@@ -25,6 +25,7 @@
 		}
 	}
 
+
 	&[data-scroll = above-viewport],
 	&[data-scroll = below-viewport] {
 		//.section-inner { visibility:hidden; }
@@ -43,6 +44,8 @@
 	@include breakpoint( tablet-max ) {
 		overflow:hidden;
 	}
+
+
 }
 
 

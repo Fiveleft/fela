@@ -1,5 +1,5 @@
 {
-  "name": "fiveleft",
+  "name": "fiveleft-fela",
   "version": "4.0.0",
   "engines": {
     "node": "0.10.x",
@@ -33,29 +33,27 @@
   },
   "homepage": "https://github.com/Fiveleft/fela",
   "dependencies": {
-    "logfmt": "^1.1.2"
-    ,"mysql": ">=2.1.x"
-    ,"socket.io" : "~0.9.13"
-    ,"express": "^4.0.0"
-    ,"express3-handlebars": "~0.5.0"
-    ,"express-redirect": "~1.1.0"
-    ,"handlebars":"latest"
+    "logfmt": "^1.1.2",
+    "mysql": ">=2.1.x",
+    "express": "^4.0.0",
+    "express3-handlebars": "~0.5.0",
+    "handlebars": "latest",
+    "socket.io" : "latest"
   },
-  "devDependencies":{
-    "logfmt": "^1.1.2"
-    ,"mysql": ">=2.1.x"
-    ,"express": "^4.0.0"
-    ,"express3-handlebars": "~0.5.0"
-    ,"handlebars":"latest"
-    ,"grunt": "~0.4.2"
-    ,"grunt-cli": "~0.1.13"
-    ,"grunt-contrib-cssmin": "~0.9.0"
-    ,"grunt-contrib-watch": "~0.6.1"
-    ,"grunt-contrib-compass": "~0.7.2"
-    ,"grunt-contrib-clean": "~0.5.0"
-    ,"grunt-contrib-jshint": "~0.7.2"
-    ,"grunt-contrib-nodeunit": "~0.2.0"
-    ,"grunt-contrib-internal": "~0.4.2"
+  "devDependencies": {
+    "logfmt": "^1.1.2",
+    "mysql": ">=2.1.x",
+    "express": "^4.0.0",
+    "express3-handlebars": "~0.5.0",
+    "handlebars": "latest",
+    "grunt": "~0.4.2",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-cssmin": "~0.9.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-contrib-compass": "~0.7.2",
+    "grunt-contrib-clean": "~0.5.0",
+    "grunt-contrib-jshint": "~0.7.2",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-internal": "~0.4.2"
   }
-
 }
