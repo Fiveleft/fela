@@ -1,0 +1,326 @@
+
+
+
+
+		/* ------------------------- */
+		/* Rectangles: */
+
+		// the full canvas size (fixed)
+		// ,layout.artwork = new fiveleft.Rectangle( 0, 0, artworkWidth, artworkHeight )
+
+		// the window - active area for user
+		// ,layout.viewport = new fiveleft.Rectangle()
+
+		// interactive area that triggers parallax movement
+		// ,uiRect = new fiveleft.Rectangle()
+
+		// // RenderBoundry is the width/height we can move around in for rendering the Artwork
+		// ,renderBoundryRect = new fiveleft.Rectangle()
+
+		// // Render Rect is the rectangle we will be rendering into. 
+		// //   We will hook this to an accelerator to ensure it moves to 
+		// //   its target position smoothly
+		// ,renderRect = new fiveleft.Rectangle()
+
+		// // ParallaxArea is the maximum area we can move around in for 
+		// //   the parallax effect at any given position inside the RenderArea rect
+		// ,parallaxAreaRect = new fiveleft.Rectangle()
+
+		// The Interactive area should be a percentage of the overall viewport
+		// ,uiAreaScale = 0.65
+		// ,parallaxAreaScale = 1.2
+
+
+
+
+/* OLD - PixelRatio Measurement - not being used 
+
+		// To measure Retina displays
+		,devicePixelRatio = 1
+		,backingStoreRatio = 1
+		,deviceScaleRatio = 1
+		,dpiScale = false
+	function measurePixelRatio()
+	{
+		// Determine DevicePixelRatio
+		// @see
+		devicePixelRatio = window.devicePixelRatio || 1;
+		backingStoreRatio = dCtx.webkitBackingStorePixelRatio ||
+                dCtx.mozBackingStorePixelRatio ||
+                dCtx.msBackingStorePixelRatio ||
+                dCtx.oBackingStorePixelRatio ||
+                dCtx.backingStorePixelRatio || 1;
+
+		deviceScaleRatio = devicePixelRatio / backingStoreRatio;
+		dpiScale = devicePixelRatio !== backingStoreRatio;
+	}
+*/
+
+
+/* OLD FIXXYSHAPE Builder Functions - stored for now
+
+	// FIXXY LINE
+	var fLineTime = 3 //5 second
+		,fLineDuration = fLineTime * 2
+		,fLinePos = new fiveleft.Vector()
+		,fLineLast = new fiveleft.Vector()
+		,fCvs = document.createElement("canvas")
+		,fCtx = fCvs.getContext("2d")
+		,fColor = new fiveleft.Color()
+		,fColorLast = fiveleft.Color.random(50).desaturate(0)
+		,fColorNext = fiveleft.Color.random(50).desaturate(0)
+		,bgImg = null
+		,fLineStarted = false
+		,fLineReset = 5;
+
+	function drawFixxyShape()
+	{
+		var pat1 = round( randomBetween(1, patternSprite.cells) )
+			,pat2 = round( randomBetween(1, patternSprite.cells) )
+			,splat1 = round( randomBetween(1, splatterSprite.cells) )
+			,c1 = fiveleft.Color.random(100).desaturate(0)
+			,c2 = fiveleft.Color.random(50).desaturate(0)
+			,c3 = fiveleft.Color.random(50).desaturate(0)
+			,offX = 500
+			,blobIndex, patIndex
+			,pat
+			,blob1, blob2, blob3
+		
+
+		// *** SHAPE 1 ***
+
+		// 1. Create the blob and the pattern
+		blobIndex = round( randomBetween(1, blobSprite.cells) );
+		patIndex = round( randomBetween(1, patternSprite.cells) ); 
+		blob1 = blobSprite.drawSprite( blobIndex, null, 0.85 );
+		pat = rCtx.createPattern( patternSprite.drawSprite( patIndex, null, 0.6 ), "repeat" );
+
+		// 2. Clear the rendering rectangle to the size of the blob
+		rCtx.clearRect( 0, 0, blob1.width, blob1.height );
+		rCtx.rect( 0, 0, blob1.width, blob1.height );
+
+		// Fill with the pattern
+		rCtx.fillStyle = pat;
+		rCtx.fill();
+
+		// Fill color atop pattern
+		rCtx.globalCompositeOperation = "destination-atop";
+		rCtx.fillStyle = c1.getRGBA();
+		rCtx.fill();
+
+		// Fill Blob atop colored pattern
+		rCtx.drawImage( blob1, 0, 0 );
+
+		aCtx.drawImage( rCvs, 0, 0, rCvs.width, rCvs.height );
+
+		// *** SHAPE 2 ***
+
+		// 1. Create the blob and the pattern
+		blobIndex = round( randomBetween(1, blobSprite.cells) );
+		blob2 = blobSprite.drawSprite( blobIndex, null, 1 );
+
+		// Draw pattern to its sprite canvas
+		patIndex = 2;//round( randomBetween(1, patternSprite.cells) ); 
+		pat = rCtx.createPattern( patternSprite.drawSprite( patIndex ), "repeat" );
+
+		// 2. Clear the rendering rectangle to the size of the blob
+		rCtx.clearRect( 0, 0, blob2.width, blob2.height );
+
+		// 3. Fill the Render context with the color
+		rCtx.globalCompositeOperation = "source-over";
+		rCtx.rect( 0, 0, blob2.width, blob2.height );
+
+		rCtx.fillStyle = c2.getRGBA();
+		rCtx.fill();
+
+		// 3. Fill with the pattern and overlay onto the color
+		rCtx.globalCompositeOperation = "destination-in";
+		rCtx.fillStyle = pat;
+		rCtx.fill();
+
+		// Fill with color again
+		rCtx.globalCompositeOperation = "destination-atop";
+		rCtx.fillStyle = c1.getRGBA();
+		rCtx.fill();
+
+		// Fill with a random pattern
+		patIndex = round( randomBetween(1, patternSprite.cells) ); 
+		pat = rCtx.createPattern( patternSprite.drawSprite( patIndex ), "repeat" );
+		rCtx.globalCompositeOperation = "destination-in";
+		rCtx.fillStyle = pat;
+		rCtx.fill();
+
+		// Create the shape by drawing the blob as a mask
+		rCtx.drawImage( blob2, 0, 0 );
+
+		rCtx.globalCompositeOperation = "destination-atop";
+		rCtx.save();
+		rCtx.translate( round(blob2.width*0.5), round(blob2.height*0.5) );
+		rCtx.rotate( toRad(3) );
+		rCtx.drawImage( blob2, -round(blob2.width*0.5), -round(blob2.height*0.5) );
+		rCtx.restore();
+
+		// Draw to Artwork Canvas
+		aCtx.globalCompositeOperation = "source-over";
+		aCtx.drawImage( rCvs, 0, 0, rCvs.width, rCvs.height );
+	}
+
+	function drawFixxyLine()
+	{
+		// var fLineDuration = fLineTime * controller.fps
+		// 	,resetTime = (!fLineStarted) ? 0 : ticker.getTicks() % (fLineReset * controller.fps)
+		// 	,time = (!fLineStarted) ? 0 : ticker.getTicks() % fLineDuration
+		// 	,interval = (!fLineStarted) ? 0 : ticker.getTicks() % fLineDuration
+		// 	,ratio = Sine.easeInOut.getRatio( time/fLineDuration )
+
+
+		// fLineLast.copy( fLinePos );
+		// fLinePos.set( viewportRect.l + (viewportRect.width * ratio), viewportRect.center.y );
+		// fLinePos.y += randomBetween( -3, 3 );
+
+		// if( resetTime == 0 ) {
+
+		// 	fLineStarted = true;
+		// 	fCvs.width = viewportRect.width;
+		// 	fCvs.height = viewportRect.height;
+		// 	fCtx.clearRect( 0, 0, fCvs.width, fCvs.height );
+		// 	fColorLast.copy(fColorNext);
+		// 	fColorNext.setRandom(50).desaturate(25);
+		// 	fLineLast.copy( fLinePos );
+		// 	brush.clear();
+		// }
+
+
+
+		// aCtx.save();
+		// aCtx.translate( 500, 200 );
+		brush.setPosition( userPosition );
+		brush.renderTo( aCtx );
+
+		// aCtx.restore();
+		return;
+	}
+*/
+
+/* OLD DrawTestRenderArea function - moved to 'drawToDisplay'
+
+	function drawTestRenderArea()
+	{
+		if( _api.assetQueue === null ) return;
+
+		// if( bgImg === null ) {
+		// 	bgImg = 1;
+		// 	aCtx.save();
+		// 	aCtx.translate( 500, 200 );
+		// 	drawFixxyShape();
+		// 	aCtx.restore();
+		// }
+
+		// aCtx.clearRect( 0, 0, dCvs.width, dCvs.height );
+		
+		// drawFixxyLine();
+
+		// rCvs.width = viewportRect.width;
+		// rCvs.height = viewportRect.height;
+		// rCtx.scale( deviceScaleRatio, deviceScaleRatio );
+
+		var rp = renderPosition
+			,vp = viewportRect
+			,srcX = vp.x //rp.x (kills left/right parallax)
+			,srcY = rp.y 
+			,srcW = vp.width
+			,srcH = vp.height
+			,desX = 0
+			,desY = 0
+			,desW = vp.width
+			,desH = vp.height;
+
+		dCtx.clearRect( 0, 0, dCvs.width, dCvs.height );
+		dCtx.drawImage( 
+				// artworkCanvas
+				aCvs
+				, srcX, srcY, viewportRect.width, viewportRect.height
+				, 0, 0, viewportRect.width, viewportRect.height 
+			);
+	}
+*/
+
+/* OLD Accelerator Constructor/Prototype - moved to fiveleft/core/MotionVector.js 
+
+	var Accelerator = function() 
+	{
+		this.target = new fiveleft.Vector();
+		this.pos = new fiveleft.Vector();
+		this.acc = new fiveleft.Vector();
+		this.vel = new fiveleft.Vector(); 
+		this.speed = new fiveleft.Vector(); 
+		this.friction = new fiveleft.Vector(1,1,1);
+		var applyUpdate = function() {
+			this.acc
+				.set()
+				.add( this.friction );
+			this.vel
+				.subtractVectors( this.target, this.pos )
+				.multiply( this.acc );
+			this.pos
+				.add( this.vel );
+		};
+		this.update = function() {
+			applyUpdate.apply(this);
+			this.onUpdate();
+			return this.pos;
+		};
+		this.set = function( v ){
+			this.target.copy(v);
+			this.update();
+		};
+	};
+
+	Accelerator.prototype = {
+		constructor : Accelerator
+		,target : null
+		,pos : null
+		,acc : null
+		,vel : null 
+		,friction : null
+		,set : function() {}
+		,update : function() {}
+		,onUpdate : function() {}
+	};
+*/
+
+/* OLD PARALLAX FUNCTION - moved to parallaxOffset_onUpdate 
+
+	var PARALLAX = new Accelerator();
+	PARALLAX.friction.set().addScalar( 0.05 );
+	PARALLAX.onUpdate = function() 
+	{
+		var vr = viewportRect
+			,ur = uiRect
+			,up = userPosition
+			,P = this;
+
+		P.target.x =
+			inRange( up.x, ur.l, ur.r ) ? 0 :
+			inRange( up.x, vr.l, ur.l ) ? -ratioBetween( up.x, ur.l, 0 ) :  
+			inRange( up.x, ur.r, vr.r ) ? ratioBetween( up.x, ur.r, vr.r ) : 
+			(userPosition.x<vr.l ? -1 : 1);
+		P.target.y = 
+			inRange( up.y, ur.t, ur.b ) ? 0 :
+			inRange( up.y, vr.t, ur.t ) ? -ratioBetween( up.y, ur.t, 0 ) :  
+			inRange( up.y, ur.b, vr.b ) ? ratioBetween( up.y, ur.b, vr.b ) : 
+			(userPosition.y<vr.t ? -1 : 1);
+
+		P.target.x = P.target.x * (parallaxAreaRect.width/2);
+		P.target.y = P.target.y * (parallaxAreaRect.height/2);
+		P.target.add( parallaxAreaRect.center );
+		// P.update();
+
+		parallaxOffset.copy( P.pos );
+
+		renderPosition.addVectors( viewportOffset, parallaxOffset );
+		renderPosition.x = clamp( renderPosition.x, renderBoundryRect.l, renderBoundryRect.r );
+		renderPosition.y = clamp( renderPosition.y, renderBoundryRect.t, renderBoundryRect.b );
+		renderPosition.round();	
+	};
+*/

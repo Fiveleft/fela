@@ -1,0 +1,58 @@
+{
+	"production" : {
+		"env_name" : "production"
+		,"facebook" : {
+			"app_id" : ""
+			,"app_secret" : ""
+			,"post_name" : ""
+			,"post_caption" : ""
+		}
+		,"twitter" : {
+
+		}
+		,"wpdb_config" : {
+
+		}
+		,"media_dir" : ""
+		,"page_meta" : ""
+		,"page_title" : ""
+	}
+	,"stage" : {
+		"env_name" : "stage"
+		,"facebook" : {
+			"app_id" : ""
+			,"app_secret" : ""
+			,"post_name" : ""
+			,"post_caption" : ""
+		}
+		,"twitter" : {
+
+		}
+		,"wpdb_config" : {
+
+		}
+		,"media_dir" : ""
+		,"page_meta" : ""
+		,"page_title" : ""
+	}	
+	,"development" : {
+		"env_name" : "development"
+		,"facebook" : {
+			"app_id" : ""
+			,"app_secret" : ""
+			,"post_name" : ""
+			,"post_caption" : ""
+		}
+		,"twitter" : {
+
+		}
+		,"wpdb_config" : {
+
+		}
+		,"media_dir" : ""
+		,"page_meta" : ""
+		,"page_title" : ""
+		,"localScripts" : "true"
+		,"ignoreSocialAPIs" : "true"
+	}
+}

@@ -1,0 +1,51 @@
+
+
+#work-section {
+
+
+	#work-nav {
+		display:none;
+	}
+
+	.project-list {
+		width:100%; margin:0 auto;
+		@include clearfix;
+	}
+
+	.project-view {
+		display:none;
+		float:left;
+		width:100%; height:0;
+		overflow:hidden;
+	}
+
+	.project-container {
+		display:block;
+		position:relative;
+		width:100%; height:100%; padding:100px 0 0; margin:0;
+	}
+
+	.project-container .project {
+		position:absolute;
+		top:0; left:0;
+		width:100%; margin:0; padding:0;
+	}
+
+	.project-view {
+		&.active, &.inactive {
+			display:block;
+		}
+	}
+
+	@include breakpoint( small-desktop-max ){
+		
+		.section-inner {
+			padding-left:0; padding-right:0;
+		}
+		.project-list {
+			padding:0 1.5%;
+		}
+
+	}
+	
+}

@@ -1,0 +1,35 @@
+
+
+#footer {
+	position:fixed; bottom:0;
+	width:100%; height:100%;
+	padding:0; margin:0;
+	z-index:1;
+
+
+	background:#1a1a1a url(../img/blackorchid.png) repeat;
+	color:$color-gold-30;
+
+	.footer-wrapper {
+		position:absolute; bottom:0; left:0; 
+		width:100%; height:auto;
+	}
+
+	.footer-inner {
+		padding:emCalc(100px) emCalc(20px) emCalc(20px);
+		background:transparent url(../img/fiveleft-logo-footer.png) no-repeat 50% 50%;
+		text-align:center;
+	}
+
+	.connect-nav {
+		color:#FFF;
+	}
+
+	.copyright {
+		margin:0.5em 0 0;
+		font-size:0.875em; font-style:italic;
+		text-align:center;
+		color:$color-gold-30;
+	}
+
+}

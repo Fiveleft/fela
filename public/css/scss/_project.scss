@@ -1,0 +1,430 @@
+
+
+#project-view-container {
+	width:100%;
+}
+
+
+.project-grid-item {
+
+	display:block;
+	position:relative;
+	float:left;
+	width:33.3333%; height:auto; padding:1%;
+	cursor:pointer;
+
+	span {
+		display:block;
+	}
+	.media, .info {
+		width:100%;
+	}
+	.media-inner {
+		position:relative;
+		width:100%; height:0; padding:0 0 75%; /* 16:9 */ margin:0;
+	}
+	.media-content, .media-hover {
+		position:absolute;
+		top:0; left:0;
+		width:100%; height:100%;
+		overflow:hidden;
+	}
+	.media-hover {
+		@include opacity(0);
+		@include transition( opacity 0.55s $easeInOutCirc );
+		background:rgba(#000,0.61) url(/img/grid-hover.png) repeat 0 0;
+	}
+	.media-content {
+		@include opacity(1);
+		@include transition( opacity 0.20s $easeInOutCubic );
+	}
+	.thumbnail { 
+		position:absolute;
+		top:0; left:0;
+		width:100%; margin-left:0;
+		@include transition( none 0.55s $easeInOutCirc );
+		@include transition-property( margin-left, width, top );
+	}
+
+	.info {
+		position:absolute; 
+		top:0; left:0; 
+		width:100%; height:100%; padding:1em;
+		z-index:2;
+		overflow:hidden;
+	}
+	.title {
+		position:absolute; 
+		left:0; bottom:-200px; margin:0;
+		padding:1em; 
+		font-size:2em;
+		color:#FFF;
+		@include opacity(0);
+		@include transition( none 0.35s $easeInOutExpo );
+		@include transition-property( opacity, bottom, color );
+	}
+	.subtitle, .details {
+		display:none;
+	}
+
+	&:not(.active):hover {
+		.thumbnail {
+			margin-left:-10%;
+			width:120%;
+			top:-20%;
+		}
+		.media-hover {
+			@include opacity(1);
+		}
+		.title {
+			@include opacity(1);	
+			@include transition-delay( 0.3s ); 
+			bottom:0;
+		}
+	}
+	&.active {
+		.media-inner {
+			position:relative;
+		}
+		.media-content {
+			@include opacity(0);
+		}
+		.media-hover {
+			@include opacity(1);
+			background-color:rgba(#000, 0);
+			// @include transition( background-color 0.20s $easeInOutCubic );
+		}
+		.media-active {
+			// display:block;
+			// position:absolute; top:55%; left:50%;
+			// width:30px; height:30px; margin-left:-15px; margin-top:-15px;
+			// background-position:-90px -60px;
+			// @include opacity(0);
+			// @include transition( none 0.20s $easeInOutCubic );
+			// @include transition-property( opacity, top );
+		}
+		&:hover {
+			.media-hover {
+				background-color:rgba(#000, 0.1);
+			}
+			// .media-active {
+			// 	top:50%;
+			// 	@include opacity(1);
+			// }
+		}
+	}
+
+	@include breakpoint( large-desktop-min ) {
+		width:25%;
+	}
+	@include breakpoint( small-desktop-max ) {
+		padding:1.5%;
+		.title {
+			font-size:1.75em;
+			padding:0.75em;
+		}
+	}
+	@include breakpoint( tablet-max ) {
+		width:50%;
+		// padding:2%;
+		.title {
+			font-size:1.5em;
+			padding:0.5em;
+		}
+	}
+	@include breakpoint( mobile ) {
+		// padding:2%;
+		.title {
+			font-size:1.25em;
+		}
+	}
+}
+
+.project {
+
+	position:absolute;
+	top:0; left:0;
+	width:100%; height:auto;
+
+	.project-inner {
+		padding:100px 0 50px;
+		position:relative;
+	}
+	.media, .info {
+		position:relative;
+		width:83.33333%; margin:0 auto;
+	}
+	.media-inner {
+		position:relative;
+		width:100%; height:0; margin:0;
+		padding:0 0 43.75%; /* 16:7 */ 
+		z-index:2;
+	}
+	.media-controls, .media-container {
+		position:absolute;
+		top:0; left:0;
+		width:100%; height:100%;
+		overflow:hidden;
+	}
+	.media-container {
+		background:url(/img/grid-hover.png) repeat 0 0;
+		z-index:99;
+	}
+	.media-controls {
+		z-index:100;
+		overflow:visible;
+		.inner {
+			display:block;
+			position:absolute; right:-10px; bottom:-10px; 
+			width:60px; height:60px;
+			padding:15px;
+			// background-color:rgba($color-magenta, 0.75);			
+		}
+		.icon {
+			position:absolute;
+			width:30px; height:30px;
+			background-color:rgba($color-white, 0.25);
+			@include border-radius(9999px);
+			@include transition( background-color 0.3s $easeInOutCubic );
+		}
+		.play { 
+			display:block;
+			@include icon-position( 5, 0 );
+		}
+		.pause {
+			display:none;
+			@include icon-position( 6, 0 );
+		}
+		&:hover {
+			.icon { background-color:rgba($color-white, 0.75); }
+			.play { @include icon-position( 5, 1 ); }
+			.pause { @include icon-position( 6, 1 ); }
+		}
+		&.mouseenter {
+			.inner { 
+				@include opacity(1); 
+			}
+		}
+		&.animating {
+			.play { display:block; }
+			.pause { display:none; }
+		}
+	}
+	&.playing {
+		.media-controls {
+			.play { display:none; }
+			.pause { display:block; }
+		}
+	}
+
+	// MEDIA TYPES
+	.media[data-media='gallery'] {
+
+		.media-container {
+			// background-color:rgba($color-magenta,0.61);
+		}
+		.gallery-list, .gallery-item {
+			position:absolute; top:0; left:0;
+			width:100%; height:100%; 
+		}
+		.gallery-item {
+			z-index:8;
+			visibility:hidden;
+		}
+		.gallery-item.last-active {
+			z-index:10;
+			visibility:visible;
+		}
+		.gallery-item.active {
+			z-index:9;
+			visibility:visible;
+		}
+		.placeholder {
+			display:block;
+			width:100%; height:100%;
+			background:no-repeat 0 50%;
+			background-size:100% auto;
+		}
+		.placeholder.aspect-skinny {
+			background-position:top center;
+			background-size:contain;
+		}
+		img { display:none; }
+	}
+
+	// MEDIA TYPES
+	.media[data-media='video'] {
+		.media-inner {
+			background-color:rgba($color-black, 0.85);
+		}
+		.video {
+			width:100%; height:auto; max-height:100%;
+		}
+	}
+	.close {
+		display:block; 
+		position:absolute; right:-10px; top:-10px; 
+		width:60px; height:60px;
+		padding:15px;
+		z-index:30;
+		.icon { 
+			position:absolute;
+			width:30px; height:30px;
+			background-color:rgba($color-white, 0.25);
+			@include border-radius(9999px);
+			@include transition( background-color 0.3s $easeInOutCubic );
+			@include icon-position( 4, 0 );
+		}
+		&:hover .icon{ 
+			background-color:rgba($color-white, 0.75);
+			@include icon-position( 4, 1 );
+		}
+	}
+	.info {
+		position:relative;
+		padding:2em 4.16666666% 0;
+	}
+	.title, .subtitle {
+		text-transform:uppercase;
+		width:100%;
+	}
+	.details {
+		width:100%;
+		padding-bottom:2.5em;
+	}
+	.description, .additional {
+		width:83.33333%;
+	}
+	.title, .subtitle, .project-detail {
+		margin-bottom:10px;
+	}
+	.project-detail {
+		& > span { 
+			display:inline; 
+			& > span, & > a { display:inline-block; }
+		}
+	}
+	.project-advance {
+		position:absolute; bottom:0; right:0;
+		display:inline-block;
+		height:30px;
+		font-style:italic;
+
+		.icon { 
+			display:block;
+			position:absolute; top:0; right:0; 
+			width:30px; height:30px;
+			background-position:-30px -30px;
+		}
+		.label { 
+			position:absolute; top:0; left:0;
+			width:100px; height:30px;
+			text-align:right;
+		}
+		.label, .project-title {
+			display:block;
+			line-height:24px; padding:3px 0;
+		}
+		.title-wrapper {
+			@include clearfix;
+			display:block;
+			margin:0 33px 0 100px;
+			overflow:hidden;
+		}
+		.project-title {
+			text-align:right;
+		}
+		&.measured {
+			.title-wrapper { width:0; }
+		}
+		&:hover {
+			color:inherit;
+			background:none;
+			.icon { background-position:-30px -60px; };
+		}
+		&.inactive {
+			display:none;
+		}
+	}
+
+
+	a, a:visited {
+		color:$color-dk-grey;
+		text-decoration:none;
+	}
+	.info-label, .taxonomy-label {
+		color:$color-grey;
+	}
+	.info-name, .taxonomy {
+		color:$color-dk-grey;
+	}
+	.taxonomy {
+		font-style:italic;
+		text-transform:lowercase;
+		&:last-child .separator { 
+			display:none;
+		}
+	}
+
+		
+	@include breakpoint( "(max-aspect-ratio:5/4) and (min-height:600px)" ) { 
+		.media-inner {
+			padding:0 0 50%; /* 2:1 */ 
+		}
+	}		
+	@include breakpoint( "(max-aspect-ratio:1/1) and (min-height:600px)" ) { 
+		.media-inner {
+			padding:0 0 56.25%; /* 16:9 */ 
+		}
+		.media[data-media='gallery'] .placeholder {
+			background-size:cover;
+		}
+	}		
+	@include breakpoint( "(max-aspect-ratio:4/5) and (min-height:480px)" ) { 
+		.media-inner {
+			padding:0 0 61.8%; /* golden ratio */ 
+		}
+		.media[data-media='gallery'] .placeholder {
+			background-size:cover;
+		}
+	}
+
+
+	@include breakpoint( small-desktop-max ) {
+		//padding-bottom:3em;
+		.media, .info {
+			width:100%;
+		}
+		.info {
+			padding:1.5em;
+		}
+		.title, .subtitle, .details {
+			width:100%;
+			margin:0 0 16px;
+		}
+	}
+	@include breakpoint( tablet-max ){
+		.info {
+			padding:1em;
+		}
+		.title, .subtitle, .details {
+			margin-bottom:12px;
+		}
+	}
+	@include breakpoint( mobile ){
+		.info {
+			padding:1em 0;
+		}
+	}
+}
+
+
+
+.iOS .project {
+	.media-controls {
+		.inner {
+			@include opacity(1);
+		}
+	}
+}
+
