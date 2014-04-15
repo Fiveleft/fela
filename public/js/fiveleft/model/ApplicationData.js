@@ -319,15 +319,13 @@
 		 */
 		, loadSiteData : function() 
 		{	
-			var request = this.getServiceRequest();
-			
-			// Set Service URL and callbacks
-			request.url = "/sitedata-cache.json";
-			request.success = siteDataLoaded;
-			request.error = siteDataLoadError;
-
 			// Call Service
-			$.ajax(request);
+			$.ajax({
+				dataType : 'json'
+				,url : "/sitedata-cache.json"
+				,success : siteDataLoaded
+				,error : siteDataLoadError
+			});
 		}
 	};
 

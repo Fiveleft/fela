@@ -5,6 +5,7 @@ var express = require("express")
 	,sockets = require("socket.io")
 	,path = require("path")
 	,envConfig = require("./config.json")
+	,siteData = require("./sitedata.json")
 	,exphbs = require("express3-handlebars")
 	,logfmt = require("logfmt");
 
@@ -23,7 +24,11 @@ app.set( "pageContent", {
 });
 
 
-app.use(express.static( path.join(__dirname, '/public')) );
+app.use( express.static( path.join(__dirname, '/public')) );
+
+// app.get( "/sitedata-cache.json", function(req,res){
+
+// })
 
 // Use Routefiles to create unique routes
 routeFiles.forEach( function( file ) {

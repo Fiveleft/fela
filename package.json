@@ -38,7 +38,8 @@
     "express": "^4.0.0",
     "express3-handlebars": "~0.5.0",
     "handlebars": "latest",
-    "socket.io" : "latest"
+    "socket.io" : "latest",
+    "async" : "latest"
   },
   "devDependencies": {
     "logfmt": "^1.1.2",

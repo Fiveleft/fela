@@ -1,0 +1,40 @@
+
+{{#unless config.ignoreSocialAPIs }}
+	<script>
+		//Include API Asynchronous Code Loading
+		window.fbAsyncInit = function() {
+			log( "facebookAPILoad" );
+			FB.init({ appId:"{{config.facebook.appId}}", status:false, xfbml:true });
+			window.dispatchEvent( new Event("facebook_init") );
+		};
+		window.onGoogleAPILoad = function() {
+			log( "onGoogleAPILoad" );
+		}
+		window.onYouTubeIframeAPIReady = function(){
+			log( "onYoutubeAPILoad" );
+			window.dispatchEvent( new Event("youtube_init") );
+		}
+		
+		// Google Analytics Tracking
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', "{{config.google.analyticsId}}"]);
+		_gaq.push(['_trackPageview']);
+
+		// Handle Async Loading
+	  	!function(){
+	  		function loadAsyncScript( d, src, id ) {
+				if (!d.getElementById(id)) {
+					var js = d.createElement("script");
+					if(id) js.id=id; js.src=src; js.type="text/javascript"; js.async=true;
+					var fjs = d.getElementsByTagName("script")[0];
+					fjs.parentNode.insertBefore(js, fjs);
+				}
+	  		}
+		  	loadAsyncScript( document, "//connect.facebook.net/en_US/all.js", 'facebook-jssdk' );
+		  	loadAsyncScript( document, "//apis.google.com/js/client:plusone.js?onload=onGoogleAPILoad", 'googleplus-jssdk' );
+		  	loadAsyncScript( document, "//platform.twitter.com/widgets.js", "twitter-wjs");	
+		  	loadAsyncScript( document, "//www.youtube.com/iframe_api", "yt-api");	
+		  	loadAsyncScript( document, (('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js'), "google-analytics");	
+		}();
+	</script>
+{{/unless}}
