@@ -1,11 +1,7 @@
 module.exports = function(grunt) {
 
   // files to be minified and combined
-  var cssFiles = [
-      'public/css/style1.css',
-      'public/css/style2.css'
-    ]
-    ,path = require("path");
+  var path = require("path");
 
   // this is where all the grunt configs will go
   grunt.initConfig({
@@ -14,56 +10,117 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json')
 
     ,compass : {
-      dist: {
+      options : {
+        sassDir: "public/css/scss"
+        ,cssDir: "public/css"
+        ,imagesDir: "public/img"
+        ,outputStyle: "nested"
+      }
+    }
+    ,express : {
+      options : {
+        script : "app.js"
+        ,port : process.env.PORT || 8888 
+      }
+      ,stage : {
+        node_env : "stage"
+      }
+      ,dev : {
+        node_env : "development"
+        ,script : "app.js"
+        ,port : process.env.PORT || 8888 
+      }
+    }
+    ,handlebars : {
+      // @see http://danburzo.ro/grunt/chapters/handlebars/
+      all : { 
         options : {
-          sassDir: "public/css/scss"
-          ,cssDir: "public/css"
-          ,imagesDir: "public/img"
-          ,outputStyle: "nested"
+          namespace : "fiveleft.templates"
+          ,processName: function(filePath) {
+            return filePath.replace(/^views\/templates\//, '').replace(/\.hbs$/, '');
+          }
+        }
+        ,files : {
+          "public/js/fiveleft/view/templates.js" : ["views/templates/**/*.hbs"]
         }
       }
     }
     ,watch: {
-      sass: {
+      gruntFile: {
+        files: [ 
+          'Gruntfile.js' 
+        ]
+        ,options: {
+          reload: true
+        }
+        ,tasks: ["watch"]
+      }
+      ,sass: {
         files: [
           "**/*.scss"
-          //,path.join(__dirname,"css/scss","*")
         ]
         ,tasks: ["compass"]
+      }
+      ,templates : {
+        files: [
+          "views/templates/**/*.hbs"
+        ]
+        ,tasks: ["handlebars"]
+      }
+      ,express: {
+        option : {
+          background:false
+        }
+        ,files:  [ 
+          "app.js"
+          ,"config.json"
+          ,"views/*.hbs"
+          ,"views/layouts/*"
+          ,"views/partials/*"
+          ,"routes/**/*.js"
+        ]
+        ,tasks: ['express:dev']
       }
     }
 
     // configuration for the cssmin task
     // note that this syntax and options can found on npm page of any grunt plugin/task
-    ,cssmin: {
-      // options for css min task
-      options:{
-        // banner to be put on the top of the minified file using package name and todays date
-        // note that we are reading our project name using pkg.name i.e name of our project
-        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
-      },
-      combine: {
-        // options for combining files
-        // we have defined cssFiles variable to hold our file names at the top
-        files: {
-          // here key part is output file which will our <package name>.min.css
-          // value part is set of input files which will be combined/minified
-          'public/css/<%= pkg.name %>.min.css': cssFiles
-        }
-      }
-    }
+    // ,cssmin: {
+    //   // options for css min task
+    //   options:{
+    //     // banner to be put on the top of the minified file using package name and todays date
+    //     // note that we are reading our project name using pkg.name i.e name of our project
+    //     banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
+    //   },
+    //   combine: {
+    //     // options for combining files
+    //     // we have defined cssFiles variable to hold our file names at the top
+    //     files: {
+    //       // here key part is output file which will our <package name>.min.css
+    //       // value part is set of input files which will be combined/minified
+    //       'public/css/<%= pkg.name %>.min.css': cssFiles
+    //     }
+    //   }
+    // }
 
   }); // end of configuring the grunt task
 
+  
+  // grunt.loadTasks('tasks');
+
   // Load the plugin that provides the "cssmin" task.
+  grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
+  grunt.loadNpmTasks('grunt-express-server');
 
   // Default task(s).
-  grunt.registerTask('default', ["compass", "watch", "cssmin"]);
+  grunt.registerTask('default', ["compass", "handlebars", "express:dev", "watch"]);
 
-  // cssmin task
-  grunt.registerTask('buildcss', ['cssmin']);
+  // Run Server Task
+  grunt.registerTask('server', [ 'express:dev', 'watch' ]);
+
 
 };

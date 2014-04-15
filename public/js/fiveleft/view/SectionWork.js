@@ -44,8 +44,8 @@
 			this.$projectView = $( ".project-view", this.$projectList );
 
 			// Templates
-			this.gridItemTemplate = Handlebars.compile( $( "#project-grid-item-template" ).html() );
-			this.projectTemplate = Handlebars.compile( $( "#project-template" ).html() );
+			this.gridItemTemplate = fiveleft.templates["project-grid-item"]; //Handlebars.compile( $( "#project-grid-item-template" ).html() );
+			this.projectTemplate = fiveleft.templates["project-item"]; //Handlebars.compile( $( "#project-template" ).html() );
 
 			// Properties
 			this.projectDataList = null;
@@ -331,7 +331,6 @@
 
 		// Set GridItems
 		_ref.$projectGridItems = $(_sel.gridItem, this.$projectList );
-
 		// Update Grid
 		updateLayout();
 	}

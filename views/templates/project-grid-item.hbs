@@ -1,0 +1,29 @@
+{{#if id}}
+    <a href="/project/{{name}}" class="project-grid-item" data-id="{{id}}" data-index="{{index}}" >
+        <span class="media">
+            <span class="media-inner">
+                <span class="media-content">
+                    {{#if thumb}}
+                        {{#if thumb.info.sizes.thumbnail.file}}
+                        <img class="thumbnail" src="/assets/media/{{thumb.info.sizes.thumbnail.file}}" />
+                        {{else}}
+                            {{#if thumb.info.file }}
+                            <img class="thumbnail" src="/assets/media/{{thumb.info.file}}" />
+                            {{/if}}
+                        {{/if}}
+                    {{else}}
+                    <img class="thumbnail" src="/assets/media/fpo-thumbnail.png" />
+                    {{/if}}
+                </span>   
+                <span class="media-hover"></span>             
+                <span class="media-active icon"></span>             
+            </span>
+        </span>
+        <span class="info">
+            <h1 class="title">{{title}}</h1>
+            {{#if subtitle}}
+            <h2 class="subtitle">{{subtitle}}</h2>
+            {{/if}}
+        </span>
+    </a>
+{{/if}}

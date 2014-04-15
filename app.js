@@ -5,7 +5,6 @@ var express = require("express")
 	,sockets = require("socket.io")
 	,path = require("path")
 	,envConfig = require("./config.json")
-	,siteData = require("./sitedata.json")
 	,exphbs = require("express3-handlebars")
 	,logfmt = require("logfmt");
 
@@ -13,6 +12,7 @@ var app = express()
 	,router = express.Router()
 	,server = http.createServer(app)
 	,io = sockets.listen(server)
+	,port = process.env.PORT || 8888
 	,node_env = process.env.NODE_ENV || 'development'
 	,config = envConfig[node_env]
 	,routeFiles = fs.readdirSync( path.join(__dirname, "routes") );
@@ -23,12 +23,8 @@ app.set( "pageContent", {
 	title : "Fiveleft is a creative digital studio focusing on interactive development located in beautiful Seattle WA"
 });
 
-
 app.use( express.static( path.join(__dirname, '/public')) );
 
-// app.get( "/sitedata-cache.json", function(req,res){
-
-// })
 
 // Use Routefiles to create unique routes
 routeFiles.forEach( function( file ) {
@@ -58,9 +54,8 @@ app.engine( "hbs", exphbs({
 }) );
 app.set( "view engine", "hbs" );
 app.set( "views", __dirname + "/views" );
+app.set( "port", port );
 
-
-app.set( "port", process.env.PORT || 8888 );
-app.listen( app.get('port'), function() {
-  console.log("Listening on " + app.get('port') );
+app.listen( app.get("port"), function() {
+  console.log("Listening on " + app.get("port") );
 });

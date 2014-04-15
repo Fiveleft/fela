@@ -1164,10 +1164,10 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   width: 100%;
   max-width: none;
   z-index: 1; }
-  /* line 10, scss/_section-connect.scss */
+  /* line 11, scss/_section-connect.scss */
   #connect-section .section-inner {
     display: none; }
-  /* line 13, scss/_section-connect.scss */
+  /* line 14, scss/_section-connect.scss */
   #connect-section .section-fix {
     position: absolute;
     bottom: 0;
@@ -1175,16 +1175,16 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
     width: 100%;
     background: #1a1a1a url(../img/blackorchid.png) repeat;
     color: #dfdfda; }
-  /* line 19, scss/_section-connect.scss */
+  /* line 20, scss/_section-connect.scss */
   #connect-section a, #connect-section a:visited, #connect-section a:active {
     color: white;
     font-family: "adobe-garamond-pro", "Garamond", serif;
     font-weight: 700;
     text-decoration: none; }
-    /* line 23, scss/_section-connect.scss */
+    /* line 24, scss/_section-connect.scss */
     #connect-section a:hover, #connect-section a:visited:hover, #connect-section a:active:hover {
       color: #ff0097; }
-  /* line 27, scss/_section-connect.scss */
+  /* line 28, scss/_section-connect.scss */
   #connect-section .section-fix-inner {
     width: 100%;
     max-width: 1280px;
@@ -1195,22 +1195,22 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
       content: "";
       display: table;
       clear: both; }
-  /* line 32, scss/_section-connect.scss */
+  /* line 33, scss/_section-connect.scss */
   #connect-section .top-row {
     width: 100%;
     padding: 1em; }
-  /* line 35, scss/_section-connect.scss */
+  /* line 36, scss/_section-connect.scss */
   #connect-section .section-title {
     font-size: 3em;
     line-height: 1em; }
-  /* line 38, scss/_section-connect.scss */
+  /* line 39, scss/_section-connect.scss */
   #connect-section .logo {
     display: inline-block; }
-    /* line 40, scss/_section-connect.scss */
+    /* line 41, scss/_section-connect.scss */
     #connect-section .logo > * {
       display: inline-block;
       vertical-align: top; }
-    /* line 44, scss/_section-connect.scss */
+    /* line 45, scss/_section-connect.scss */
     #connect-section .logo .brand-name {
       width: 90px;
       line-height: 30px;
@@ -1220,11 +1220,11 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
       text-align: left;
       background: transparent url(/img/brand-name.png) 0 50% no-repeat; }
       @media (min--moz-device-pixel-ratio: 1.3), (-o-min-device-pixel-ratio: 2.6 / 2), (-webkit-min-device-pixel-ratio: 1.3), (min-device-pixel-ratio: 1.3), (min-resolution: 1.3dppx) {
-        /* line 44, scss/_section-connect.scss */
+        /* line 45, scss/_section-connect.scss */
         #connect-section .logo .brand-name {
           background-image: url("/img/brand-name@2x.png");
           background-size: 90px 90px; } }
-    /* line 50, scss/_section-connect.scss */
+    /* line 51, scss/_section-connect.scss */
     #connect-section .logo .brand-icon {
       width: 30px;
       height: 28px;
@@ -1234,45 +1234,45 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
       text-indent: -119988px;
       overflow: hidden;
       text-align: left; }
-    /* line 57, scss/_section-connect.scss */
+    /* line 58, scss/_section-connect.scss */
     #connect-section .logo:hover .brand-name {
       background-position: 0 100%; }
-    /* line 58, scss/_section-connect.scss */
+    /* line 59, scss/_section-connect.scss */
     #connect-section .logo:hover .brand-icon {
       background-position: -5px -75px; }
-  /* line 61, scss/_section-connect.scss */
+  /* line 62, scss/_section-connect.scss */
   #connect-section .info-row {
     border-bottom: 1px solid rgba(68, 68, 62, 0.33);
     border-top: 1px solid rgba(68, 68, 62, 0.33);
     position: relative;
     display: table; }
-  /* line 67, scss/_section-connect.scss */
+  /* line 68, scss/_section-connect.scss */
   #connect-section .info {
     display: table-cell;
     padding: 1.5em 1.5em 2em;
     border-left: 1px solid rgba(68, 68, 62, 0.33); }
-    /* line 71, scss/_section-connect.scss */
+    /* line 72, scss/_section-connect.scss */
     #connect-section .info .title {
       font-family: "adobe-garamond-pro", "Garamond", serif;
       font-style: italic;
       font-weight: 600;
       margin-bottom: 0.5em; }
-    /* line 75, scss/_section-connect.scss */
+    /* line 76, scss/_section-connect.scss */
     #connect-section .info .hours {
       font-size: 0.875em;
       font-style: italic;
       padding-bottom: 0.75em; }
-  /* line 81, scss/_section-connect.scss */
+  /* line 82, scss/_section-connect.scss */
   #connect-section .info.location {
     width: 25%;
     border-left: none; }
-    /* line 84, scss/_section-connect.scss */
+    /* line 85, scss/_section-connect.scss */
     #connect-section .info.location address {
       line-height: 1.4375em; }
-  /* line 88, scss/_section-connect.scss */
+  /* line 89, scss/_section-connect.scss */
   #connect-section .info.new-business, #connect-section .info.collaboration {
     width: 37.5%; }
-  /* line 92, scss/_section-connect.scss */
+  /* line 93, scss/_section-connect.scss */
   #connect-section .final-row {
     position: relative;
     padding: 1em 1em 0.25em;
@@ -1288,11 +1288,11 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
       content: "";
       display: table;
       clear: both; }
-    /* line 100, scss/_section-connect.scss */
+    /* line 101, scss/_section-connect.scss */
     #connect-section .final-row:hover {
       filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
       opacity: 1; }
-    /* line 103, scss/_section-connect.scss */
+    /* line 104, scss/_section-connect.scss */
     #connect-section .final-row .logo, #connect-section .final-row .social-links, #connect-section .final-row .copyright {
       display: inline-block;
       vertical-align: top;
@@ -1302,7 +1302,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
       content: "";
       display: table;
       clear: both; }
-    /* line 111, scss/_section-connect.scss */
+    /* line 112, scss/_section-connect.scss */
     #connect-section .final-row .nav-link {
       display: block;
       float: left;
@@ -1310,27 +1310,27 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
       height: 34px;
       padding: 2px 0;
       margin: 0 5px; }
-      /* line 115, scss/_section-connect.scss */
+      /* line 116, scss/_section-connect.scss */
       #connect-section .final-row .nav-link:hover .icon {
         background-color: #ff0097; }
-      /* line 118, scss/_section-connect.scss */
+      /* line 119, scss/_section-connect.scss */
       #connect-section .final-row .nav-link.facebook .icon {
         background-position: -240px -30px; }
-      /* line 119, scss/_section-connect.scss */
+      /* line 120, scss/_section-connect.scss */
       #connect-section .final-row .nav-link.twitter .icon {
         background-position: -270px -30px; }
-      /* line 120, scss/_section-connect.scss */
+      /* line 121, scss/_section-connect.scss */
       #connect-section .final-row .nav-link.google .icon {
         background-position: -330px -30px; }
-    /* line 122, scss/_section-connect.scss */
+    /* line 123, scss/_section-connect.scss */
     #connect-section .final-row .copyright {
       font-style: italic;
       line-height: 44px; }
   @media (max-width: 1024px) {
-    /* line 129, scss/_section-connect.scss */
+    /* line 130, scss/_section-connect.scss */
     #connect-section .section-fix-inner {
       padding: 20px; }
-    /* line 132, scss/_section-connect.scss */
+    /* line 133, scss/_section-connect.scss */
     #connect-section .info-row {
       display: block; }
       /* line 194, scss/_base.scss */
@@ -1338,57 +1338,57 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
         content: "";
         display: table;
         clear: both; }
-    /* line 136, scss/_section-connect.scss */
+    /* line 137, scss/_section-connect.scss */
     #connect-section .info {
       display: block;
       padding: 1em 1em 2em; }
-    /* line 140, scss/_section-connect.scss */
+    /* line 141, scss/_section-connect.scss */
     #connect-section .info.location {
       float: left;
       width: 25%; }
-    /* line 144, scss/_section-connect.scss */
+    /* line 145, scss/_section-connect.scss */
     #connect-section .info.new-business, #connect-section .info.collaboration {
       float: right;
       width: 75%; }
-    /* line 148, scss/_section-connect.scss */
+    /* line 149, scss/_section-connect.scss */
     #connect-section .info.new-business {
       border-bottom: 1px solid rgba(68, 68, 62, 0.33); } }
   @media (max-width: 767px), (max-width: 1024px) and (orientation: portrait) {
-    /* line 153, scss/_section-connect.scss */
+    /* line 154, scss/_section-connect.scss */
     #connect-section .section-fix-inner {
       padding: 20px; }
-    /* line 156, scss/_section-connect.scss */
+    /* line 157, scss/_section-connect.scss */
     #connect-section .top-row, #connect-section .info, #connect-section .final-row {
       padding: 1em 0;
       border-left: none; }
-    /* line 160, scss/_section-connect.scss */
+    /* line 161, scss/_section-connect.scss */
     #connect-section .info.location, #connect-section .info.new-business, #connect-section .info.collaboration {
       width: 100%;
       float: none;
       border-bottom: 1px solid rgba(68, 68, 62, 0.33); }
-      /* line 163, scss/_section-connect.scss */
+      /* line 164, scss/_section-connect.scss */
       #connect-section .info.location p, #connect-section .info.new-business p, #connect-section .info.collaboration p {
         width: 90%; }
-    /* line 167, scss/_section-connect.scss */
+    /* line 168, scss/_section-connect.scss */
     #connect-section .final-row {
       padding-bottom: 0.25em; }
-    /* line 170, scss/_section-connect.scss */
+    /* line 171, scss/_section-connect.scss */
     #connect-section address br {
       display: inline;
       content: " "; }
-      /* line 173, scss/_section-connect.scss */
+      /* line 174, scss/_section-connect.scss */
       #connect-section address br::after {
         content: " "; } }
 
-/* line 180, scss/_section-connect.scss */
+/* line 181, scss/_section-connect.scss */
 .iOS #connect-section {
   z-index: 3; }
-  /* line 182, scss/_section-connect.scss */
+  /* line 183, scss/_section-connect.scss */
   .iOS #connect-section .section-fix {
     position: relative; }
 
 @media (min-width: 768px) {
-  /* line 190, scss/_section-connect.scss */
+  /* line 191, scss/_section-connect.scss */
   .affix-top #connect-section .section-fix {
     position: fixed; } }
 

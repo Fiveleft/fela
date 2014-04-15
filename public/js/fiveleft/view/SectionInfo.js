@@ -55,7 +55,8 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			this.activeTarget = null;
 
 			// Templates
-			this.partnershipTemplate = Handlebars.compile( $("#partnership-item-template").html() );
+			this.partnershipTemplate = fiveleft.templates["partnership-item"];
+			 //Handlebars.compile( $("#partnership-item-template").html() );
 		}
 
 		, onSiteDataLoaded : function()

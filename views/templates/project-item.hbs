@@ -1,0 +1,98 @@
+{{#if id}}
+    <article id="project-{{id}}" class="project" data-id="{{id}}" >
+        <div class="project-inner">
+            <div class="media" {{#if media}}data-media="{{media}}"{{/if}}>
+                <div class="media-inner">
+                    <a href="#" class="media-controls">
+                        <span class="inner">
+                            <i class="icon play">Play</i>
+                            <i class="icon pause">Pause</i>
+                        </span>
+                    </a> 
+                    <div class="media-container">
+                    {{#if gallery}}
+                        <ul class="gallery-list">
+                        {{#each gallery}}
+                            <li class="gallery-item" data-id="{{id}}"><span class="placeholder" data-src="{{src}}"></span></li>
+                        {{/each}}
+                        </ul>
+                    {{/if}}
+                    {{#if video}}
+                        <video class="video" {{#if video.poster}}poster="{{video.poster.src}}"{{/if}} preload="load" loop="loop">
+                            {{#if video.mp4}}<source src="{{video.mp4}}" type="video/mp4" />{{/if}}
+                            {{#if video.ogg}}<source src="{{video.ogg}}" type="video/ogg" />{{/if}}
+                            {{#if video.webm}}<source src="{{video.webm}}" type="video/webm" />{{/if}}
+                        </video>
+                    {{/if}}
+                    </div>
+                </div>
+                <a class="close" href="#"><i class="icon">Close</i></a>
+            </div>
+            <div class="info">
+                <h1 class="title">{{title}}</h1>
+                {{#if subtitle}}
+                <h2 class="subtitle">{{subtitle}}</h2>
+                {{/if}}
+                <div class="details">
+                    <p class="project-detail description">{{content}}</p>
+                    <p class="project-detail additional">
+                        {{#if client}}
+                        <span class="participant-info client">
+                            <span class="info-label">Client: </span> <!--
+                         --><a class="client-name info-name" href="/client/{{clientId}}">{{client}}</a>
+                        </span>
+                        {{/if}}
+                        {{#if agency}}
+                        <span class="separator">/</span>
+                        <span class="participant-info agency">
+                            <span class="info-label">Agency: </span> <!--
+                         --><a class="agency-name info-name" href="/agency/{{agencyId}}">{{agency}}</a>
+                        </span>
+                        {{/if}}
+                        {{#if discipline}}
+                        <span class="separator">/</span>
+                        <span class="disciplines">
+                            <span class="taxonomy-label info-label">Disciplines: </span>
+                            {{#each discipline}}
+                            <span class="discipline taxonomy term-{{name}}" {{!-- href="/discipline/{{name}}" data-id="{{name}}" data-type="discipline" --}}>
+                                <span class="label">{{title}}</span><span class="separator">,</span>
+                            </span>
+                            {{/each}}
+                        </span>
+                        {{/if}}
+                        {{#if technology}}
+                        <span class="separator">/</span>
+                        <span class="technologies">
+                            <span class="taxonomy-label info-label">Technology: </span>
+                            {{#each technology}}
+                            <span class="technology taxonomy term-{{name}}" {{!-- href="/technology/{{name}}" data-id="{{name}}" data-type="technology" --}}>
+                                <span class="label">{{title}}</span><span class="separator">,</span>
+                            </span>
+                            {{/each}}
+                        </span>
+                        {{/if}}
+                        {{#if info.website}}
+                        <span class="separator">/</span>
+                        <span class="participant-info site">
+                            <a class="project-link info-name" href="{{info.website}}" target="_blank" title="{{title}}">View Site</a>
+                        </span>
+                        {{/if}}
+                    </p>
+                    <a class="next project-advance" href="#">
+                        <span class="label">Next Project</span>
+                        <span class="title-wrapper"><span class="project-title">{project title}</span></span>
+                        <i class="icon"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </article>
+    {{else}}
+    <article class="project unknown-project">
+        <div class="project-inner">
+            <div class="info">
+                <h1 class="title">Project not found</h1>
+            </div>
+        </div>
+    </article>
+{{/if}}
