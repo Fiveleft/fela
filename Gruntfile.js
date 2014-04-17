@@ -19,7 +19,8 @@ module.exports = function(grunt) {
     }
     ,express : {
       options : {
-        script : "app.js"
+        node_env : "development"
+        ,script : "app.js"
         ,port : process.env.PORT || 8888 
       }
       ,stage : {
@@ -70,6 +71,7 @@ module.exports = function(grunt) {
       ,express: {
         option : {
           background:false
+          ,serverreload : true
         }
         ,files:  [ 
           "app.js"
@@ -79,7 +81,7 @@ module.exports = function(grunt) {
           ,"views/partials/*"
           ,"routes/**/*.js"
         ]
-        ,tasks: ['express:dev']
+        ,tasks: ['express:dev:stop', 'express:dev', 'watch']
       }
     }
 
@@ -118,9 +120,6 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ["compass", "handlebars", "express:dev", "watch"]);
-
-  // Run Server Task
-  grunt.registerTask('server', [ 'express:dev', 'watch' ]);
 
 
 };

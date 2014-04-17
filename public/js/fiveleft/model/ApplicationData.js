@@ -70,7 +70,6 @@
 			this.isMobile = /(android)|(webOS)/g.test(navigator.userAgent) || this.isiOS;
 			this.baseURL = fiveleft._baseURL || (location.protocol + '//' + location.host + location.pathname);
 			this.environment = fiveleft._environment;
-			this.mediaDir = fiveleft._mediaDir;
 			this.pageTitle = this.doc.find("title").text();
 			this.mediaQueries = [];
 			this.scrollLayout = true;
@@ -319,10 +318,15 @@
 		 */
 		, loadSiteData : function() 
 		{	
-			// Call Service
+			data = {}
+			if( fiveleft._environment !== "production" ) {
+				data.uncache = 1;
+			}
+
 			$.ajax({
-				dataType : 'json'
-				,url : "/sitedata-cache.json"
+				url : "http://cms.fiveleft.com/sitedata.php"
+				,dataType : "jsonp"
+				,data : data
 				,success : siteDataLoaded
 				,error : siteDataLoadError
 			});
@@ -387,6 +391,8 @@
 	 */
 	function siteDataLoaded( result ) 
 	{
+		fiveleft.ProjectData.setMediaDirectory( result.media );
+
 		// Set up data
 		createProjectData( result.projects );
 		// createTaxonomies( result.taxonomies );

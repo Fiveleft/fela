@@ -5,14 +5,14 @@
                 <span class="media-content">
                     {{#if thumb}}
                         {{#if thumb.info.sizes.thumbnail.file}}
-                        <img class="thumbnail" src="/assets/media/{{thumb.info.sizes.thumbnail.file}}" />
+                        <img class="thumbnail" src="{{thumb.dir}}{{thumb.info.sizes.thumbnail.file}}" />
                         {{else}}
                             {{#if thumb.info.file }}
-                            <img class="thumbnail" src="/assets/media/{{thumb.info.file}}" />
+                            <img class="thumbnail" src="{{thumb.dir}}{{thumb.info.file}}" />
                             {{/if}}
                         {{/if}}
                     {{else}}
-                    <img class="thumbnail" src="/assets/media/fpo-thumbnail.png" />
+                    <img class="thumbnail" src="{{thumb.dir}}fpo-thumbnail.png" />
                     {{/if}}
                 </span>   
                 <span class="media-hover"></span>             

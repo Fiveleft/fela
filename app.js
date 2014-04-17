@@ -1,5 +1,6 @@
 var express = require("express")
 	,routes = require("./routes")
+	,mysql = require("mysql")
 	,fs = require("fs")
 	,http = require("http")
 	,sockets = require("socket.io")
@@ -12,17 +13,25 @@ var app = express()
 	,router = express.Router()
 	,server = http.createServer(app)
 	,io = sockets.listen(server)
+	,socketCount = 0
 	,port = process.env.PORT || 8888
 	,node_env = process.env.NODE_ENV || 'development'
 	,config = envConfig[node_env]
 	,routeFiles = fs.readdirSync( path.join(__dirname, "routes") );
 
 
+
 app.set( "config", config );
 app.set( "pageContent", {
 	title : "Fiveleft is a creative digital studio focusing on interactive development located in beautiful Seattle WA"
 });
+var data = {
+    content : app.get("pageContent")
+    ,config : app.get("config")
+  };
 
+
+// Catch Public Static files
 app.use( express.static( path.join(__dirname, '/public')) );
 
 
@@ -33,6 +42,15 @@ routeFiles.forEach( function( file ) {
 	route.init(app);
 });
 
+
+// Socket Connection
+// io.sockets.on('connection', function (socket) {
+// 	socket.emit('news', { hello: 'world' });
+// 	socket.on('my other event', function (data) {
+// 		console.log(data);
+// 	});
+// });
+// 
 
 // Set Handlebars as Express Rendering Engine
 app.engine( "hbs", exphbs({
@@ -57,5 +75,5 @@ app.set( "views", __dirname + "/views" );
 app.set( "port", port );
 
 app.listen( app.get("port"), function() {
-  console.log("Listening on " + app.get("port") );
+	console.log("Listening on " + app.get("port") );
 });

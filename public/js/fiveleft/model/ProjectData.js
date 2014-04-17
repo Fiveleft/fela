@@ -3,6 +3,10 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 !function($){
 	
 
+	var _mediaDirectory = "";
+
+
+
 	function ProjectData( data ) {
 
 		$.extend( true, this, data||{} );
@@ -27,12 +31,19 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		}
 
 
+		// Thumb Source
+		if( this.thumb ) {
+			this.thumb.dir = _mediaDirectory;
+		}
+
+
 		// Attachment Map
 		if( this.attachments.length ) 
 		{
 			var _attachmentMap = [], a;
 			for( var i=this.attachments.length-1; i!==-1; i-- ) {
 				a = this.attachments[i];
+				a.dir = _mediaDirectory;
 				_attachmentMap[ a.id ] = a;
 			}
 			this.getAttachment = function( id ) {
@@ -41,7 +52,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		}
 
 		// Create Gallery
-		if( typeof this.gallery !== "undefined" ) 
+		if( typeof this.gallery !== "undefined" && this.attachments.length ) 
 		{
 			var galleryMap = []
 				,galleryList = this.gallery.ids.split(",")
@@ -56,8 +67,9 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		}
 
 		// Create Video
-		if( typeof this.video !== "undefined" )
+		if( typeof this.video !== "undefined" && this.attachments.length )
 		{
+			log( this.video );
 			var _poster = this.video.poster;
 			if( _poster ) {
 				this.video._poster = _poster;
@@ -95,8 +107,14 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			}
 			return this._hasTechnology[slug];
 		}
-
 	}
+
+
+	ProjectData.setMediaDirectory = function( dir )
+	{
+		_mediaDirectory = (dir.substr(-1).indexOf("/")>-1) ? dir : dir + "/" ;
+		// log( "ProjectData.setMediaDirectory :: ", _mediaDirectory );
+	} 
 	
 	
 	// ------------------------------------------------------------------------------------------

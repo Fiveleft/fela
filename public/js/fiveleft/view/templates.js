@@ -101,7 +101,8 @@ function program2(depth0,data) {
 function program3(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                        <img class=\"thumbnail\" src=\"/assets/media/"
+  buffer += "\n                        <img class=\"thumbnail\" src=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.dir)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.info)),stack1 == null || stack1 === false ? stack1 : stack1.sizes)),stack1 == null || stack1 === false ? stack1 : stack1.thumbnail)),stack1 == null || stack1 === false ? stack1 : stack1.file)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\" />\n                        ";
   return buffer;
@@ -119,7 +120,8 @@ function program5(depth0,data) {
 function program6(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                            <img class=\"thumbnail\" src=\"/assets/media/"
+  buffer += "\n                            <img class=\"thumbnail\" src=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.dir)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.info)),stack1 == null || stack1 === false ? stack1 : stack1.file)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\" />\n                            ";
   return buffer;
@@ -127,8 +129,11 @@ function program6(depth0,data) {
 
 function program8(depth0,data) {
   
-  
-  return "\n                    <img class=\"thumbnail\" src=\"/assets/media/fpo-thumbnail.png\" />\n                    ";
+  var buffer = "", stack1;
+  buffer += "\n                    <img class=\"thumbnail\" src=\""
+    + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.dir)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
+    + "fpo-thumbnail.png\" />\n                    ";
+  return buffer;
   }
 
 function program10(depth0,data) {
