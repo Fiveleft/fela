@@ -545,7 +545,7 @@
 			,guidesAlpha : 1
 			,intro : true
 			,play : true
-			,fps : _FPS || 30	
+			// ,fps : _FPS || 30	
 			,_fps : { min:5, max:60, step:5 }
 			,onPlay : function() {
 				_api[ (c.play) ? "start" : "stop" ]();
@@ -553,9 +553,9 @@
 			,onIntro : function() {
 				_api[ (c.intro) ? "toIntro" : "fromIntro" ]();
 			}
-			,onFPS : function() {
-				ticker.setFPS( c.fps );
-			}
+			// ,onFPS : function() {
+			// 	ticker.setFPS( c.fps );
+			// }
 			,onShowComposition : function() {
 				layout.render = c.showComposition;
 			}
@@ -594,7 +594,7 @@
 		var playbackFolder = c.gui.addFolder( "Playback" );
 		playbackFolder.add( c, "play" ).onChange( c.onPlay ).listen();
 		playbackFolder.add( c, "intro" ).onChange( c.onIntro ).listen();
-		playbackFolder.add( c, "fps" ).min( c._fps.min ).max( c._fps.max ).step( c._fps.step ).onChange( c.onFPS );
+		// playbackFolder.add( c, "fps" ).min( c._fps.min ).max( c._fps.max ).step( c._fps.step ).onChange( c.onFPS );
 		playbackFolder.open();
 		
 

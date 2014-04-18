@@ -181,7 +181,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			,nextEase = Quart.easeOut
 			,currEase = Quart.easeIn
 			,speed = 0.35
-			,nextDelay = 0.01 + (currMessage.length > 0 ? speed : 0)
+			,nextDelay = 0.2 + (currMessage.length > 0 ? speed : 0)
 			,tOrigin = "50% 50% -50%"
 			,lastItem = nextMessage.length===0;
 
@@ -195,9 +195,9 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		// animating = true;
 		messageIndex = lastItem ? 0 : newMessageIndex;
 
-		log( "\tcurrMessage = ", currMessage );
-		log( "\tnextMessage = ", nextMessage );
-		log( "\tnextDelay = ", nextDelay );
+		// log( "\tcurrMessage = ", currMessage );
+		// log( "\tnextMessage = ", nextMessage );
+		// log( "\tnextDelay = ", nextDelay );
 
 		// TweenLite.to( currMessage, speed, {opacity:0, marginLeft:"-200px", ease:currEase});
 		// TweenLite.fromTo( nextMessage, speed, {delay:speed, opacity:1, marginLeft:0, ease:nextEase})
@@ -208,24 +208,31 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			currMessage.css({opacity:1});
 			nextMessage.css({opacity:0});
 			TweenLite.to( currMessage, speed, {opacity:0, ease:currEase});
-			TweenLite.to( nextMessage, speed, {delay:nextDelay, opacity:1, ease:nextEase
+			TweenLite.to( nextMessage, speed, {delay:nextDelay, opacity:1
+					,ease:nextEase
 					,onStart : swapMessage
-					,onComplete : function(){changeMessageComplete(lastItem)} });
-			// TweenMax.delayedCall( speed+nextDelay, function(){changeMessageComplete(lastItem)} );
-			log( " here? ");
-		}
-		else{
+					,onComplete : function(){changeMessageComplete(lastItem)} 
+				}
+			);
+		
+		}else{
+
 			TweenMax.fromTo( currMessage, speed, 
 				{rotationX:0, opacity:1}, 
-				{rotationX:-90, marginTop:"-150px", opacity:0, transformOrigin:tOrigin, clearProps:"margin-top", ease:currEase} 
+				{rotationX:90, translateY:-100, opacity:0, transformOrigin:tOrigin, clearProps:"all"
+					,ease:currEase
+					,onComplete : swapMessage
+				} 
 			);
 			TweenMax.fromTo( nextMessage, speed, 
-				{rotationX:90, marginTop:"150px", opacity:0}, 
-				{rotationX:0, marginTop:0,  delay:nextDelay, opacity:1, transformOrigin:tOrigin, clearProps:"margin-top", ease:nextEase, onStart:swapMessage} 
-			);
+				{rotationX:-90, translateY:100, opacity:0}, 
+				{delay:nextDelay, rotationX:0, translateY:0, opacity:1, transformOrigin:tOrigin, clearProps:"all"
+					,ease:nextEase
+					,onComplete : function(){changeMessageComplete(lastItem)} 
+				}
+			); 
 		}
 
-		// TweenMax.delayedCall( speed+nextDelay, function(){changeMessageComplete(lastItem)} );
 	}
 
 	function changeMessageComplete( lastItem ) 

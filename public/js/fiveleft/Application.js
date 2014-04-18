@@ -145,7 +145,7 @@
 
 		, load : function() 
 		{
-			log( _cn+"::load" );
+			// log( _cn+"::load" );
 			this.appData.loadSiteData();
 		}
 
@@ -179,7 +179,7 @@
 
 		, start : function()
 		{
-			log( _cn+"::handleStart");
+			// log( _cn+"::handleStart");
 			
 			_ref.started = false;
 			_ref.$window.trigger( _evt.Start );
@@ -230,7 +230,7 @@
 
 	function handleResize( event )
 	{
-		log( _cn+"::handleResize" );
+		// log( _cn+"::handleResize" );
 
 		// Update The Scroll Area Height
 		scroll.height = _ref.$mainInner.outerHeight() - _ref.$window.height();
@@ -350,7 +350,7 @@
 	{
 		event.preventDefault();
 		event.stopImmediatePropagation();
-		log( " handle draw click ");
+		// log( " handle draw click ");
 	}
 
 
@@ -435,7 +435,7 @@
 
 	function handleHistoryClickEvent( evt ) 
 	{	
-		log( _cn + "::handleHistoryClickEvent", $(this) );
+		// log( _cn + "::handleHistoryClickEvent", $(this) );
 		evt.preventDefault();
 		var path = $(this).attr('href');
 		History.pushState( {}, null, path );
@@ -445,7 +445,7 @@
 
 	function handleHistoryStateChange( event )
 	{
-		log( _cn + "::handleHistoryStateChange" );
+		// log( _cn + "::handleHistoryStateChange" );
 		targetSection();
 	}
 
