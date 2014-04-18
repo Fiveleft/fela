@@ -117,9 +117,10 @@
 
 		, start : function() 
 		{
+			this.playing = true;
 			// log( "DrawingAPI::start" );
-			playing = true;
-			doRender = true;
+			// log( "\tdrawingApi.playing = ", this.playing );
+			// log( "\tdrawingApi.paused = ", this.paused );
 			controller.play = true;
 			timer.start();
 			layout.start();
@@ -129,9 +130,10 @@
 
 		, stop : function() 
 		{
+			this.playing = false;
 			// log( "DrawingAPI::stop" );
-			playing = false;
-			doRender = false;
+			// log( "\tdrawingApi.playing = ", this.playing );
+			// log( "\tdrawingApi.paused = ", this.paused );
 			controller.play = false;
 			timer.stop();
 			layout.stop();
@@ -140,24 +142,23 @@
 
 		, pause : function()
 		{
-			if( this.paused ) return;
+			// if( this.paused ) return;
 			// log( "DrawingAPI::pause" );
 			this.paused = true;
-			this.stop();
+			// this.stop();
 		}
 
 		, resume : function()
 		{
-			if( !this.paused ) return;
+			// if( !this.paused ) return;
 			// log( "DrawingAPI::resume" );
 			this.paused = false;
-			this.start();
+			// this.start();
 		}
 
 		, tick : function() 
 		{
-			// device.motion.update();
-			// device.orientation.update();
+			doRender = _api.playing && !_api.paused;	
 			timer.update();
 			layout.update();
 			if( doRender ) {
@@ -302,6 +303,8 @@
 
 	function drawToArtwork() 
 	{
+
+		//TODO: turn off for now
 		brush.add( layout.artworkPosition );
 		brush.render();
 		aCtx.drawImage( brush.canvas, 0, 0 );
@@ -319,9 +322,6 @@
 	{
 		var src = layout.artwork.source
 			,dest = layout.render.area
-			// ,ctx = introState ? iCtx : dCtx;
-
-		// log( src.toString(), dest.toString() );
 
 		// Clear the display canvas and ensure its size.
 		if( dCvs.width !== layout.viewport.area.width || dCvs.height !== layout.viewport.area.height ) {
@@ -334,19 +334,15 @@
 		// Draw the artwork canvas onto the Display Canvas
 		dCtx.drawImage( aCvs, src.x, src.y, src.width, src.height, dest.x, dest.y, dest.width, dest.height );
 	
-
-		// TEMPORARY
-		// introState = false;
-
 		// If we are in intro state, draw to the intro canvas
 		if( introState ) {
 			// log( "DrawingAPI::drawToDisplay introState = " + introState );
 			if( !introMask.complete ) return;
-			// dCtx.globalCompositeOperation = "destination-in";
-			dCtx.globalAlpha = 0.3;
+			dCtx.globalCompositeOperation = "destination-in";
+			// dCtx.globalAlpha = 0.3;
 			dCtx.drawImage( introMask, 0, 0, introMask.width, introMask.height, dest.x, dest.y, dest.width, dest.height );
-			dCtx.globalAlpha = 1;
-			// dCtx.globalCompositeOperation = "source-over";
+			// dCtx.globalAlpha = 1;
+			dCtx.globalCompositeOperation = "source-over";
 		}
 	}
 
@@ -448,10 +444,6 @@
 			[onOff]( "mousemove", handleUserMove )
 			[onOff]( "mouseup mouseleave", handleUserEnd )
 			[onOff]( "touchend touchcancel touchstart touchmove", handleUserTouch );
-
-		// $(window)
-		// 	[onOff]( "deviceorientation", handleUserOrientation )
-		// 	[onOff]( "devicemotion", handleUserMotion );
 
 		ticker[applyFtn]( "tick", _api.tick );
 	}

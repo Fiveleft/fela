@@ -9,7 +9,12 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			classes : {
 				scrollResponse : "scroll-response"
 			}
-		};
+		}
+		,activeScrollStates = [
+			"fill-viewport", "inside-viewport", "top-viewport-half"
+		]
+		,activeScrollTest = RegExp("^" + activeScrollStates.join("|^"));
+
 
 
 	/** 
@@ -99,11 +104,22 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			this.$portrait.css({ "top" : this.portraitTop });
 		}
 
-
-		, scroll : function()
+		, scroll : function( _scrollState )
 		{
+			var scrollState = _scrollState||this.element.attr("data-scroll")
+				,scrollActive = activeScrollTest.test( scrollState );
+
 			// log("SectionInfo::scroll");
 			if( this.appData.scrollLayout ) this.positionPortrait();
+
+			switch( true ) {
+				case this.started && scrollActive && !this.active :
+					this.activate();
+					break;
+				case this.started && !scrollActive && this.active :
+					this.deactivate();
+					break;
+			}
 		}
 
 

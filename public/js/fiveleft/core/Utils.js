@@ -1,7 +1,10 @@
 
 !function( global )
 {
-	
+	// Namespace
+	window.fiveleft = (typeof window.fiveleft == "undefined") ? {} : window.fiveleft;
+
+
 	// Class Inheritance
 	Function.prototype.extend = function ( parent )
 	{

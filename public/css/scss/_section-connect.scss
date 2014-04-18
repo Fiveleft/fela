@@ -188,6 +188,8 @@
 
 .affix-top #connect-section {
 
+	background:rgba(magenta, 0.75);
+
 	@include breakpoint( small-desktop-min ) {
 		.section-fix {
 			position:fixed;

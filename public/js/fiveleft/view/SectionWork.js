@@ -15,7 +15,11 @@
 				,projectContainer : ".project-container"
 				,gridItem : ".project-grid-item"
 			}
-		};
+		}
+		,activeScrollStates = [
+			"fill-viewport", "inside-viewport", "bottom-viewport-half", "top-viewport-half"
+		]
+		,activeScrollTest = RegExp("^" + activeScrollStates.join("|^"));
 
 
 	function SectionWork( element )
@@ -55,7 +59,6 @@
 			this.onLoadProjectName = null;
 			this.topOffset = 0;
 			this.grid = {};
-
 			
 			// Listeners
 			this.$projectList.on( "click", ".project .close", handleProjectClose );
@@ -63,7 +66,7 @@
 
 		, target : function( path )
 		{
-			log( _cn + "::target", path );
+			// log( _cn + "::target", path );
 			switch( true ) 
 			{
 				case path[0] == "work" && path.length === 1  && _ref.activeProject == null :
@@ -84,7 +87,6 @@
 			}
 		}
 
-
 		, activate : function()
 		{
 			this.active = true;
@@ -97,6 +99,21 @@
 			this.active = false;
 			this.element.removeClass( _cls.active );
 			this.navItem.removeClass( _cls.active );
+		}
+
+		, scroll : function( _scrollState )
+		{
+			var scrollState = _scrollState||this.element.attr("data-scroll")
+				,scrollActive = activeScrollTest.test( scrollState );
+
+			switch( true ) {
+				case this.started && scrollActive && !this.active :
+					this.activate();
+					break;
+				case this.started && !scrollActive && this.active :
+					this.deactivate();
+					break;
+			}
 		}
 
 		, resize : function()

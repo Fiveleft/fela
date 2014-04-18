@@ -26,20 +26,32 @@
 	}
 
 
-	&[data-scroll = above-viewport],
-	&[data-scroll = below-viewport] {
-		//.section-inner { visibility:hidden; }
-	}
-	&[data-scroll = top-inside-viewport] {
-		//background-color:rgba( green, 0.5);
-	}
-	&[data-scroll = bottom-inside-viewport] {
-		//background-color:rgba( red, 0.5);
-	}
-	&[data-scroll = fill-viewport],
-	&[data-scroll = inside-viewport] {
-		//background-color:rgba( black, 0.75);
-	}
+	// &[data-scroll = above-viewport],
+	// &[data-scroll = below-viewport] {
+	// 	//.section-inner { visibility:hidden; }
+	// }
+	// &[data-scroll = top-inside-viewport] {
+	// 	background-color:rgba( green, 0.25);
+	// }
+	// &[data-scroll = top-viewport-half] {
+	// 	background-color:rgba( green, 0.5);
+	// }
+	// &[data-scroll = bottom-viewport-half] {
+	// 	background-color:rgba( red, 0.5);
+	// }
+	// &[data-scroll = bottom-inside-viewport] {
+	// 	background-color:rgba( red, 0.25);
+	// }
+	// &[data-scroll = fill-viewport],
+	// &[data-scroll = inside-viewport] {
+	// 	background-color:rgba( blue, 0.75);
+	// }
+	// &.active {
+	// 	background-color:rgba( green, 0.15 );
+	// }
+	// &.viewport {
+
+	// }
 
 	@include breakpoint( tablet-max ) {
 		overflow:hidden;

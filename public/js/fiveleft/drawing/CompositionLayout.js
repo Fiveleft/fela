@@ -4,6 +4,15 @@
 	// Namespace
 	window.fiveleft = (typeof window.fiveleft == "undefined") ? {} : window.fiveleft;
 
+	// Dependencies
+	var dependencies = [ "Vector", "MotionVector", "Rectangle", "RegPoint" ];
+	for( var d=dependencies.length-1; d!==-1; d-- ) {
+		if( typeof fiveleft[dependencies[d]] === "undefined" ) {
+			throw new Error( "fiveleft.CompositionLayout uses " + dependencies[d].toString() + " but could not find it" );
+		}
+	}
+
+
 
 	var _ref
 		,artworkWidth = 2200
@@ -106,6 +115,14 @@
 			,scrollOffset : new fiveleft.Vector()
 		};
 
+	// For the Render Area function
+	var areaColors = {
+		viewport : new fiveleft.Color( 0, 127, 255, 1 )
+		,artwork : new fiveleft.Color( 0, 0, 0, 0.25 )
+		,parallax : new fiveleft.Color( 255, 255, 51, 0.8 )
+		,render : new fiveleft.Color( 255, 0, 0, 0.8 )
+		,hotspot : new fiveleft.Color(0,0,0,1)
+	};
 
 	/** 
 	 * Composition Layout
@@ -127,17 +144,6 @@
 		this.introState = true;
 		this.doRender = true;
 		this.canvas = document.createElement("canvas");
-
-
-		// TEMPORARY
-		this.badAngle = false;
-
-
-
-		// timer.onDelayComplete = function() {
-		// 	magnet.on = !magnet.on;
-		// 	// log("timer delay complete -  magnet: ", magnet.on );
-		// };
 
 		// Idle Posiiton - runs when composition is magnetized
 		idle.position.copy( this.userPosition );
@@ -163,7 +169,6 @@
 		// Measurements
 		measureLayout();
 		createHotSpots();
-
 
 		// Functions
 		this.renderAreas = renderAreas;
@@ -201,20 +206,23 @@
 		// Do the updates if the animation is not running
 		if( !animation.isAnimating ) {
 			parallax.offset.update();
-			// idle.position.update();
+			idle.position.update();
 		}else{
-			log("CompositionLayout::update - no parallax update");
+			// log("CompositionLayout::update - no parallax update");
 		}
 		
 		if( runIdle && magnet.on && !animation.isAnimating ) {
-			idle.position.update();
+			// idle.position.update();
 		}
 		// Render source combines viewport position, render area, parallax offset
 		render.offset.update();
 		render.area.setPosition( render.targetOffset.x, render.targetOffset.y );
 
-		artwork.source.set( render.offset.x+render.area.x, render.offset.y+render.area.y, render.area.width, render.area.height );
-		artwork.position.copy( artwork.source.center );
+		artwork.source
+			.set( render.offset.x+render.targetOffset.x, render.offset.y+render.targetOffset.y, render.area.width, render.area.height );
+		artwork.position
+			.copy( render.offset )
+			.add( idle.position );
 
 	}
 
@@ -223,16 +231,9 @@
 	{
 		magnet.on = !magnet.on;
 
-
-
-
 		if( magnet.on ) {
-
 			var lastHotSpot = hotspots.current;
-			hotspots.current = getHotspotInRenderBoundry()
-
-
-
+			hotspots.current = getHotspotInRenderBoundry();
 			// log( "CompositionLayout::magnetize" );
 			// nextHotSpot.log()
 		}
@@ -312,7 +313,7 @@
 		render.area.set( tX, tY, tW, tH ).round();
 
 		// Update the Artwork Source
-		artwork.source.set( render.offset.x+render.area.x, render.offset.y+render.area.y, render.area.width, render.area.height );
+		// artwork.source.set( render.offset.x+render.area.x, render.offset.y+render.area.y, render.area.width, render.area.height );
 
 		// Parallax UIRect is the trigger area that parallax-es the artwork
 		parallax.uiRect.scaleRect( viewport.area, parallax.uiRectScale );
@@ -335,7 +336,6 @@
 			log( "\tviewport.centerOffset = ", viewport.centerOffset.toString() );
 			log( "\trender.area = ", render.area.toString() );
 			// log( "\trender.targetOffset = ", render.targetOffset.toString() );
-			log( "\trender.area = ", render.area.toString() );
 			// log( "\tparallax.area = ", parallax.area.toString() );
 			// log( "\tparallax.uiRect = ", parallax.uiRect.toString() );
 			log( "***" );
@@ -378,12 +378,16 @@
 			render.useTarget = false;
 			render.targetElement = null;
 			render.targetOffset.set( 0, 0 );
+			render.area.set( 0, 0, viewport.width, viewport.height );
 		}else{
 			render.useTarget = true;
 			render.targetElement = $(element);
 			render.targetOffset.set( render.targetElement.offset().left, render.targetElement.offset().top );
+			render.area.set(
+					render.targetOffset.x, render.targetOffset.y
+					,render.targetElement.width(), render.targetElement.height() 
+				);
 		}
-		render.area.setPosition( render.targetOffset.x, render.targetOffset.y );
 
 		// log( "CompositionLayout::setRenderTarget" );
 		// log( "\trender.targetElement:", render.useTarget );
@@ -526,15 +530,6 @@
 	}
 
 
-	var areaColors = {
-		viewport : new fiveleft.Color( 0, 127, 255, 1 )
-		,artwork : new fiveleft.Color( 0, 0, 0, 0.25 )
-		,parallax : new fiveleft.Color( 255, 255, 51, 0.8 )
-		,render : new fiveleft.Color( 255, 0, 0, 0.8 )
-		,hotspot : new fiveleft.Color(0,0,0,1)
-	};
-
-
 	/**
 	 * Render the Layout Areas used for calculation
 	 * @return {Canvas DOMElement} 
@@ -562,6 +557,7 @@
 
 		// Draw the Composition HeatMap
 		ctx.drawImage( compCvs, 0, 0 );
+		// ctx.clearRect( 0, 0, artworkWidth, artworkHeight );
 
 		// Draw the Artwork Rectangle
 		// ctx.beginPath();
@@ -686,7 +682,7 @@
 			// .add( render.targetOffset );
 
 		this.target.x = clamp( this.target.x, viewport.boundry.l, artwork.width-render.area.width  );
-		this.target.y = clamp( this.target.y, viewport.boundry.t, artwork.height-render.area.height  );
+		this.target.y = clamp( this.target.y, viewport.boundry.t, viewport.boundry.b  );
 	}
 
 
@@ -727,11 +723,11 @@
 		// log( " idle : vFlag=" + idle.vFlag + " hFlag=" + idle.hFlag );			
 		if( idle.angle === false ) {
 			// log( " bad angle - ", oldAngle.toFixed(2) )
-			_ref.badAngle = true;
+			// _ref.badAngle = true;
 			idle.angle = 0;
 			idle.position.target.copy( render.area.getCenter() );
 		}else{
-			_ref.badAngle = false;
+			// _ref.badAngle = false;
 			idle.position.target.x = Math.cos( idle.angle ) * moveAmt;
 			idle.position.target.y = Math.sin( idle.angle ) * moveAmt;
 			idle.position.target.add( idle.position );

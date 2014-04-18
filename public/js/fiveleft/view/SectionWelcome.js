@@ -19,7 +19,11 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		,arrivedOnce = false
 		,animating = false
 		,messageIndex = 1
-		,messageCount = 0;
+		,messageCount = 0
+		,activeScrollStates = [
+			"fill-viewport", "inside-viewport", "bottom-viewport-half"
+		]
+		,activeScrollTest = RegExp("^" + activeScrollStates.join("|^"));
 
 
 	/** 
@@ -81,7 +85,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 
 		, activate : function()
 		{
-			log( "SectionWelcome::activate || completed = ", completed);
+			// log( "SectionWelcome::activate || completed = ", completed);
 			if( completed ) {
 				_ref.element.addClass( _cls.complete );
 			}
@@ -99,7 +103,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		, scroll : function( _scrollState )
 		{
 			var scrollState = _scrollState||this.element.attr("data-scroll")
-				,scrollActive = /fill\-viewport|inside\-viewport|top\-inside\-viewport/.test( scrollState );
+				,scrollActive = activeScrollTest.test( scrollState );
 
 			switch( true ) {
 				case this.started && scrollActive && !this.active :
@@ -123,7 +127,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 
 		, onStart : function()
 		{
-			log( _cn+"::start!" );
+			// log( _cn+"::start!" );
 			this.scroll();
 		}
 
@@ -173,7 +177,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 	 */
 	function changeMessageIndex( index ) 
 	{
-		log( _cn+"::changeMessageIndex( " + index + " )" );
+		// log( _cn+"::changeMessageIndex( " + index + " )" );
 
 		var newMessageIndex = index
 			,currMessage = _ref.$messageSteps.filter('[data-index=' + messageIndex + ']')
@@ -195,12 +199,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		// animating = true;
 		messageIndex = lastItem ? 0 : newMessageIndex;
 
-		// log( "\tcurrMessage = ", currMessage );
-		// log( "\tnextMessage = ", nextMessage );
-		// log( "\tnextDelay = ", nextDelay );
 
-		// TweenLite.to( currMessage, speed, {opacity:0, marginLeft:"-200px", ease:currEase});
-		// TweenLite.fromTo( nextMessage, speed, {delay:speed, opacity:1, marginLeft:0, ease:nextEase})
 		if( _ref.appData.isiOS ) 
 		{
 			fiveleft.drawingApi.pause();
@@ -237,7 +236,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 
 	function changeMessageComplete( lastItem ) 
 	{
-		log( _cn+"::changeMessageComplete() lastItem ? ", lastItem  );
+		// log( _cn+"::changeMessageComplete() lastItem ? ", lastItem  );
 
 		animating = false;
 		if( _ref.appData.isiOS && !lastItem ) {

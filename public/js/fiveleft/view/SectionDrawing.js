@@ -10,7 +10,9 @@
 	var baseOffset
 		,appData
 		,drawingApi
-		,scrollArea
+		,affixTop = false
+		,affixOffset = 0
+		,affixArea = 0
 		,loadQueue;
 
 
@@ -41,24 +43,14 @@
 			// Elements
 			this.$mainInner = $("#main .main-inner", this.body);
 			this.$connectOffset = $("#connect-section");
-			this.canvasElement = $( "#canvas-drawing", this.element );
 
 			// Properties
-			baseOffset = 0;
 			appData = fiveleft.applicationData;
-
 			drawingApi = fiveleft.drawingApi;
-			
-			scrollArea = this.$mainInner.height() - this.window.height();
-			userPos = new fiveleft.Vector();
+			baseOffset = this.$connectOffset.height();
 
 			// Listeners
-			// this.window
-			// 	.on( _evt.Start, handleStart )
-			// 	.on( _evt.AffixTop, handleAffixTop )
-			// 	.on( _evt.IntroSequenceChange, handleIntroChange )
-			// 	.on( _evt.IntroSequenceComplete, handleIntroComplete )
-			// 	.on( "orientationchange " + _evt.DOMChange, $.proxy(this, 'resize'));
+			this.window.on( _evt.AffixTop, handleAffixTop )
 
 			// Begin Loading Assets
 			this.initAssetLoading();
@@ -84,46 +76,22 @@
 
 		, resize : function( event )
 		{
-			// log( _cn + "::resize event = ", (event) ? event.type : "none" );
-			switch( true )
-			{
-				case appData.isiOS :
-					// var w = window.orientation !== 0 ? window.screen.height : window.screen.width
-					// 	,h = window.orientation !== 0 ? window.screen.width : window.screen.height;
-					baseOffset = 0;
-					// drawingApi.setSize( w, h );
-					break;
-
-				default :
-					baseOffset = this.$connectOffset.outerHeight();
-					// drawingApi.setSize( window.innerWidth, window.innerHeight );
-					break;
-			}
-			scrollArea = (this.$mainInner.height() - this.window.height()) - baseOffset;
-			// drawingApi.setSize( window.innerWidth, window.innerHeight );
-			// drawingApi.setScrollRatio( clamp( (this.window.scrollTop() / scrollArea), 0, 1) );
+			var wH = window.innerHeight;
+			this.element.height(wH);
+			baseOffset = this.$connectOffset.height();
+			affixArea = this.$mainInner.height() - wH - baseOffset;
+			affixOffset = _ref.window.scrollTop() - affixArea;
+			if( !affixTop && affixOffset > 0 ) handleAffixedScroll();
 		}
 
 
 		, scroll : function()
 		{
-			var currOffset = this.element.css("top")
-				,offset = (this.affixTop && this.appData.scrollLayout) ? -(this.window.scrollTop()-scrollArea) : 0;
-
-			if( currOffset !== offset && offset < 0 ){
-				this.element.css({"top" : offset+"px"} )
-			}else{
-				this.element.css({"top" : ""});
-			}
-
-			// drawingApi.setScrollRatio( clamp( (this.window.scrollTop() / scrollArea), 0, 1) );
 		}
 
 
 		, target : function()
 		{
-
-			// log( _cn + "::target" );
 		}
 
 
@@ -135,38 +103,21 @@
 		}
 
 	}
-	
-
-	function handleStart( event )
-	{
-		// log( _cn + "::handleStart" );
-		// drawingApi.start();
-		// _ref.resize();
-		// drawingApi.startIntro( $("canvas.hero-canvas") );
-	}
-
-
-	function handleIntroChange( event, index ) 
-	{
-		// log( _cn + "::handleIntroChange index = ", index );
-		//drawingApi.introStep( index );
-	}
-	
-
-	function handleIntroComplete( event ) 
-	{
-
-		// log( _cn + "::handleIntroComplete" );
-	}
 
 
 	function handleAffixTop( event, apply ) 
 	{
-		_ref.affixTop = apply;
-		if( !apply ) {
-			_ref.element.css({"top" : 0});
-		}else{
-			_ref.scroll();
+		affixTop = apply;
+		_ref.window[ (apply) ? "on" : "off" ]( "scroll", handleAffixedScroll );
+		if( affixTop ) handleAffixedScroll();
+	}
+
+
+	function handleAffixedScroll()
+	{
+		affixOffset = _ref.window.scrollTop() - affixArea;
+		if( affixOffset > 0 ){
+			_ref.element.css({"bottom" : affixOffset+"px"})
 		}
 	}
 

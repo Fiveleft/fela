@@ -3,6 +3,13 @@
 	// Namespace
 	window.fiveleft = (typeof window.fiveleft == "undefined") ? {} : window.fiveleft;
 	
+	// Dependencies
+	var dependencies = [ "Vector" ];
+	for( var d=dependencies.length-1; d!==-1; d-- ) {
+		if( typeof fiveleft[dependencies[d]] === "undefined" ) {
+			throw new Error( "fiveleft.MotionVector uses " + dependencies[d].toString() + " but could not find it" );
+		}
+	}
 
 	function MotionVector( x, y, z )
 	{

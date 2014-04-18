@@ -17,6 +17,7 @@
 			,tickInterval : 5
 			,timeout : 0
 			,interval : 200
+			,affixTop : false
 		}
 		,resize = {
 			timeout : 0
@@ -49,7 +50,8 @@
 
 		, defaults : {
 			classes : {
-				beforeStart : "beforeStart"
+				affixTop : "affix-top"
+				,beforeStart : "beforeStart"
 				,drawClosing : "draw-closing"
 				,drawOpen : "draw-open"
 				,drawOpening : "draw-opening"
@@ -101,6 +103,7 @@
 			this.started = false;
 			this.appData = fiveleft.applicationData = new fiveleft.ApplicationData();
 			this.drawingApi = fiveleft.drawingApi = new fiveleft.DrawingAPI();
+			this.drawingApi.init( $("#canvas-drawing")[0] );
 
 			// FontsLoaded hook (see index.php for connection to typekit)
 			if( !fiveleft.fontsloaded ) fiveleft.onfontloaded = this.fontsLoadComplete();
@@ -134,6 +137,7 @@
 				.one( _evt.SiteDataLoaded, handleLoadComplete )
 				.one( _evt.SiteDataError, handleCriticalLoadError )
 				.on( "scroll", handleScroll )
+				.on( _evt.AffixTop, handleAffixTop )
 				.on( ["resize", "orientationchange", _evt.DOMChange].join(" "), handleResize )
 				.on( [_evt.OpenMenu, _evt.CloseMenu].join(" "), handleMenuToggle )
 				.on( [_evt.IntroSequenceChange, _evt.IntroSequenceComplete].join(" "), handleIntroSequence );
@@ -165,7 +169,6 @@
 				// log( "** " + _cn + "::ready() **" );
 				History.Adapter.bind(window,'statechange',handleHistoryStateChange);
 				
-				this.drawingApi.init( $("#canvas-drawing")[0] );
 				// this.drawingApi.setSize();
 
 				this.body.attr( "data-loadstate", "intro" );
@@ -197,6 +200,19 @@
 
 
 
+
+
+	function handleAffixTop( event, apply )
+	{
+		// log("Application::handleAffixTop", _cls.affixTop );
+		var apiAction = apply ? "stop" : "start";
+		scroll.affixTop = apply;
+		fiveleft.drawingApi[apiAction]();
+
+		_ref.html.toggleClass( _cls.affixTop, apply );
+	}
+
+
 	function handleScroll()
 	{
 		// log( _cn+"::handleScroll" );
@@ -206,7 +222,7 @@
 		scroll.ratio = clamp( scroll.position/scroll.height, 0, 1 );
 
 		fiveleft.drawingApi.setScrollRatio( scroll.ratio );
-		fiveleft.drawingApi.pause();
+		if( fiveleft.drawingApi.playing ) fiveleft.drawingApi.stop();
 
 		// Update Intermittent Scroll Responses
 		clearTimeout( scroll.timeout );
@@ -223,8 +239,9 @@
 	{
 		// log( "Application::handleScrollTimeout" );
 		clearTimeout( scroll.timeout );
-		scroll.timeout = 0;		
-		fiveleft.drawingApi.resume();
+		scroll.timeout = 0;
+		// fiveleft.drawingApi.resume();
+		if( !scroll.affixTop ) fiveleft.drawingApi.start();
 	}
 
 
@@ -266,6 +283,9 @@
 
 		var scrollTop = _ref.$window.scrollTop()
 			,winH = window.innerHeight
+			,winHalf = round( winH/2 )
+			,topHalf = 0
+			,bottomHalf = 0
 			,min = Math.max( 0, scrollTop )
 			,max = min + winH
 			,currScrollState = ""
@@ -276,6 +296,8 @@
 
 				section.top = Math.floor( section.element.offset().top );
 				section.bottom = Math.ceil( section.top + section.element.outerHeight() );
+
+				bottomHalf = 
 				currScrollState = section.element.attr("data-scroll");
 
 				switch( true )
@@ -286,16 +308,22 @@
 					case (section.top >= min && section.bottom <= max ) :
 						scrollState = "inside-viewport";
 						break;
+					case (section.top > min && section.top < max-winHalf && section.bottom > max ) :
+						scrollState = "top-viewport-half";
+						break;
 					case (section.top > min && section.top < max && section.bottom > max ) :
 						scrollState = "top-inside-viewport";
 						break;
-					case section.bottom > min && section.bottom < max && section.top < min :
+					case (section.bottom > min+winHalf && section.bottom < max && section.top < min ) :
+						scrollState = "bottom-viewport-half";
+						break;
+					case (section.bottom > min && section.bottom < max && section.top < min ) :
 						scrollState = "bottom-inside-viewport";
 						break;
-					case (section.top >= max) : 
+					case (section.top >= max ) : 
 						scrollState = "below-viewport";
 						break;
-					case (section.bottom <= min) : 
+					case (section.bottom <= min ) : 
 						scrollState = "above-viewport";
 						break;
 					default : 

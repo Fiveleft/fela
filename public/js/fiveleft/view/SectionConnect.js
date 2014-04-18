@@ -5,11 +5,11 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 	// Shortcuts
 	var _cn = "SectionConnect"
 		,_ref, _cfg, _sel, _cls, _evt
-		,_defaults = {
-			classes : {
-				affixTop : "affix-top"
-			}
-		};
+		,activeScrollStates = [
+			"top-inside-viewport", "top-viewport-half", "inside-viewport"
+		]
+		,activeScrollTest = RegExp("^" + activeScrollStates.join("|^"));
+
 
 
 	/** 
@@ -19,7 +19,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 	 */
 	function SectionConnect( element ) 
 	{
-		this._init( element, _defaults );
+		this._init( element );
 	}
 
 	SectionConnect.prototype = {
@@ -47,24 +47,24 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			this.resize();
 		}
 
-		, scroll : function()
-		{
-			var scrollState = this.element.attr("data-scroll");
 
-			if( scrollState == "top-inside-viewport" || scrollState == "fill-viewport" || scrollState == "inside-viewport" ) {
-				if( !this.affixTop ) {
+
+		, scroll : function( _scrollState )
+		{
+			var scrollState = _scrollState||this.element.attr("data-scroll")
+				,scrollActive = activeScrollTest.test( scrollState );
+
+			switch( true ) {
+				case !this.affixTop && !this.active && scrollActive :
 					this.activate();
 					this.affixTop = true;
-					this.html.addClass( _cls.affixTop );
-					this.window.trigger( fiveleft.Event.AffixTop, true );
-				}
-			}else{
-				if( this.affixTop ) {
+					this.window.trigger( _evt.AffixTop, true );
+					break;
+				case this.affixTop && !scrollActive && this.active :
 					this.deactivate();
 					this.affixTop = false;
-					this.html.removeClass( _cls.affixTop );
-					this.window.trigger( fiveleft.Event.AffixTop, false );
-				}
+					this.window.trigger( _evt.AffixTop, false );
+					break;
 			}
 		}
 
