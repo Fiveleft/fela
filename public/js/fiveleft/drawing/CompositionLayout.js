@@ -19,7 +19,6 @@
 		,renderCanvas = document.createElement("canvas")
 		,introState = true
 		,heatMapRendered = false
-		,state = null // 'magnetized' | 'paused' | 'idle'
 
 		/* New idea 'run idle' */
 		,runIdle = false
@@ -57,6 +56,7 @@
 			,botLeft : null
 			,thirdsOffsetRatio : Expo.easeIn.getRatio
 			,offsetRatio : Sine.easeIn.getRatio
+			,selectArea : new fiveleft.Rectangle()
 		}
 		,idle = {
 			magnetized : false
@@ -89,21 +89,21 @@
 		}
 		,artwork = {
 			area : new fiveleft.Rectangle( 0, 0, artworkWidth, artworkHeight )
+			,source : new fiveleft.Rectangle()
 			,position : new fiveleft.Vector()
 		}
 		,render = {
 			area : new fiveleft.Rectangle()
-			,source : new fiveleft.Rectangle()
-			,dest : new fiveleft.Rectangle()
 			,offset : new fiveleft.MotionVector()
 			,targetElement : null
 			,targetPosition : new fiveleft.Vector()
+			,targetOffset : new fiveleft.Vector()
 		}
 		,viewport = {
 			area : new fiveleft.Rectangle( 0, 0, window.innerWidth, window.innerHeight )
 			,boundry : new fiveleft.Rectangle( 0, 0, (artworkWidth-window.innerWidth), (artworkHeight-window.innerHeight))
 			,centerOffset : new fiveleft.Vector()
-			,scrollRatio : 0
+			,scrollOffset : new fiveleft.Vector()
 		};
 
 
@@ -202,21 +202,20 @@
 		if( !animation.isAnimating ) {
 			parallax.offset.update();
 			// idle.position.update();
+		}else{
+			log("CompositionLayout::update - no parallax update");
 		}
 		
-
-		if( runIdle && magnet.on && !animation.isAnimationg ) {
+		if( runIdle && magnet.on && !animation.isAnimating ) {
 			idle.position.update();
 		}
-
-		artwork.position
-			.addVectors( idle.position, viewport.area.getTopLeft() )
-			.add( parallax.offset );
-
 		// Render source combines viewport position, render area, parallax offset
-		render.source
-			.copy( render.area )
-			.setPosition( render.area.x+viewport.area.x+parallax.offset.x, render.area.y+viewport.area.y+parallax.offset.y );
+		render.offset.update();
+		render.area.setPosition( render.targetOffset.x, render.targetOffset.y );
+
+		artwork.source.set( render.offset.x+render.area.x, render.offset.y+render.area.y, render.area.width, render.area.height );
+		artwork.position.copy( artwork.source.center );
+
 	}
 
 
@@ -265,10 +264,13 @@
 
 	function setScrollRatio( value ) 
 	{
-		if( !introState ) {
-			scrollRatio = value;
-			viewport.area.y = ( scrollRatio * viewport.boundry.height );
-		}
+		viewport.scrollOffset.set( 0, value );
+		viewport.area.y = round( value * viewport.boundry.height );
+
+		// if( !introState ) {
+		// 	scrollRatio = value;
+		// 	viewport.area.y = ( scrollRatio * viewport.boundry.height );
+		// }
 	}
 
 	function setSize( w, h ) 
@@ -309,6 +311,9 @@
 		}
 		render.area.set( tX, tY, tW, tH ).round();
 
+		// Update the Artwork Source
+		artwork.source.set( render.offset.x+render.area.x, render.offset.y+render.area.y, render.area.width, render.area.height );
+
 		// Parallax UIRect is the trigger area that parallax-es the artwork
 		parallax.uiRect.scaleRect( viewport.area, parallax.uiRectScale );
 		parallax.uiRect.setPosition( parallax.uiRect.x-viewport.area.x, parallax.uiRect.y-viewport.area.y ).round();
@@ -318,18 +323,21 @@
 			parallax.area.setPosition( (vW*(1-parallax.areaScale)*0.5), (vH*(1-parallax.areaScale)*0.5) );
 			parallax.area.setSize( parallax.area.x * -2, parallax.area.y * -2 ).round();
 		}else{
-			parallax.area.x = 0;
-			parallax.area.width = vbW;
+			parallax.area.setPosition( 0, (vH*(1-parallax.areaScale)*0.5) );
+			parallax.area.setSize( vbW, parallax.area.y * -2 ).round();
 		}
 
 		if( _log ) {	
 			log( "***\nCompositionLayout::setSize(" + w + ", " + h + ")" );
+			log( "\tUSE TARGET = ", render.useTarget );
 			log( "\tviewport.area = ", viewport.area.toString() );
 			log( "\tviewport.boundry = ", viewport.boundry.toString() );
 			log( "\tviewport.centerOffset = ", viewport.centerOffset.toString() );
 			log( "\trender.area = ", render.area.toString() );
-			log( "\tparallax.area = ", parallax.area.toString() );
-			log( "\tparallax.uiRect = ", parallax.uiRect.toString() );
+			// log( "\trender.targetOffset = ", render.targetOffset.toString() );
+			log( "\trender.area = ", render.area.toString() );
+			// log( "\tparallax.area = ", parallax.area.toString() );
+			// log( "\tparallax.uiRect = ", parallax.uiRect.toString() );
 			log( "***" );
 		}
 	}
@@ -369,12 +377,17 @@
 		if( !element ) {
 			render.useTarget = false;
 			render.targetElement = null;
+			render.targetOffset.set( 0, 0 );
 		}else{
 			render.useTarget = true;
 			render.targetElement = $(element);
+			render.targetOffset.set( render.targetElement.offset().left, render.targetElement.offset().top );
 		}
+		render.area.setPosition( render.targetOffset.x, render.targetOffset.y );
+
 		// log( "CompositionLayout::setRenderTarget" );
 		// log( "\trender.targetElement:", render.useTarget );
+		// log( "\trender.area:", render.area.toString() );
 	}
 
 
@@ -532,11 +545,14 @@
 			,ctx = cvs.getContext("2d")
 			,compCvs = compositionCanvas
 			,aa = artwork.area
-			,va = viewport.area
+			,aSrc = artwork.source
+			,va = viewport.area.update()
 			,vOff = viewport.centerOffset
+			,vaScOff = viewport.scrollOffset
 			,pa = parallax.area
 			,pOff = parallax.offset
-			,ra = render.area;
+			,ra = render.area
+			,rOff = render.offset;
 
 
 		if( !heatMapRendered ) this.renderHeatMap();
@@ -548,40 +564,31 @@
 		ctx.drawImage( compCvs, 0, 0 );
 
 		// Draw the Artwork Rectangle
-		ctx.beginPath();
-		ctx.moveTo( aa.l, aa.t ); 
-		ctx.lineTo( aa.r, aa.t ); 
-		ctx.lineTo( aa.r, aa.b ); 
-		ctx.lineTo( aa.l, aa.b ); 
-		ctx.lineTo( aa.l, aa.t ); 
+		// ctx.beginPath();
+		// ctx.rect( aa.x, aa.y, aa.width, aa.height );
+		// ctx.fillStyle = areaColors.artwork.getRGBA();
+		// ctx.fill();
+		// ctx.closePath();
+		
 		// Punch out the Viewport Rectangle;
-		ctx.moveTo( va.r, va.t );
-		ctx.lineTo( va.l, va.t ); 
-		ctx.lineTo( va.l, va.b ); 
-		ctx.lineTo( va.r, va.b ); 
-		ctx.lineTo( va.r, va.t );
-		ctx.fillStyle = areaColors.artwork.getRGBA();
-		ctx.fill();
-		ctx.closePath();
-
-		// Draw the Viewport
+		// ctx.globalCompositeOperation = "destination-out";
 		ctx.beginPath();
 		ctx.rect( va.x, va.y, va.width, va.height );
 		ctx.strokeStyle = areaColors.viewport.getRGBA();
 		ctx.stroke();
 		ctx.closePath();
 
-		// Draw the Parallax Area
-		ctx.beginPath();
-		ctx.rect( (va.x+ra.x+vOff.x)+pa.x, (va.y+ra.y+vOff.y)+pa.y, pa.width, pa.height );
-		ctx.fillStyle = ctx.strokeStyle = areaColors.parallax.getRGBA();
-		ctx.fill();
-		ctx.stroke();
-		ctx.closePath();
+		// Draw the Viewport
+		// ctx.globalCompositeOperation = "source-over";
+		// ctx.beginPath();
+		// ctx.rect( va.x, va.y, va.width, va.height );
+		// ctx.strokeStyle = areaColors.viewport.getRGBA();
+		// ctx.stroke();
+		// ctx.closePath();	
 
 		// Draw the Render Area
 		ctx.beginPath();
-		ctx.rect( (va.x+ra.x+vOff.x)+pOff.x, (va.y+ra.y+vOff.y)+pOff.y, ra.width, ra.height );
+		ctx.rect( aSrc.x, aSrc.y, aSrc.width, aSrc.height );
 		ctx.fillStyle = ctx.strokeStyle = areaColors.render.getRGBA();
 		ctx.fill();
 		ctx.stroke();
@@ -674,6 +681,12 @@
 
 	function renderOffset_onUpdate()
 	{
+		this.target
+			.addVectors( viewport.area.update().position, parallax.offset )
+			// .add( render.targetOffset );
+
+		this.target.x = clamp( this.target.x, viewport.boundry.l, artwork.width-render.area.width  );
+		this.target.y = clamp( this.target.y, viewport.boundry.t, artwork.height-render.area.height  );
 	}
 
 
@@ -777,19 +790,24 @@
 		return getUnitByCoord( colOff, rowOff );
 	}
 
-	function getHotspotInRenderBoundry()
+	function getHotspotInRenderBoundry( targetArea )
 	{
 		var targetHotspot = null
 			,targetIndex = (hotspots.current !== null) ? hotspots.current.hotspotIndex : 0
 			,i = hotspots.count-1
+			,targetArea = targetArea||artwork.source
 			,hIndex
 			,hSpot;
+
+		hotspots.selectArea
+			.setPosition( targetArea.x-(units.width/2), targetArea.y-(units.height/2) )
+			.setSize( targetArea.width + units.width, targetArea.height + units.height );
 
 		while( targetHotspot === null && i !== -1 ) 
 		{
 			hIndex = (i+targetIndex) % hotspots.count;
 			hSpot = hotspots.list[hIndex];
-			targetHotspot = ( viewport.area.getIntersects( hSpot.getCenter() ) ) ? hSpot : null;
+			targetHotspot = ( hotspots.selectArea.getIntersects( hSpot.getCenter() ) ) ? hSpot : null;
 			i--;
 		}
 		// log( "CompositionLayout::getHotspotInRenderBoundry, found target at index (" + (i+1) + ")" );

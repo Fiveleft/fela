@@ -47,8 +47,8 @@
 		}
 
 		, setPosition : function( x, y ){
-			this.x = x||this.x;
-			this.y = y||this.y;
+			this.x = x||this.position.x||this.x;
+			this.y = y||this.position.y||this.y;
 			return this.update();
 		}
 
@@ -167,6 +167,7 @@
 			this.r = this.br.x;
 			this.b = this.br.y;
 			this.center.interpolateVectors( this.tl, this.br, 0.5 );
+			this.position = this.tl;
 			return this;
 		}
 

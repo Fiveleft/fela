@@ -4,11 +4,24 @@
 	window.fiveleft = (typeof window.fiveleft == "undefined") ? {} : window.fiveleft;
 	
 	// Shortcuts
-	var _ref, _cfg, _cls, _sel, _evt
-		,_cn = "Application";
-
-	// Properties
-	var resizeTimeout = 0;
+	var _ref
+		,_cn = "Application"
+		,_cls
+		,_sel
+		,_evt
+		,scroll = {
+			position : 0
+			,height : 0
+			,ratio : 0
+			,ticks : 0
+			,tickInterval : 5
+			,timeout : 0
+			,interval : 200
+		}
+		,resize = {
+			timeout : 0
+			,interval : 200
+		};
 
 
 
@@ -19,7 +32,6 @@
 	{
 		this.config = $.extend( true, this.defaults, options||{} );
 		_ref = this;
-		_cfg = this.config;
 		_cls = this.config.classes;
 		_sel = this.config.selectors;
 		_evt = fiveleft.Event;
@@ -68,11 +80,10 @@
 		 */
 		, initProperties : function() 
 		{
-
 			// Elements
 			this.html = $("html");
 			this.body = $("body");
-			this.window = $(window);
+			this.$window = $(window);
 			this.$header = $("header");
 			this.$topNav = $( "#top-nav" );
 			this.$mobileNav = $( "#mobile-nav" );
@@ -87,6 +98,7 @@
 			this.historyReady = typeof History.getState() !== "undefined";
 
 			// Properties
+			this.started = false;
 			this.appData = fiveleft.applicationData = new fiveleft.ApplicationData();
 			this.drawingApi = fiveleft.drawingApi = new fiveleft.DrawingAPI();
 
@@ -118,12 +130,11 @@
 			this.body
 				.on( "click", _sel.historyLinks, handleHistoryClickEvent );
 
-			this.window
+			this.$window
 				.one( _evt.SiteDataLoaded, handleLoadComplete )
 				.one( _evt.SiteDataError, handleCriticalLoadError )
-				.one( _evt.Start, handleStart )
 				.on( "scroll", handleScroll )
-				.on( "resize orientationchange", handleResize )
+				.on( ["resize", "orientationchange", _evt.DOMChange].join(" "), handleResize )
 				.on( [_evt.OpenMenu, _evt.CloseMenu].join(" "), handleMenuToggle )
 				.on( [_evt.IntroSequenceChange, _evt.IntroSequenceComplete].join(" "), handleIntroSequence );
 
@@ -155,72 +166,105 @@
 				History.Adapter.bind(window,'statechange',handleHistoryStateChange);
 				
 				this.drawingApi.init( $("#canvas-drawing")[0] );
+				// this.drawingApi.setSize();
 
 				this.body.attr( "data-loadstate", "intro" );
 
 				// this.body.removeAttr( "data-loadstate" );
-				
-				this.window.trigger( _evt.Start );
-				setTimeout( targetSection, 500 );
+				_ref.$window.trigger( _evt.DOMChange );
+
+				setTimeout( _ref.start, 500 );
 			}
+		}
+
+		, start : function()
+		{
+			log( _cn+"::handleStart");
+			
+			_ref.started = false;
+			_ref.$window.trigger( _evt.Start );
+
+			// Base Starting View State on appData.introCompleted:
+			if( !_ref.appData.introCompleted ) {
+				fiveleft.drawingApi.startIntro( $("canvas.hero-canvas") );
+			}else{
+				fiveleft.drawingApi.start();
+				_ref.body.removeAttr( "data-loadstate" );
+			}
+			targetSection();
 		}
 	};
 
 
 
-
-
-	var scrollTicks = 0
-		,scrollApply = 5
-		,scrollTimeout = 0
-		,scrollInterval = 200
-		,applyResizeInterval = 200
-		,applyResizeTimeout = 0;
-
-
 	function handleScroll()
 	{
-		clearTimeout( scrollTimeout );
-		scrollTimeout = setTimeout( handleScrollComplete, scrollInterval );
+		// log( _cn+"::handleScroll" );
+
+		// Handle Immediate Scroll updates
+		scroll.position = _ref.$window.scrollTop();
+		scroll.ratio = clamp( scroll.position/scroll.height, 0, 1 );
+
+		fiveleft.drawingApi.setScrollRatio( scroll.ratio );
 		fiveleft.drawingApi.pause();
 
-		if( scrollTicks ++ % scrollApply !== 0 ) return;
-		updateViewStates();
+		// Update Intermittent Scroll Responses
+		clearTimeout( scroll.timeout );
+		scroll.timeout = setTimeout( handleScrollTimeout, scroll.interval );
+
+		// Only update the scroll on the views at a specified interval
+		if( scroll.ticks ++ % scroll.tickInterval === 0 ) {
+			updateViewStates();
+		}
 	}
 
 
-	function handleScrollComplete()
+	function handleScrollTimeout()
 	{
-		// log( "Application::handleScrollComplete" );
-		clearTimeout( scrollTimeout );
-		scrollTimeout = 0;		
+		// log( "Application::handleScrollTimeout" );
+		clearTimeout( scroll.timeout );
+		scroll.timeout = 0;		
 		fiveleft.drawingApi.resume();
 	}
 
 
 	function handleResize( event )
 	{
+		log( _cn+"::handleResize" );
+
+		// Update The Scroll Area Height
+		scroll.height = _ref.$mainInner.outerHeight() - _ref.$window.height();
+		// log( scroll.height );
+
+		// Force Scroll Handling without triggering the scroll.tickInterval
+		scroll.ticks = 1;
+		handleScroll();		
+
+		// Set DrawingAPI size
 		fiveleft.drawingApi.setSize();
+
 		if( event.type == "orientationchange" ) {
 			updateViewStates(true);
 			return;
 		}
-		clearTimeout( applyResizeTimeout );
-		applyResizeTimeout = setTimeout( applyResize, applyResizeInterval );
+		clearTimeout( resize.timeout );
+		resize.timeout = setTimeout( applyResize, resize.interval );
 	}
 
 
 	function applyResize()
 	{
-		clearTimeout( applyResizeTimeout );
-		applyResizeTimeout = 0;
-		updateViewStates(true);
+		clearTimeout( resize.timeout );
+		resize.timeout = 0;
+		updateViewStates( true );
 	}
 
 
 	function updateViewStates( resize )
 	{
-		var scrollTop = _ref.window.scrollTop()
+		// log( _cn+"::updateViewStates" );
+
+		var scrollTop = _ref.$window.scrollTop()
 			,winH = window.innerHeight
 			,min = Math.max( 0, scrollTop )
 			,max = min + winH
@@ -265,7 +309,7 @@
 
 				if( currScrollState !== scrollState ) {
 					section.element.attr( "data-scroll", scrollState );
-					section.scrollChange();
+					section.scroll( scrollState );
 				}
 
 			}
@@ -279,31 +323,12 @@
 	// ------------------------------------------------------------------------------------------
 
 
-
-
-	function handleStart( ) 
-	{
-		log("Application::handleStart");
-
-		fiveleft.drawingApi.setSize();
-
-		// Base Starting View State on appData.introCompleted:
-		if( !_ref.appData.introCompleted ) {
-			fiveleft.drawingApi.startIntro( $("canvas.hero-canvas") );
-		}else{
-			fiveleft.drawingApi.start();
-			_ref.body.removeAttr( "data-loadstate" );
-		}
-
-	}
-
-
 	function handleIntroSequence( event, step ) 
 	{	
 		var complete = event.namespace === "IntroSequenceComplete"
 			,step = step||0;
 	
-		log( "Application::handleIntroSequence\n\tevent = " + event.namespace, "\n\tstep = " + step );
+		// log( "Application::handleIntroSequence\n\tevent = " + event.namespace, "\n\tstep = " + step );
 	
 		if( complete ) {
 			fiveleft.drawingApi.fromIntro();
@@ -361,7 +386,7 @@
 	function openMenuComplete()
 	{
 		// log( _cn+"::openMenuComplete" );
-		_ref.window.trigger( fiveleft.Event.OpenMenuComplete );
+		_ref.$window.trigger( fiveleft.Event.OpenMenuComplete );
 	}
 
 
@@ -369,7 +394,7 @@
 	{
 		// log( _cn+"::closeMenuComplete" );
 		_ref.html.removeClass( _cls.navOpen + " " + _cls.navClosing );			
-		_ref.window.trigger( fiveleft.Event.CloseMenuComplete );
+		_ref.$window.trigger( fiveleft.Event.CloseMenuComplete );
 	}
 
 
@@ -407,6 +432,7 @@
 	// History Event Handler Methods
 	// ------------------------------------------------------------------------------------------
 
+
 	function handleHistoryClickEvent( evt ) 
 	{	
 		log( _cn + "::handleHistoryClickEvent", $(this) );
@@ -430,6 +456,7 @@
 	 */
 	function handleCriticalLoadError( result ) 
 	{
+
 		log("Application::handleCriticalLoadError", result);
 	}
 
@@ -491,7 +518,7 @@
 	// 	_ref.html
 	// 		.removeClass( _cls.drawOpening )
 	// 		.addClass( _cls.drawOpen );
-	// 	_ref.window.trigger( fiveleft.Event.OpenDrawComplete );
+	// 	_ref.$window.trigger( fiveleft.Event.OpenDrawComplete );
 	// }
 
 
@@ -506,5 +533,5 @@
 	// {
 	// 	// log( _cn+"::closeDrawComplete" );
 	// 	_ref.html.removeClass( _cls.drawClosing );			
-	// 	_ref.window.trigger( fiveleft.Event.CloseDrawComplete );
+	// 	_ref.$window.trigger( fiveleft.Event.CloseDrawComplete );
 	// }

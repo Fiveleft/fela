@@ -50,6 +50,8 @@ body {
 		width:100%; height:100%; 
 		overflow:hidden;
 	}
+
+
 	
 }
 
@@ -73,6 +75,11 @@ body {
 			z-index:4;
 		}
 	}
+
+	// section .section-inner {
+	// 	visibility:hidden;
+	// }
+
 	// .section:not(#drawing-section) {
 	// 	.section-inner {
 	// 		visibility:hidden;
@@ -81,6 +88,8 @@ body {
 	// 	border-bottom:1px dotted $color-dk-grey;
 	// }
 }
+
+
 
 // Mobile Setting
 #drawing-section { z-index:1; }
@@ -142,6 +151,8 @@ body {
 }
 
 
+
+
 h1, h2, h3, h4, h5, h6 {
 	font-family: $font-headline;
 }
@@ -187,20 +198,9 @@ button, input[type='submit'] {
 
 
 .wf-loading {
-
 	p, h1, h2, h3, h4, a, button {
 		visibility:hidden;
 	}
-	// .section {
-	// 	@include opacity(0);
-	// 	visibility:hidden;
-	// }
-	// #header {
-	// 	.nav-items, .sub-nav-container{
-	// 		@include opacity(0);
-	// 		visibility:hidden;
-	// 	}
-	// }
 }
 .wf-active {
 

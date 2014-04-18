@@ -14,6 +14,7 @@
 		this.target = new fiveleft.Vector();
 		this.acc = new fiveleft.Vector();
 		this.vel = new fiveleft.Vector(); 
+		this.maxVelocity = new fiveleft.Vector(); 
 		this.speed = new fiveleft.Vector(); 
 		this.friction = new fiveleft.Vector(1,1,1);
 
@@ -21,6 +22,11 @@
 		var applyUpdate = function() {
 			this.acc.set().add( this.friction );
 			this.vel.subtractVectors( this.target, this ).multiply( this.acc );
+
+			// TODO: Add max/min velocity
+			// if( this.maxVelocity.length() !== 0 ) {
+			// 	this.vel.limit
+			// }
 			this.add( this.vel );
 		};
 
@@ -51,6 +57,16 @@
 	{
 		// intended to be overridden
 		//  - can call this.x, this.y to get scope position
+	}
+
+
+	function mv_setMaxVelocity( v ) 
+	{
+		if( !v ) {
+			this.maxVelocity.set( 0, 0, 0 );
+		}else{
+			this.maxVelocity.copy( v );
+		}
 	}
 
 

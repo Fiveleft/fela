@@ -14,14 +14,19 @@ module.exports = function(grunt) {
         sassDir: "public/css/scss"
         ,cssDir: "public/css"
         ,imagesDir: "public/img"
-        ,outputStyle: "nested"
+      }
+      ,dev : {
+        outputStyle: "expanded"
+      }
+      ,dist : {
+        outputStyle: "compressed"
       }
     }
     ,express : {
       options : {
         node_env : "development"
         ,script : "app.js"
-        ,port : process.env.PORT || 8888 
+        ,port : process.env.PORT || 3000 
       }
       ,stage : {
         node_env : "stage"
@@ -29,7 +34,7 @@ module.exports = function(grunt) {
       ,dev : {
         node_env : "development"
         ,script : "app.js"
-        ,port : process.env.PORT || 8888 
+        ,port : process.env.PORT || 3000 
       }
     }
     ,handlebars : {
@@ -60,7 +65,7 @@ module.exports = function(grunt) {
         files: [
           "**/*.scss"
         ]
-        ,tasks: ["compass"]
+        ,tasks: ["compass:dev"]
       }
       ,templates : {
         files: [
@@ -119,7 +124,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-express-server');
 
   // Default task(s).
-  grunt.registerTask('default', ["compass", "handlebars", "express:dev", "watch"]);
+  grunt.registerTask('default', ["compass:dev", "handlebars", "express:dev", "watch"]);
 
 
 };

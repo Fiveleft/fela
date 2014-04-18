@@ -66,7 +66,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 
 			// Properties
 			animating = false;
-			completed = this.appData.introCompleted == true;
+			completed = this.appData.introCompleted;
 			messageIndex = 0;
 			messageCount = this.$message.length;
 
@@ -77,7 +77,6 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			this.inner.on( "click", handleMessageChange );
 			this.$advanceButton.on( "click", handleMessageChange );
 			this.window.on( "orientationchange", $.proxy(this,'resize'));
-
 		}
 
 		, activate : function()
@@ -97,6 +96,21 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			this.element.removeClass( _cls.active );
 		}
 
+		, scroll : function( _scrollState )
+		{
+			var scrollState = _scrollState||this.element.attr("data-scroll")
+				,scrollActive = /fill\-viewport|inside\-viewport|top\-inside\-viewport/.test( scrollState );
+
+			switch( true ) {
+				case this.started && scrollActive && !this.active :
+					this.activate();
+					break;
+				case this.started && !scrollActive && this.active :
+					this.deactivate();
+					break;
+			}
+		}
+
 		, resize : function()
 		{
 			var heroW = this.$heroImage.width()
@@ -105,6 +119,12 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 
 			this.inner.css({"min-height" : this.window.height() });
 			this.$heroLogo.css({"width" : size+"px", "height" : size+"px" });
+		}
+
+		, onStart : function()
+		{
+			log( _cn+"::start!" );
+			this.scroll();
 		}
 
 		, onSiteDataLoaded : function()
@@ -118,13 +138,6 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		}
 	}
 
-
-	function changeMessageComplete( lastItem ) 
-	{
-		// log( _cn+"::changeMessageComplete() lastItem ? ", lastItem  );
-		animating = false;
-		if( lastItem ) showFinalAnimation();
-	}
 
 
 	function showFinalAnimation()
@@ -148,6 +161,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 	function swapMessage()
 	{
 		// log( _cn+"::swapMessage()" );
+		animating = false;
 		_ref.window.trigger( _evt.IntroSequenceChange, messageIndex );
 		_ref.$messageSteps.filter(".active").siblings().removeClass("last-active");
 	}
@@ -159,15 +173,16 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 	 */
 	function changeMessageIndex( index ) 
 	{
-		// log( _cn+"::changeMessageIndex( " + index + " )" );
+		log( _cn+"::changeMessageIndex( " + index + " )" );
+
 		var newMessageIndex = index
 			,currMessage = _ref.$messageSteps.filter('[data-index=' + messageIndex + ']')
 			,nextMessage = _ref.$messageSteps.filter('[data-index=' + newMessageIndex + ']')
 			,nextEase = Quart.easeOut
 			,currEase = Quart.easeIn
-			,speed = 0.75
-			,nextDelay = currMessage.length > 0 ? speed : 0
-			,tOrigin = "50% 50% -300"
+			,speed = 0.35
+			,nextDelay = 0.01 + (currMessage.length > 0 ? speed : 0)
+			,tOrigin = "50% 50% -50%"
 			,lastItem = nextMessage.length===0;
 
 		if( lastItem ) {
@@ -177,21 +192,51 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		nextMessage.addClass( "active" );
 		currMessage.removeClass("active").addClass( "last-active" );
 
-		animating = true;
+		// animating = true;
 		messageIndex = lastItem ? 0 : newMessageIndex;
 
-		// Run animations
-		TweenMax.fromTo( currMessage, speed, 
-			{rotationY:0, opacity:1}, 
-			{rotationY:-85, translateX:-100, opacity:0, overwrite:0, transformOrigin:tOrigin, clearProps:"all", ease:currEase, onComplete:swapMessage} 
-		);
+		log( "\tcurrMessage = ", currMessage );
+		log( "\tnextMessage = ", nextMessage );
+		log( "\tnextDelay = ", nextDelay );
 
-		TweenMax.fromTo( nextMessage, speed, 
-			{rotationY:85, translateX:100, opacity:0}, 
-			{rotationY:0, translateX:0, delay:nextDelay, opacity:1, overwrite:0, transformOrigin:tOrigin, clearProps:"all", ease:nextEase} 
-		);
+		// TweenLite.to( currMessage, speed, {opacity:0, marginLeft:"-200px", ease:currEase});
+		// TweenLite.fromTo( nextMessage, speed, {delay:speed, opacity:1, marginLeft:0, ease:nextEase})
+		if( _ref.appData.isiOS ) 
+		{
+			fiveleft.drawingApi.pause();
 
-		TweenMax.delayedCall( speed+nextDelay, function(){changeMessageComplete(lastItem)} );
+			currMessage.css({opacity:1});
+			nextMessage.css({opacity:0});
+			TweenLite.to( currMessage, speed, {opacity:0, ease:currEase});
+			TweenLite.to( nextMessage, speed, {delay:nextDelay, opacity:1, ease:nextEase
+					,onStart : swapMessage
+					,onComplete : function(){changeMessageComplete(lastItem)} });
+			// TweenMax.delayedCall( speed+nextDelay, function(){changeMessageComplete(lastItem)} );
+			log( " here? ");
+		}
+		else{
+			TweenMax.fromTo( currMessage, speed, 
+				{rotationX:0, opacity:1}, 
+				{rotationX:-90, marginTop:"-150px", opacity:0, transformOrigin:tOrigin, clearProps:"margin-top", ease:currEase} 
+			);
+			TweenMax.fromTo( nextMessage, speed, 
+				{rotationX:90, marginTop:"150px", opacity:0}, 
+				{rotationX:0, marginTop:0,  delay:nextDelay, opacity:1, transformOrigin:tOrigin, clearProps:"margin-top", ease:nextEase, onStart:swapMessage} 
+			);
+		}
+
+		// TweenMax.delayedCall( speed+nextDelay, function(){changeMessageComplete(lastItem)} );
+	}
+
+	function changeMessageComplete( lastItem ) 
+	{
+		log( _cn+"::changeMessageComplete() lastItem ? ", lastItem  );
+
+		animating = false;
+		if( _ref.appData.isiOS && !lastItem ) {
+			fiveleft.drawingApi.resume();
+		} 
+		if( lastItem ) showFinalAnimation();
 	}
 
 	
@@ -202,9 +247,16 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 	 */
 	function handleMessageChange( event ) 
 	{
-		event.preventDefault();
-		event.stopImmediatePropagation();
-		if( !completed && !animating ) changeMessageIndex( messageIndex+1 );
+		// log( "SectionWelcome::handleMessageChange", event.type );
+		// log( "\tcompleted:", completed );
+		// log( "\tanimating:", animating );
+		if( event.type === "click" ) event.preventDefault();
+		// event.stopImmediatePropagation();
+		// if( !completed && !animating ) {
+		if( !animating ) {
+			changeMessageIndex( messageIndex+1 );
+		}
+
 		return;
 	}
 

@@ -97,12 +97,26 @@
 				this.scrollLayout = !this.isiOS && (targetMQ.name == "desktop" || targetMQ.name == "large");
 				this.mobileLayout = targetMQ.name == "mobile" || targetMQ.name == "tablet";
 			}
+
+
+			window._dc = this.deleteCookies;
+			window._ac = this.approveCookies;
 		}
 
 		, deleteCookies : function() 
 		{
+			log( "ApplicationData::deleteCookies" );
+			this.introCompleted = false;
+			this.recentVisit = false;
 			deleteCookie( "visit" );
 			deleteCookie( "intro_complete" );
+			// log( "\tvisit: ", getCookie("visit"), "\n\tintroCompleted: ", getCookie("intro_complete") );
+		}
+
+		, approveCookies : function()
+		{
+			setCookie( "intro_complete", true );
+			setCookie( "visit", Date.now(), 30 );
 		}
 		
 		, initCookies : function() 
@@ -318,18 +332,31 @@
 		 */
 		, loadSiteData : function() 
 		{	
-			data = {}
-			if( fiveleft._environment !== "production" ) {
-				data.uncache = 1;
+			var loadSettings = {
+				success : siteDataLoaded
+				,error : siteDataLoadError
+			};
+
+			switch( fiveleft._environment ) 
+			{
+				case "production" :
+					loadSettings.url = "http://cms.fiveleft.com/sitedata.php";
+					loadSettings.dataType = "jsonp";
+					break;
+
+				case "stage" : 
+					loadSettings.url = "http://cms.fiveleft.com/sitedata.php";
+					loadSettings.dataType = "jsonp";
+					loadSettings.data = { uncache : 1 };
+					break;
+
+				case "development" : 
+					loadSettings.url = "/sitedata.json";
+					loadSettings.dataType = "json";
+					break;
 			}
 
-			$.ajax({
-				url : "http://cms.fiveleft.com/sitedata.php"
-				,dataType : "jsonp"
-				,data : data
-				,success : siteDataLoaded
-				,error : siteDataLoadError
-			});
+			$.ajax( loadSettings );
 		}
 	};
 
@@ -346,6 +373,7 @@
 		setCookie( "intro_complete", true );
 	}
 
+
 	function handleOrientationChange()
 	{
 		_ref.portraitLayout = Math.abs( window.orientation ) < 45;
@@ -353,7 +381,7 @@
 	}
 
 	
-	function handleMediaQueryUpdate( query ) 
+	function handleMediaQueryUpdate() 
 	{
 		var targetMQ = null;
 		$(_ref.mediaQueries).each( function(i,mq){
@@ -395,6 +423,7 @@
 
 		// Set up data
 		createProjectData( result.projects );
+		
 		// createTaxonomies( result.taxonomies );
 		createPageContent( result.pages );
 		_agencies = result.agencies;
@@ -531,7 +560,7 @@
 
 	function deleteCookie( c_name ) 
 	{
-		document.cookie = c_name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+		document.cookie=c_name + "=;path=/;expires=Thu, 01 Jan 1970 00:00:01 GMT;";
 	}
 
 
@@ -545,7 +574,7 @@
 	{
 		var exdate=new Date();
 		exdate.setDate(exdate.getDate() + exdays);
-		var c_value=escape(value) + ((exdays===null) ? "" : "; expires="+exdate.toUTCString());
+		var c_value= escape(value) + ";path=/;" + ((exdays===null) ? "" : "expires="+exdate.toUTCString() + ";" );
 		document.cookie=c_name + "=" + c_value;
 	}
 	

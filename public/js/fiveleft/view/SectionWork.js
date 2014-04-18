@@ -63,6 +63,7 @@
 
 		, target : function( path )
 		{
+			log( _cn + "::target", path );
 			switch( true ) 
 			{
 				case path[0] == "work" && path.length === 1  && _ref.activeProject == null :

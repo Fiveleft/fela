@@ -176,7 +176,7 @@
 		switch( event.type )
 		{
 			case "complete" : 
-				log( _cn + ":: QUEUE COMPLETE " ); 
+				// log( _cn + ":: QUEUE COMPLETE " ); 
 				drawingApi.setAssetQueue( loadQueue );
 				break;
 			case "error" : 

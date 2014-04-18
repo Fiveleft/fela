@@ -22,6 +22,7 @@
 			motion : new fiveleft.MotionVector()
 			,orientation : new fiveleft.MotionVector()
 		}
+		,touchActive = false
 		,userActive = false
 		,introState = false
 		,playing = false
@@ -99,14 +100,18 @@
 			this.assetQueue = null;
 
 			timer = new Timer();
-			ticker = createjs.Ticker;
+			// ticker = createjs.Ticker;
+			ticker = TweenLite.ticker;
 			controller = setController();
 
 			// Update Timer
 			timer.onDelayComplete = handleTimerDelay;
 			
 			// Set Controller-dependent properties
-			ticker.setFPS( controller.fps );
+			// ticker.setFPS( controller.fps );
+
+
+			
 		}
 
 
@@ -225,7 +230,7 @@
 
 		, setScrollRatio : function( value ) 
 		{ 
-			//
+			// log( "DrawingAPI::setScrollRatio", value.toFixed(2) );
 			layout.setScrollRatio(value);
 		}
 
@@ -257,7 +262,7 @@
 
 	function handleTimerDelay () 
 	{
-		log( " HANDLE TIMER DELAY ");
+		// log( " HANDLE TIMER DELAY ");
 		brush.color = fiveleft.Color.random(100,180).desaturate(25);
 		brush.thickness = randomBetween( 2, 20 );
 		layout.magnetize();
@@ -312,9 +317,11 @@
 	 */
 	function drawToDisplay()
 	{
-		var src = layout.render.source
+		var src = layout.artwork.source
 			,dest = layout.render.area
-			,ctx = introState ? iCtx : dCtx;
+			// ,ctx = introState ? iCtx : dCtx;
+
+		// log( src.toString(), dest.toString() );
 
 		// Clear the display canvas and ensure its size.
 		if( dCvs.width !== layout.viewport.area.width || dCvs.height !== layout.viewport.area.height ) {
@@ -327,13 +334,19 @@
 		// Draw the artwork canvas onto the Display Canvas
 		dCtx.drawImage( aCvs, src.x, src.y, src.width, src.height, dest.x, dest.y, dest.width, dest.height );
 	
+
+		// TEMPORARY
+		// introState = false;
+
 		// If we are in intro state, draw to the intro canvas
 		if( introState ) {
 			// log( "DrawingAPI::drawToDisplay introState = " + introState );
 			if( !introMask.complete ) return;
-			dCtx.globalCompositeOperation = "destination-in";
+			// dCtx.globalCompositeOperation = "destination-in";
+			dCtx.globalAlpha = 0.3;
 			dCtx.drawImage( introMask, 0, 0, introMask.width, introMask.height, dest.x, dest.y, dest.width, dest.height );
-			dCtx.globalCompositeOperation = "source-over";
+			dCtx.globalAlpha = 1;
+			// dCtx.globalCompositeOperation = "source-over";
 		}
 	}
 
@@ -431,9 +444,10 @@
 			,onOff = !apply ? "off" : "on";
 
 		$("body")
-			[onOff]( "touchstart mousedown", handleUserStart )
-			[onOff]( "touchmove mousemove", handleUserMove )
-			[onOff]( "touchend touchcancel mouseup mouseleave", handleUserEnd );
+			[onOff]( "mousedown", handleUserStart )
+			[onOff]( "mousemove", handleUserMove )
+			[onOff]( "mouseup mouseleave", handleUserEnd )
+			[onOff]( "touchend touchcancel touchstart touchmove", handleUserTouch );
 
 		// $(window)
 		// 	[onOff]( "deviceorientation", handleUserOrientation )
@@ -447,6 +461,7 @@
 		if( e.type == "touchstart" ) {
 			log( e.type );
 		}
+		touchActive = false;
 		return e;
 		// var touch = e.type == "touchstart"
 		// 	,x = touch ? e.originalEvent.changedTouches[0].clientX : e.clientX
@@ -462,6 +477,7 @@
 		if( e.type == "touchend" ) {
 			log( e.type );
 		}
+		touchActive = false;
 		return e;
 		// var touch = e.type == "touchend"
 		// 	,x = touch ? e.originalEvent.changedTouches[0].clientX : e.clientX
@@ -486,6 +502,11 @@
 
 	function handleUserMove( e )
 	{
+		if( touchActive ) {
+			// log(" touch is active - cancel move event "); 
+			return;
+		}
+
 		var touch = e.type == "touchmove"
 			,x = touch ? e.originalEvent.changedTouches[0].clientX : e.clientX
 			,y = touch ? e.originalEvent.changedTouches[0].clientY : e.clientY;
@@ -493,6 +514,13 @@
 		// Update position
 		_api.setUserPosition( x, y );
 		// userActive = true;
+		touchActive = false;
+	}
+
+	function handleUserTouch( e )
+	{
+		// log( "DrawingAPI::handleUserTouch " + e.type );
+		touchActive = true;// = e.type === "touchstart";
 	}
 
 

@@ -48,24 +48,16 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		, initListeners : function(){}
 		, onMediaQueryChange : function(){}
 		, onSiteDataLoaded : function(){}
-
-		, start : function(){}
+		, onStart : function(){}
 		, resize : function(){}
 		, scroll : function(){}
-		, scrollChange : function() {
-
-			// log( this, "scrollChange" )
-
-		}
 		, activate : function(){}
 		, deactivate : function(){}
-
-		, scrollspy : false
-		, scrollActive : false
 		, top : 0
 		, bottom : 0
 		, id : 0
 		, index : 0
+		, started : false
 		, url : ""
 		, path : []
 
@@ -86,26 +78,21 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			this.navItem = $("a[data-id=\"" + this.id + "\"]");
 
 			// Set Properties
+			this.started = false;
+			this.appData = fiveleft.applicationData;
 			this.config = {};
 			$.extend( true, this.config, _defaultConfig, options||{} );
 			
-			this.appData = fiveleft.applicationData;
-			this.scrollspy = false;
-			this.scrollActive = false;
-
 			// Paths
 			this.path = element.attr("data-path") ? element.attr("data-path").split(",") : [];
 
 			// Section Data
 			this.element.data("section", this);
 
-			// Listeners
-			this.watchResize(true);
-
 			// Subclass init()
 			this.init();
 			this._initListeners();
-			this._onMediaQueryChange();
+			this.onMediaQueryChange();
 		}
 
 
@@ -115,82 +102,10 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		, _initListeners : function()
 		{
 			this.window
-				// .on( fiveleft.Event.DOMChange, $.proxy(this, "_onResize") )
-				.on( fiveleft.Event.MediaQueryChange, $.proxy(this, "_onMediaQueryChange" ) )
-				.one( fiveleft.Event.SiteDataLoaded, $.proxy(this, "_onSiteDataLoaded" ) )
-				.one( fiveleft.Event.Start, $.proxy(this, "_onStart") );
+				.on( fiveleft.Event.MediaQueryChange, $.proxy(this, "onMediaQueryChange" ) )
+				.one( fiveleft.Event.SiteDataLoaded, $.proxy(this, "onSiteDataLoaded" ) )
+				.one( fiveleft.Event.Start, $.proxy(this, "start") );
 
-		}
-
-
-		/**
-		 * [_onMediaQueryChange description]
-		 */
-		, _onMediaQueryChange : function() {
-			this.onMediaQueryChange();
-		}
-
-
-		/**
-		 * [_onSiteDataLoaded description]
-		 */
-		, _onSiteDataLoaded : function() {
-			this.onSiteDataLoaded();
-			this._onResize();
-		}
-
-
-		/**
-		 * [_onSiteDataLoaded description]
-		 */
-		, _onStart : function() 
-		{
-			this.startScrollSpy();
-			this.start();
-		}
-
-
-		/**
-		 * [_onScroll description]
-		 * @return {[type]} [description]
-		 */
-		, _onScroll : function()
-		{
-			if( this.scrollspy ) this.updateScrollSpy();
-			this.scroll();
-		}
-
-
-		/**
-		 * [_resize description]
-		 * @return {[type]} [description]
-		 */
-		, _onResize : function()
-		{
-			if( this.scrollspy ) this.updateScrollSpy();
-			this.resize();
-		}
-
-
-		/**
-		 * [_resize description]
-		 * @return {[type]} [description]
-		 */
-		, watchScroll : function( value ) 
-		{
-			var scope = this;
-			// this.window[(value ? "on" : "off")]( "scroll", function(){scope._onScroll()} );
-		}
-
-
-		/**
-		 * [_resize description]
-		 * @return {[type]} [description]
-		 */
-		, watchResize : function( value ) 
-		{
-			var scope = this;
-			this.window[(value ? "on" : "off")]( "resize", function(){scope._onResize()} );
 		}
 
 
@@ -204,67 +119,10 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			return match > -1 ? this.path[match] : false;
 		}
 
-		, startScrollSpy : function() 
-		{
-			this.scrollspy = true;
-			this.watchScroll(true);
-			this.updateScrollSpy();
-		}
 
-		, stopScrollSpy : function()
-		{
-			this.scrollspy = false;
-			this.watchScroll(false);
-			this.element.removeAttr("data-scroll");
-		}
-
-		, updateScrollSpy : function()
-		{
-			if( !this.scrollspy ) return;
-
-			var min = Math.max( 0, this.window.scrollTop() )
-				,wh = window.innerHeight 
-				,max = min + wh
-				,base = 0
-				,scrollActive = false
-				,scrollState;
-
-			this.top = Math.floor( this.element.offset().top );
-			this.bottom = Math.ceil( this.top + this.element.outerHeight() );
-
-			switch( true ) 
-			{
-				case (this.top <= min && this.bottom >= max ) :
-					scrollState = "fill-viewport";
-					scrollActive = true;
-					break;
-				case (this.top >= min && this.bottom <= max ) :
-					scrollState = "inside-viewport";
-					scrollActive = true;
-					break;
-				case (this.top > min && this.top < max && this.bottom > max ) :
-					scrollState = "top-inside-viewport";
-					break;
-				case this.bottom > min && this.bottom < max && this.top < min :
-					scrollState = "bottom-inside-viewport";
-					break;
-				case (this.top >= max) : 
-					scrollState = "below-viewport";
-					break;
-				case (this.bottom <= min) : 
-					scrollState = "above-viewport";
-					break;
-				default : 
-					scrollState = "unknown";
-					break;
-			}
-
-			this.element.attr("data-scroll", scrollState);
-
-			if( this.scrollActive !== scrollActive ) {
-				this.scrollActive = scrollActive;
-				this[(scrollActive ? "activate" : "deactivate")]();
-			}
+		, start : function(){
+			this.started = true;
+			this.onStart();
 		}
 
 
@@ -292,6 +150,8 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			if( targetY > this.body.height() - this.window.height() ) {
 				targetY = this.body.height() - this.window.height();
 			}
+
+			
 
 			// Find Distance Ratio to give a pleasant time.
 			distY = Math.abs( targetY - this.window.scrollTop() );
@@ -324,3 +184,139 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 }($);
 
 
+// REMOVED
+// 
+
+		// , startScrollSpy : function() 
+		// {
+		// 	this.scrollspy = true;
+		// 	this.watchScroll(true);
+		// 	this.updateScrollSpy();
+		// }
+
+		// , stopScrollSpy : function()
+		// {
+		// 	this.scrollspy = false;
+		// 	this.watchScroll(false);
+		// 	this.element.removeAttr("data-scroll");
+		// }
+
+		// , updateScrollSpy : function()
+		// {
+		// 	if( !this.scrollspy ) return;
+
+		// 	var min = Math.max( 0, this.window.scrollTop() )
+		// 		,wh = window.innerHeight 
+		// 		,max = min + wh
+		// 		,base = 0
+		// 		,scrollActive = false
+		// 		,scrollState;
+
+		// 	this.top = Math.floor( this.element.offset().top );
+		// 	this.bottom = Math.ceil( this.top + this.element.outerHeight() );
+
+		// 	switch( true ) 
+		// 	{
+		// 		case (this.top <= min && this.bottom >= max ) :
+		// 			scrollState = "fill-viewport";
+		// 			scrollActive = true;
+		// 			break;
+		// 		case (this.top >= min && this.bottom <= max ) :
+		// 			scrollState = "inside-viewport";
+		// 			scrollActive = true;
+		// 			break;
+		// 		case (this.top > min && this.top < max && this.bottom > max ) :
+		// 			scrollState = "top-inside-viewport";
+		// 			break;
+		// 		case this.bottom > min && this.bottom < max && this.top < min :
+		// 			scrollState = "bottom-inside-viewport";
+		// 			break;
+		// 		case (this.top >= max) : 
+		// 			scrollState = "below-viewport";
+		// 			break;
+		// 		case (this.bottom <= min) : 
+		// 			scrollState = "above-viewport";
+		// 			break;
+		// 		default : 
+		// 			scrollState = "unknown";
+		// 			break;
+		// 	}
+
+		// 	this.element.attr("data-scroll", scrollState);
+
+		// 	if( this.scrollActive !== scrollActive ) {
+		// 		this.scrollActive = scrollActive;
+		// 		this[(scrollActive ? "activate" : "deactivate")]();
+		// 	}
+		// }
+
+
+
+		// /**
+		//  * [_onMediaQueryChange description]
+		//  */
+		// , _onMediaQueryChange : function() {
+		// 	this.onMediaQueryChange();
+		// }
+
+
+		// /**
+		//  * [_onSiteDataLoaded description]
+		//  */
+		// , _onSiteDataLoaded : function() {
+		// 	this.onSiteDataLoaded();
+		// 	// this._onResize();
+		// }
+
+
+		// /**
+		//  * [_onSiteDataLoaded description]
+		//  */
+		// , _onStart : function() 
+		// {
+		// 	this.startScrollSpy();
+		// 	this.start();
+		// }
+
+
+		// /**
+		//  * [_onScroll description]
+		//  * @return {[type]} [description]
+		//  */
+		// , _onScroll : function()
+		// {
+		// 	if( this.scrollspy ) this.updateScrollSpy();
+		// 	this.scroll();
+		// }
+
+
+		// /**
+		//  * [_resize description]
+		//  * @return {[type]} [description]
+		//  */
+		// , _onResize : function()
+		// {
+		// 	if( this.scrollspy ) this.updateScrollSpy();
+		// 	this.resize();
+		// }
+
+
+		/**
+		 * [_resize description]
+		 * @return {[type]} [description]
+		, watchScroll : function( value ) 
+		{
+			var scope = this;
+			// this.window[(value ? "on" : "off")]( "scroll", function(){scope._onScroll()} );
+		}
+		 */
+
+		/**
+		 * [_resize description]
+		 * @return {[type]} [description]
+		, watchResize : function( value ) 
+		{
+			var scope = this;
+			this.window[(value ? "on" : "off")]( "resize", function(){scope._onResize()} );
+		}
+		 */
