@@ -38,21 +38,10 @@
 		,user : null
 	};
 
-	// Spritesheets
-	var patternSprite
-		,blobSprite
-		,splatterSprite;
-
-	// OVERRIDES
-	var _FPS = 30;
-
-
-
-	// BRUSH
-	var brush = new fiveleft.Brush();
-
-	// COMPOSITION LAYOUT
-	var layout;
+	// The Important parts
+	var brush = new fiveleft.Brush()
+		,shapeBuilder = new fiveleft.ShapeBuilder()
+		,layout
 
 	/** 
 	 * DrawingAPI Consturctor
@@ -87,6 +76,9 @@
 			
 			// Create Canvases
 			createCanvases( canvas );
+
+			// Shape Builder
+			shapeBuilder = new fiveleft.ShapeBuilder();
 			
 			brush = new fiveleft.Brush();
 			brush.setSize( layout.artwork.area.width, layout.artwork.area.height );
@@ -97,30 +89,40 @@
 			device.orientation.onUpdate = deviceOrientation_onUpdate;
 
 			// Asset Queue
-			this.assetQueue = null;
+			assetQueue = null;
 
 			timer = new Timer();
-			// ticker = createjs.Ticker;
 			ticker = TweenLite.ticker;
 			controller = setController();
 
 			// Update Timer
 			timer.onDelayComplete = handleTimerDelay;
-			
-			// Set Controller-dependent properties
-			// ticker.setFPS( controller.fps );
+
+			// Asset Loading
+			this.initAssetLoading();
+		}
 
 
-			
+		, initAssetLoading : function()
+		{
+			assetQueue = new createjs.LoadQueue(true);
+			assetQueue.addEventListener( "complete", handleLoadQueueEvent );
+			assetQueue.addEventListener( "error", handleLoadQueueEvent );
+			assetQueue.addEventListener( "fileload", handleLoadQueueEvent );
+			assetQueue.loadManifest([
+					{id:"bg-pat", src:"/img/draw-assets/bg-grid-pat.png"}
+					,{id:"sprite-patterns", src:"/img/draw-assets/spritesheet-patterns.png"}
+					,{id:"sprite-blobs", src:"/img/draw-assets/spritesheet-blobs.png"}
+					,{id:"sprite-splatters", src:"/img/draw-assets/spritesheet-splatters.png"}
+					// ,{id:"sprite-splatters", src:"img/draw-assets/spritesheet-splatters.jpg"}
+				], false);
+			assetQueue.load();
 		}
 
 
 		, start : function() 
 		{
 			this.playing = true;
-			// log( "DrawingAPI::start" );
-			// log( "\tdrawingApi.playing = ", this.playing );
-			// log( "\tdrawingApi.paused = ", this.paused );
 			controller.play = true;
 			timer.start();
 			layout.start();
@@ -205,15 +207,6 @@
 		}
 
 
-		, setAssetQueue : function( queue )
-		{
-			this.assetQueue = queue;
-			patternSprite = new fiveleft.SpriteSheet( _api.assetQueue.getItem("sprite-patterns").tag, 5, 5 );
-			blobSprite = new fiveleft.SpriteSheet( _api.assetQueue.getItem("sprite-blobs").tag, 4, 4 );
-			splatterSprite = new fiveleft.SpriteSheet( _api.assetQueue.getItem("sprite-splatters").tag, 4, 3 );
-		}
-
-
 		, setUserPosition : function( x, y )
 		{
 			userPosition.set( x, y );
@@ -269,10 +262,42 @@
 		layout.magnetize();
 
 
+		if( layout.magnet.on ) {
+
+			// Create a new shape.
+			var shape = new fiveleft.Shape()
+				,shapeSize = round(layout.viewport.area.width * randomBetween( 0.2, 0.8 ));
+
+			shape.width = shapeSize;
+			shape.height = shapeSize;
+			shape.setCenter( layout.magnet.target.getCenter() );
+			shape.build();
+
+			aCtx.drawImage( shape.canvas, 0, 0, shape.width, shape.height, shape.x, shape.y, shape.width, shape.height );
+
+		}
+
+
 	}
 
 
 
+
+
+	function handleLoadQueueEvent( event )
+	{
+		switch( event.type )
+		{
+			case "complete" : 
+				shapeBuilder.patternSprite = new fiveleft.SpriteSheet( assetQueue.getItem("sprite-patterns").tag, 5, 5 );
+				shapeBuilder.blobSprite = new fiveleft.SpriteSheet( assetQueue.getItem("sprite-blobs").tag, 4, 4 );
+				shapeBuilder.splatterSprite = new fiveleft.SpriteSheet( assetQueue.getItem("sprite-splatters").tag, 4, 3 );
+				shapeBuilder.ready();
+				break;
+			case "error" : break;
+			case "fileload" : break;
+		}
+	}
 
 
 	// --------------------------------------------------------------------
@@ -290,14 +315,16 @@
 		// Set the Canvas sizes
 		dCvs.width = vCvs.width = rCvs.width = window.innerWidth;
 		dCvs.height = vCvs.height = rCvs.height = window.innerHeight;
-		aCvs.width = layout.artwork.area.width;
-		aCvs.height = layout.artwork.area.height;
+		rCvs.width = aCvs.width = layout.artwork.area.width;
+		rCvs.height = aCvs.height = layout.artwork.area.height;
 
 		// Context References	
 		dCtx = dCvs.getContext("2d");
 		vCtx = vCvs.getContext("2d");
 		aCtx = aCvs.getContext("2d");
 		rCtx = rCvs.getContext("2d");
+
+		log( dCvs );
 	}
 
 
@@ -305,8 +332,9 @@
 	{
 
 		//TODO: turn off for now
-		brush.add( layout.artworkPosition );
-		brush.render();
+		// brush.add( layout.artworkPosition );
+		// brush.render();
+		// aCtx.drawImage( rCvs, 0, 0 );
 		aCtx.drawImage( brush.canvas, 0, 0 );
 	}
 
@@ -323,6 +351,14 @@
 		var src = layout.artwork.source
 			,dest = layout.render.area
 
+
+		// Run a quick check to make sure the source is there
+		if( src.width < 320 || src.height < 320 ) {
+			log( " no source rect ");
+			return ;
+		}
+
+
 		// Clear the display canvas and ensure its size.
 		if( dCvs.width !== layout.viewport.area.width || dCvs.height !== layout.viewport.area.height ) {
 			dCvs.width = layout.viewport.area.width;
@@ -330,7 +366,6 @@
 		}else{
 			dCtx.clearRect( 0, 0, layout.viewport.area.width, layout.viewport.area.height );
 		}
-
 		// Draw the artwork canvas onto the Display Canvas
 		dCtx.drawImage( aCvs, src.x, src.y, src.width, src.height, dest.x, dest.y, dest.width, dest.height );
 	

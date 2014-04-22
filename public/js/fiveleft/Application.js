@@ -221,8 +221,8 @@
 		scroll.position = _ref.$window.scrollTop();
 		scroll.ratio = clamp( scroll.position/scroll.height, 0, 1 );
 
-		fiveleft.drawingApi.setScrollRatio( scroll.ratio );
-		if( fiveleft.drawingApi.playing ) fiveleft.drawingApi.stop();
+
+		// if( fiveleft.drawingApi.playing ) fiveleft.drawingApi.stop();
 
 		// Update Intermittent Scroll Responses
 		clearTimeout( scroll.timeout );
@@ -230,6 +230,7 @@
 
 		// Only update the scroll on the views at a specified interval
 		if( scroll.ticks ++ % scroll.tickInterval === 0 ) {
+			fiveleft.drawingApi.setScrollRatio( scroll.ratio );
 			updateViewStates();
 		}
 	}
@@ -241,7 +242,7 @@
 		clearTimeout( scroll.timeout );
 		scroll.timeout = 0;
 		// fiveleft.drawingApi.resume();
-		if( !scroll.affixTop ) fiveleft.drawingApi.start();
+		// if( !scroll.affixTop ) fiveleft.drawingApi.start();
 	}
 
 

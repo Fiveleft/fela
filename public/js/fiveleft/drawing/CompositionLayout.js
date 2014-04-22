@@ -135,6 +135,7 @@
 		this.artwork = artwork;
 		this.viewport = viewport;
 		this.render = render;
+		this.magnet = magnet;
 
 		// Vectors
 		this.userPosition = viewport.area.getCenter().clone();
@@ -233,9 +234,8 @@
 
 		if( magnet.on ) {
 			var lastHotSpot = hotspots.current;
-			hotspots.current = getHotspotInRenderBoundry();
-			// log( "CompositionLayout::magnetize" );
-			// nextHotSpot.log()
+			magnet.target = hotspots.current = getHotspotInRenderBoundry( artwork.source );
+			// magnet.target = hotspots.current = getHotspotInRenderBoundry( artwork.area );
 		}
 	}
 
@@ -515,15 +515,15 @@
 		// Clear the render canvas
 		rCtx.clearRect( 0, 0, units.width, units.height );
 
-		for( i=3; i!==-1; i-- ) 
-		{
-			cu = hotspots.thirds[i].unit;
-			compCtx.beginPath();
-			compCtx.rect( cu.x, cu.y, units.width, units.height );
-			compCtx.fillStyle = "rgba(0,250,0,0.8)";
-			compCtx.fill();
-			compCtx.closePath();
-		}
+		// for( i=3; i!==-1; i-- ) 
+		// {
+		// 	cu = hotspots.thirds[i].unit;
+		// 	compCtx.beginPath();
+		// 	compCtx.rect( cu.x, cu.y, units.width, units.height );
+		// 	compCtx.fillStyle = "rgba(0,250,0,0.8)";
+		// 	compCtx.fill();
+		// 	compCtx.closePath();
+		// }
 
 		// Finally, clear the render canvas
 		heatMapRendered = true;
@@ -547,17 +547,20 @@
 			,pa = parallax.area
 			,pOff = parallax.offset
 			,ra = render.area
-			,rOff = render.offset;
+			,rOff = render.offset
+			,showViewport = true
+			,showRenderArea = true;
 
 
 		if( !heatMapRendered ) this.renderHeatMap();
+
 
 		// Line Width must be thick
 		ctx.lineWidth = 15;
 
 		// Draw the Composition HeatMap
-		ctx.drawImage( compCvs, 0, 0 );
-		// ctx.clearRect( 0, 0, artworkWidth, artworkHeight );
+		ctx.clearRect( 0, 0, artworkWidth, artworkHeight );
+		// ctx.drawImage( compCvs, 0, 0 );
 
 		// Draw the Artwork Rectangle
 		// ctx.beginPath();
@@ -568,11 +571,13 @@
 		
 		// Punch out the Viewport Rectangle;
 		// ctx.globalCompositeOperation = "destination-out";
-		ctx.beginPath();
-		ctx.rect( va.x, va.y, va.width, va.height );
-		ctx.strokeStyle = areaColors.viewport.getRGBA();
-		ctx.stroke();
-		ctx.closePath();
+		if( showViewport ) {
+			ctx.beginPath();
+			ctx.rect( va.x, va.y, va.width, va.height );
+			ctx.strokeStyle = areaColors.viewport.getRGBA();
+			ctx.stroke();
+			ctx.closePath();
+		}
 
 		// Draw the Viewport
 		// ctx.globalCompositeOperation = "source-over";
@@ -583,12 +588,15 @@
 		// ctx.closePath();	
 
 		// Draw the Render Area
-		ctx.beginPath();
-		ctx.rect( aSrc.x, aSrc.y, aSrc.width, aSrc.height );
-		ctx.fillStyle = ctx.strokeStyle = areaColors.render.getRGBA();
-		ctx.fill();
-		ctx.stroke();
-		ctx.closePath();
+		if( showRenderArea ) {
+			ctx.beginPath();
+			ctx.rect( aSrc.x, aSrc.y, aSrc.width, aSrc.height );
+			ctx.fillStyle = "rgba(255,0,0,0.2)";
+			ctx.fill();
+			ctx.strokeStyle = areaColors.render.getRGBA();
+			ctx.stroke();
+			ctx.closePath();
+		}
 
 		// Draw the HOTSPOT
 		if( hotspots.current !== null ) {

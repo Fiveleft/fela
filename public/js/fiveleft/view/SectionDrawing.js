@@ -51,26 +51,6 @@
 
 			// Listeners
 			this.window.on( _evt.AffixTop, handleAffixTop )
-
-			// Begin Loading Assets
-			this.initAssetLoading();
-		}
-
-
-		, initAssetLoading : function()
-		{
-			loadQueue = new createjs.LoadQueue(true);
-			loadQueue.addEventListener( "complete", handleLoadQueueEvent );
-			loadQueue.addEventListener( "error", handleLoadQueueEvent );
-			loadQueue.addEventListener( "fileload", handleLoadQueueEvent );
-			loadQueue.loadManifest([
-					{id:"bg-pat", src:"/img/draw-assets/bg-grid-pat.png"}
-					,{id:"sprite-patterns", src:"/img/draw-assets/spritesheet-patterns.png"}
-					,{id:"sprite-blobs", src:"/img/draw-assets/spritesheet-blobs.png"}
-					,{id:"sprite-splatters", src:"/img/draw-assets/spritesheet-splatters.png"}
-					// ,{id:"sprite-splatters", src:"img/draw-assets/spritesheet-splatters.jpg"}
-				], false);
-			loadQueue.load();
 		}
 
 
@@ -82,16 +62,6 @@
 			affixArea = this.$mainInner.height() - wH - baseOffset;
 			affixOffset = _ref.window.scrollTop() - affixArea;
 			if( !affixTop && affixOffset > 0 ) handleAffixedScroll();
-		}
-
-
-		, scroll : function()
-		{
-		}
-
-
-		, target : function()
-		{
 		}
 
 
@@ -118,24 +88,6 @@
 		affixOffset = _ref.window.scrollTop() - affixArea;
 		if( affixOffset > 0 ){
 			_ref.element.css({"bottom" : affixOffset+"px"})
-		}
-	}
-
-
-	function handleLoadQueueEvent( event )
-	{
-		switch( event.type )
-		{
-			case "complete" : 
-				// log( _cn + ":: QUEUE COMPLETE " ); 
-				drawingApi.setAssetQueue( loadQueue );
-				break;
-			case "error" : 
-				// log( " Error " ); 
-				break;
-			case "fileload" : 
-				// log( " FileLoad ", event.item.tag ); 
-				break;
 		}
 	}
 

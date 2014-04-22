@@ -58,6 +58,29 @@
 			return this.update();
 		}
 
+		, setBottom : function( value ){
+			this.height = (value>this.y) ? value-this.y : 0;
+			return this.update();
+		}
+
+		, setWidth : function( w ){
+			this.width = w||0;
+			return this.update();
+		}
+
+		, setHeight : function( h ){
+			this.height = h||0;
+			return this.update();
+		}
+
+		, setCenter : function( vector )
+		{
+			this.x = round( vector.x - (this.width/2));
+			this.y = round( vector.y - (this.height/2));
+			return this.update();
+		}
+
+
 		, copy : function( r ) {
 			this.x = r.x;
 			this.y = r.y;
@@ -101,28 +124,6 @@
 
 		, getBottom : function(){
 			return this.y + this.height;
-		}
-
-		, setBottom : function( value ){
-			this.height = (value>this.y) ? value-this.y : 0;
-			return this.update();
-		}
-
-		, setWidth : function( w ){
-			this.width = w||0;
-			return this.update();
-		}
-
-		, setHeight : function( h ){
-			this.height = h||0;
-			return this.update();
-		}
-
-		, setCenter : function( vector )
-		{
-			this.x = round( vector.x - (this.width/2));
-			this.y = round( vector.y - (this.height/2));
-			return this.update();
 		}
 
 		, scaleRect : function( rect, amtW, amtH ) 
@@ -183,8 +184,23 @@
 
 	Rectangle.clone = function( v )
 	{
-		return new Rectangle(v.x, v.y, v.w, v.h);
-	}
+		return new Rectangle(v.x, v.y, v.width, v.height);
+	};
+
+	Rectangle.getRotatedBoundry = function( rect, angle )
+	{
+		var origin = rect.update().center
+			,deg = toDeg(angle) % 90
+			,useW, useH
+			,newW, newH
+			,angle = toRad(deg)
+		useW = rect.width;
+		useH = rect.height;
+		rect.width = (Math.cos(angle) * useW) + (Math.sin(angle) * useH);
+		rect.height = (Math.sin(angle) * useW) + (Math.cos(angle) * useH);
+		return rect.setCenter( origin );
+	};
+
 
 	fiveleft.Rectangle = Rectangle;
 

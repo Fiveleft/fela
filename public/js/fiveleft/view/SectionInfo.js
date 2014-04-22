@@ -130,6 +130,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			this.navItem.addClass( _cls.active );
 		}
 
+
 		, deactivate : function()
 		{
 			this.active = false;
