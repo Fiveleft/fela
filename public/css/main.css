@@ -1728,10 +1728,14 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   display: block;
 }
 /* line 19, scss/_project.scss */
+.project-grid-item .project-grid-item-inner {
+  position: relative;
+}
+/* line 22, scss/_project.scss */
 .project-grid-item .media, .project-grid-item .info {
   width: 100%;
 }
-/* line 22, scss/_project.scss */
+/* line 25, scss/_project.scss */
 .project-grid-item .media-inner {
   position: relative;
   width: 100%;
@@ -1740,7 +1744,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   /* 16:9 */
   margin: 0;
 }
-/* line 26, scss/_project.scss */
+/* line 29, scss/_project.scss */
 .project-grid-item .media-content, .project-grid-item .media-hover {
   position: absolute;
   top: 0;
@@ -1749,7 +1753,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   height: 100%;
   overflow: hidden;
 }
-/* line 32, scss/_project.scss */
+/* line 35, scss/_project.scss */
 .project-grid-item .media-hover {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
@@ -1759,7 +1763,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   transition: opacity 0.55s cubic-bezier(0.785, 0.135, 0.15, 0.86);
   background: rgba(0, 0, 0, 0.61) url(/img/grid-hover.png) repeat 0 0;
 }
-/* line 37, scss/_project.scss */
+/* line 40, scss/_project.scss */
 .project-grid-item .media-content {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
@@ -1768,7 +1772,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   -o-transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: opacity 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 41, scss/_project.scss */
+/* line 44, scss/_project.scss */
 .project-grid-item .thumbnail {
   position: absolute;
   top: 0;
@@ -1784,18 +1788,18 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   -o-transition-property: margin-left, width, top;
   transition-property: margin-left, width, top;
 }
-/* line 49, scss/_project.scss */
+/* line 52, scss/_project.scss */
 .project-grid-item .info {
   position: absolute;
   top: 0;
   left: 0;
+  display: block;
   width: 100%;
   height: 100%;
-  padding: 1em;
   z-index: 2;
   overflow: hidden;
 }
-/* line 56, scss/_project.scss */
+/* line 59, scss/_project.scss */
 .project-grid-item .title {
   position: absolute;
   left: 0;
@@ -1815,22 +1819,22 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   -o-transition-property: opacity, bottom, color;
   transition-property: opacity, bottom, color;
 }
-/* line 66, scss/_project.scss */
+/* line 69, scss/_project.scss */
 .project-grid-item .subtitle, .project-grid-item .details {
   display: none;
 }
-/* line 71, scss/_project.scss */
+/* line 74, scss/_project.scss */
 .project-grid-item:not(.active):hover .thumbnail {
   margin-left: -10%;
   width: 120%;
   top: -20%;
 }
-/* line 76, scss/_project.scss */
+/* line 79, scss/_project.scss */
 .project-grid-item:not(.active):hover .media-hover {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
-/* line 79, scss/_project.scss */
+/* line 82, scss/_project.scss */
 .project-grid-item:not(.active):hover .title {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
@@ -1840,22 +1844,22 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   transition-delay: 0.3s;
   bottom: 0;
 }
-/* line 86, scss/_project.scss */
+/* line 89, scss/_project.scss */
 .project-grid-item.active .media-inner {
   position: relative;
 }
-/* line 89, scss/_project.scss */
+/* line 92, scss/_project.scss */
 .project-grid-item.active .media-content {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 92, scss/_project.scss */
+/* line 95, scss/_project.scss */
 .project-grid-item.active .media-hover {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
   background-color: rgba(0, 0, 0, 0);
 }
-/* line 107, scss/_project.scss */
+/* line 110, scss/_project.scss */
 .project-grid-item.active:hover .media-hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -1870,7 +1874,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   .project-grid-item {
     padding: 1.5%;
   }
-  /* line 122, scss/_project.scss */
+  /* line 125, scss/_project.scss */
   .project-grid-item .title {
     font-size: 1.75em;
     padding: 0.75em;
@@ -1881,20 +1885,20 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   .project-grid-item {
     width: 50%;
   }
-  /* line 130, scss/_project.scss */
+  /* line 133, scss/_project.scss */
   .project-grid-item .title {
     font-size: 1.5em;
     padding: 0.5em;
   }
 }
 @media (max-width: 480px) {
-  /* line 137, scss/_project.scss */
+  /* line 140, scss/_project.scss */
   .project-grid-item .title {
     font-size: 1.25em;
   }
 }
 
-/* line 143, scss/_project.scss */
+/* line 146, scss/_project.scss */
 .project {
   position: absolute;
   top: 0;
@@ -1902,18 +1906,18 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   width: 100%;
   height: auto;
 }
-/* line 149, scss/_project.scss */
+/* line 152, scss/_project.scss */
 .project .project-inner {
   padding: 100px 0 50px;
   position: relative;
 }
-/* line 153, scss/_project.scss */
+/* line 156, scss/_project.scss */
 .project .media, .project .info {
   position: relative;
   width: 83.33333%;
   margin: 0 auto;
 }
-/* line 157, scss/_project.scss */
+/* line 160, scss/_project.scss */
 .project .media-inner {
   position: relative;
   width: 100%;
@@ -1923,7 +1927,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   /* 16:7 */
   z-index: 2;
 }
-/* line 163, scss/_project.scss */
+/* line 166, scss/_project.scss */
 .project .media-controls, .project .media-container {
   position: absolute;
   top: 0;
@@ -1932,17 +1936,17 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   height: 100%;
   overflow: hidden;
 }
-/* line 169, scss/_project.scss */
+/* line 172, scss/_project.scss */
 .project .media-container {
-  background: url(/img/grid-hover.png) repeat 0 0;
+  background: url(/img/bg-pattern-white.png) repeat 0 0;
   z-index: 99;
 }
-/* line 173, scss/_project.scss */
+/* line 176, scss/_project.scss */
 .project .media-controls {
   z-index: 100;
   overflow: visible;
 }
-/* line 176, scss/_project.scss */
+/* line 179, scss/_project.scss */
 .project .media-controls .inner {
   display: block;
   position: absolute;
@@ -1952,7 +1956,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   height: 60px;
   padding: 15px;
 }
-/* line 183, scss/_project.scss */
+/* line 186, scss/_project.scss */
 .project .media-controls .icon {
   position: absolute;
   width: 30px;
@@ -1968,50 +1972,50 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   -o-transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 190, scss/_project.scss */
+/* line 193, scss/_project.scss */
 .project .media-controls .play {
   display: block;
   background-position: -150px 0px;
 }
-/* line 194, scss/_project.scss */
+/* line 197, scss/_project.scss */
 .project .media-controls .pause {
   display: none;
   background-position: -180px 0px;
 }
-/* line 199, scss/_project.scss */
+/* line 202, scss/_project.scss */
 .project .media-controls:hover .icon {
   background-color: rgba(255, 255, 255, 0.75);
 }
-/* line 200, scss/_project.scss */
+/* line 203, scss/_project.scss */
 .project .media-controls:hover .play {
   background-position: -150px -30px;
 }
-/* line 201, scss/_project.scss */
+/* line 204, scss/_project.scss */
 .project .media-controls:hover .pause {
   background-position: -180px -30px;
 }
-/* line 204, scss/_project.scss */
+/* line 207, scss/_project.scss */
 .project .media-controls.mouseenter .inner {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
-/* line 209, scss/_project.scss */
+/* line 212, scss/_project.scss */
 .project .media-controls.animating .play {
   display: block;
 }
-/* line 210, scss/_project.scss */
+/* line 213, scss/_project.scss */
 .project .media-controls.animating .pause {
   display: none;
 }
-/* line 215, scss/_project.scss */
+/* line 218, scss/_project.scss */
 .project.playing .media-controls .play {
   display: none;
 }
-/* line 216, scss/_project.scss */
+/* line 219, scss/_project.scss */
 .project.playing .media-controls .pause {
   display: block;
 }
-/* line 226, scss/_project.scss */
+/* line 229, scss/_project.scss */
 .project .media[data-media='gallery'] .gallery-list, .project .media[data-media='gallery'] .gallery-item {
   position: absolute;
   top: 0;
@@ -2019,22 +2023,22 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   width: 100%;
   height: 100%;
 }
-/* line 230, scss/_project.scss */
+/* line 233, scss/_project.scss */
 .project .media[data-media='gallery'] .gallery-item {
   z-index: 8;
   visibility: hidden;
 }
-/* line 234, scss/_project.scss */
+/* line 237, scss/_project.scss */
 .project .media[data-media='gallery'] .gallery-item.last-active {
   z-index: 10;
   visibility: visible;
 }
-/* line 238, scss/_project.scss */
+/* line 241, scss/_project.scss */
 .project .media[data-media='gallery'] .gallery-item.active {
   z-index: 9;
   visibility: visible;
 }
-/* line 242, scss/_project.scss */
+/* line 245, scss/_project.scss */
 .project .media[data-media='gallery'] .placeholder {
   display: block;
   width: 100%;
@@ -2042,26 +2046,26 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   background: no-repeat 0 50%;
   background-size: 100% auto;
 }
-/* line 248, scss/_project.scss */
+/* line 251, scss/_project.scss */
 .project .media[data-media='gallery'] .placeholder.aspect-skinny {
   background-position: top center;
   background-size: contain;
 }
-/* line 252, scss/_project.scss */
+/* line 255, scss/_project.scss */
 .project .media[data-media='gallery'] img {
   display: none;
 }
-/* line 257, scss/_project.scss */
+/* line 260, scss/_project.scss */
 .project .media[data-media='video'] .media-inner {
   background-color: rgba(0, 0, 0, 0.85);
 }
-/* line 260, scss/_project.scss */
+/* line 263, scss/_project.scss */
 .project .media[data-media='video'] .video {
   width: 100%;
   height: auto;
   max-height: 100%;
 }
-/* line 264, scss/_project.scss */
+/* line 267, scss/_project.scss */
 .project .close {
   display: block;
   position: absolute;
@@ -2072,7 +2076,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   padding: 15px;
   z-index: 30;
 }
-/* line 270, scss/_project.scss */
+/* line 273, scss/_project.scss */
 .project .close .icon {
   position: absolute;
   width: 30px;
@@ -2089,43 +2093,43 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   background-position: -120px 0px;
 }
-/* line 278, scss/_project.scss */
+/* line 281, scss/_project.scss */
 .project .close:hover .icon {
   background-color: rgba(255, 255, 255, 0.75);
   background-position: -120px -30px;
 }
-/* line 283, scss/_project.scss */
+/* line 286, scss/_project.scss */
 .project .info {
   position: relative;
   padding: 2em 4.16666666% 0;
 }
-/* line 287, scss/_project.scss */
+/* line 290, scss/_project.scss */
 .project .title, .project .subtitle {
   text-transform: uppercase;
   width: 100%;
 }
-/* line 291, scss/_project.scss */
+/* line 294, scss/_project.scss */
 .project .details {
   width: 100%;
   padding-bottom: 2.5em;
 }
-/* line 295, scss/_project.scss */
+/* line 298, scss/_project.scss */
 .project .description, .project .additional {
   width: 83.33333%;
 }
-/* line 298, scss/_project.scss */
+/* line 301, scss/_project.scss */
 .project .title, .project .subtitle, .project .project-detail {
   margin-bottom: 10px;
 }
-/* line 302, scss/_project.scss */
+/* line 305, scss/_project.scss */
 .project .project-detail > span {
   display: inline;
 }
-/* line 304, scss/_project.scss */
+/* line 307, scss/_project.scss */
 .project .project-detail > span > span, .project .project-detail > span > a {
   display: inline-block;
 }
-/* line 307, scss/_project.scss */
+/* line 310, scss/_project.scss */
 .project .project-advance {
   position: absolute;
   bottom: 0;
@@ -2134,7 +2138,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   height: 30px;
   font-style: italic;
 }
-/* line 313, scss/_project.scss */
+/* line 316, scss/_project.scss */
 .project .project-advance .icon {
   display: block;
   position: absolute;
@@ -2144,7 +2148,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   height: 30px;
   background-position: -30px -30px;
 }
-/* line 319, scss/_project.scss */
+/* line 322, scss/_project.scss */
 .project .project-advance .label {
   position: absolute;
   top: 0;
@@ -2153,13 +2157,13 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   height: 30px;
   text-align: right;
 }
-/* line 324, scss/_project.scss */
+/* line 327, scss/_project.scss */
 .project .project-advance .label, .project .project-advance .project-title {
   display: block;
   line-height: 24px;
   padding: 3px 0;
 }
-/* line 328, scss/_project.scss */
+/* line 331, scss/_project.scss */
 .project .project-advance .title-wrapper {
   display: block;
   margin: 0 33px 0 100px;
@@ -2171,111 +2175,111 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   display: table;
   clear: both;
 }
-/* line 334, scss/_project.scss */
+/* line 337, scss/_project.scss */
 .project .project-advance .project-title {
   text-align: right;
 }
-/* line 338, scss/_project.scss */
+/* line 341, scss/_project.scss */
 .project .project-advance.measured .title-wrapper {
   width: 0;
 }
-/* line 340, scss/_project.scss */
+/* line 343, scss/_project.scss */
 .project .project-advance:hover {
   color: inherit;
   background: none;
 }
-/* line 343, scss/_project.scss */
+/* line 346, scss/_project.scss */
 .project .project-advance:hover .icon {
   background-position: -30px -60px;
 }
-/* line 345, scss/_project.scss */
+/* line 348, scss/_project.scss */
 .project .project-advance.inactive {
   display: none;
 }
-/* line 351, scss/_project.scss */
+/* line 354, scss/_project.scss */
 .project a, .project a:visited {
   color: #171716;
   text-decoration: none;
 }
-/* line 355, scss/_project.scss */
+/* line 358, scss/_project.scss */
 .project .info-label, .project .taxonomy-label {
   color: #44443e;
 }
-/* line 358, scss/_project.scss */
+/* line 361, scss/_project.scss */
 .project .info-name, .project .taxonomy {
   color: #171716;
 }
-/* line 361, scss/_project.scss */
+/* line 364, scss/_project.scss */
 .project .taxonomy {
   font-style: italic;
   text-transform: lowercase;
 }
-/* line 364, scss/_project.scss */
+/* line 367, scss/_project.scss */
 .project .taxonomy:last-child .separator {
   display: none;
 }
 @media (max-aspect-ratio: 5 / 4) and (min-height: 600px) {
-  /* line 371, scss/_project.scss */
+  /* line 374, scss/_project.scss */
   .project .media-inner {
     padding: 0 0 50%;
     /* 2:1 */
   }
 }
 @media (max-aspect-ratio: 1 / 1) and (min-height: 600px) {
-  /* line 376, scss/_project.scss */
+  /* line 379, scss/_project.scss */
   .project .media-inner {
     padding: 0 0 56.25%;
     /* 16:9 */
   }
-  /* line 379, scss/_project.scss */
+  /* line 382, scss/_project.scss */
   .project .media[data-media='gallery'] .placeholder {
     background-size: cover;
   }
 }
 @media (max-aspect-ratio: 4 / 5) and (min-height: 480px) {
-  /* line 384, scss/_project.scss */
+  /* line 387, scss/_project.scss */
   .project .media-inner {
     padding: 0 0 61.8%;
     /* golden ratio */
   }
-  /* line 387, scss/_project.scss */
+  /* line 390, scss/_project.scss */
   .project .media[data-media='gallery'] .placeholder {
     background-size: cover;
   }
 }
 @media (max-width: 1024px) {
-  /* line 395, scss/_project.scss */
+  /* line 398, scss/_project.scss */
   .project .media, .project .info {
     width: 100%;
   }
-  /* line 398, scss/_project.scss */
+  /* line 401, scss/_project.scss */
   .project .info {
     padding: 1.5em;
   }
-  /* line 401, scss/_project.scss */
+  /* line 404, scss/_project.scss */
   .project .title, .project .subtitle, .project .details {
     width: 100%;
     margin: 0 0 16px;
   }
 }
 @media (max-width: 767px) {
-  /* line 407, scss/_project.scss */
+  /* line 410, scss/_project.scss */
   .project .info {
     padding: 1em;
   }
-  /* line 410, scss/_project.scss */
+  /* line 413, scss/_project.scss */
   .project .title, .project .subtitle, .project .details {
     margin-bottom: 12px;
   }
 }
 @media (max-width: 480px) {
-  /* line 415, scss/_project.scss */
+  /* line 418, scss/_project.scss */
   .project .info {
     padding: 1em 0;
   }
 }
 
-/* line 425, scss/_project.scss */
+/* line 428, scss/_project.scss */
 .iOS .project .media-controls .inner {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
@@ -2355,15 +2359,6 @@ body[data-loadstate=intro] {
   .main-inner .section {
     z-index: 4;
   }
-}
-/* line 82, scss/main.scss */
-.main-inner .section:not(#drawing-section) {
-  border-top: 1px dotted #171716;
-  border-bottom: 1px dotted #171716;
-}
-/* line 83, scss/main.scss */
-.main-inner .section:not(#drawing-section) .section-inner {
-  visibility: hidden;
 }
 
 /* line 94, scss/main.scss */

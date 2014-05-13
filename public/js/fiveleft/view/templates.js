@@ -76,74 +76,74 @@ function program1(depth0,data) {
   if (helper = helpers.index) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.index); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\" >\n        <span class=\"media\">\n            <span class=\"media-inner\">\n                <span class=\"media-content\">\n                    ";
+    + "\" >\n        <span class=\"project-grid-item-inner\">\n            <span class=\"media\">\n                <span class=\"media-inner\">\n                    <span class=\"media-content\">\n                        ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.thumb), {hash:{},inverse:self.program(8, program8, data),fn:self.program(2, program2, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                </span>   \n                <span class=\"media-hover\"></span>             \n                <span class=\"media-active icon\"></span>             \n            </span>\n        </span>\n        <span class=\"info\">\n            <h1 class=\"title\">";
+  buffer += "\n                    </span>   \n                    <span class=\"media-hover\"></span>             \n                    <span class=\"media-active icon\"></span>             \n                </span>\n            </span>\n            <span class=\"info\">\n                <h1 class=\"title\">";
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</h1>\n            ";
+    + "</h1>\n                ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.subtitle), {hash:{},inverse:self.noop,fn:self.program(10, program10, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n        </span>\n    </a>\n";
+  buffer += "\n            </span>\n        </span>\n    </a>\n";
   return buffer;
   }
 function program2(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                        ";
+  buffer += "\n                            ";
   stack1 = helpers['if'].call(depth0, ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.info)),stack1 == null || stack1 === false ? stack1 : stack1.sizes)),stack1 == null || stack1 === false ? stack1 : stack1.thumbnail)),stack1 == null || stack1 === false ? stack1 : stack1.file), {hash:{},inverse:self.program(5, program5, data),fn:self.program(3, program3, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                    ";
+  buffer += "\n                        ";
   return buffer;
   }
 function program3(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                        <img class=\"thumbnail\" src=\""
+  buffer += "\n                            <img class=\"thumbnail\" src=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.dir)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.info)),stack1 == null || stack1 === false ? stack1 : stack1.sizes)),stack1 == null || stack1 === false ? stack1 : stack1.thumbnail)),stack1 == null || stack1 === false ? stack1 : stack1.file)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" />\n                        ";
+    + "\" />\n                            ";
   return buffer;
   }
 
 function program5(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                            ";
+  buffer += "\n                                ";
   stack1 = helpers['if'].call(depth0, ((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.info)),stack1 == null || stack1 === false ? stack1 : stack1.file), {hash:{},inverse:self.noop,fn:self.program(6, program6, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                        ";
+  buffer += "\n                            ";
   return buffer;
   }
 function program6(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                            <img class=\"thumbnail\" src=\""
+  buffer += "\n                                <img class=\"thumbnail\" src=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.dir)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + escapeExpression(((stack1 = ((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.info)),stack1 == null || stack1 === false ? stack1 : stack1.file)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "\" />\n                            ";
+    + "\" />\n                                ";
   return buffer;
   }
 
 function program8(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                    <img class=\"thumbnail\" src=\""
+  buffer += "\n                        <img class=\"thumbnail\" src=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.thumb)),stack1 == null || stack1 === false ? stack1 : stack1.dir)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
-    + "fpo-thumbnail.png\" />\n                    ";
+    + "fpo-thumbnail.png\" />\n                        ";
   return buffer;
   }
 
 function program10(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\n            <h2 class=\"subtitle\">";
+  buffer += "\n                <h2 class=\"subtitle\">";
   if (helper = helpers.subtitle) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.subtitle); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "</h2>\n            ";
+    + "</h2>\n                ";
   return buffer;
   }
 

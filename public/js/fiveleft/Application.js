@@ -222,7 +222,7 @@
 		scroll.ratio = clamp( scroll.position/scroll.height, 0, 1 );
 
 
-		// if( fiveleft.drawingApi.playing ) fiveleft.drawingApi.stop();
+		if( fiveleft.drawingApi.playing ) fiveleft.drawingApi.stop();
 
 		// Update Intermittent Scroll Responses
 		clearTimeout( scroll.timeout );
@@ -241,7 +241,7 @@
 		// log( "Application::handleScrollTimeout" );
 		clearTimeout( scroll.timeout );
 		scroll.timeout = 0;
-		// fiveleft.drawingApi.resume();
+		fiveleft.drawingApi.resume();
 		// if( !scroll.affixTop ) fiveleft.drawingApi.start();
 	}
 
@@ -337,7 +337,9 @@
 				}
 
 				if( currScrollState !== scrollState ) {
-					section.element.attr( "data-scroll", scrollState );
+					section.element
+						.attr( "data-scroll", scrollState )
+						.toggleClass( "render" );
 					section.scroll( scrollState );
 				}
 
