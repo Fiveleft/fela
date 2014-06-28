@@ -44,6 +44,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			for( var i=this.attachments.length-1; i!==-1; i-- ) {
 				a = this.attachments[i];
 				a.dir = _mediaDirectory;
+				// log( a );
 				_attachmentMap[ a.id ] = a;
 			}
 			this.getAttachment = function( id ) {
@@ -69,7 +70,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 		// Create Video
 		if( typeof this.video !== "undefined" && this.attachments.length )
 		{
-			log( this.video );
+			// log( this.video );
 			var _poster = this.video.poster;
 			if( _poster ) {
 				this.video._poster = _poster;

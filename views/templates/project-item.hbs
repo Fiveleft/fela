@@ -49,8 +49,9 @@
                          --><a class="agency-name info-name" href="/agency/{{agencyId}}">{{agency}}</a>
                         </span>
                         {{/if}}
+                    </p>
+                    <p class="project-detail additional">
                         {{#if discipline}}
-                        <span class="separator">/</span>
                         <span class="disciplines">
                             <span class="taxonomy-label info-label">Disciplines: </span>
                             {{#each discipline}}
@@ -61,7 +62,7 @@
                         </span>
                         {{/if}}
                         {{#if technology}}
-                        <span class="separator">/</span>
+                        <br/>
                         <span class="technologies">
                             <span class="taxonomy-label info-label">Technology: </span>
                             {{#each technology}}
@@ -71,13 +72,14 @@
                             {{/each}}
                         </span>
                         {{/if}}
-                        {{#if info.website}}
-                        <span class="separator">/</span>
+                    </p>
+                    {{#if info.website}}
+                    <p class="project-detail additional">
                         <span class="participant-info site">
                             <a class="project-link info-name" href="{{info.website}}" target="_blank" title="{{title}}">View Site</a>
                         </span>
-                        {{/if}}
                     </p>
+                    {{/if}}
                     <a class="next project-advance" href="#">
                         <span class="label">Next Project</span>
                         <span class="title-wrapper"><span class="project-title">{project title}</span></span>

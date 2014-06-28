@@ -351,8 +351,10 @@
 					break;
 
 				case "development" : 
-					loadSettings.url = "/sitedata.json";
-					loadSettings.dataType = "json";
+					// loadSettings.url = "/sitedata.json";
+					loadSettings.url = "http://cms.fiveleft.com/sitedata.php";
+					loadSettings.dataType = "jsonp";
+					// loadSettings.dataType = "json";
 					break;
 			}
 
@@ -444,7 +446,7 @@
 	 */
 	function siteDataLoadError( result )
 	{
-		 log( _cn + "::siteDataLoadError", result );
+		log( _cn + "::siteDataLoadError", result );
 		_ref.$window.trigger( _evt.SiteDataError, {projects:[]} ); 
 	}
 	

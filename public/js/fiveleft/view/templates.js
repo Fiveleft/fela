@@ -194,16 +194,16 @@ function program1(depth0,data) {
   buffer += "\n                        ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.agency), {hash:{},inverse:self.noop,fn:self.program(20, program20, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                        ";
+  buffer += "\n                    </p>\n                    <p class=\"project-detail additional\">\n                        ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.discipline), {hash:{},inverse:self.noop,fn:self.program(22, program22, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                        ";
   stack1 = helpers['if'].call(depth0, (depth0 && depth0.technology), {hash:{},inverse:self.noop,fn:self.program(25, program25, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                        ";
+  buffer += "\n                    </p>\n                    ";
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 && depth0.info)),stack1 == null || stack1 === false ? stack1 : stack1.website), {hash:{},inverse:self.noop,fn:self.program(28, program28, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
-  buffer += "\n                    </p>\n                    <a class=\"next project-advance\" href=\"#\">\n                        <span class=\"label\">Next Project</span>\n                        <span class=\"title-wrapper\"><span class=\"project-title\">{project title}</span></span>\n                        <i class=\"icon\"></i>\n                    </a>\n                </div>\n            </div>\n        </div>\n    </article>\n    ";
+  buffer += "\n                    <a class=\"next project-advance\" href=\"#\">\n                        <span class=\"label\">Next Project</span>\n                        <span class=\"title-wrapper\"><span class=\"project-title\">{project title}</span></span>\n                        <i class=\"icon\"></i>\n                    </a>\n                </div>\n            </div>\n        </div>\n    </article>\n    ";
   return buffer;
   }
 function program2(depth0,data) {
@@ -339,7 +339,7 @@ function program20(depth0,data) {
 function program22(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                        <span class=\"separator\">/</span>\n                        <span class=\"disciplines\">\n                            <span class=\"taxonomy-label info-label\">Disciplines: </span>\n                            ";
+  buffer += "\n                        <span class=\"disciplines\">\n                            <span class=\"taxonomy-label info-label\">Disciplines: </span>\n                            ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.discipline), {hash:{},inverse:self.noop,fn:self.program(23, program23, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                        </span>\n                        ";
@@ -363,7 +363,7 @@ function program23(depth0,data) {
 function program25(depth0,data) {
   
   var buffer = "", stack1;
-  buffer += "\n                        <span class=\"separator\">/</span>\n                        <span class=\"technologies\">\n                            <span class=\"taxonomy-label info-label\">Technology: </span>\n                            ";
+  buffer += "\n                        <br/>\n                        <span class=\"technologies\">\n                            <span class=\"taxonomy-label info-label\">Technology: </span>\n                            ";
   stack1 = helpers.each.call(depth0, (depth0 && depth0.technology), {hash:{},inverse:self.noop,fn:self.program(26, program26, data),data:data});
   if(stack1 || stack1 === 0) { buffer += stack1; }
   buffer += "\n                        </span>\n                        ";
@@ -387,13 +387,13 @@ function program26(depth0,data) {
 function program28(depth0,data) {
   
   var buffer = "", stack1, helper;
-  buffer += "\n                        <span class=\"separator\">/</span>\n                        <span class=\"participant-info site\">\n                            <a class=\"project-link info-name\" href=\""
+  buffer += "\n                    <p class=\"project-detail additional\">\n                        <span class=\"participant-info site\">\n                            <a class=\"project-link info-name\" href=\""
     + escapeExpression(((stack1 = ((stack1 = (depth0 && depth0.info)),stack1 == null || stack1 === false ? stack1 : stack1.website)),typeof stack1 === functionType ? stack1.apply(depth0) : stack1))
     + "\" target=\"_blank\" title=\"";
   if (helper = helpers.title) { stack1 = helper.call(depth0, {hash:{},data:data}); }
   else { helper = (depth0 && depth0.title); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
   buffer += escapeExpression(stack1)
-    + "\">View Site</a>\n                        </span>\n                        ";
+    + "\">View Site</a>\n                        </span>\n                    </p>\n                    ";
   return buffer;
   }
 

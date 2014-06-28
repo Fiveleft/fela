@@ -73,6 +73,7 @@
 		{
 			// CompositionLayout Creates the rules for drawing a balanced composition
 			this.compositionLayout = layout = new fiveleft.CompositionLayout();
+			this.compositionController = controller = new fiveleft.CompositionController();
 			
 			// Create Canvases
 			createCanvases( canvas );
@@ -94,6 +95,7 @@
 			timer = new Timer();
 			ticker = TweenLite.ticker;
 			controller = setController();
+			//log( controller );
 
 			// Update Timer
 			timer.onDelayComplete = handleTimerDelay;
@@ -324,7 +326,7 @@
 		aCtx = aCvs.getContext("2d");
 		rCtx = rCvs.getContext("2d");
 
-		log( dCvs );
+		// log( dCvs );
 	}
 
 
@@ -652,8 +654,8 @@
 	function Timer() 
 	{
 		var _timer = this
-			,delayMin = 1000
-			,delayMax = 3000;
+			,delayMin = 500
+			,delayMax = 1000;
 
 		this.startAt = 0;
 		this.pausedAt = 0;

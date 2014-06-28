@@ -1805,8 +1805,8 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   left: 0;
   bottom: -200px;
   margin: 0;
-  padding: 1em;
-  font-size: 2em;
+  padding: 0.5em;
+  font-size: 2.5em;
   color: #FFF;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
@@ -1859,7 +1859,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   opacity: 1;
   background-color: rgba(0, 0, 0, 0);
 }
-/* line 110, scss/_project.scss */
+/* line 103, scss/_project.scss */
 .project-grid-item.active:hover .media-hover {
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -1870,14 +1870,9 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   }
 }
 @media (max-width: 1024px) {
-  /* line 8, scss/_project.scss */
-  .project-grid-item {
-    padding: 1.5%;
-  }
-  /* line 125, scss/_project.scss */
+  /* line 113, scss/_project.scss */
   .project-grid-item .title {
     font-size: 1.75em;
-    padding: 0.75em;
   }
 }
 @media (max-width: 767px) {
@@ -1885,20 +1880,20 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   .project-grid-item {
     width: 50%;
   }
-  /* line 133, scss/_project.scss */
+  /* line 119, scss/_project.scss */
   .project-grid-item .title {
     font-size: 1.5em;
     padding: 0.5em;
   }
 }
 @media (max-width: 480px) {
-  /* line 140, scss/_project.scss */
+  /* line 125, scss/_project.scss */
   .project-grid-item .title {
     font-size: 1.25em;
   }
 }
 
-/* line 146, scss/_project.scss */
+/* line 131, scss/_project.scss */
 .project {
   position: absolute;
   top: 0;
@@ -1906,18 +1901,18 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   width: 100%;
   height: auto;
 }
-/* line 152, scss/_project.scss */
+/* line 137, scss/_project.scss */
 .project .project-inner {
   padding: 100px 0 50px;
   position: relative;
 }
-/* line 156, scss/_project.scss */
+/* line 141, scss/_project.scss */
 .project .media, .project .info {
   position: relative;
   width: 83.33333%;
   margin: 0 auto;
 }
-/* line 160, scss/_project.scss */
+/* line 145, scss/_project.scss */
 .project .media-inner {
   position: relative;
   width: 100%;
@@ -1927,7 +1922,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   /* 16:7 */
   z-index: 2;
 }
-/* line 166, scss/_project.scss */
+/* line 151, scss/_project.scss */
 .project .media-controls, .project .media-container {
   position: absolute;
   top: 0;
@@ -1936,17 +1931,17 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   height: 100%;
   overflow: hidden;
 }
-/* line 172, scss/_project.scss */
+/* line 157, scss/_project.scss */
 .project .media-container {
   background: url(/img/bg-pattern-white.png) repeat 0 0;
   z-index: 99;
 }
-/* line 176, scss/_project.scss */
+/* line 161, scss/_project.scss */
 .project .media-controls {
   z-index: 100;
   overflow: visible;
 }
-/* line 179, scss/_project.scss */
+/* line 164, scss/_project.scss */
 .project .media-controls .inner {
   display: block;
   position: absolute;
@@ -1956,7 +1951,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   height: 60px;
   padding: 15px;
 }
-/* line 186, scss/_project.scss */
+/* line 171, scss/_project.scss */
 .project .media-controls .icon {
   position: absolute;
   width: 30px;
@@ -1972,50 +1967,50 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   -o-transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 193, scss/_project.scss */
+/* line 178, scss/_project.scss */
 .project .media-controls .play {
   display: block;
   background-position: -150px 0px;
 }
-/* line 197, scss/_project.scss */
+/* line 182, scss/_project.scss */
 .project .media-controls .pause {
   display: none;
   background-position: -180px 0px;
 }
-/* line 202, scss/_project.scss */
+/* line 187, scss/_project.scss */
 .project .media-controls:hover .icon {
   background-color: rgba(255, 255, 255, 0.75);
 }
-/* line 203, scss/_project.scss */
+/* line 188, scss/_project.scss */
 .project .media-controls:hover .play {
   background-position: -150px -30px;
 }
-/* line 204, scss/_project.scss */
+/* line 189, scss/_project.scss */
 .project .media-controls:hover .pause {
   background-position: -180px -30px;
 }
-/* line 207, scss/_project.scss */
+/* line 192, scss/_project.scss */
 .project .media-controls.mouseenter .inner {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
 }
-/* line 212, scss/_project.scss */
+/* line 197, scss/_project.scss */
 .project .media-controls.animating .play {
   display: block;
 }
-/* line 213, scss/_project.scss */
+/* line 198, scss/_project.scss */
 .project .media-controls.animating .pause {
   display: none;
 }
-/* line 218, scss/_project.scss */
+/* line 203, scss/_project.scss */
 .project.playing .media-controls .play {
   display: none;
 }
-/* line 219, scss/_project.scss */
+/* line 204, scss/_project.scss */
 .project.playing .media-controls .pause {
   display: block;
 }
-/* line 229, scss/_project.scss */
+/* line 214, scss/_project.scss */
 .project .media[data-media='gallery'] .gallery-list, .project .media[data-media='gallery'] .gallery-item {
   position: absolute;
   top: 0;
@@ -2023,22 +2018,22 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   width: 100%;
   height: 100%;
 }
-/* line 233, scss/_project.scss */
+/* line 218, scss/_project.scss */
 .project .media[data-media='gallery'] .gallery-item {
   z-index: 8;
   visibility: hidden;
 }
-/* line 237, scss/_project.scss */
+/* line 222, scss/_project.scss */
 .project .media[data-media='gallery'] .gallery-item.last-active {
   z-index: 10;
   visibility: visible;
 }
-/* line 241, scss/_project.scss */
+/* line 226, scss/_project.scss */
 .project .media[data-media='gallery'] .gallery-item.active {
   z-index: 9;
   visibility: visible;
 }
-/* line 245, scss/_project.scss */
+/* line 230, scss/_project.scss */
 .project .media[data-media='gallery'] .placeholder {
   display: block;
   width: 100%;
@@ -2046,26 +2041,26 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   background: no-repeat 0 50%;
   background-size: 100% auto;
 }
-/* line 251, scss/_project.scss */
+/* line 236, scss/_project.scss */
 .project .media[data-media='gallery'] .placeholder.aspect-skinny {
   background-position: top center;
   background-size: contain;
 }
-/* line 255, scss/_project.scss */
+/* line 240, scss/_project.scss */
 .project .media[data-media='gallery'] img {
   display: none;
 }
-/* line 260, scss/_project.scss */
+/* line 245, scss/_project.scss */
 .project .media[data-media='video'] .media-inner {
   background-color: rgba(0, 0, 0, 0.85);
 }
-/* line 263, scss/_project.scss */
+/* line 248, scss/_project.scss */
 .project .media[data-media='video'] .video {
   width: 100%;
   height: auto;
   max-height: 100%;
 }
-/* line 267, scss/_project.scss */
+/* line 252, scss/_project.scss */
 .project .close {
   display: block;
   position: absolute;
@@ -2076,7 +2071,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   padding: 15px;
   z-index: 30;
 }
-/* line 273, scss/_project.scss */
+/* line 258, scss/_project.scss */
 .project .close .icon {
   position: absolute;
   width: 30px;
@@ -2093,43 +2088,43 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   background-position: -120px 0px;
 }
-/* line 281, scss/_project.scss */
+/* line 266, scss/_project.scss */
 .project .close:hover .icon {
   background-color: rgba(255, 255, 255, 0.75);
   background-position: -120px -30px;
 }
-/* line 286, scss/_project.scss */
+/* line 271, scss/_project.scss */
 .project .info {
   position: relative;
   padding: 2em 4.16666666% 0;
 }
-/* line 290, scss/_project.scss */
+/* line 275, scss/_project.scss */
 .project .title, .project .subtitle {
   text-transform: uppercase;
   width: 100%;
 }
-/* line 294, scss/_project.scss */
+/* line 279, scss/_project.scss */
 .project .details {
   width: 100%;
   padding-bottom: 2.5em;
 }
-/* line 298, scss/_project.scss */
+/* line 283, scss/_project.scss */
 .project .description, .project .additional {
   width: 83.33333%;
 }
-/* line 301, scss/_project.scss */
+/* line 286, scss/_project.scss */
 .project .title, .project .subtitle, .project .project-detail {
   margin-bottom: 10px;
 }
-/* line 305, scss/_project.scss */
+/* line 290, scss/_project.scss */
 .project .project-detail > span {
   display: inline;
 }
-/* line 307, scss/_project.scss */
+/* line 292, scss/_project.scss */
 .project .project-detail > span > span, .project .project-detail > span > a {
   display: inline-block;
 }
-/* line 310, scss/_project.scss */
+/* line 295, scss/_project.scss */
 .project .project-advance {
   position: absolute;
   bottom: 0;
@@ -2138,7 +2133,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   height: 30px;
   font-style: italic;
 }
-/* line 316, scss/_project.scss */
+/* line 301, scss/_project.scss */
 .project .project-advance .icon {
   display: block;
   position: absolute;
@@ -2148,7 +2143,7 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   height: 30px;
   background-position: -30px -30px;
 }
-/* line 322, scss/_project.scss */
+/* line 307, scss/_project.scss */
 .project .project-advance .label {
   position: absolute;
   top: 0;
@@ -2157,13 +2152,13 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   height: 30px;
   text-align: right;
 }
-/* line 327, scss/_project.scss */
+/* line 312, scss/_project.scss */
 .project .project-advance .label, .project .project-advance .project-title {
   display: block;
   line-height: 24px;
   padding: 3px 0;
 }
-/* line 331, scss/_project.scss */
+/* line 316, scss/_project.scss */
 .project .project-advance .title-wrapper {
   display: block;
   margin: 0 33px 0 100px;
@@ -2175,111 +2170,113 @@ html:not(.iOS) #info-section[data-scroll][data-scroll=bottom-inside-viewport] .p
   display: table;
   clear: both;
 }
-/* line 337, scss/_project.scss */
+/* line 322, scss/_project.scss */
 .project .project-advance .project-title {
   text-align: right;
 }
-/* line 341, scss/_project.scss */
+/* line 326, scss/_project.scss */
 .project .project-advance.measured .title-wrapper {
   width: 0;
 }
-/* line 343, scss/_project.scss */
+/* line 328, scss/_project.scss */
 .project .project-advance:hover {
   color: inherit;
   background: none;
 }
-/* line 346, scss/_project.scss */
+/* line 331, scss/_project.scss */
 .project .project-advance:hover .icon {
   background-position: -30px -60px;
 }
-/* line 348, scss/_project.scss */
+/* line 333, scss/_project.scss */
 .project .project-advance.inactive {
   display: none;
 }
-/* line 354, scss/_project.scss */
+/* line 338, scss/_project.scss */
 .project a, .project a:visited {
   color: #171716;
   text-decoration: none;
 }
-/* line 358, scss/_project.scss */
+/* line 342, scss/_project.scss */
 .project .info-label, .project .taxonomy-label {
   color: #44443e;
 }
-/* line 361, scss/_project.scss */
+/* line 345, scss/_project.scss */
 .project .info-name, .project .taxonomy {
   color: #171716;
 }
-/* line 364, scss/_project.scss */
-.project .taxonomy {
-  font-style: italic;
-  text-transform: lowercase;
-}
-/* line 367, scss/_project.scss */
+/* line 351, scss/_project.scss */
 .project .taxonomy:last-child .separator {
   display: none;
 }
+/* line 355, scss/_project.scss */
+.project .project-link {
+  margin-left: -0.5em;
+  padding: 0 0.5em;
+  line-height: 2em;
+  font-style: italic;
+}
 @media (max-aspect-ratio: 5 / 4) and (min-height: 600px) {
-  /* line 374, scss/_project.scss */
+  /* line 368, scss/_project.scss */
   .project .media-inner {
     padding: 0 0 50%;
     /* 2:1 */
   }
 }
 @media (max-aspect-ratio: 1 / 1) and (min-height: 600px) {
-  /* line 379, scss/_project.scss */
+  /* line 373, scss/_project.scss */
   .project .media-inner {
     padding: 0 0 56.25%;
     /* 16:9 */
   }
-  /* line 382, scss/_project.scss */
+  /* line 376, scss/_project.scss */
   .project .media[data-media='gallery'] .placeholder {
     background-size: cover;
   }
 }
 @media (max-aspect-ratio: 4 / 5) and (min-height: 480px) {
-  /* line 387, scss/_project.scss */
+  /* line 381, scss/_project.scss */
   .project .media-inner {
     padding: 0 0 61.8%;
     /* golden ratio */
   }
-  /* line 390, scss/_project.scss */
+  /* line 384, scss/_project.scss */
   .project .media[data-media='gallery'] .placeholder {
     background-size: cover;
   }
 }
 @media (max-width: 1024px) {
-  /* line 398, scss/_project.scss */
+  /* line 392, scss/_project.scss */
   .project .media, .project .info {
     width: 100%;
   }
-  /* line 401, scss/_project.scss */
+  /* line 395, scss/_project.scss */
   .project .info {
     padding: 1.5em;
   }
-  /* line 404, scss/_project.scss */
+  /* line 398, scss/_project.scss */
   .project .title, .project .subtitle, .project .details {
     width: 100%;
     margin: 0 0 16px;
   }
 }
 @media (max-width: 767px) {
-  /* line 410, scss/_project.scss */
+  /* line 404, scss/_project.scss */
   .project .info {
     padding: 1em;
   }
-  /* line 413, scss/_project.scss */
+  /* line 407, scss/_project.scss */
   .project .title, .project .subtitle, .project .details {
     margin-bottom: 12px;
   }
 }
 @media (max-width: 480px) {
-  /* line 418, scss/_project.scss */
+  /* line 412, scss/_project.scss */
   .project .info {
     padding: 1em 0;
   }
 }
 
-/* line 428, scss/_project.scss */
+/* line 422, scss/_project.scss */
 .iOS .project .media-controls .inner {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
   opacity: 1;
@@ -2359,6 +2356,14 @@ body[data-loadstate=intro] {
   .main-inner .section {
     z-index: 4;
   }
+}
+/* line 78, scss/main.scss */
+.main-inner section .section-inner {
+  visibility: hidden;
+}
+/* line 83, scss/main.scss */
+.main-inner .section:not(#drawing-section) .section-inner {
+  visibility: hidden;
 }
 
 /* line 94, scss/main.scss */

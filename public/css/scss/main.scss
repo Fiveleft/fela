@@ -75,17 +75,17 @@ body {
 		}
 	}
 
-	// section .section-inner {
-	// 	visibility:hidden;
-	// }
+	section .section-inner {
+		visibility:hidden;
+	}
 
-	// .section:not(#drawing-section) {
-	// 	.section-inner {
-	// 		visibility:hidden;
-	// 	}
-	// 	border-top:1px dotted $color-dk-grey;
-	// 	border-bottom:1px dotted $color-dk-grey;
-	// }
+	.section:not(#drawing-section) {
+		.section-inner {
+			visibility:hidden;
+		}
+		// border-top:1px dotted $color-dk-grey;
+		// border-bottom:1px dotted $color-dk-grey;
+	}
 }
 
 

@@ -222,7 +222,7 @@
 		scroll.ratio = clamp( scroll.position/scroll.height, 0, 1 );
 
 
-		if( fiveleft.drawingApi.playing ) fiveleft.drawingApi.stop();
+		// if( fiveleft.drawingApi.playing ) fiveleft.drawingApi.stop();
 
 		// Update Intermittent Scroll Responses
 		clearTimeout( scroll.timeout );
