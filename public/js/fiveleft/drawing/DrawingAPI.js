@@ -22,6 +22,7 @@
 			motion : new fiveleft.MotionVector()
 			,orientation : new fiveleft.MotionVector()
 		}
+		,compController
 		,touchActive = false
 		,userActive = false
 		,introState = false
@@ -73,8 +74,10 @@
 		{
 			// CompositionLayout Creates the rules for drawing a balanced composition
 			this.compositionLayout = layout = new fiveleft.CompositionLayout();
-			this.compositionController = controller = new fiveleft.CompositionController();
+			this.compositionController = compController = new fiveleft.CompositionController();
 			
+			window.cc = compController;
+
 			// Create Canvases
 			createCanvases( canvas );
 
@@ -94,9 +97,9 @@
 
 			timer = new Timer();
 			ticker = TweenLite.ticker;
+			
 			controller = setController();
-			//log( controller );
-
+			
 			// Update Timer
 			timer.onDelayComplete = handleTimerDelay;
 
@@ -124,6 +127,7 @@
 
 		, start : function() 
 		{
+			log("***   DrawingAPI.start()   ***");
 			this.playing = true;
 			controller.play = true;
 			timer.start();
@@ -134,6 +138,7 @@
 
 		, stop : function() 
 		{
+			log("***   DrawingAPI.stop()   ***");
 			this.playing = false;
 			// log( "DrawingAPI::stop" );
 			// log( "\tdrawingApi.playing = ", this.playing );
@@ -165,6 +170,7 @@
 			doRender = _api.playing && !_api.paused;	
 			timer.update();
 			layout.update();
+			compController.update( timer.elapsed );
 			if( doRender ) {
 				_api.render();
 			}
@@ -258,32 +264,40 @@
 
 	function handleTimerDelay () 
 	{
+		var m;
+
 		// log( " HANDLE TIMER DELAY ");
 		brush.color = fiveleft.Color.random(100,180).desaturate(25);
 		brush.thickness = randomBetween( 2, 20 );
 		layout.magnetize();
 
-
-		if( layout.magnet.on ) {
-
-			// Create a new shape.
-			var shape = new fiveleft.Shape()
-				,shapeSize = round(layout.viewport.area.width * randomBetween( 0.2, 0.8 ));
-
-			shape.width = shapeSize;
-			shape.height = shapeSize;
-			shape.setCenter( layout.magnet.target.getCenter() );
-			shape.build();
-
-			aCtx.drawImage( shape.canvas, 0, 0, shape.width, shape.height, shape.x, shape.y, shape.width, shape.height );
-
+		if( compController.total >= 5 ) {
+			compController.restoreModifier();
+		}else{
+			m = new fiveleft.MDFYR();
+			m.start = timer.elapsed + round(randomBetween(0, 1000));
+			m.end = m.start + round(randomBetween(500, 4000));
+			compController.addModifier( m );
 		}
+		return;
+
+		// if( layout.magnet.on ) {
+
+		// 	// Create a new shape.
+		// 	var shape = new fiveleft.Shape()
+		// 		,shapeSize = round(layout.viewport.area.width * randomBetween( 0.2, 0.8 ));
+
+		// 	shape.width = shapeSize;
+		// 	shape.height = shapeSize;
+		// 	shape.setCenter( layout.magnet.target.getCenter() );
+		// 	shape.build();
+
+		// 	aCtx.drawImage( shape.canvas, 0, 0, shape.width, shape.height, shape.x, shape.y, shape.width, shape.height );
+
+		// }
 
 
 	}
-
-
-
 
 
 	function handleLoadQueueEvent( event )
@@ -325,19 +339,18 @@
 		vCtx = vCvs.getContext("2d");
 		aCtx = aCvs.getContext("2d");
 		rCtx = rCvs.getContext("2d");
-
-		// log( dCvs );
 	}
 
 
 	function drawToArtwork() 
 	{
-
 		//TODO: turn off for now
 		// brush.add( layout.artworkPosition );
 		// brush.render();
 		// aCtx.drawImage( rCvs, 0, 0 );
-		aCtx.drawImage( brush.canvas, 0, 0 );
+		// aCtx.drawImage( brush.canvas, 0, 0 );
+		
+		
 	}
 
 
@@ -353,13 +366,11 @@
 		var src = layout.artwork.source
 			,dest = layout.render.area
 
-
 		// Run a quick check to make sure the source is there
 		if( src.width < 320 || src.height < 320 ) {
-			log( " no source rect ");
+			log( "DrawingAPI.drawToDisplay() - no source rect ");
 			return ;
 		}
-
 
 		// Clear the display canvas and ensure its size.
 		if( dCvs.width !== layout.viewport.area.width || dCvs.height !== layout.viewport.area.height ) {
@@ -572,8 +583,8 @@
 			,showComposition : true
 			,showPoints : false
 			,guidesAlpha : 1
-			,intro : true
-			,play : true
+			,intro : false
+			,play : false
 			// ,fps : _FPS || 30	
 			,_fps : { min:5, max:60, step:5 }
 			,onPlay : function() {
@@ -596,7 +607,7 @@
 			}
 		};
 
-		c.gui = new dat.GUI({autoPlace:false});
+		c.gui = new dat.GUI();
 
 		var parallaxFolder = c.gui.addFolder("Parallax Motion");
 		parallaxFolder.add( layout.parallax, "uiRectScale" ).min(0.1).max(0.8).step(0.1).onChange( function(){
@@ -628,7 +639,7 @@
 		
 
 		// Controller uses the spacebar to play/pause
-		$(window).on( 'keypress', c.onToggleSpacebar );
+		// $(window).on( 'keypress', c.onToggleSpacebar );
 		
 
 		// Add Controller to DOM
@@ -655,7 +666,7 @@
 	{
 		var _timer = this
 			,delayMin = 500
-			,delayMax = 1000;
+			,delayMax = 3000;
 
 		this.startAt = 0;
 		this.pausedAt = 0;
@@ -687,7 +698,7 @@
 			_timer.pausedAt = Date.now();
 		};
 		this.onDelayComplete = function() {
-			log( "Timer::onDelayComplete - time: " + _timer.seconds );
+			//log( "Timer::onDelayComplete - time: " + _timer.seconds );
 		};
 	}
 

@@ -66,12 +66,11 @@
 	// Variables
 	var _ref,
 		modifiers = [],
-		modMap = []
-		modCount = 0
-		active = [],
-		time = 0
-		timer = 0
-		;
+		modMap = [],
+		modCount = 0,
+		completed = [],
+		completedCount = 0,
+		time = 0;
 
 
 	/** 
@@ -82,39 +81,77 @@
 		_ref = this;
 	};
 
+	CompositionController.prototype = {
 
-	function addModifier( m ) 
-	{
-		modCount = modifiers.push( m );
-		modMap[ m.start ] = undefined ? [] : modMap[ m.start ];
-		modMap[ m.end ] = undefined ? [] : modMap[ m.end ];
-		modMap[ m.start ].push(m);
-		modMap[ m.end ].push(m);
+		constructor : CompositionController,
 
-		updateStats();
-	}
+		total : 0,
 
-	function removeModifier( mTarget ) 
-	{	
-		var removed = false,
-				m;
-		for( i=modifiers.length-1; i!==-1 && !removed; i-- ) {
-			m = modifiers[i];
-			removed = m.uid === mTarget.uid ? true : removed;
-			if( removed ) {
-				modifiers.splice(i,0);
-				modCount = modifiers.length;
-			}
-		}
-
-		if( removed ) {
+		addModifier : function( m ) 
+		{
+			modCount = modifiers.push( m );
 			updateStats();
-		}
-	}
+		},
 
-	function update( t ) {
-		if( modCount ) updateModifiers(t);
-	}
+		restoreModifier : function( mTarget ) 
+		{
+			var restored = false,
+				m = null;
+
+			switch( true ) {
+				case completedCount == 0 :
+					// return;
+					break;
+				case !mTarget :
+					var random = round(randomBetween(0,completed.length-1));
+					m = completed.splice(random, 1)[0];
+					restored = true;
+					break;
+				default : 
+					for( i=completed.length-1; i!==-1 && !restored; i-- ) {
+						m = completed[i];
+						restored = m.uid === mTarget.uid ? true : restored;
+						if( restored ) {
+							completed.splice(i,1);
+						}
+					}
+					break;
+			}
+			if( m !== null ) {
+				log( "restore ", m._uid );
+				modifiers.push(m);
+				m._restore(time);
+				updateStats();
+			}
+		},
+
+		removeModifier : function( mTarget ) 
+		{	
+			var removed = false,
+					m;
+
+			for( i=modifiers.length-1; i!==-1 && !removed; i-- ) {
+				m = modifiers[i];
+				removed = m.uid === mTarget.uid ? true : removed;
+				if( removed ) {
+					completedCount = completed.push( m );
+					modifiers.splice(i,1);
+					modCount = modifiers.length;
+				}
+			}
+			if( removed ) {
+				m._destroy();
+				updateStats();
+			}
+		},
+
+		update : function( t ) {
+			time = t;
+			if( modCount ) {
+				updateModifiers(t);
+			}
+		},
+	};
 
 
 	/**
@@ -129,17 +166,20 @@
 
 		for( i; i!==-1; i-- ) {
 			m = modifiers[i];
-
+			
+			if( m._uid == "_1" ) {
+				log( m.active, m.start, m.end, m.duration );
+			}
 			switch( true ) {
 				case !m.active && m.start <= t :
 					m._start();
 					break;
 				case m.active && m.start <= t && m.end > t :
-					m._update();
+					m._update(t);
 					break;
 				case m.active && m.end <= t :
 					m._end();
-					removeModifier(m);
+					_ref.removeModifier(m);
 					break;
 			}
 		}
@@ -148,8 +188,11 @@
 
 	function updateStats() 
 	{
-		var types = []
-
+		var types = [];
+		modCount = modifiers.length;
+		completedCount = completed.length;
+		_ref.total = modCount + completedCount;
+		log( "updateStats", "\tmodCount = " + modCount + ",\tcompletedCount = " + completedCount );
 	}
 
 

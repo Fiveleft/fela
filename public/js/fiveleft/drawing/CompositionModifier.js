@@ -4,7 +4,7 @@
 	// Namespace
 	window.fiveleft = (typeof window.fiveleft == "undefined") ? {} : window.fiveleft
 
-	var uid = -1;
+	var uid = 0;
 
 
 
@@ -13,37 +13,65 @@
 	 */
 	var CompositionModifier = function() 
 	{
+		this.type = "untyped modifier";
+		this.active = false;
+		this.created = 0;
+		this.incubation = 0;
+		this.elapsed = 0;
+		this.progress = 0;
+		this.used = 0;
+		this.start = 0;
+		this.end = 0;
+		this.duration = 0;
+		this.pausable = false;
 	};
 
 
 	CompositionModifier.prototype = {
 
-		constructor : CompositionModifier, 
-
-		init : function(){
-			this._uid = "_" + uid++;
-			this.active = false;
-			this.progress = 0;
-			this.start = 0;
-			this.end = 0;
-			this.pausable = false;
-		}
+		constructor : CompositionModifier,
+		active : false,
+		created : 0,
+		elapsed : 0,
+		incubation : 0,
+		progress : 0,
+		start : 0,
+		end : 0,
+		used : 0,
+		duration : 0,
+		pausable : false,
 		onStart : function() {},
 		onEnd : function() {},
 		onPause : function() {},
 		onResume : function() {},
-		onUpdate : function() {},
-		pause : function() {
-			// do anything?
+		onRestore : function() {},
+		onUpdate : function() {},		
+		destroy : function() {},
+
+		_init : function() {
+			this._uid = "_" + uid++;
+			this.created = Date.now();
+		},
+		_restore : function(t) {
+			this.start = this.incubation + t||0;
+			this.end = this.start + this.duration;
+			this.progress = 0;
+			this.onRestore();
+		},
+		_pause : function() {
 			this.onPause();
 		},
-		resume : function(){ 
-			// do anything?
+		_resume : function(){ 
 			this.onResume();
 		},
 		_start : function() {
 			this.active = true;
+			this.duration =  this.end - this.start;
 			this.progress = 0;
+			this.used ++;
+			if( this.used == 1 ) {
+				this.incubation = Date.now() - this.created;
+			}
 			this.onStart();
 			this.onUpdate();
 		},
@@ -55,7 +83,11 @@
 		},
 		_update : function( t ) {
 			this.progress = ratioBetween( t, this.start, this.end );
+			this.elapsed = Math.round( this.duration * this.progress );
 			this.onUpdate();
+		},
+		_destroy : function() {
+			this.destroy();
 		},
 	};
 

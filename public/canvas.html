@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+ 
+<html>
+    <head>
+        <title>Canvas from scratch</title>
+        <meta charset="utf-8">
+ 
+        <style>
+            * { box-sizing:border-box; }
+            body { width:100%; height:100%; margin:0; padding:0; position:fixed; }
+            .wrapper { position:relative; width:100%; height:100%; }
+            #controls { display:block; position:absolute; bottom:0; left:0; width:100%; height:2em; }
+            .controls-inner { position:relative; width:100%; height:100%; text-align:center; }
+            .controls-inner > * { display:inline-block; }
+            button { padding:0.25em 0.825em; margin:0; background:#333; border:1px solid #000; color:#FFF; font-weight:bold; text-transform:uppercase; }
+            button:hover { background:#CCC; color:#333; }
+        </style>
+
+
+ 
+    </head>
+ 
+    <body>
+        <div class="wrapper">
+            <canvas id="displayCanvas"></canvas>
+        </div>
+        <div id="controls">
+            <div class="controls-inner">
+                <button id="start" >Start</button>
+            </div>
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+        
+        <script>
+            !function(){
+
+                var _scope, 
+                    wrapper,
+                    startBtn,
+                    cvs, ctx, rCvs, rCtx,
+                    grd,
+                    renderArea;
+
+                function App() {
+                    _scope = this;
+                    this.init();
+                    this.start();
+                }
+
+                App.prototype = {
+                    constructor : App,
+                    run : false,
+
+                    init : function()
+                    {
+                        // Elements
+                        wrapper = $(".wrapper");
+                        startBtn = $("#start");
+                        cvs = $("#displayCanvas")[0];
+                        rCvs = document.createElement( "canvas" );
+
+                        // Properties
+                        renderArea = {};
+
+                        // Set display canvas size
+                        cvs.width = window.innerWidth;
+                        cvs.height = window.innerHeight;
+                        rCvs.width = window.screen.availWidth;
+                        rCvs.height = window.screen.availHeight;
+
+                        // Contexts
+                        ctx = cvs.getContext("2d");
+                        rCtx = rCvs.getContext("2d");
+
+                        // Gradient (FPO)
+                        var grd= rCtx.createLinearGradient(0,0,0,rCvs.height);
+                        grd.addColorStop(0,"rgba(0,0,0,0.75)");
+                        grd.addColorStop(1,"rgba(0,0,0,0.88)");
+                        rCtx.fillStyle = grd;
+                        rCtx.fillRect( 0, 0, rCvs.width, rCvs.height );
+
+                        this.initListeners();
+                    },
+
+                    initListeners : function()
+                    {
+                        $(window)
+                            .on("resize", $.proxy( this, 'resize' ) )
+                            .on("keypress", toggleRun );
+
+                        startBtn
+                            .on("click", toggleRun );
+                    },
+
+                    start : function() 
+                    {
+                        this.resize();
+                        this.render();
+                    },
+
+                    resize : function() 
+                    {
+                        cvs.width = window.innerWidth;
+                        cvs.height = window.innerHeight;
+                        renderArea = { 
+                            x:Math.round((window.screen.availWidth-window.innerWidth)*0.5), 
+                            y:Math.round((window.screen.availHeight-window.innerHeight)*0.5),
+                            width:window.innerWidth, 
+                            height:window.innerHeight
+                        }
+                        if( !_scope.run ) _scope.render();    
+                    },
+
+                    render : function() 
+                    {
+                        // DO THINGS TO THE RENDER CANVAS HERE!
+                        renderThings();
+                        
+                        // Draw the render canvas centered into the display canvas.
+                        ctx.clearRect( 0, 0, cvs.width, cvs.height );
+                        ctx.drawImage( 
+                            rCvs, 
+                            renderArea.x, renderArea.y, renderArea.width, renderArea.height,
+                            0, 0, cvs.width, cvs.height
+                        );
+                    },
+
+                    _run : function(){
+                        if( _scope.run ) requestAnimFrame(_scope._run);
+                        _scope.render();
+                    },
+                };
+
+                /** 
+                 * Start/Stop animation
+                 * @return {[type]} [description]
+                 */
+                function toggleRun() {
+                        
+                    if( startBtn.hasClass("running") ) {
+                        startBtn.text("Start").removeClass("running");
+                        _scope.run = false;
+                    }else{
+                        startBtn.text("Stop").addClass("running");
+                        _scope.run = true;
+                        _scope._run();
+                    }
+                }
+
+                /**
+                 * Render Things
+                 */
+                function renderThings() {
+
+                    // rCvs/rCtx: the rendring canvas/context, sized to the maximum screen area
+                    // renderArea: the width/height of the display area
+                }
+
+                /**
+                 * RAF  shim layer with setTimeout fallback
+                 * @see http://www.paulirish.com/2011/requestanimationframe-for-smart-animating/
+                 */
+                window.requestAnimFrame = (function(){
+                  return  window.requestAnimationFrame       ||
+                          window.webkitRequestAnimationFrame ||
+                          window.mozRequestAnimationFrame    ||
+                          function( callback ){
+                            window.setTimeout(callback, 1000 / 60);
+                          };
+                })();
+
+                /**
+                 * @see: http://paulirish.com/2009/log-a-lightweight-wrapper-for-consolelog/
+                 * @usage: log('inside coolFunc',this,arguments);
+                 */
+                window.log = function(){
+                  log.history = log.history || [];   // store logs to an array for reference
+                  log.history.push(arguments);
+                  if(this.console){
+                    console.log( Array.prototype.slice.call(arguments) );
+                  }
+                };
+
+                // Namespace
+                window.App = App;
+
+            }();
+
+            $(document).ready(function() {
+                new App();
+            });
+        </script>
+
+    </body>
+</html>

@@ -162,7 +162,8 @@
 		render.offset.onUpdate = renderOffset_onUpdate;
 
 		// IF we're dealing with a device that demands a smaller size, scale the artwork down:
-		if( fiveleft.applicationData.isiOS ) {
+		
+		if( /(iPad|iPhone|iPod)/g.test(navigator.userAgent) ) {
 			var artworkScale = 5000000 / artwork.area.getArea();
 			artwork.area.scaleRect( artwork.area, artworkScale ).round();
 		}
@@ -190,6 +191,8 @@
 		this.setRenderTarget = setRenderTarget;
 		this.setSize = setSize;
 		this.setUserPosition = setUserPosition;
+
+		log( this );
 	};
 
 
@@ -504,7 +507,7 @@
 
 		// Render Canvas creates the heatmap block
 		rCtx.rect( 0, 0, units.width, units.height );
-		rCtx.fillStyle = "rgba(0,0,0,0.8)";
+		rCtx.fillStyle = "rgba(0,0,0,0.75)";
 		rCtx.fill();
 
 		for( i=hotspots.list.length-1; i!==-1; i-- ) 
@@ -524,7 +527,6 @@
 		// 	compCtx.fill();
 		// 	compCtx.closePath();
 		// }
-
 		// Finally, clear the render canvas
 		heatMapRendered = true;
 	}
@@ -558,9 +560,10 @@
 		// Line Width must be thick
 		ctx.lineWidth = 15;
 
-		// Draw the Composition HeatMap
+		// Clear the Context
 		ctx.clearRect( 0, 0, artworkWidth, artworkHeight );
-		// ctx.drawImage( compCvs, 0, 0 );
+		// Draw the Composition HeatMap. 
+		ctx.drawImage( compCvs, 0, 0 );
 
 		// Draw the Artwork Rectangle
 		// ctx.beginPath();
