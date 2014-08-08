@@ -668,11 +668,13 @@
 			,delayMin = 500
 			,delayMax = 3000;
 
+		this.created = Date.now();
 		this.startAt = 0;
 		this.pausedAt = 0;
 		this.elapsed = 0;
 		this.seconds = 0;
 		this.nextDelay = 0;
+		this.totalElapsed = 0;
 
 
 		function getDelayTime() {
@@ -686,6 +688,7 @@
 		};
 		this.update = function() 
 		{
+			_timer.totalElapsed = Date.now() - _timer.created;
 			_timer.elapsed = Date.now() - _timer.startAt;
 			_timer.seconds = Math.floor( _timer.elapsed / 1000 );
 

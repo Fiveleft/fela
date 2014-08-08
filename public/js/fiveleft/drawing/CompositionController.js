@@ -66,10 +66,13 @@
 	// Variables
 	var _ref,
 		modifiers = [],
-		modMap = [],
-		modCount = 0,
-		completed = [],
-		completedCount = 0,
+		stored = [],
+		stats = {
+			active : 0,
+			stored : 0,
+			completed : 0,
+			types : [],
+		},
 		time = 0;
 
 
@@ -89,7 +92,7 @@
 
 		addModifier : function( m ) 
 		{
-			modCount = modifiers.push( m );
+			modifiers.push( m );
 			updateStats();
 		},
 
@@ -99,26 +102,25 @@
 				m = null;
 
 			switch( true ) {
-				case completedCount == 0 :
+				case stats.stored == 0 :
 					// return;
 					break;
 				case !mTarget :
-					var random = round(randomBetween(0,completed.length-1));
-					m = completed.splice(random, 1)[0];
+					var random = round(randomBetween(0,stored.length-1));
+					m = stored.splice(random, 1)[0];
 					restored = true;
 					break;
 				default : 
-					for( i=completed.length-1; i!==-1 && !restored; i-- ) {
-						m = completed[i];
+					for( i=stored.length-1; i!==-1 && !restored; i-- ) {
+						m = stored[i];
 						restored = m.uid === mTarget.uid ? true : restored;
 						if( restored ) {
-							completed.splice(i,1);
+							stored.splice(i,1);
 						}
 					}
 					break;
 			}
 			if( m !== null ) {
-				log( "restore ", m._uid );
 				modifiers.push(m);
 				m._restore(time);
 				updateStats();
@@ -134,20 +136,19 @@
 				m = modifiers[i];
 				removed = m.uid === mTarget.uid ? true : removed;
 				if( removed ) {
-					completedCount = completed.push( m );
+					stored.push( m );
 					modifiers.splice(i,1);
-					modCount = modifiers.length;
 				}
 			}
 			if( removed ) {
-				m._destroy();
 				updateStats();
+				m._destroy();
 			}
 		},
 
 		update : function( t ) {
 			time = t;
-			if( modCount ) {
+			if( stats.active ) {
 				updateModifiers(t);
 			}
 		},
@@ -161,26 +162,27 @@
 	 */
 	function updateModifiers( t ) 
 	{
-		var i = modCount-1,
+		var i = stats.active-1,
 				m;
 
 		for( i; i!==-1; i-- ) {
 			m = modifiers[i];
-			
-			if( m._uid == "_1" ) {
-				log( m.active, m.start, m.end, m.duration );
-			}
+
 			switch( true ) {
-				case !m.active && m.start <= t :
-					m._start();
-					break;
 				case m.active && m.start <= t && m.end > t :
 					m._update(t);
 					break;
 				case m.active && m.end <= t :
 					m._end();
+					stats.completed ++;
 					_ref.removeModifier(m);
 					break;
+				case !m.active && m.start <= t :
+					m._start();
+					break;
+			}			
+			if( m._uid == "_1" ) {
+				log( m.active, "inc:" + m.incubation + ", start:" + m.start + ", time:" + t + ", end:" + m.end );
 			}
 		}
 	}
@@ -189,10 +191,10 @@
 	function updateStats() 
 	{
 		var types = [];
-		modCount = modifiers.length;
-		completedCount = completed.length;
-		_ref.total = modCount + completedCount;
-		log( "updateStats", "\tmodCount = " + modCount + ",\tcompletedCount = " + completedCount );
+		stats.active = modifiers.length;
+		stats.stored = stored.length;
+		_ref.total = stats.active + stats.stored;
+		log( "updateStats ( active:" + stats.active + ", stored:" + stats.stored + ", completed:" + stats.completed + " )" );
 	}
 
 
