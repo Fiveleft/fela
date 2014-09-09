@@ -143,6 +143,9 @@
 			if( removed ) {
 				updateStats();
 				m._destroy();
+				if( m._uid == "_0" ) {
+					log( "\tREMOVE:" + m._uid, "active:" + m.active, "progress:" + m.progress.toFixed(2), "[" + m.start + "/" + m.end + "]" );
+				}
 			}
 		},
 
@@ -169,21 +172,25 @@
 			m = modifiers[i];
 
 			switch( true ) {
-				case m.active && m.start <= t && m.end > t :
+				case m.active && t >= m.start && t < m.end :
 					m._update(t);
+					if( m._uid == "_0" ) {
+						log( m._uid, "active:" + m.active, "progress:" + m.progress.toFixed(2), "[" + (t - m.start) + "/" + m.duration + "]" );
+					}
 					break;
-				case m.active && m.end <= t :
+				case m.active && t >= m.end :
 					m._end();
 					stats.completed ++;
 					_ref.removeModifier(m);
+					if( m._uid == "_0" ) {
+						log( m._uid, "REMOVE:", time, m.end );
+					}
+					continue;
 					break;
-				case !m.active && m.start <= t :
-					m._start();
+				case !m.active && t >= m.start :
+					m._start(t);
 					break;
 			}			
-			if( m._uid == "_1" ) {
-				log( m.active, "inc:" + m.incubation + ", start:" + m.start + ", time:" + t + ", end:" + m.end );
-			}
 		}
 	}
 

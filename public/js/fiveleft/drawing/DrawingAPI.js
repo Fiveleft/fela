@@ -275,8 +275,9 @@
 			compController.restoreModifier();
 		}else{
 			m = new fiveleft.MDFYR();
-			m.start = timer.elapsed + round(randomBetween(0, 1000));
-			m.end = m.start + round(randomBetween(500, 4000));
+			m.duration = round(randomBetween(1000,4000));
+			// m.start = timer.elapsed + round(randomBetween(0, 1000));
+			// m.end = m.start + round(randomBetween(500, 4000));
 			compController.addModifier( m );
 		}
 		return;

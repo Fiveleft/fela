@@ -51,11 +51,14 @@
 		_init : function() {
 			this._uid = "_" + uid++;
 			this.created = Date.now();
+			log( "CompositionModifier[ " + this._uid + "] created");
 		},
-		_restore : function(t) {
-			this.start = this.incubation + t||0;
-			this.end = this.start + this.duration;
-			this.progress = 0;
+		_restore : function( t ) {
+			// this.active = true;
+			// this.start = Date.now();
+			// this.end = this.duration + this.start;
+			// this.progress = 0;
+			this._start( t );
 			this.onRestore();
 		},
 		_pause : function() {
@@ -64,20 +67,18 @@
 		_resume : function(){ 
 			this.onResume();
 		},
-		_start : function() {
+		_start : function( t ) {
 			this.active = true;
-			this.duration =  this.end - this.start;
+			this.start = t;
+			this.end = this.duration + this.start;
 			this.progress = 0;
 			this.used ++;
-			if( this.used == 1 ) {
-				this.incubation = Date.now() - this.created;
-			}
 			this.onStart();
 			this.onUpdate();
 		},
 		_end : function() {
-			this.progress = 1;
 			this.active = false;
+			this.progress = 1;
 			this.onUpdate();
 			this.onEnd();
 		},
