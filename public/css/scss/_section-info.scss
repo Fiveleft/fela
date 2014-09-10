@@ -3,6 +3,11 @@
 
 	max-width:none;
 
+	a {		
+		@include transition( background-color 0.5s $easeInOutCubic );
+		@include transition( color 0.5s $easeInOutCubic );
+	}
+
 	.section-inner {
 		height:auto;
 		overflow:visible;
@@ -44,7 +49,7 @@
 		position:relative;
 		z-index:9;
 		float:right;
-		width:50%; margin-right:8.333333%;
+		width:58.333333%; margin-right:8.333333%;
 		@include clearfix;
 	}
 	.section-container, .info-nav {
@@ -75,7 +80,7 @@
 	}
 	.info-nav {
 		position:absolute; margin-bottom:0; left:0;
-		width:41.66666%; height:0; padding:0 0 25%;
+		width:33.333333%; height:0; padding:0 0 25%;
 		margin:16.666666% 0 0; 
 		z-index:10;
 		ul {
@@ -98,8 +103,6 @@
 		text-align:right;
 		background:rgba(#FFF,0.8);
 
-		@include transition( none 0.15s $easeInOutCubic );
-		@include transition-property( background-color, color );
 		&:hover {
 			color:$color-white;
 			background-color:$color-magenta;
@@ -137,55 +140,57 @@
 	}
 
 
+	// @include breakpoint( tablet-max ) {
+	// 	.portrait { padding-top:0; }
+	// }
+
+	// @include breakpoint( tablet-max ) {
+	// 	.portrait { padding-top:0; }
+	// 	.primary-content, .info-nav {
+	// 		margin:41.66666% 0 0;
+	// 	}
+	// 	.primary-content {
+	// 		width:87.5%;
+	// 	}
+	// 	.info-nav {
+	// 		display:none;
+	// 		width: 25%;
+	// 		ul { 
+	// 			position:relative;
+	// 			padding:12px 0 0; 
+	// 			right: auto;
+	// 			bottom: auto;
+	// 		}
+
+	// 	}
+	// 	.info-link {
+	// 		display:block; 
+	// 		font-size:1.125em;
+	// 		padding:0 0.5em 0 0;
+	// 	}
+	// 	.section-container {
+	// 		margin-top:-70px;
+	// 		overflow:hidden;
+	// 		font-size:1em;
+	// 	}
+	// 	section {
+	// 		display:none;
+	// 		h1 { margin-bottom:0.5em; }
+	// 		&.active {
+	// 			display:block;
+	// 		}
+	// 	}
+	// 	.partnership-list {
+	// 		display:table;
+	// 	}
+	// 	.partnership-list .partner-link {
+	// 		display:table-cell;
+	// 		vertical-align:middle;
+	// 		padding-right:0;
+	// 	}
+	// }
+
 	@include breakpoint( tablet-max ) {
-		.portrait { padding-top:0; }
-	}
-
-	@include breakpoint( tablet ) {
-		.primary-content, .info-nav {
-			margin:41.66666% 0 0;
-		}
-		.primary-content {
-			width:75%;
-		}
-		.info-nav {
-			width: 25%;
-			ul { 
-				position:relative;
-				padding:12px 0 0; 
-				right: auto;
-				bottom: auto;
-			}
-
-		}
-		.info-link {
-			display:block; 
-			font-size:1.125em;
-			padding:0 0.5em 0 0;
-		}
-		.section-container {
-			margin-top:-70px;
-			overflow:hidden;
-			font-size:1em;
-		}
-		section {
-			display:none;
-			h1 { margin-bottom:0.5em; }
-			&.active {
-				display:block;
-			}
-		}
-		.partnership-list {
-			display:table;
-		}
-		.partnership-list .partner-link {
-			display:table-cell;
-			vertical-align:middle;
-			padding-right:0;
-		}
-	}
-
-	@include breakpoint( mobile ) {
 
 		&[data-scroll] {
 			.portrait {
@@ -226,8 +231,7 @@
 html:not(.iOS) #info-section[data-scroll] {
 
 	&[data-scroll = fill-viewport],
-	&[data-scroll = inside-viewport], 
-	&[data-scroll = bottom-inside-viewport] {
+	&[data-scroll = inside-viewport] {
 		.portrait {
 			position:fixed;
 			padding:120px 0 0;			
@@ -236,7 +240,8 @@ html:not(.iOS) #info-section[data-scroll] {
 			padding:0 30px;
 		}
 	}
-	&[data-scroll = bottom-inside-viewport] {
+	&[data-scroll *= 'top'],
+	&[data-scroll *= 'bottom'] {
 		.portrait {
 			position:absolute;
 		}

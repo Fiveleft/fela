@@ -9,11 +9,16 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			classes : {
 				scrollResponse : "scroll-response"
 			}
-		}
-		,activeScrollStates = [
-			"fill-viewport", "inside-viewport", "top-viewport-half"
-		]
-		,activeScrollTest = RegExp("^" + activeScrollStates.join("|^"));
+		},
+		activeScrollStates = [
+			"fill-viewport", 
+			"inside-viewport", 
+			"top-viewport-half", 
+			"bottom-inside-viewport",
+			"bottom-viewport-half"
+		],
+		activeScrollTest = RegExp("^" + activeScrollStates.join("|^")),
+		scrollState;
 
 
 
@@ -44,6 +49,7 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 			_evt = fiveleft.Event;
 
 			// Elements
+			this.$primaryContent = $(".primary-content");
 			this.$portrait = $(".portrait", this.element);
 			this.$portraitInner = $(".portrait-inner", this.$portrait);
 			this.$nav = $(".info-nav", this.element);
@@ -93,21 +99,19 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 
 		, positionPortrait : function()
 		{
-			if( this.element.attr("data-scroll") !== "bottom-inside-viewport" ) {
-				if( this.portraitTop !== "" ) {
-					this.portraitTop = "";
-					this.$portrait.css({"top" : this.portraitTop});
-				}
-				return;
+			if( /bottom/.test(scrollState) ) {
+				this.portraitTop = (this.bottom-this.top) - this.window.height();
+			}else{
+				this.portraitTop = 0;
 			}
-			this.portraitTop = (this.bottom-this.top) - this.window.height();
 			this.$portrait.css({ "top" : this.portraitTop });
 		}
 
 		, scroll : function( _scrollState )
 		{
-			var scrollState = _scrollState||this.element.attr("data-scroll")
-				,scrollActive = activeScrollTest.test( scrollState );
+			var scrollActive = activeScrollTest.test( scrollState );
+
+			scrollState = _scrollState||this.element.attr("data-scroll")
 
 			// log("SectionInfo::scroll");
 			if( this.appData.scrollLayout ) this.positionPortrait();
@@ -150,10 +154,11 @@ if( typeof fiveleft == "undefined" ) fiveleft = {};
 
 			// Update target offset
 			this.targetOffset = parseFloat(this.$sectionContainer.css("padding-top"));
-			this.inner.css({"min-height" : this.window.height() });
+			this.inner.css({
+				"min-height" : this.window.height()
+			});
 
-
-			// Update Sub section vertical spacing
+			//Update Sub section vertical spacing
 			this.$sections.each( function(i,s) {
 				$(s).css({"min-height" : sHeight, "padding-top" : sPadding });
 			});

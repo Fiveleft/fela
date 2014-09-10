@@ -153,7 +153,10 @@ body {
 
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: $font-headline;
+	// font-family: $font-headline;
+	font-family: $font-body;
+	text-transform:uppercase;
+	color:$color-dk-grey;
 }
 h1 {
 	font-size:3.75em; line-height:0.875em; // 60/48px;
@@ -180,8 +183,9 @@ h2 {
 }
 p {
 	font-size:1em; line-height:1.4375em; // 16/23px;
+	color:$color-grey;
 	@include breakpoint( mobile ) {
-		font-size:0.875em; line-height:1.3571428em; // 14/19px;
+		//font-size:0.875em; line-height:1.3571428em; // 14/19px;
 	}
 }
 button, input[type='submit'] {

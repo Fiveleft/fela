@@ -339,7 +339,8 @@
 				if( currScrollState !== scrollState ) {
 					section.element
 						.attr( "data-scroll", scrollState )
-						.toggleClass( "render" );
+						.toggleClass( "render" )
+						.parent().hide().show(0);
 					section.scroll( scrollState );
 				}
 

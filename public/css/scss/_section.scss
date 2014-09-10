@@ -4,8 +4,6 @@
 	position:relative;
 	max-width:$width-large-desktop; 
 	margin:0 auto;
-	// padding-bottom:25%;
-	// 
 	
 	.section-inner {
 		
@@ -15,49 +13,19 @@
 		@include clearfix;
 
 		@include breakpoint (small-desktop) {
-			padding:90px 30px 30px;
+			padding-top:90px;
 		}
 		@include breakpoint (tablet) {
-			padding:70px 20px 20px;
+			padding-top:70px;
 		}
 		@include breakpoint (mobile) {
 			padding:60px 20px 20px;
 		}
 	}
 
-
-	// &[data-scroll = above-viewport],
-	// &[data-scroll = below-viewport] {
-	// 	//.section-inner { visibility:hidden; }
-	// }
-	// &[data-scroll = top-inside-viewport] {
-	// 	background-color:rgba( green, 0.25);
-	// }
-	// &[data-scroll = top-viewport-half] {
-	// 	background-color:rgba( green, 0.5);
-	// }
-	// &[data-scroll = bottom-viewport-half] {
-	// 	background-color:rgba( red, 0.5);
-	// }
-	// &[data-scroll = bottom-inside-viewport] {
-	// 	background-color:rgba( red, 0.25);
-	// }
-	// &[data-scroll = fill-viewport],
-	// &[data-scroll = inside-viewport] {
-	// 	background-color:rgba( blue, 0.75);
-	// }
-	// &.active {
-	// 	background-color:rgba( green, 0.15 );
-	// }
-	// &.viewport {
-
-	// }
-
 	@include breakpoint( tablet-max ) {
 		overflow:hidden;
 	}
-
-
 }
 
 

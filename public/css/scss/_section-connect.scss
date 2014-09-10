@@ -2,11 +2,30 @@
 
 #connect-section {
 
-	$border : 1px solid rgba($color-grey, 0.33);
-
+	$border : 1px solid rgba($color-white,0.15);
 	width:100%; max-width:none;
 	z-index:1;
 
+	h1 {
+		letter-spacing:0.0625em;
+	} 
+	h2 {
+		padding:1em 0 0.75em;
+		margin:0;
+		color:$color-white;
+	}
+	p {
+		color:$color-lt-grey;
+		letter-spacing:0.05em;
+	}
+	a, a:visited, a:active {
+		color:$color-white;
+		// text-decoration:none;
+		&:hover {
+			color:$color-magenta;
+			text-decoration:none;
+		}
+	}
 
 	.section-inner {
 		display:none;
@@ -14,17 +33,10 @@
 	.section-fix {
 		position:absolute; bottom:0; left:0;
 		width:100%; 
-		background:#1a1a1a url(../img/blackorchid.png) repeat;
-		color:$color-lt-grey;
-	}
-	a, a:visited, a:active {
+		background:$color-dk-grey; //url(../img/blackorchid.png) repeat;
 		color:$color-white;
-		@include font-bold;
-		text-decoration:none;
-		&:hover {
-			color:$color-magenta;
-		}
 	}
+	
 	.section-fix-inner{
 		@include clearfix;
 		width:100%; max-width:$width-large-desktop;
@@ -34,7 +46,8 @@
 		width:100%;	padding:1em; 
 	}
 	.section-title {
-		font-size:3em; line-height:1em;
+		font-size:1.5em; line-height:1.125em;
+		padding:2em 0;
 	}
 	.logo {
 		display:inline-block;
@@ -69,10 +82,7 @@
 		display:table-cell;
 		padding:1.5em 1.5em 2em;
 		border-left:$border;
-		.title {
-			@include font-emphasis;
-			margin-bottom:0.5em;
-		}
+
 		.hours {
 			font-size:0.875em;
 			font-style:italic;
@@ -128,7 +138,7 @@
 
 	@include breakpoint (small-desktop-max) {
 		.section-fix-inner{	
-			padding:20px; 
+			//padding:20px; 
 		}
 		.info-row {
 			@include clearfix;
