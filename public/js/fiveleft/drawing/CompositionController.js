@@ -101,25 +101,29 @@
 			var restored = false,
 				m = null;
 
-			switch( true ) {
-				case stats.stored == 0 :
-					// return;
-					break;
-				case !mTarget :
-					var random = round(randomBetween(0,stored.length-1));
-					m = stored.splice(random, 1)[0];
-					restored = true;
-					break;
-				default : 
-					for( i=stored.length-1; i!==-1 && !restored; i-- ) {
-						m = stored[i];
-						restored = m.uid === mTarget.uid ? true : restored;
-						if( restored ) {
-							stored.splice(i,1);
-						}
+			switch( true ) 
+			{
+			case stats.stored === 0 :
+				// return;
+				break;
+
+			case !mTarget :
+				var random = round(randomBetween(0,stored.length-1));
+				m = stored.splice(random, 1)[0];
+				restored = true;
+				break;
+
+			default : 
+				for( i=stored.length-1; i!==-1 && !restored; i-- ) {
+					m = stored[i];
+					restored = m.uid === mTarget.uid ? true : restored;
+					if( restored ) {
+						stored.splice(i,1);
 					}
-					break;
+				}
+				break;
 			}
+			
 			if( m !== null ) {
 				modifiers.push(m);
 				m._restore(time);
@@ -130,11 +134,12 @@
 		removeModifier : function( mTarget ) 
 		{	
 			var removed = false,
-					m;
+				i = modifiers.length-1,
+				m;
 
-			for( i=modifiers.length-1; i!==-1 && !removed; i-- ) {
+			for( i; i!==-1 && !removed; i-- ) {
 				m = modifiers[i];
-				removed = m.uid === mTarget.uid ? true : removed;
+				removed = m._uid === mTarget._uid ? true : removed;
 				if( removed ) {
 					stored.push( m );
 					modifiers.splice(i,1);
@@ -143,9 +148,6 @@
 			if( removed ) {
 				updateStats();
 				m._destroy();
-				if( m._uid == "_0" ) {
-					log( "\tREMOVE:" + m._uid, "active:" + m.active, "progress:" + m.progress.toFixed(2), "[" + m.start + "/" + m.end + "]" );
-				}
 			}
 		},
 
@@ -170,25 +172,21 @@
 
 		for( i; i!==-1; i-- ) {
 			m = modifiers[i];
-
-			switch( true ) {
-				case m.active && t >= m.start && t < m.end :
-					m._update(t);
-					if( m._uid == "_0" ) {
-						log( m._uid, "active:" + m.active, "progress:" + m.progress.toFixed(2), "[" + (t - m.start) + "/" + m.duration + "]" );
-					}
+			switch( true ) { 
+				case !m.active :
+					m._start(t);
+					if( m._uid == "_0" ) m.report(); 
 					break;
 				case m.active && t >= m.end :
-					m._end();
+					m._end(t);
 					stats.completed ++;
 					_ref.removeModifier(m);
-					if( m._uid == "_0" ) {
-						log( m._uid, "REMOVE:", time, m.end );
-					}
-					continue;
+					if( m._uid == "_0" ) m.report();
+					continue; 
 					break;
-				case !m.active && t >= m.start :
-					m._start(t);
+				case m.active && t >= m.start && t < m.end :
+					m._update(t);
+					if( m._uid == "_0" ) m.report(); 
 					break;
 			}			
 		}

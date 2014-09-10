@@ -90,6 +90,9 @@
 		_destroy : function() {
 			this.destroy();
 		},
+		report : function() {
+			log( this._uid, "active:" + this.active, "progress:" + this.progress.toFixed(2), "duration:" + this.duration);
+		}
 	};
 
 	/* 
