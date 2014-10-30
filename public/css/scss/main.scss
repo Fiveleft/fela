@@ -5,6 +5,7 @@ body {
 h1, h2, h3, h4 {
   font-family: "brandon-grotesque",sans-serif;
   text-transform: uppercase;
+  line-height: 1;
 }
 h1 {
   font-size: 48px;
@@ -17,6 +18,7 @@ h3 {
 }
 ul, li {
   list-style-type:none;
+  padding:0;
 }
 a {
   color: #FF0097;

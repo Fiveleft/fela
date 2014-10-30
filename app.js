@@ -36,12 +36,13 @@ app.engine( "hbs", exphbs({
 app.set( "view engine", "hbs" );
 
 // Settings
-app.use(favicon(__dirname + '/app/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'app/public')));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
 // Set Routes
 app.use('/', routes);

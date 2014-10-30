@@ -2,9 +2,13 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    bowerInstall: {
-      target: {
-        src: 'views/index.hbs' // point to your HTML file.
+    bower: {
+      install: {
+        options: {
+          // Install dependencies into source/vendor
+          targetDir: 'public/js/vendor',
+          layout: 'byType'
+        }
       }
     },
 
@@ -28,7 +32,7 @@ module.exports = function(grunt) {
     compass: {                  // Task
       dist: {                   // Target
         options: {              // Target options
-          sassDir: 'app/public/css/scss',
+          sassDir: 'public/css/scss',
           cssDir: 'app/dist/css',
           outputStyle: 'compact',
           lineComments: 'true'
@@ -36,8 +40,8 @@ module.exports = function(grunt) {
       },
       dev: {
         options: {
-          sassDir: 'app/public/css/scss',
-          cssDir: 'app/public/css'
+          sassDir: 'public/css/scss',
+          cssDir: 'public/css'
         }
       }
     },
@@ -55,7 +59,7 @@ module.exports = function(grunt) {
     // watch css and js files and process the above tasks
     watch: {
       css: {
-        files: ['src/scss/**/*.scss'],
+        files: ['public/css/scss/**/*.scss'],
         tasks: ['compass:dev']
       }
       // js: {
@@ -87,7 +91,8 @@ module.exports = function(grunt) {
   });
 
   // Load tasks
-  grunt.loadNpmTasks('grunt-wiredep');
+  grunt.loadNpmTasks('grunt-bower-task');
+  grunt.loadNpmTasks('grunt-bower-requirejs');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
