@@ -1,12 +1,25 @@
 
 {{#contentFor 'pageStyles'}}
 	<link rel="stylesheet" href="/css/main.css">
-	{{#if config.localScripts }}
-	    <script src="/js/vendor/modernizr.min.js"></script>
-	{{else}}
-	    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-	{{/if}}
+	<script src="/js/vendor/modernizr.min.js"></script>
 {{/contentFor}}
+
+
+<main role="main">
+	<header id="header">
+		{{>main/header}}
+	</header>
+	<article class="section-container">
+		{{>main/section-home}}
+		{{>main/section-work}}
+		{{>main/section-info}}
+		{{>main/section-connect}}
+	</article>
+	<footer id="footer">
+		{{>main/footer}}
+	</footer>
+</main>
+<canvas id="canvas"></canvas>
 
 
 {{#contentFor 'pageScripts'}}
@@ -14,33 +27,44 @@
 {{/contentFor}}
 
 {{#contentFor 'inlineScripts'}}
+
+	<script src="/js/vendor/underscore.js"></script>
+	<script src="/js/vendor/jquery.js"></script>
+	<script src="/js/vendor/backbone.js"></script>
+	<script src="/js/vendor/handlebars.min.js"></script>
+	<script src="/js/client.js"></script>
+	<script src="/js/init.js"></script>
+
+	<!-- bower:js -->
+	<!-- endbower -->
 	
 	{{#if config.localScripts }}
-	    <!-- Local Vendor Files: -->
-		<script src="/js/vendor/jquery-1.11.0.min.js"></script>
+	  <!-- Local Vendor Files:
 		<script src="/js/vendor/native.history.js"></script>
+		<script src="/js/vendor/jquery-1.11.0.min.js"></script>
 		<script src="/js/vendor/preloadjs-0.4.0.min.js"></script>
 		<script src="/js/vendor/TweenMax.min.js"></script>
 		<script src="/js/vendor/ScrollToPlugin.min.js"></script>
 		<script src="/js/vendor/handlebars-v1.3.0.js"></script>
-
+		-->
 	{{else}}
-	    <!-- CDNs: -->
+	  <!-- CDNs: 
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/history.js/1.8/bundled/html4+html5/native.history.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.10.0/ScrollToPlugin.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.10.0/TweenMax.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/PreloadJS/0.4.0/preloadjs.min.js"></script>
 		<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.2/handlebars.min.js"></script>
+		-->
 	{{/if}}
 
 	
 	{{#if config.minifiedScripts}}
 		<!-- TODO: add minification to grunt and put respective files here -->
 	{{else}}
-		<script src="/js/vendor/dat.gui.min.js"></script>
+		<!-- <script src="/js/vendor/dat.gui.min.js"></script> -->
 
-		<!-- Up-front requirements -->
+		<!-- Up-front requirements 
 		<script src="/js/fiveleft/core/Utils.js"></script>
 		<script src="/js/fiveleft/core/SineValue.js"></script>
 		<script src="/js/fiveleft/core/Color.js"></script>
@@ -70,25 +94,10 @@
 		<script src="/js/fiveleft/view/SectionConnect.js"></script>
 		<script src="/js/fiveleft/Events.js"></script>
 		<script src="/js/fiveleft/Application.js"></script>
+		-->
 	{{/if}}
 
 	
 {{/contentFor}}
-
-
-<header id="header">
-	{{>main/navigation}}
-</header>
-<div id="main">
-	<div class="main-inner section-container">
-		{{>main/section-welcome}}
-		{{>main/section-work}}
-		{{>main/section-info}}
-		{{>main/section-drawing}}
-		{{>main/section-connect}}
-	</div>
-</div>
-
-
 
 

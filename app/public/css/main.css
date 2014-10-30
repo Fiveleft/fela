@@ -1,0 +1,37 @@
+/* line 1, ../../../src/scss/main.scss */
+body {
+  padding: 40px;
+  font: 16px "adobe-garamond", Georgia, serif;
+}
+
+/* line 5, ../../../src/scss/main.scss */
+h1, h2, h3, h4 {
+  font-family: "brandon-grotesque",sans-serif;
+  text-transform: uppercase;
+}
+
+/* line 9, ../../../src/scss/main.scss */
+h1 {
+  font-size: 48px;
+}
+
+/* line 12, ../../../src/scss/main.scss */
+h2 {
+  font-size: 30px;
+}
+
+/* line 15, ../../../src/scss/main.scss */
+h3 {
+  font-size: 21px;
+}
+
+/* line 18, ../../../src/scss/main.scss */
+ul, li {
+  list-style-type: none;
+}
+
+/* line 21, ../../../src/scss/main.scss */
+a {
+  color: #FF0097;
+  text-decoration: none;
+}

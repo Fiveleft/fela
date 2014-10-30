@@ -1,14 +1,25 @@
-function init(app) {
+var express = require('express');
+var router = express.Router();
 
-  var data = {
-    content : app.get("pageContent")
-    ,config : app.get("config")
-  };
+router.get( "/_escape_fragment_/*", function( request, response ) {
 
-  // Index Sections: "work", "work/{project-name}", "info", "info/{info-section}", "connect"
-  app.get(/\/|\/work(\/\w+)*|\/info(\/\w+)*|\/connect/, function (req, res){
-    res.render('index', data);
+  var script = path.join( __dirname, "get_html.js" );
+  var url = "http://localhost:8080" + request.url.replace( "_escape_fragment_", "#!" );
+  var childArgs = [
+      script, url
+  ];
+
+  childProcess.execFile( binPath, childArgs, function( err, stdout, stderr ) {
+    response.writeHead( 200, {
+      "Content-Type": "text/html; charset=UTF-8"
+    });
+    response.end( "<!doctype html><html>" + stdout + "</html>" );
   });
-}
+});
 
-module.exports.init = init;
+/* GET home page. */
+router.get('/', function(req, res) {
+  res.render('index', { title: 'Fiveleft is a Creative Digital Studio' });
+});
+
+module.exports = router;

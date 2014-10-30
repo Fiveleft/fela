@@ -1,62 +1,38 @@
 {
   "name": "fiveleft-fela",
-  "version": "4.0.0",
-  "engines": {
-    "node": "0.10.x",
-    "npm": "1.3.x"
-  },
-  "description": "The Fiveleft Website: code name \"fela\"",
-  "main": "fiveleft.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app/bin/www"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Fiveleft/fela.git"
-  },
-  "keywords": [
-    "Fiveleft",
-    "Interactive",
-    "Developer",
-    "Development",
-    "Creative",
-    "Digital",
-    "Studio",
-    "Graphic",
-    "Design",
-    "Seattle"
-  ],
-  "author": "charleskrueger",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Fiveleft/fela/issues"
-  },
-  "homepage": "https://github.com/Fiveleft/fela",
   "dependencies": {
-    "logfmt": "^1.1.2",
-    "mysql": ">=2.1.x",
-    "express": "^4.0.0",
-    "express3-handlebars": "~0.5.0",
-    "handlebars": "latest",
-    "socket.io": "latest",
-    "async": "latest"
+    "express": "~4.9.0",
+    "body-parser": "~1.8.1",
+    "cookie-parser": "~1.3.3",
+    "morgan": "~1.3.0",
+    "serve-favicon": "~2.1.3",
+    "debug": "~2.0.0",
+    "request": "^2.45.0",
+    "route-cache": "^0.1.1",
+    "apicache": "0.0.12",
+    "express-simple-cdn": "^1.0.1",
+    "everyauth": "^0.4.9",
+    "connect": "^3.3.1",
+    "express3-handlebars": "^0.5.2"
   },
   "devDependencies": {
-    "logfmt": "^1.1.2",
-    "mysql": ">=2.1.x",
-    "express": "^4.0.0",
-    "express3-handlebars": "~0.5.0",
-    "handlebars": "latest",
-    "grunt": "~0.4.2",
-    "grunt-cli": "~0.1.13",
-    "grunt-contrib-cssmin": "~0.9.0",
-    "grunt-contrib-watch": "~0.6.1",
-    "grunt-contrib-compass": "~0.7.2",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-jshint": "~0.7.2",
-    "grunt-contrib-nodeunit": "~0.2.0",
-    "grunt-contrib-internal": "~0.4.2",
-    "grunt-express-server": "^0.4.13",
-    "grunt-contrib-handlebars": "^0.7.0"
+    "bower": "^1.3.12",
+    "grunt": "^0.4.5",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-cssmin": "^0.10.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-nodemon": "^0.3.0",
+    "grunt-concurrent": "^1.0.0",
+    "open": "0.0.5",
+    "grunt-contrib-compass": "^1.0.1",
+    "grunt-bower-task": "^0.4.0",
+    "grunt-bower": "^0.16.0",
+    "grunt-wiredep": "^1.9.0"
   }
 }
