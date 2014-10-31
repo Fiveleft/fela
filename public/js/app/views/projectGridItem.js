@@ -1,7 +1,7 @@
 // partner.js
 define(
-  ['templates', 'backbone'],
-  function( templates, Backbone ){
+  ['jquery', 'templates', 'backbone', 'handlebars'],
+  function( $, templates, Backbone, Handlebars ){
 
     var ProjectGridItemView = Backbone.View.extend({
       className: "project-content",

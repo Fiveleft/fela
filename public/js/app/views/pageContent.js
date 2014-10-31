@@ -7,7 +7,7 @@ define(
       tagName: "section",
       render: function() {
         var html = templates["page-content"](this.model.attributes);
-        this.$el.html( html );
+        this.$el.html( html ).attr("data-name", this.model.attributes.slug);
         return this;
       }
     });

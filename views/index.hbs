@@ -5,6 +5,7 @@
 
 {{#contentFor 'pageScripts'}}
 	{{>fonts }}	
+	<script src="/js/vendor/modernizr/modernizr.js"></script>
 {{/contentFor}}
 
 <main role="main">
@@ -12,10 +13,10 @@
 		{{>main/header}}
 	</header>
 	<article class="section-container">
-		{{>main/section-home}}
-		{{>main/section-work}}
-		{{>main/section-info}}
-		{{>main/section-connect}}
+		{{>main/section_home}}
+		{{>main/section_work}}
+		{{>main/section_info}}
+		{{>main/section_connect}}
 	</article>
 	<footer id="footer">
 		{{>main/footer}}
@@ -24,10 +25,8 @@
 <canvas id="canvas"></canvas>
 
 
-{{#contentFor 'inlineScripts'}}
-
+{{#contentFor 'inlineScripts'}} 
 	<script data-main="js/main" src="/js/vendor/requirejs/require.js"></script>
-
 {{/contentFor}}
 
 

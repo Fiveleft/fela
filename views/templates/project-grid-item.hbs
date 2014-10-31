@@ -1,20 +1,9 @@
-{{#if id}}
 <a href="/project/{{slug}}" class="project-grid-item" data-id="{{id}}" data-index="{{index}}" >
   <span class="project-grid-item-inner">
     <span class="media">
       <span class="media-inner">
         <span class="media-content">
-          {{#if thumb}}
-          {{#if thumb.info.sizes.thumbnail.file}}
-          <img class="thumbnail" src="{{thumb.dir}}{{thumb.info.sizes.thumbnail.file}}" />
-          {{else}}
-          {{#if thumb.info.file }}
-          <img class="thumbnail" src="{{thumb.dir}}{{thumb.info.file}}" />
-          {{/if}}
-          {{/if}}
-          {{else}}
-          <img class="thumbnail" src="{{thumb.dir}}fpo-thumbnail.png" />
-          {{/if}}
+          <img class="thumbnail" src="{{@CDN}}{{gridImage}}" />
         </span>   
         <span class="media-hover"></span>             
         <span class="media-active icon"></span>             
@@ -28,4 +17,3 @@
     </span>
   </span>
 </a>
-{{/if}}

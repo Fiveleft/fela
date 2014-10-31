@@ -1,6 +1,6 @@
 define(
-  ['backbone', 'app/views/pageContent'],
-  function( Backbone, PageContentView ){
+  ['jquery', 'backbone', 'app/views/pageContent'],
+  function( $, Backbone, PageContentView ){
 
     var pcView;
 
@@ -8,6 +8,7 @@ define(
       render: function() {
         this.collection.each( function( data ){
           pcView = new PageContentView({ model:data });
+
           this.$el.append( pcView.render().el );
         }, this);
         return this;
