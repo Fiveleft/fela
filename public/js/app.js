@@ -5,7 +5,10 @@ define([
     'backbone',
     'app/collections/pageContentCollection',
     'app/collections/partnerCollection',
-    'app/collections/projectCollection'
+    'app/collections/projectCollection',
+    'app/views/pageContentCollection',
+    'app/views/partnerCollection',
+    'app/views/workCollection'
   ], 
   function(
     $, 
@@ -13,22 +16,39 @@ define([
     Backbone, 
     PageContentCollection, 
     PartnerCollection, 
-    ProjectCollection
+    ProjectCollection,
+    PageContentCollectionView,
+    PartnerCollectionView,
+    WorkCollectionView
   ){
 
     var projects = new ProjectCollection(), 
       partners = new PartnerCollection(), 
       pageContent = new PageContentCollection();
 
+    // Build Projects Grid View
     function buildProjects() {
-      // console.log( "App.buildProjects");
+
+      var wcView = new WorkCollectionView({ collection:projects });
+      $(".project-list").append( wcView.render().el );
     }
+
     function buildPartners() {
-      // console.log( " - agencies  - ", partners.where({ type : "fiveleft_agency" }) );
-      // console.log( " - clients - ", partners.where({ type : "fiveleft_client" }) );
+
+      var agencyData = partners.where({ type: "fiveleft_agency" }),
+        clientData = partners.where({ type: "fiveleft_client" }),
+        agencyView = new PartnerCollectionView({ collection:agencyData }),
+        clientView = new PartnerCollectionView({ collection:clientData });
+
+      $(".agency-list").append( agencyView.render().el );
+      $(".client-list").append( clientView.render().el );
     }
+
+
     function buildPageContent() {
-      // console.log( "App.buildPageContent");
+
+      var pcView = new PageContentCollectionView({ collection:pageContent });
+      $(".section-container").append( pcView.render().el );
     }
 
     var initialize = function(){

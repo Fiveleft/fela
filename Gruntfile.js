@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
+    // Perhaps no longer needed
     bower: {
       install: {
         options: {
@@ -11,6 +12,23 @@ module.exports = function(grunt) {
         }
       }
     },
+
+    handlebars: {
+    // @see http://danburzo.ro/grunt/chapters/handlebars/
+      all : { 
+        options : {
+          amd: true,
+          // namespace : "fiveleft.tpl",
+          processName: function(filePath) {
+            return filePath.replace(/^views\/templates\//, '').replace(/\.hbs$/, '');
+          }
+        },
+        files : {
+          "public/js/app/views/templates.js" : ["views/templates/**/*.hbs"]
+        }
+      }
+    },
+
 
     // JS TASKS ================================================================
     // check all js files for errors
@@ -61,6 +79,10 @@ module.exports = function(grunt) {
       css: {
         files: ['public/css/scss/**/*.scss'],
         tasks: ['compass:dev']
+      },
+      templates: {
+        files: ['views/templates/**/*.hbs'],
+        tasks: ['handlebars']
       }
       // js: {
       //   files: ['src/js/**/*.js'],
@@ -83,7 +105,12 @@ module.exports = function(grunt) {
         script: './bin/www',
         options: {
           nodeArgs: ['--debug'],
-          ext: 'js,hbs'
+          ext: 'hbs,js',
+          ignore: [
+            'node_modules/**',
+            'views/templates/**',
+            'public/js/**'
+          ],
         }
       }
     }
@@ -95,12 +122,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bower-requirejs');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-nodemon');
 
-  // register the nodemon task when we run grunt
-  grunt.registerTask('default', ['concurrent']);
-  // grunt.registerTask('compass', ['compass:dev']);
+  // Default task
+  grunt.registerTask('default', ['handlebars','concurrent']);
 
 };

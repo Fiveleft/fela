@@ -8,8 +8,15 @@ require.config({
     underscore: 'vendor/underscore/underscore',
     backbone: 'vendor/backbone/backbone',
     handlebars: 'vendor/handlebars/handlebars',
-    tweenmax: 'vendor/gsap/TweenMax'
+    tweenmax: 'vendor/gsap/TweenMax',
+    templates: 'app/views/templates'
   },
+  // shim: {
+  //   templates: {
+  //     deps: ['handlebars'],
+  //     exports: 'fiveleft.tpl'
+  //   }
+  // }
 });
 
 // Load our app module and pass it to our definition function

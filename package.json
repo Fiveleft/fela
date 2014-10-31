@@ -36,6 +36,7 @@
     "grunt-bower": "^0.16.0",
     "grunt-wiredep": "^1.9.0",
     "requirejs": "^2.1.15",
-    "grunt-bower-requirejs": "^1.1.0"
+    "grunt-bower-requirejs": "^1.1.0",
+    "grunt-contrib-handlebars": "^0.9.0"
   }
 }
