@@ -5,6 +5,7 @@
 
 {{#contentFor 'pageScripts'}}
 	{{>fonts }}	
+	<script>var __cdn='{{cdn}}';</script>
 	<script src="/js/vendor/modernizr/modernizr.js"></script>
 {{/contentFor}}
 
@@ -12,21 +13,21 @@
 	<header id="header">
 		{{>main/header}}
 	</header>
-	<article class="section-container">
+	<article id="site-content" class="container">
 		{{>main/section_home}}
 		{{>main/section_work}}
 		{{>main/section_info}}
 		{{>main/section_connect}}
+		<footer id="footer">
+			{{>main/footer}}
+		</footer>
 	</article>
-	<footer id="footer">
-		{{>main/footer}}
-	</footer>
+	<canvas id="canvas"></canvas>	
 </main>
-<canvas id="canvas"></canvas>
 
 
 {{#contentFor 'inlineScripts'}} 
-	<script data-main="js/main" src="/js/vendor/requirejs/require.js"></script>
+	<script data-main="/js/main" src="/js/vendor/requirejs/require.js"></script>
 {{/contentFor}}
 
 

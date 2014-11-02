@@ -1,3 +1,4 @@
+var app = require('../app');
 var express = require('express');
 var router = express.Router();
 
@@ -19,8 +20,11 @@ var router = express.Router();
 
 
 /* GET home page. */
-router.get('/', function(req, res) {
-  res.render('index', { title: 'Fiveleft is a Creative Digital Studio' });
+router.get(['/','/work','/project/:slug','/connect','/info'], function(req, res) {
+  res.render('index', { 
+    title: 'Fiveleft is a Creative Digital Studio',
+    cdn: app.locals.CDN
+  });
 });
 
 module.exports = router;

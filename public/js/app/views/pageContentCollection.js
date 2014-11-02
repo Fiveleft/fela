@@ -8,8 +8,10 @@ define(
       render: function() {
         this.collection.each( function( data ){
           pcView = new PageContentView({ model:data });
-
-          this.$el.append( pcView.render().el );
+          pcView.render();
+          // this.$el.append( pcView.render().el );
+          // console.log( data.attributes.slug );
+          // $("[data-content='" + data.attributes.slug + "']").replace( this.el );
         }, this);
         return this;
       }

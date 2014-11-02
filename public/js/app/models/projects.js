@@ -4,7 +4,7 @@ define(
   function(_, Backbone) {
     var ProjectModel = Backbone.Model.extend({
       initialize: function() {
-        this.attributes.gridImage = this.attributes.thumbnail.substring(this.attributes.thumbnail.lastIndexOf("/") + 1);
+        this.attributes.gridImage = __cdn + this.attributes.thumbnail.substring(this.attributes.thumbnail.lastIndexOf("/") + 1);
         // console.log( this.attributes );
         // this.attributes.info = this.get("post_meta").info;
         // this.attributes.subtitle = this.attributes.info.subtitle || false;

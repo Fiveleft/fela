@@ -13,6 +13,48 @@ module.exports = function(grunt) {
       }
     },
 
+    assetsReplace: {
+      options: {
+        manifest: 'temp/testManifest.json'
+      },
+      // testCase: {
+      //   options: {
+      //     key: '__ASSET(%)',
+      //     cdnurl: 'http://cms.fiveleft.com/media/'
+      //   },
+      //   files: {
+      //     'temp/replace-testCase/': ['test/case/less/*.less']
+      //   }
+      // },
+      
+      // the handlebars target
+      handlebars: {
+        options: {
+          cdnurl: 'http://cms.fiveleft.com/media',
+          // a regex for lax matching {{asset "%"}} allowing for spaces in between
+          // and single quotes.
+          keyRegex: '\\\{\\\{[\\\s]*asset[\\\s]+[\\\'\\\"]{1}%[\\\'\\\"]{1}[\\\s]*\\\}\\\}',
+          // prepend the slash on every asset query
+          prepend: '/'
+        },
+        // all the files from the assets/handlebars folder
+        src: 'views/templates/**/*.hbs',
+        // output to temp/handlebars folder
+        dest: 'temp/handlebars/'
+      },
+
+      // testCasePrepend: {
+      //   options: {
+      //     key: '__ASSET(%)',
+      //     manifest: 'temp/testManifestAbs.json',
+      //     prepend: '/'
+      //   },
+      //   files: {
+      //     'temp/replace-prepend/': ['test/case/less/*.less']
+      //   }
+      // }
+    },
+
     handlebars: {
     // @see http://danburzo.ro/grunt/chapters/handlebars/
       all : { 
@@ -119,6 +161,7 @@ module.exports = function(grunt) {
 
   // Load tasks
   grunt.loadNpmTasks('grunt-bower-task');
+  grunt.loadNpmTasks('grunt-bower-task');
   grunt.loadNpmTasks('grunt-bower-requirejs');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
@@ -126,6 +169,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-nodemon');
+
+  var gruntAssets = require('assetflow');
+  gruntAssets(grunt);
+
 
   // Default task
   grunt.registerTask('default', ['handlebars','concurrent']);

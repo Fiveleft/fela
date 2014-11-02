@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+  padding: 0;
+  @include bodyFont();
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+}
+* {
+  @include box-sizing( border-box );
+}
+h1, h2, h3, h4 {
+  @include headlineFont();
+}
+h1 {
+  font-size: 48px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 21px;
+}
+ul, li {
+  list-style-type:none;
+  padding: 0;
+  margin: 0;
+}
+p {
+  max-width: 40em;
+  margin: 0;
+  padding: 0 0 1em;
+}
+a {
+  color: $brand-magenta;
+  text-decoration: none;
+}
+button {
+  display: inline-block;
+  border: none;
+  padding: 0 10px;
+  text-align: center;
+  background: $brand-black;
+  color: $color-white;
+}

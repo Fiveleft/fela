@@ -1,39 +1,306 @@
-/* line 1, scss/main.scss */
-body {
-  padding: 40px;
-  font: 16px "adobe-garamond", Georgia, serif;
+/* line 5, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
 }
 
-/* line 5, scss/main.scss */
+/* line 22, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 1, scss/_base.scss */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "adobe-garamond-pro", Georgia, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* line 8, scss/_base.scss */
+* {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 11, scss/_base.scss */
 h1, h2, h3, h4 {
   font-family: "brandon-grotesque",sans-serif;
+  font-style: normal;
+  font-weight: 900;
   text-transform: uppercase;
   line-height: 1;
 }
 
-/* line 10, scss/main.scss */
+/* line 14, scss/_base.scss */
 h1 {
   font-size: 48px;
 }
 
-/* line 13, scss/main.scss */
+/* line 17, scss/_base.scss */
 h2 {
   font-size: 30px;
 }
 
-/* line 16, scss/main.scss */
+/* line 20, scss/_base.scss */
 h3 {
   font-size: 21px;
 }
 
-/* line 19, scss/main.scss */
+/* line 23, scss/_base.scss */
 ul, li {
   list-style-type: none;
   padding: 0;
+  margin: 0;
 }
 
-/* line 23, scss/main.scss */
+/* line 28, scss/_base.scss */
+p {
+  max-width: 40em;
+  margin: 0;
+  padding: 0 0 1em;
+}
+
+/* line 33, scss/_base.scss */
 a {
-  color: #FF0097;
+  color: #ed2490;
   text-decoration: none;
+}
+
+/* line 37, scss/_base.scss */
+button {
+  display: inline-block;
+  border: none;
+  padding: 0 10px;
+  text-align: center;
+  background: #161813;
+  color: white;
+}
+
+/* line 3, scss/_layout.scss */
+main {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -moz-transition: margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: margin-left 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+/* line 10, scss/_layout.scss */
+#site-content {
+  position: relative;
+  height: 100%;
+  z-index: 3;
+}
+
+/* line 15, scss/_layout.scss */
+#site-content > section {
+  width: 100%;
+  min-height: 100%;
+  padding: 60px 0 0;
+}
+
+/* line 20, scss/_layout.scss */
+#canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: #F2F2F2;
+}
+
+/* line 30, scss/_layout.scss */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+/* line 38, scss/_layout.scss */
+main.snap-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+/* line 44, scss/_layout.scss */
+main.snap-nav #mobile-nav {
+  position: absolute;
+}
+/* line 50, scss/_layout.scss */
+main.snap-nav #canvas {
+  position: absolute;
+}
+/* line 54, scss/_layout.scss */
+main.snap-nav.open {
+  margin-left: -200px;
+}
+
+@media (min-width: 768px) {
+  /* line 61, scss/_layout.scss */
+  .container {
+    max-width: 768px;
+  }
+}
+@media (min-width: 1024px) {
+  /* line 67, scss/_layout.scss */
+  .container {
+    max-width: 1024px;
+  }
+}
+@media (min-width: 1170px) {
+  /* line 73, scss/_layout.scss */
+  .container {
+    max-width: 1170px;
+  }
+}
+/* line 3, scss/_nav.scss */
+#top-nav, #mobile-nav {
+  position: fixed;
+  top: 0;
+  background: rgba(22, 24, 19, 0.96);
+  color: white;
+  font-family: "brandon-grotesque",sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* line 11, scss/_nav.scss */
+#mobile-nav {
+  display: block;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  padding: 0 50px 0 0;
+  z-index: 1000;
+}
+/* line 19, scss/_nav.scss */
+#mobile-nav a.logo, #mobile-nav button {
+  height: 40px;
+}
+/* line 23, scss/_nav.scss */
+#mobile-nav a.logo {
+  display: inline-block;
+  padding: 5px 20px;
+}
+/* line 27, scss/_nav.scss */
+#mobile-nav button {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50px;
+  padding: 10px 20px 10px 10px;
+}
+/* line 34, scss/_nav.scss */
+#mobile-nav button .icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid yellow;
+  text-indent: -119988px;
+  overflow: hidden;
+  text-align: left;
+  text-transform: capitalize;
+}
+/* line 41, scss/_nav.scss */
+#mobile-nav button .open {
+  display: block;
+}
+/* line 44, scss/_nav.scss */
+#mobile-nav button .close {
+  display: none;
+}
+
+/* line 51, scss/_nav.scss */
+#top-nav {
+  right: 0;
+  width: 200px;
+  height: 100%;
+  min-height: 100%;
+  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  /* line 65, scss/_nav.scss */
+  #mobile-nav {
+    display: none;
+  }
+
+  /* line 68, scss/_nav.scss */
+  #top-nav {
+    display: block;
+    width: 100%;
+    height: 40px;
+    min-height: 0;
+    z-index: 1000;
+  }
+}
+/* line 14, scss/main.scss */
+.project-grid-item h1, .project-grid-item h2 {
+  font-size: 21px;
+  color: #4b4b4b;
 }

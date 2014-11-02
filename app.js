@@ -5,17 +5,17 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
   hbs = require("hbs"),
+  assets = require("assetflow"),
   CDN = require("express-simple-cdn");
 
+// Application Instantiation
+var app = module.exports = express();
 
 // Routes
 var routes = require('./routes/index'),
   users = require('./routes/users'),
   api = require('./routes/api');
 
-
-// Application Instantiation
-var app = express();
 
 // View engine setup
 // Set Handlebars as Express Rendering engine
@@ -25,7 +25,10 @@ app.set( "view engine", "hbs" );
 // Set Handlebars as Express Rendering engine
 hbs.localsAsTemplateData(app);
 hbs.registerPartials(__dirname + '/views/partials');
-hbs.registerPartials(__dirname + '/views/templates');
+// hbs.registerPartials(__dirname + '/views/templates');
+hbs.registerHelper('asset', function(file) {
+  return app.locals.CDN + file;
+});
 hbs.registerHelper('block', function(name){
   var blocks = this._blocks;
   var content = blocks && blocks[name];
@@ -37,41 +40,19 @@ hbs.registerHelper('contentFor', function(name, options){
   block.push(options.fn(this)); 
 });
 
-// app.engine( "hbs", exphbs({
-//   partialsDir: __dirname + "/views/partials",
-//   extname: ".hbs",
-//   defaultLayout: "main",
-//   helpers: {
-//     cdn: function (obj, fn) {
-//       return fn({asset:app.locals.CDN + obj});
-//     },
-//     block: function(name){
-//       var blocks = this._blocks;
-//       var content = blocks && blocks[name];
-//       return content ? content.join('\n') : null;
-//     },
-//     contentFor: function(name, options){
-//       var blocks = this._blocks || (this._blocks = {});
-//       var block = blocks[name] || (blocks[name] = []); //Changed this to [] instead of {}
-//       block.push(options.fn(this));
-//     }
-//   }
-// }));
-
 // Settings
-app.locals.CDN = function(path) { return CDN(path, '//cms.fiveleft.com/media/') };
+app.locals.CDN = '//cms.fiveleft.com/media/';
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use('/bower_components', express.static(path.join(__dirname, 'bower_components')));
 
 // Set Routes
-app.use('/', routes);
 app.use('/users', users);
 app.use('/api', api);
+app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -86,7 +67,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.locals.CDN = function(path) { return CDN(path, '//cms.fiveleft.com/media/') };
+  app.locals.CDN = '//cms.fiveleft.com/media/';
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
