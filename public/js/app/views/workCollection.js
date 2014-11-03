@@ -1,15 +1,18 @@
 // partner.js
 define(
-  ['backbone', 'app/views/projectGridItem'],
-  function( Backbone, ProjectGridItemView ){
+  ['jquery', 'backbone', 'app/views/projectGridItem'],
+  function( $, Backbone, ProjectGridItemView ){
 
-    var projectGridView;
+    var projectGridView,
+      $projectList = $("#work-section .project-list");
 
     var WorkCollectionView = Backbone.View.extend({
       render: function() {
         this.collection.each( function( projectItem ){
           projectGridView = new ProjectGridItemView({ model:projectItem });
-          this.$el.append( projectGridView.render().el );
+          $projectList.append( projectGridView.render().el );
+
+          // this.$el.append( projectGridView.render().el );
         }, this);
         return this;
       }

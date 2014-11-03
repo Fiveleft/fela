@@ -4,7 +4,8 @@ define(
   function(_, Backbone, PartnerModel) {
     var PartnerCollection = Backbone.Collection.extend({
       model: PartnerModel,
-      url: "/api/partners"
+      url: "/api/partners",
+      comparator: "priority"
     });
     // Return the model for the module
     return PartnerCollection;

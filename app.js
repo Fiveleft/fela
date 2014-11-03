@@ -42,8 +42,8 @@ hbs.registerHelper('contentFor', function(name, options){
 
 // Settings
 app.locals.CDN = '//cms.fiveleft.com/media/';
-app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev'));
+app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
+// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());

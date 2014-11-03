@@ -1,10 +1,21 @@
 
 // Colors
-$brand-black    : rgb( 22, 24, 19 );      // #162732
-$brand-magenta  : rgb( 237, 36, 144 );    // #FF0097
-$brand-grey     : rgb( 149, 148, 132 );   // #959484
+$color-black      : rgb( 0, 0, 0 );
+$color-grey-black : rgb( 28, 28, 26 );
+$color-grey-dark  : rgb( 82, 82, 78 );
+$color-grey-med   : rgb( 133, 133, 128 );
+$color-grey-light : rgb( 184, 184, 177 );
+$color-grey-white : rgb( 247, 247, 240 );
+$color-white      : rgb( 255, 255, 255 );
+$color-border     : rgba( $color-grey-med, 0.25 );
+$color-text       : $color-grey-dark;
 
-$color-white    : rgb( 255, 255, 255 );   // #FFFFFF
+$brand-black    : $color-grey-black;    //rgb( 22, 24, 19 );      // #162732
+$brand-magenta  : rgb( 237, 36, 144 );  // #FF0097
+$brand-grey     : $color-grey-med;      // #959484
+
+
+// 2c1e29-e80048-fff3cf-ad9e8c-9d9382
 
 // Fonts
 
@@ -13,8 +24,8 @@ $width-xs-max: 767px;
 $width-sm-min: 768px;
 $width-sm-max: 1023px;
 $width-md-min: 1024px;
-$width-md-max: 1169px;
-$width-lg-min: 1170px;
+$width-md-max: 1279px;
+$width-lg-min: 1280px;
 
 
 // Easing

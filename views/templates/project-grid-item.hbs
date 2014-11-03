@@ -1,19 +1,21 @@
-<a href="/project/{{slug}}" class="project-grid-item" data-id="{{id}}" data-index="{{index}}" >
+<a href="/project/{{slug}}" class="project-item" data-id="{{id}}" data-index="{{index}}" >
   <span class="project-grid-item-inner">
     <span class="media">
       <span class="media-inner">
-        <span class="media-content">
-          <img class="thumbnail" src="{{gridImage}}" />
+        <span class="media-content" style="background-image: url('{{gridImage}}');">
+          <!-- <img class="thumbnail" src="{{gridImage}}" /> -->
         </span>   
         <span class="media-hover"></span>             
         <span class="media-active icon"></span>             
       </span>
     </span>
     <span class="info">
-      <h1 class="title">{{title}}</h1>
-      {{#if subtitle}}
-      <h2 class="subtitle">{{subtitle}}</h2>
-      {{/if}}
+      <span class="info-inner">
+        <h1 class="title">{{{title}}}</h1>
+        {{#if info.subtitle}}
+        <h2 class="subtitle">{{{info.subtitle}}}</h2>
+        {{/if}}
+      </span>
     </span>
   </span>
 </a>

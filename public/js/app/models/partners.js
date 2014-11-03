@@ -4,10 +4,8 @@ define(
   function(_, Backbone) {
     var PartnerModel = Backbone.Model.extend({
       initialize: function() {
-        // console.log( this.attributes );
-        // this.attributes.info = this.get("post_meta").info;
-        // this.attributes.subtitle = this.attributes.info.subtitle || false;
-        // this.attributes.gridImage = this.get("featured_image").attachment_meta.file || false;
+        this.attributes.priority = parseInt(this.attributes.info.priority,10);
+        // console.log( this.attributes.info );
       }
     });
     // Return the model for the module

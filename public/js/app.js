@@ -30,7 +30,8 @@ define([
     function buildProjects() {
 
       var wcView = new WorkCollectionView({ collection:projects });
-      $(".project-list").append( wcView.render().el );
+      wcView.render();
+      // $(".project-list").append( wcView.render().el );
     }
 
     function buildPartners() {
@@ -48,14 +49,15 @@ define([
     function buildPageContent() {
 
       var pcView = new PageContentCollectionView({ collection:pageContent });
-      $(".section-container").append( pcView.render().el );
+      pcView.render();
+      // $(".section-container").append( pcView.render().el );
     }
 
     var initialize = function(){
       projects.fetch({ success:buildProjects });
       partners.fetch({ success:buildPartners });
       pageContent.fetch({ success:buildPageContent });
-      console.log( "App.initialize" );
+      // console.log( "App.initialize" );
     };
 
     return {

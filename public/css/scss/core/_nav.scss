@@ -1,0 +1,222 @@
+// _nav.scss
+#top-nav, #mobile-nav {
+  position: fixed;
+  top: 0;
+  background: rgba( $color-grey-black, 0.95 );
+  color: $color-grey-light;
+  @include navFont();
+  a { color: $color-grey-light; }
+}
+
+#mobile-nav {
+  display: block;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  padding: 0 50px 0 0;
+  z-index: 1000;
+
+  a.logo, button {
+    height: 40px;
+  }
+  a.logo {
+    display: inline-block;
+    padding: 5px 20px;
+  }
+  button {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    padding: 10px 20px 10px 10px;
+    .icon {
+      display: block;
+      width: 100%;
+      height: 100%;
+      border: 1px solid yellow;
+      @include hide-text();
+    }
+    .open {
+      display: block;
+    }
+    .close {
+      display: none;
+    }
+  }
+}
+
+
+#top-nav {
+
+  .connect-title {
+    display: block;
+    @include italicFont();
+    text-transform: none;
+  }
+
+  .connect-nav {
+    .nav-link.social {
+      position: relative;
+      display: block;
+      width: 40px; 
+      height: 40px;
+      padding: 5px;
+      .icon {
+        position: relative;
+        display: block;
+        width: 100%; height: 100%;
+        @include hide-text();
+        @include border-radius(9999px);
+        background: rgba( $brand-grey, 0.2 );
+      }
+    }
+  }
+}
+
+
+
+@media ( max-width:$width-xs-max ) {
+
+  #top-nav {
+    right: 0;
+    width: 200px; 
+    height: 100%;
+    min-height: 100%;
+    z-index: 1;
+
+    .container {
+      padding: 0;
+      overflow: hidden;
+    }
+    .nav-link {
+      display: block;
+      padding: 10px;
+      padding-left: 20px;
+      line-height: 1.25;
+    }
+    .connect-title {
+      margin-top: 10px;
+      padding: 10px;
+      padding-left: 20px;
+      border-top: 1px solid $color-border;
+    }
+    .connect-nav {
+      @include clearfix;
+      // padding-left: 20px;
+      .info-item, .social-item {
+        display: block;
+        float: left;
+      }
+      .info-item {
+        width: 100%;
+      }
+      .social-item {
+        width: auto;
+        margin-right: 10px;
+      }
+      .nav-link.location {
+        padding-top: 0;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid $color-border;
+      }
+      .social-item::first-of-type {
+        margin-left: 20px;
+      }
+    }
+  }
+}
+
+
+@media ( min-width:$width-sm-min ) {
+
+  #mobile-nav {
+    display: none;
+  }
+  #top-nav {
+    display: block;
+    width: 100%;
+    height: 40px;
+    min-height: 0;
+    z-index: 1000;
+    font-size: 14px;
+    overflow: visible;
+
+    .container {
+      @include clearfix;
+    }
+    .top-nav-items, .connect-nav {
+      @include clearfix;
+    }
+    .top-nav-items {
+      position: relative;
+      display: block;
+      padding-left: 120px;
+      float: left;
+
+      .nav-item.home {
+        position: absolute;
+        top: 0; left: 0;
+        width: 120px;
+        height: 40px;
+      }
+      .nav-link.logo {
+        display: block;
+        width: 70px; height: 70px;
+        background: $brand-black;
+      }
+
+      .nav-item:not( .home ) {
+        display: block;
+        float: left;
+        padding: 0;
+        .nav-link {
+          display: block;
+          padding: 10px 15px;
+          line-height: 20px;
+        }
+      }
+    }
+
+    .connect-nav {
+      display: block;
+      float: right;
+    }
+    .connect-nav li {
+      float: left;
+    }
+    .connect-nav .info-item {
+      text-align: left;
+      margin-right: 10px;
+      span, a {
+        display: inline-block;
+        vertical-align: top;
+        padding: 10px 0;
+        margin: 0 5px;
+        line-height: 20px;
+      }
+      .connect-title {
+        font-size: 16px;
+        line-height: 1.4;
+      }
+      .pipe {
+        margin: 0;
+      }
+      .connect-title, .location, .pipe {
+        display: none;
+      }
+    }
+  }
+}
+
+@media ( min-width:$width-md-min ) {
+  #top-nav {
+    .connect-nav .info-item {
+      .connect-title, .location, .pipe {
+        display: inline-block;
+      }
+    }
+  }
+}
+

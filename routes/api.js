@@ -2,6 +2,7 @@
 var express = require('express'),
     request = require('request'),
     apicache = require('apicache'),
+    phpUnserialize = require('php-unserialize'),
     urlBase = "http://cms.fiveleft.com/wordpress/api/";
 
 var router  = express.Router(),
@@ -9,6 +10,15 @@ var router  = express.Router(),
     ttl     = "10 days";
 
 
+
+function unserialize( json ) {
+  for( var i=json.length-1; i!==-1; i-- ) {
+    var p = json[i];
+    p.info = phpUnserialize.unserialize( p.custom_fields._meta[0] );
+    delete p.custom_fields;
+  }
+  return json;
+}
 
 
 
@@ -21,7 +31,7 @@ router.get('/projects', cache(), function(req, res){
   req.apicacheGroup = "project";
   request( params, function( err, response, body ){
     if( err ) return;
-    res.send( body.posts );
+    res.send( unserialize( body.posts ) );
   });
 });
 
@@ -36,7 +46,7 @@ router.get('/project/:id', cache(), function(req, res){
   req.apicacheGroup = "project";
   request( params, function( err, response, body ){
     if( err ) return;
-    res.send( body );
+    res.send( unserialize( body.posts ) );
   });
 });
 
@@ -51,7 +61,7 @@ router.get('/partners', cache(), function(req, res){
   req.apicacheGroup = "partners";
   request( params, function( err, response, body ){
     if( err ) return;
-    res.send( body.posts );
+    res.send( unserialize( body.posts ) );
   });
 });
 
@@ -66,7 +76,7 @@ router.get('/clients', cache(), function(req, res){
   req.apicacheGroup = "client";
   request( params, function( err, response, body ){
     if( err ) return;
-    res.send( body.posts );
+    res.send( unserialize( body.posts ) );
   });
 });
 

@@ -9,6 +9,11 @@
 @mixin italicFont() {
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
   font-style: italic;
+  font-weight: 400;
+}
+@mixin italicBoldFont() {
+  font-family: "adobe-garamond-pro", Georgia, sans-serif;
+  font-style: italic;
   font-weight: 600;
 }
 @mixin boldFont() {
@@ -36,3 +41,39 @@
   line-height: 1;
   text-transform: uppercase;
 }
+
+body {
+  font-size: 16px;
+  @include bodyFont();
+}
+h1, h2, h3, h4 {
+  @include headlineFont();
+  color: $color-grey-black;
+}
+h1 { font-size: 30px; }
+h2 { font-size: 24px; }
+h3 { font-size: 20px; }
+h4 { font-size: 16px; }
+p {
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+}
+
+
+@media ( min-width:$width-sm-min ) {
+  body { font-size: 16px; }
+  h1 { font-size: 48px; }
+  h2 { font-size: 30px; }
+  h3 { font-size: 21px; }
+  h4 { font-size: 18px; }
+}
+
+@media ( min-width:$width-md-min ) {
+  
+}
+
+@media ( min-width:$width-lg-min ) {
+  
+}
+
+

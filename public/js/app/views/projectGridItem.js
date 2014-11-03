@@ -4,7 +4,7 @@ define(
   function( $, templates, Backbone, Handlebars ){
 
     var ProjectGridItemView = Backbone.View.extend({
-      className: "project-content",
+      className: "project-grid-content",
       render: function() {
         var html = templates["project-grid-item"](this.model.attributes);
         this.$el.html( html );
