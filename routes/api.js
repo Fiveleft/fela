@@ -1,4 +1,4 @@
-// api.js
+  // api.js
 var express = require('express'),
     request = require('request'),
     apicache = require('apicache'),
@@ -6,7 +6,7 @@ var express = require('express'),
     urlBase = "http://cms.fiveleft.com/wordpress/api/";
 
 var router  = express.Router(),
-    cache   = apicache.options({debug:true, defaultDuration:(1000*60*60*24*10)}).middleware,
+    cache   = apicache.options({defaultDuration:(1000*60*60*24*10)}).middleware,
     ttl     = "10 days";
 
 

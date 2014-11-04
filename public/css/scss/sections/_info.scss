@@ -1,0 +1,49 @@
+// sections/_info.scss
+section#info-section {
+
+  .partnership-list {
+    max-width: 40em;
+    li { 
+      display: inline;
+      line-height: 24px;
+    }
+    li:after {
+      content: " / ";
+      color: $color-grey-light;
+    }
+    li:last-child:after {
+      content: "";
+    }
+  }
+}
+
+
+
+@media ( min-width:$width-sm-min ) {
+  
+  section#info-section {
+    .partnership-list {
+      max-width: none;
+      @include columns( 10em 3 );
+      @include column-gap( 1.5em );
+      li {
+        display: block;
+      }
+      li:after {
+        content: none;
+      }
+    }
+  }
+}
+
+@media ( min-width:$width-md-min ) {
+  
+  section#info-section {
+  }
+}
+
+@media ( min-width:$width-lg-min ) {
+  
+  section#info-section {
+  }
+}

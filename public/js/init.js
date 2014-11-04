@@ -9,17 +9,22 @@ require.config({
     backbone: 'vendor/backbone/backbone',
     handlebars: 'vendor/handlebars/handlebars',
     tweenmax: 'vendor/gsap/TweenMax',
-    templates: 'app/views/templates'
+    templates: 'app/views/templates',
+    events: 'app/events',
+    router: 'app/router',
+    siteindex : 'app/views/siteindex'
   },
-  // shim: {
-  //   templates: {
-  //     deps: ['handlebars'],
-  //     exports: 'fiveleft.tpl'
-  //   }
-  // }
+  shim: {
+    backbone: {
+      deps: ['jquery', 'underscore'],
+      exports: 'backbone'
+    }
+  }
 });
 
 // Load our app module and pass it to our definition function
 require(['app'], function(App) {
-  App.initialize();
+  $(function(){
+    App.start();
+  });
 });
