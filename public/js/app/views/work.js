@@ -12,8 +12,9 @@ define(
 
 
     function toggleActiveContainer() {
+      $(projectContainer[containerIndex]).removeClass("active");
       containerIndex = (containerIndex+1) % 2;
-      console.log( "toggleActiveContainer - index: " + containerIndex );
+      $(projectContainer[containerIndex]).addClass("active");
       return $(projectContainer[containerIndex]);
     }
 

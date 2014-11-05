@@ -5,7 +5,7 @@ define(
 
     var ProjectGridItemView = Backbone.View.extend({
       
-      className: "project-grid-content",
+      className: "project-grid-item",
       
       render: function() {
         var html = templates["project-grid-item"](this.model.attributes);

@@ -8,7 +8,7 @@ require.config({
     underscore: 'vendor/underscore/underscore',
     backbone: 'vendor/backbone/backbone',
     handlebars: 'vendor/handlebars/handlebars',
-    tweenmax: 'vendor/gsap/TweenMax',
+    tweenmax: 'vendor/gsap/src/uncompressed/TweenMax',
     templates: 'app/views/templates',
     events: 'app/events',
     router: 'app/router',

@@ -10,12 +10,20 @@ define(
       return tFile;
     }
 
+    function cleanContent( c ) {
+      var regex = /(<p>.*<\/p>)/g,
+        gallery = c.match( regex ),
+        cleanContent = gallery.join("");
+      return cleanContent;
+    }
+
     var ProjectModel = Backbone.Model.extend({
       initialize: function() {
         this.media = new MediaCollection( this.attributes.attachments );
         this.attributes.launchDate = new Date( this.attributes.info.launchdate.replace( /(\d{4})-(\d{2})-(\d{2})/, "$2/$3/$1") );
         this.attributes.priority = parseInt(this.attributes.info.priority,10);
         this.attributes.gridImage = __cdn + getThumbnail(this);
+        this.attributes.content_clean = cleanContent( this.attributes.content );
       },
       getView : function() {
         return this.get("view");

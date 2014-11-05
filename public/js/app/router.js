@@ -1,7 +1,7 @@
 // app/appRouter.js
 define( 
-  ['backbone','events','siteindex' ],
-  function( Backbone, Events, SiteIndex ) {
+  ['underscore','backbone','events','siteindex' ],
+  function( _, Backbone, Events, SiteIndex ) {
 
     var siteindex;
 
@@ -10,9 +10,10 @@ define(
       initialize: function() {
         // console.log( "AppRouter.initialize()" );
         var self = this;
-        Events.on("router:navigate", function(url){
-          self.navigate( url, {trigger:true} );
-        })
+        Events.on("router:navigate", function(url, options){
+          var opt = _.extend( {trigger:true}, options );
+          self.navigate( url, opt );
+        });
       },
 
       routes: {
@@ -31,17 +32,11 @@ define(
 
       index : function() {
         this._buildIndex();
-        console.log( " route:index" );
       },
 
       project : function( slug ) {
         this._buildIndex();
-        console.log( " route:project, slug: " + slug );
         Events.trigger( "project:open", slug );
-        // site.index.workView
-        // var projectData = siteindex.projectsCollection.findWhere({"slug" : slug});
-        // var projectView = new ProjectView({ collection:siteindex.projectsCollection });
-        // projectView.render();
       },
 
     });

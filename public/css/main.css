@@ -567,13 +567,17 @@ section#work-section .project-list:after {
   clear: both;
 }
 /* line 8, scss/sections/_work.scss */
-section#work-section .project-grid-content {
+section#work-section .project-grid-item {
   float: left;
   width: 50%;
   padding: 5px;
 }
+/* line 13, scss/sections/_work.scss */
+section#work-section .project-view {
+  padding: 0 5px;
+}
 
-/* line 15, scss/sections/_work.scss */
+/* line 18, scss/sections/_work.scss */
 .project-item {
   display: block;
   position: relative;
@@ -581,7 +585,7 @@ section#work-section .project-grid-content {
   height: 0;
   padding: 0 0 100%;
 }
-/* line 23, scss/sections/_work.scss */
+/* line 25, scss/sections/_work.scss */
 .project-item .project-grid-item-inner {
   display: block;
   position: absolute;
@@ -591,7 +595,7 @@ section#work-section .project-grid-content {
   height: 100%;
   overflow: hidden;
 }
-/* line 29, scss/sections/_work.scss */
+/* line 31, scss/sections/_work.scss */
 .project-item .info, .project-item .media {
   position: absolute;
   top: 0;
@@ -599,19 +603,19 @@ section#work-section .project-grid-content {
   width: 100%;
   height: 100%;
 }
-/* line 34, scss/sections/_work.scss */
+/* line 36, scss/sections/_work.scss */
 .project-item .media-inner, .project-item .info-inner {
   display: block;
   position: relative;
   width: 100%;
   height: 100%;
 }
-/* line 39, scss/sections/_work.scss */
+/* line 41, scss/sections/_work.scss */
 .project-item .media {
   display: block;
   z-index: 1;
 }
-/* line 43, scss/sections/_work.scss */
+/* line 45, scss/sections/_work.scss */
 .project-item .media-content {
   display: block;
   position: absolute;
@@ -622,41 +626,86 @@ section#work-section .project-grid-content {
   background: no-repeat 50% 50%;
   background-size: cover;
 }
-/* line 51, scss/sections/_work.scss */
+/* line 53, scss/sections/_work.scss */
 .project-item .info {
   display: none;
   z-index: 2;
   padding: 5%;
 }
-/* line 55, scss/sections/_work.scss */
+/* line 57, scss/sections/_work.scss */
 .project-item .info h1, .project-item .info h2 {
   font-size: 21px;
   color: white;
 }
 
 @media (min-width: 768px) {
-  /* line 67, scss/sections/_work.scss */
-  section#work-section .project-grid-content {
+  /* line 69, scss/sections/_work.scss */
+  section#work-section .project-grid-item {
     width: 33.33333%;
   }
 
-  /* line 72, scss/sections/_work.scss */
+  /* line 74, scss/sections/_work.scss */
   .project-item .info {
     display: block;
   }
 }
 @media (min-width: 1024px) {
-  /* line 80, scss/sections/_work.scss */
-  section#work-section .project-grid-content {
+  /* line 82, scss/sections/_work.scss */
+  section#work-section .project-grid-item {
     width: 25%;
   }
 }
 @media (min-width: 1280px) {
-  /* line 88, scss/sections/_work.scss */
-  section#work-section .project-grid-content {
+  /* line 90, scss/sections/_work.scss */
+  section#work-section .project-grid-item {
     width: 25%;
   }
 }
+/* line 5, scss/sections/_project.scss */
+.project .media {
+  display: block;
+  margin: 0 0 20px;
+}
+/* line 9, scss/sections/_project.scss */
+.project .media-inner {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding: 0 0 56.25%;
+}
+/* line 15, scss/sections/_project.scss */
+.project .media-container, .project .media-controls {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/* line 21, scss/sections/_project.scss */
+.project .media-controls {
+  z-index: 2;
+}
+/* line 23, scss/sections/_project.scss */
+.project .media-controls .inner {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100px;
+  height: 100px;
+  margin: -50px 0 0 -50px;
+  background: #b8b8b1;
+  -moz-border-radius: 9999px;
+  -webkit-border-radius: 9999px;
+  border-radius: 9999px;
+}
+/* line 33, scss/sections/_project.scss */
+.project .media-container {
+  border: 1px solid #000;
+  z-index: 1;
+}
+
 /* line 4, scss/sections/_info.scss */
 section#info-section .partnership-list {
   max-width: 40em;

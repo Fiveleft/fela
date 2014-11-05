@@ -178,14 +178,14 @@ this["JST"]["project-item"] = Handlebars.template({"1":function(depth0,helpers,p
   if (stack1 != null) { buffer += stack1; }
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.video : depth0), {"name":"if","hash":{},"fn":this.program(6, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  buffer += "        </div>\n      </div>\n      <a class=\"close\" href=\"#\"><i class=\"icon\">Close</i></a>\n    </div>\n    <div class=\"info\">\n      <h1 class=\"title\">";
+  buffer += "        </div>\n      </div>\n      <a class=\"close\" href=\"\"><i class=\"icon\">Close</i></a>\n    </div>\n    <div class=\"info\">\n      <h1 class=\"title\">";
   stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
   buffer += "</h1>\n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.subtitle : depth0), {"name":"if","hash":{},"fn":this.program(15, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "      <div class=\"details\">\n        <p class=\"description\">";
-  stack1 = ((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"content","hash":{},"data":data}) : helper));
+  stack1 = ((helper = (helper = helpers.content_clean || (depth0 != null ? depth0.content_clean : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"content_clean","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
   buffer += "</p>\n        <p class=\"additional\">\n          \n";
   stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.client : depth0), {"name":"if","hash":{},"fn":this.program(17, data),"inverse":this.noop,"data":data});
