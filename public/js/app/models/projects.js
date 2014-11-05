@@ -16,7 +16,13 @@ define(
         this.attributes.launchDate = new Date( this.attributes.info.launchdate.replace( /(\d{4})-(\d{2})-(\d{2})/, "$2/$3/$1") );
         this.attributes.priority = parseInt(this.attributes.info.priority,10);
         this.attributes.gridImage = __cdn + getThumbnail(this);
-      }
+      },
+      getView : function() {
+        return this.get("view");
+      },
+      setView : function( html ) {
+        this.set("view", html);
+      },
     });
     // Return the model for the module
     return ProjectModel;

@@ -37,6 +37,7 @@ define(
       project : function( slug ) {
         this._buildIndex();
         console.log( " route:project, slug: " + slug );
+        Events.trigger( "project:open", slug );
         // site.index.workView
         // var projectData = siteindex.projectsCollection.findWhere({"slug" : slug});
         // var projectView = new ProjectView({ collection:siteindex.projectsCollection });

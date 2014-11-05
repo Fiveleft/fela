@@ -1,26 +1,20 @@
 // project.js
 define(
-  ['jquery','underscore','backbone','events'],
-  function( $, _, Backbone, Events ){
+  ['jquery','underscore','backbone','events','templates'],
+  function( $, _, Backbone, Events, templates ){
 
 
 
     var ProjectView = Backbone.View.extend({
 
       initialize : function() {
-        console.log( "ProjectView.initialize()  collection:", this.collection  );
-
-        if( !this.collection.length ) {
-          this.listenToOnce( this.collection, "sync", this.projectsLoaded );
-        }
-      },
-
-      projectsLoaded : function( scope ) {
-        console.log("ProjectView.projectsLoaded", scope );
+        console.log("ProjctView.initialize()", this.model.attributes.content );
       },
 
       render : function() {
-        // console.log( "ProjectView.render() model : ", this.model  );
+        var html = templates["project-item"](this.model.attributes);
+        this.$el.html( html );
+        return this;
       }
 
     });
