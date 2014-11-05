@@ -6,6 +6,7 @@ define(
 
     var $mediaControls,
       $mediaList,
+      $
       window;
 
 
@@ -19,11 +20,13 @@ define(
       render : function() {
         var html = templates["project-item"](this.model.attributes);
         this.setElement( html );
+        this.$el.css({"min-height" : window.innerHeight});
         return this;
       },
 
       events : {
-        "click a.close" : "close"
+        "click a.close" : "close",
+        "click a.media-controls" : "togglePlay"
       },
 
       open : function() {
@@ -34,6 +37,12 @@ define(
         e.preventDefault();
         console.log("ProjectView[" + this.model.attributes.slug + "].close()" );
         Events.trigger( "router:navigate", "/work" );
+      },
+
+      togglePlay : function( e ) {
+        e.preventDefault();
+        console.log("ProjectView[" + this.model.attributes.slug + "].togglePlay()" );
+        Events.trigger( "project:playMedia" );
       }
 
     });

@@ -118,8 +118,8 @@ this["JST"]["project-item"] = Handlebars.template({"1":function(depth0,helpers,p
     + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.video : depth0)) != null ? stack1.webm : stack1), depth0))
     + "\" type=\"video/webm\" />";
 },"15":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, buffer = "      <h2 class=\"subtitle\">";
-  stack1 = ((helper = (helper = helpers.subtitle || (depth0 != null ? depth0.subtitle : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"subtitle","hash":{},"data":data}) : helper));
+  var stack1, lambda=this.lambda, buffer = "      <h2 class=\"subtitle\">";
+  stack1 = lambda(((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.subtitle : stack1), depth0);
   if (stack1 != null) { buffer += stack1; }
   return buffer + "</h2>\n";
 },"17":function(depth0,helpers,partials,data) {
@@ -182,7 +182,7 @@ this["JST"]["project-item"] = Handlebars.template({"1":function(depth0,helpers,p
   stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
   buffer += "</h1>\n";
-  stack1 = helpers['if'].call(depth0, (depth0 != null ? depth0.subtitle : depth0), {"name":"if","hash":{},"fn":this.program(15, data),"inverse":this.noop,"data":data});
+  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.subtitle : stack1), {"name":"if","hash":{},"fn":this.program(15, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   buffer += "      <div class=\"details\">\n        <p class=\"description\">";
   stack1 = ((helper = (helper = helpers.content_clean || (depth0 != null ? depth0.content_clean : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"content_clean","hash":{},"data":data}) : helper));
