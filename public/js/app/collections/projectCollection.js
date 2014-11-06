@@ -2,10 +2,11 @@
 define(
   ['underscore','backbone','app/models/projects'], 
   function(_, Backbone, ProjectModel) {
+    var _instance;
     var ProjectCollection = Backbone.Collection.extend({
       model: ProjectModel,
       url: "/api/projects"
     });
-    // Return the model for the module
-    return ProjectCollection;
+    if( !_instance ) _instance = new ProjectCollection();
+    return _instance;
   });

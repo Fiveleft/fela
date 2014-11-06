@@ -4,15 +4,13 @@ var express = require('express'),
   logger = require('morgan'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
-  hbs = require("hbs"),
-  assets = require("assetflow"),
-  CDN = require("express-simple-cdn");
+  hbs = require("hbs");
 
 // Application Instantiation
 var app = module.exports = express();
 
 // Routes
-var routes = require('./routes/index'),
+var indexRoutes = require('./routes/index'),
   users = require('./routes/users'),
   api = require('./routes/api');
 
@@ -20,7 +18,7 @@ var routes = require('./routes/index'),
 // View engine setup
 // Set Handlebars as Express Rendering engine
 app.set('views', path.join(__dirname, 'views'));
-app.set( "view engine", "hbs" );
+app.set("view engine", "hbs");
 
 // Set Handlebars as Express Rendering engine
 hbs.localsAsTemplateData(app);
@@ -43,7 +41,7 @@ hbs.registerHelper('contentFor', function(name, options){
 // Settings
 app.locals.CDN = '//cms.fiveleft.com/media/';
 app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
-// app.use(logger('dev'));
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -52,7 +50,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Set Routes
 app.use('/users', users);
 app.use('/api', api);
-app.use('/', routes);
+app.use( indexRoutes );
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

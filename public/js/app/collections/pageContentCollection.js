@@ -2,10 +2,11 @@
 define(
   ['underscore','backbone','app/models/pagecontent'], 
   function(_, Backbone, PageContentModel) {
+    var _instance;
     var PageContentCollection = Backbone.Collection.extend({
       model: PageContentModel,
       url: "/api/pagecontent"
     });
-    // Return the model for the module
-    return PageContentCollection;
+    if( !_instance ) _instance = new PageContentCollection();
+    return _instance;
   });

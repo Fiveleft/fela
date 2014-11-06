@@ -5,8 +5,8 @@
 
 {{#contentFor 'pageScripts'}}
 	{{>fonts }}	
-	<script>var __cdn='{{cdn}}';</script>
 	<script src="/js/vendor/modernizr/modernizr.js"></script>
+	<script id="site-vars" hidden> var __cdn='{{cdn}}'; </script>
 {{/contentFor}}
 
 <main role="main" class="">
@@ -24,10 +24,11 @@
 	</article>
 	<canvas id="canvas"></canvas>	
 </main>
-
-
 {{#contentFor 'inlineScripts'}} 
 	<script data-main="/js/init" src="/js/vendor/requirejs/require.js"></script>
 {{/contentFor}}
 
+<span hidden id="data-api-projects" data-json='{{projects}}'></span>
+<span hidden id="data-api-partners" data-json='{{partners}}'></span>
+<span hidden id="data-api-content" data-json='{{pageContent}}'></span>
 

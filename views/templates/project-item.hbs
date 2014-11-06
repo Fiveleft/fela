@@ -29,17 +29,21 @@
     </div>
     <div class="info">
       <h1 class="title">{{{title}}}</h1>
-      {{#if info.subtitle}}
-      <h2 class="subtitle">{{{info.subtitle}}}</h2>
+      {{#if subtitle}}
+      <h2 class="subtitle">{{{subtitle}}}</h2>
       {{/if}}
       <div class="details">
-        <p class="description">{{{content_clean}}}</p>
+        {{{content}}}
         <p class="additional">
           
           {{#if client}}
           <span class="participant-info client">
             <span class="info-label">Client:&nbsp;</span>
-            <a class="client-name info-name" href="/client/{{clientId}}">{{client}}</a>
+            {{#if client.website}}
+            <a class="info-name" href="{{client.website}}">{{client.name}}</a>
+            {{else}}
+            <span class="info-name">{{client.name}}</a>
+            {{/if}}
           </span>
           {{/if}}
           
@@ -47,46 +51,64 @@
           <span class="separator">/</span>
           <span class="participant-info agency">
             <span class="info-label">Agency:&nbsp;</span>
-            <a class="agency-name info-name" href="/agency/{{agencyId}}">{{agency}}</a>
+            {{#if agency.website}}
+            <a class="info-name" href="{{agency.website}}">{{agency.name}}</a>
+            {{else}}
+            <span class="info-name">{{agency.name}}</a>
+            {{/if}}
           </span>
           {{/if}}
           
-          {{#if discipline}}
+          {{#if disciplines}}
           <span class="separator">/</span>
-          <span class="disciplines">
-            <span class="taxonomy-label info-label">Disciplines: </span>
-            {{#each discipline}}
-            <span class="discipline taxonomy term-{{name}}" {{!-- href="/discipline/{{name}}" data-id="{{name}}" data-type="discipline" --}}>
-              <span class="label">{{{title}}}</span><span class="separator">,</span>
+          <span class="taxonomy disciplines">
+            <span class="info-label">Disciplines: </span>
+            {{#each disciplines}}
+            <span class="taxonomy-item" data-term-"{{name}}">
+              <span class="label">{{{name}}}</span><span class="separator">,</span>
             </span>
             {{/each}}
           </span>
           {{/if}}
           
-          {{#if technology}}
+          {{#if technologies}}
           <span class="separator">/</span>
-          <span class="technologies">
-            <span class="taxonomy-label info-label">Technology: </span>
-            {{#each technology}}
-            <span class="technology taxonomy term-{{name}}" {{!-- href="/technology/{{name}}" data-id="{{name}}" data-type="technology" --}}>
-              <span class="label">{{{title}}}</span><span class="separator">,</span>
+          <span class="taxonomy technologies">
+            <span class="info-label">Technology: </span>
+            {{#each technologies}}
+            <span class="taxonomy-item" data-term-"{{name}}">
+              <span class="label">{{{name}}}</span><span class="separator">,</span>
+            </span>
+            {{/each}}
+          </span>
+          {{/if}}
+          
+          {{#if tools}}
+          <span class="separator">/</span>
+          <span class="taxonomy tools">
+            <span class="info-label">Tools: </span>
+            {{#each tools}}
+            <span class="taxonomy-item" data-term-"{{name}}">
+              <span class="label">{{{name}}}</span><span class="separator">,</span>
             </span>
             {{/each}}
           </span>
           {{/if}}
 
-          {{#if info.website}}
+          {{#if website}}
           <span class="separator">/</span>
           <span class="participant-info site">
-            <a class="project-link info-name" href="{{info.website}}" target="_blank" title="{{title}}">View Site</a>
+            <a class="project-link info-name" href="{{website}}" target="_blank" title="{{title}}">View Site</a>
           </span>
           {{/if}}
         </p>
+        <!--
         <a class="next project-advance" href="#">
           <span class="label">Next Project</span>
           <span class="title-wrapper"><span class="project-title">{project title}</span></span>
           <i class="icon"></i>
         </a>
+        -->
       </div>
     </div>
   </div>

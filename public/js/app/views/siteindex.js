@@ -24,11 +24,6 @@ define([
     WorkView
   ){
 
-    var projects = new ProjectCollection(), 
-      partners = new PartnerCollection(), 
-      pageContent = new PageContentCollection();
-
-
     var SiteIndexView = Backbone.View.extend({
 
       $el : $("body"),
@@ -36,27 +31,25 @@ define([
       initialize : function() {
         // console.log( "SiteIndex.initialize" );
         // var self = this;
+        
+        var projectsData = JSON.parse($("#data-api-projects").attr("data-json")); 
+        var partnersData = JSON.parse($("#data-api-partners").attr("data-json")); 
+        var contentData = JSON.parse($("#data-api-content").attr("data-json")); 
+        
+        PartnerCollection.reset( partnersData );
+        ProjectCollection.reset( projectsData );
+        PageContentCollection.reset( contentData ); 
+
         new NavView({el:$('#header')});
-        new PartnerCollectionView({ el:$(".agency-list")[0], type:"fiveleft_agency", collection:partners });
-        new PartnerCollectionView({ el:$(".client-list")[0], type:"fiveleft_client", collection:partners });
-        new WorkView({ collection:projects });
-        new PageContentCollectionView({ collection:pageContent });
+        new PartnerCollectionView({ el:$(".agency-list")[0], type:"fiveleft_agency", collection:PartnerCollection });
+        new PartnerCollectionView({ el:$(".client-list")[0], type:"fiveleft_client", collection:PartnerCollection });
+        new WorkView({ collection:ProjectCollection });
+        new PageContentCollectionView({ collection:PageContentCollection });
 
-        projects.fetch();
-        partners.fetch();
-        pageContent.fetch();
+        $("#data-api-projects").remove();
+        $("#data-api-partners").remove();
+        $("#data-api-content").remove();
 
-        // Make Projects Collection available
-        // this.projectsCollection = projects;
-
-        // Hook Events
-        // $(window)
-        //   .on("resize", self.resize )
-        //   .on("scroll", self.scroll );
-           
-        // this.listenTo( projects, "sync", function( e ){ console.log("projects.sync", e ); });
-        // this.listenTo( partners, "sync", function( e ){ console.log("partners.sync", e ); });
-        // this.listenTo( pageContent, "sync", function( e ){ console.log("pageContent.sync", e ); });
         this.listenTo( Events, "mobilenav:toggle", this.toggleMobileNav );
       },
 

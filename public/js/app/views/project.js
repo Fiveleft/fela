@@ -4,11 +4,11 @@ define(
   function( $, _, Backbone, Events, templates, TweenMax ){
 
 
-    var $mediaControls,
-      $mediaList,
-      $
-      window;
-
+    // var $mediaControls;
+    // var $mediaList;
+    // var window;
+    TweenMax;
+    // console.log( window );
 
 
     var ProjectView = Backbone.View.extend({
@@ -20,6 +20,7 @@ define(
       render : function() {
         var html = templates["project-item"](this.model.attributes);
         this.setElement( html );
+        console.log( this );
         this.$el.css({"min-height" : window.innerHeight});
         return this;
       },
