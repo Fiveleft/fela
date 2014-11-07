@@ -262,13 +262,13 @@ main.snap-nav #top-nav {
 /* line 56, scss/core/_layout.scss */
 main.snap-nav #site-content {
   pointer-events: none;
+}
+/* line 59, scss/core/_layout.scss */
+main.snap-nav #canvas {
+  position: absolute;
   -moz-box-shadow: 0 0 20px 0 black;
   -webkit-box-shadow: 0 0 20px 0 black;
   box-shadow: 0 0 20px 0 black;
-}
-/* line 60, scss/core/_layout.scss */
-main.snap-nav #canvas {
-  position: absolute;
 }
 /* line 63, scss/core/_layout.scss */
 main.snap-nav.open {
@@ -281,21 +281,21 @@ main.snap-nav.open {
     visibility: visible;
   }
 
-  /* line 77, scss/core/_layout.scss */
+  /* line 76, scss/core/_layout.scss */
   .container {
     max-width: 768px;
     padding: 0 15px;
   }
 }
 @media (min-width: 1024px) {
-  /* line 84, scss/core/_layout.scss */
+  /* line 83, scss/core/_layout.scss */
   .container {
     max-width: 1024px;
     padding: 0 20px;
   }
 }
 @media (min-width: 1280px) {
-  /* line 91, scss/core/_layout.scss */
+  /* line 90, scss/core/_layout.scss */
   .container {
     max-width: 1280px;
   }
@@ -312,12 +312,26 @@ main.snap-nav.open {
   line-height: 1;
   text-transform: uppercase;
 }
-/* line 8, scss/core/_nav.scss */
+/* line 9, scss/core/_nav.scss */
 #top-nav a, #mobile-nav a {
   color: #b8b8b1;
 }
+/* line 10, scss/core/_nav.scss */
+#top-nav .brand-name, #mobile-nav .brand-name {
+  display: block;
+  width: 80px;
+  height: 30px;
+  margin: 5px;
+  background-position: 50% 50%;
+  background: url(/images/brand-name.svg) no-repeat;
+  background-size: contain;
+  text-indent: -119988px;
+  overflow: hidden;
+  text-align: left;
+  text-transform: capitalize;
+}
 
-/* line 11, scss/core/_nav.scss */
+/* line 22, scss/core/_nav.scss */
 #mobile-nav {
   display: block;
   left: 0;
@@ -326,31 +340,60 @@ main.snap-nav.open {
   padding: 0 50px 0 0;
   z-index: 1000;
 }
-/* line 19, scss/core/_nav.scss */
+/* line 30, scss/core/_nav.scss */
 #mobile-nav a.logo, #mobile-nav button {
   height: 40px;
 }
-/* line 22, scss/core/_nav.scss */
+/* line 33, scss/core/_nav.scss */
 #mobile-nav a.logo {
   display: inline-block;
-  padding: 5px 20px;
+  padding: 0 15px 0 5px;
+  *zoom: 1;
 }
-/* line 26, scss/core/_nav.scss */
+/* line 38, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/utilities/general/_clearfix.scss */
+#mobile-nav a.logo:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* line 38, scss/core/_nav.scss */
+#mobile-nav .brand-icon {
+  display: block;
+  float: left;
+  width: 40px;
+  height: 40px;
+  background: url(/images/brand-icon.png) no-repeat 50% 50%;
+}
+/* line 44, scss/core/_nav.scss */
+#mobile-nav .brand-name {
+  display: block;
+  float: left;
+  width: 80px;
+  height: 30px;
+  margin: 5px;
+  background-position: 50% 50%;
+  background-size: contain;
+}
+/* line 52, scss/core/_nav.scss */
 #mobile-nav button {
   display: block;
   position: absolute;
   top: 0;
   right: 0;
-  width: 45px;
+  width: 50px;
   height: 100%;
-  padding: 10px 15px 11px 10px;
+  padding: 10px 15px 11px 15px;
   background-color: transparent;
+  -moz-transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 35, scss/core/_nav.scss */
+/* line 62, scss/core/_nav.scss */
 #mobile-nav button:focus {
   outline: none;
 }
-/* line 38, scss/core/_nav.scss */
+/* line 65, scss/core/_nav.scss */
 #mobile-nav button .icon {
   position: relative;
   display: block;
@@ -361,7 +404,7 @@ main.snap-nav.open {
   text-align: left;
   text-transform: capitalize;
 }
-/* line 45, scss/core/_nav.scss */
+/* line 72, scss/core/_nav.scss */
 #mobile-nav button .bar {
   position: absolute;
   display: block;
@@ -380,24 +423,28 @@ main.snap-nav.open {
   -webkit-transition-delay: 0.3s;
   transition-delay: 0.3s;
 }
-/* line 56, scss/core/_nav.scss */
+/* line 83, scss/core/_nav.scss */
 #mobile-nav button .bar:first-child {
   top: 1px;
 }
-/* line 59, scss/core/_nav.scss */
+/* line 86, scss/core/_nav.scss */
 #mobile-nav button .bar:nth-child(2) {
   top: 9px;
 }
-/* line 64, scss/core/_nav.scss */
+/* line 89, scss/core/_nav.scss */
 #mobile-nav button .bar:last-child {
   top: 17px;
 }
 
-/* line 72, scss/core/_nav.scss */
-.snap-nav.open #mobile-nav button .bar {
+/* line 97, scss/core/_nav.scss */
+.snap-nav.open #mobile-nav button {
   background-color: #ee2a7b;
 }
-/* line 74, scss/core/_nav.scss */
+/* line 99, scss/core/_nav.scss */
+.snap-nav.open #mobile-nav button .bar {
+  background-color: white;
+}
+/* line 101, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button .bar:first-child {
   top: 50%;
   height: 4px;
@@ -407,12 +454,12 @@ main.snap-nav.open {
   -webkit-transform: rotate(315deg);
   transform: rotate(315deg);
 }
-/* line 80, scss/core/_nav.scss */
+/* line 107, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button .bar:nth-child(2) {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 83, scss/core/_nav.scss */
+/* line 110, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button .bar:last-child {
   top: 50%;
   height: 4px;
@@ -423,7 +470,7 @@ main.snap-nav.open {
   transform: rotate(-315deg);
 }
 
-/* line 95, scss/core/_nav.scss */
+/* line 123, scss/core/_nav.scss */
 #top-nav .connect-title {
   display: block;
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
@@ -431,7 +478,7 @@ main.snap-nav.open {
   font-weight: 400;
   text-transform: none;
 }
-/* line 102, scss/core/_nav.scss */
+/* line 130, scss/core/_nav.scss */
 #top-nav .connect-nav .nav-link.social {
   position: relative;
   display: block;
@@ -439,7 +486,7 @@ main.snap-nav.open {
   height: 40px;
   padding: 5px;
 }
-/* line 108, scss/core/_nav.scss */
+/* line 136, scss/core/_nav.scss */
 #top-nav .connect-nav .nav-link.social .icon {
   position: relative;
   display: block;
@@ -456,7 +503,7 @@ main.snap-nav.open {
 }
 
 @media (max-width: 767px) {
-  /* line 124, scss/core/_nav.scss */
+  /* line 152, scss/core/_nav.scss */
   #top-nav {
     right: 0;
     width: 200px;
@@ -465,28 +512,56 @@ main.snap-nav.open {
     z-index: 1;
     background-color: #2b2b29;
   }
-  /* line 132, scss/core/_nav.scss */
+  /* line 159, scss/core/_nav.scss */
+  #top-nav .nav-item {
+    display: block;
+  }
+  /* line 162, scss/core/_nav.scss */
   #top-nav .container {
     padding: 0;
     overflow: hidden;
   }
-  /* line 136, scss/core/_nav.scss */
+  /* line 166, scss/core/_nav.scss */
   #top-nav .nav-link {
     display: block;
     padding: 10px;
     padding-left: 20px;
     line-height: 1.25;
   }
-  /* line 142, scss/core/_nav.scss */
-  #top-nav .connect-title {
-    margin-top: 10px;
-    padding: 10px;
-    padding-left: 20px;
-    border-top: 1px solid rgba(133, 133, 128, 0.25);
+  /* line 173, scss/core/_nav.scss */
+  #top-nav .nav-link.logo {
+    line-height: 0;
+    height: 40px;
+    padding: 0 0 0 15px;
   }
-  /* line 148, scss/core/_nav.scss */
+  /* line 177, scss/core/_nav.scss */
+  #top-nav .nav-link.logo .brand-name {
+    display: inline-block;
+    width: 80px;
+    height: 30px;
+    margin: 5px;
+    background-position: 50% 50%;
+    background-size: contain;
+  }
+  /* line 187, scss/core/_nav.scss */
+  #top-nav .top-nav-items {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #1c1c1a;
+  }
+  /* line 191, scss/core/_nav.scss */
+  #top-nav .nav-item.home {
+    border-bottom: 1px solid #1c1c1a;
+  }
+  /* line 194, scss/core/_nav.scss */
+  #top-nav .nav-item.work {
+    border-top: 1px solid rgba(133, 133, 128, 0.25);
+    padding-top: 10px;
+  }
+  /* line 199, scss/core/_nav.scss */
   #top-nav .connect-nav {
     *zoom: 1;
+    padding-top: 10px;
+    border-top: 1px solid rgba(133, 133, 128, 0.25);
   }
   /* line 38, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/utilities/general/_clearfix.scss */
   #top-nav .connect-nav:after {
@@ -494,39 +569,51 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 151, scss/core/_nav.scss */
+  /* line 203, scss/core/_nav.scss */
+  #top-nav .connect-nav .connect-title {
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    padding-left: 20px;
+  }
+  /* line 209, scss/core/_nav.scss */
+  #top-nav .connect-nav .pipe {
+    display: none;
+  }
+  /* line 212, scss/core/_nav.scss */
+  #top-nav .connect-nav .nav-link.location {
+    padding-top: 10px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #1c1c1a;
+  }
+  /* line 217, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item, #top-nav .connect-nav .social-item {
     display: block;
     float: left;
   }
-  /* line 155, scss/core/_nav.scss */
+  /* line 221, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item {
     width: 100%;
-  }
-  /* line 158, scss/core/_nav.scss */
-  #top-nav .connect-nav .social-item {
-    width: auto;
-    margin-right: 10px;
-  }
-  /* line 162, scss/core/_nav.scss */
-  #top-nav .connect-nav .nav-link.location {
-    padding-top: 0;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border-bottom: 1px solid rgba(133, 133, 128, 0.25);
   }
-  /* line 168, scss/core/_nav.scss */
-  #top-nav .connect-nav .social-item::first-of-type {
-    margin-left: 20px;
+  /* line 226, scss/core/_nav.scss */
+  #top-nav .connect-nav .social-item {
+    width: auto;
+    margin-right: 5px;
+  }
+  /* line 230, scss/core/_nav.scss */
+  #top-nav .connect-nav .nav-link.facebook {
+    margin-left: 15px;
   }
 }
 @media (min-width: 768px) {
-  /* line 178, scss/core/_nav.scss */
+  /* line 240, scss/core/_nav.scss */
   #mobile-nav {
     display: none;
   }
 
-  /* line 181, scss/core/_nav.scss */
+  /* line 243, scss/core/_nav.scss */
   #top-nav {
     display: block;
     width: 100%;
@@ -536,7 +623,7 @@ main.snap-nav.open {
     font-size: 14px;
     overflow: visible;
   }
-  /* line 190, scss/core/_nav.scss */
+  /* line 252, scss/core/_nav.scss */
   #top-nav .container {
     *zoom: 1;
   }
@@ -546,7 +633,7 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 193, scss/core/_nav.scss */
+  /* line 255, scss/core/_nav.scss */
   #top-nav .top-nav-items, #top-nav .connect-nav {
     *zoom: 1;
   }
@@ -556,14 +643,14 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 196, scss/core/_nav.scss */
+  /* line 258, scss/core/_nav.scss */
   #top-nav .top-nav-items {
     position: relative;
     display: block;
-    padding-left: 120px;
+    padding-left: 80px;
     float: left;
   }
-  /* line 202, scss/core/_nav.scss */
+  /* line 264, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item.home {
     position: absolute;
     top: 0;
@@ -575,11 +662,11 @@ main.snap-nav.open {
     text-align: left;
     text-transform: capitalize;
   }
-  /* line 209, scss/core/_nav.scss */
+  /* line 271, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-link.logo {
     display: block;
   }
-  /* line 212, scss/core/_nav.scss */
+  /* line 274, scss/core/_nav.scss */
   #top-nav .top-nav-items .brand-logo {
     display: block;
     width: 100%;
@@ -588,42 +675,42 @@ main.snap-nav.open {
     background: #1c1c1a url(/images/brand-logo.svg) no-repeat 50% 0;
     background-size: contain;
   }
-  /* line 219, scss/core/_nav.scss */
+  /* line 281, scss/core/_nav.scss */
   #top-nav .top-nav-items .brand-name {
     display: block;
     width: 100%;
     height: 0;
     padding: 0 0 40%;
-    background: url(/images/brand-name.svg) no-repeat 0 100%;
+    background-position: 0 100%;
     background-size: contain;
   }
-  /* line 226, scss/core/_nav.scss */
+  /* line 288, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item:not(.home) {
     display: block;
     float: left;
     padding: 0;
   }
-  /* line 230, scss/core/_nav.scss */
+  /* line 292, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item:not(.home) .nav-link {
     display: block;
     padding: 10px 15px;
     line-height: 20px;
   }
-  /* line 238, scss/core/_nav.scss */
+  /* line 300, scss/core/_nav.scss */
   #top-nav .connect-nav {
     display: block;
     float: right;
   }
-  /* line 242, scss/core/_nav.scss */
+  /* line 304, scss/core/_nav.scss */
   #top-nav .connect-nav li {
     float: left;
   }
-  /* line 245, scss/core/_nav.scss */
+  /* line 307, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item {
     text-align: left;
     margin-right: 10px;
   }
-  /* line 248, scss/core/_nav.scss */
+  /* line 310, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item span, #top-nav .connect-nav .info-item a {
     display: inline-block;
     vertical-align: top;
@@ -631,22 +718,26 @@ main.snap-nav.open {
     margin: 0 5px;
     line-height: 20px;
   }
-  /* line 255, scss/core/_nav.scss */
+  /* line 317, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title {
     font-size: 16px;
     line-height: 1.4;
   }
-  /* line 259, scss/core/_nav.scss */
+  /* line 321, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .pipe {
     margin: 0;
   }
-  /* line 262, scss/core/_nav.scss */
+  /* line 324, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title, #top-nav .connect-nav .info-item .location, #top-nav .connect-nav .info-item .pipe {
     display: none;
   }
 }
 @media (min-width: 1024px) {
-  /* line 272, scss/core/_nav.scss */
+  /* line 333, scss/core/_nav.scss */
+  #top-nav .top-nav-items {
+    padding-left: 120px;
+  }
+  /* line 337, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title, #top-nav .connect-nav .info-item .location, #top-nav .connect-nav .info-item .pipe {
     display: inline-block;
   }

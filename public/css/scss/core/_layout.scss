@@ -55,10 +55,10 @@ main.snap-nav {
   }
   #site-content {
     pointer-events: none;
-    @include box-shadow( 0 0 20px 0 rgb(0,0,0));
   }
   #canvas {
     position: absolute;
+    @include box-shadow( 0 0 20px 0 rgb(0,0,0));
   }
   &.open {
     margin-left: -200px;
@@ -73,7 +73,6 @@ main.snap-nav {
       visibility: visible;
     }
   }
-
   .container {
     max-width: $width-sm-min;
     padding: 0 15px;
