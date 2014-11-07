@@ -7,7 +7,7 @@ var express = require('express'),
 
 var router  = express.Router(),
     cachetime = 1000*60*60*24*10,
-    cacheDebug = false,
+    cacheDebug = true,
     cache   = apicache.options({debug:cacheDebug, defaultDuration:(cachetime)}).middleware;
 
 
@@ -39,7 +39,7 @@ function createProjectJSON( json ){
       pObj.info = {};
       for( var p in cf ) {
         pObj.info[p] = cf[p][0];
-        if( p === "video_formats" ) {
+        if( p == "video_formats" && cf[p][0].length ) {
           pObj.info[p] = phpUnserialize.unserialize( cf[p][0] );
         }
       }

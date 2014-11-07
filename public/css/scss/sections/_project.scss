@@ -2,6 +2,14 @@
 
 .project {
 
+  height: 0;
+  overflow: hidden;
+
+  &.open {
+    height: auto;
+    overflow: auto;
+  }
+
   .project-inner {
     padding: 60px 0 0;
     border-top: 1px solid $color-border;

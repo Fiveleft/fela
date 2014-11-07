@@ -45,8 +45,8 @@ define(
 
       project : function( slug ) {
         this._buildIndex();
-        this._scrollTo();
         Events.trigger( "project:open", slug );
+        this._scrollTo();
       },
 
     });

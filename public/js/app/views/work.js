@@ -12,9 +12,15 @@ define(
 
 
     function toggleActiveContainer() {
-      $(projectContainer[containerIndex]).removeClass("active");
+      $(projectContainer[containerIndex])
+        .removeClass("active")
+        .attr("data-scrollto", "");
+
       containerIndex = (containerIndex+1) % 2;
-      $(projectContainer[containerIndex]).addClass("active");
+      $(projectContainer[containerIndex])
+        .addClass("active")
+        .attr("data-scrollto", "project");
+
       return $(projectContainer[containerIndex]);
     }
 
@@ -72,12 +78,17 @@ define(
         // Clear and update the activeContainer
         activeContainer = toggleActiveContainer();
         activeContainer.empty().append( projectView.render().el );
-
       },
 
       closeProject : function () {
 
+      },
+
+      _placeProjectView : function () {
+        
       }
+
+
     });
 
     return WorkView;

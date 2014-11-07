@@ -3,8 +3,7 @@ define(
   function( $, _, Backbone, Events, TweenLite, Utils ){
     
     var _instance = false,
-        minDistance = 30,
-        minTime = 0.1,
+        minTime = 0.25,
         maxTime = 0.75;
 
     var ScrollerView = Backbone.View.extend({
