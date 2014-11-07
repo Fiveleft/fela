@@ -13,12 +13,15 @@ define(
         var html = templates["project-item"](this.model.attributes);
         this.setElement( html );
 
-        this.$el.css({"min-height" : window.innerHeight});
+        // Set Views and Elements
         this.mediaView.setElement( $(".media", this.$el) );
         this.mediaView.render();
+        
+        this.$inner = $( ".project-inner", this.$el );
+        this.$inner.css({"min-height" : window.innerHeight});
 
-        console.log( this.model.attributes );
-
+        this.$el.css({ "height" : 0 });
+        
         return this;
       },
 

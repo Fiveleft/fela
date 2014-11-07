@@ -2,13 +2,14 @@
 
 .project {
 
-  padding: 60px 0 0;
-  border-top: 1px solid $color-border;
+  .project-inner {
+    padding: 60px 0 0;
+    border-top: 1px solid $color-border;
+  }
 
   .media {
     display: block;
     position: relative;
-    // margin: 0 0 20px;
   }
   .media-inner {
     position: relative;
@@ -82,7 +83,9 @@
 
 @media ( min-width:$width-sm-min ) {
   .project {
-    padding-top: 80px;
+    .project-inner {
+      padding-top: 80px;
+    }
   }
 }
 

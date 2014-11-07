@@ -1,7 +1,7 @@
 // app/appRouter.js
 define( 
-  ['underscore','backbone','events','siteindex' ],
-  function( _, Backbone, Events, SiteIndex ) {
+  [ 'jquery','underscore','backbone','events','siteindex' ],
+  function( $, _, Backbone, Events, SiteIndex ) {
 
     var siteindex;
 
@@ -24,6 +24,14 @@ define(
         "project/:slug" : "project"
       },
 
+      _scrollTo : function( element ) {
+        if( !element ) {
+          var target = window.location.pathname.split("/")[1];
+          element = $("[data-scrollto='" + target + "']");
+        }
+        Events.trigger( Events.scrollTo, element );
+      },
+
       _buildIndex : function() {
         if( !siteindex ) {
           siteindex = new SiteIndex();
@@ -32,13 +40,13 @@ define(
 
       index : function() {
         this._buildIndex();
-        console.log( " scroll to " );
+        this._scrollTo();
       },
 
       project : function( slug ) {
         this._buildIndex();
+        this._scrollTo();
         Events.trigger( "project:open", slug );
-        console.log( " scroll to " );
       },
 
     });

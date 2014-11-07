@@ -10,7 +10,8 @@ define([
     "app/views/nav",
     'app/views/pageContentCollection',
     'app/views/partnerCollection',
-    'app/views/work'
+    'app/views/work',
+    'app/views/scroller'
   ], 
   function(
     $,
@@ -23,7 +24,8 @@ define([
     NavView,
     PageContentCollectionView,
     PartnerCollectionView,
-    WorkView
+    WorkView,
+    ScrollerView
   ){
     
     var SiteIndexView = Backbone.View.extend({
@@ -52,18 +54,12 @@ define([
         new WorkView({ collection:ProjectCollection });
         new PageContentCollectionView({ collection:PageContentCollection });
 
+        // Start the ScrollerView
+        ScrollerView.start();
 
         this.listenTo( Events, "mobilenav:open", this._mobileNavOpen );
         this.listenTo( Events, "mobilenav:close", this._mobileNavClose );
         this.listenTo( Events, "mobilenav:closed", this._mobileNavClosed );
-      },
-
-      resize : function( e ) {
-        console.log( "SiteIndex.resize()", e );
-      },
-
-      scroll : function( e ) {
-        console.log( "SiteIndex.scroll()", e );
       },
 
       _mobileNavOpen : function() {
