@@ -3,6 +3,7 @@ define([
     'jquery',
     'backbone',
     'events',
+    'tweenmax',
     'app/collections/pageContentCollection',
     'app/collections/partnerCollection',
     'app/collections/projectCollection',
@@ -15,6 +16,7 @@ define([
     $,
     Backbone,
     Events,
+    TweenMax,
     PageContentCollection, 
     PartnerCollection, 
     ProjectCollection,
@@ -23,18 +25,22 @@ define([
     PartnerCollectionView,
     WorkView
   ){
-
+    
     var SiteIndexView = Backbone.View.extend({
 
       $el : $("body"),
       
       initialize : function() {
         // console.log( "SiteIndex.initialize" );
-        // var self = this;
+        this.$main = $("main");
+        this.$siteContent = $("#site-content");
         
         var projectsData = JSON.parse($("#data-api-projects").attr("data-json")); 
         var partnersData = JSON.parse($("#data-api-partners").attr("data-json")); 
         var contentData = JSON.parse($("#data-api-content").attr("data-json")); 
+        $("#data-api-projects").remove();
+        $("#data-api-partners").remove();
+        $("#data-api-content").remove();
         
         PartnerCollection.reset( partnersData );
         ProjectCollection.reset( projectsData );
@@ -46,11 +52,10 @@ define([
         new WorkView({ collection:ProjectCollection });
         new PageContentCollectionView({ collection:PageContentCollection });
 
-        $("#data-api-projects").remove();
-        $("#data-api-partners").remove();
-        $("#data-api-content").remove();
 
-        this.listenTo( Events, "mobilenav:toggle", this.toggleMobileNav );
+        this.listenTo( Events, "mobilenav:open", this._mobileNavOpen );
+        this.listenTo( Events, "mobilenav:close", this._mobileNavClose );
+        this.listenTo( Events, "mobilenav:closed", this._mobileNavClosed );
       },
 
       resize : function( e ) {
@@ -61,9 +66,22 @@ define([
         console.log( "SiteIndex.scroll()", e );
       },
 
-      toggleMobileNav : function() {
-        console.log( "SiteIndex:toggleMobileNav");
-      }
+      _mobileNavOpen : function() {
+        // console.log( "SiteIndex._mobileNavOpen" );
+        var windowTop = window.scrollY;
+        this.$siteContent.css({"margin-top" : -windowTop });
+      },
+
+      _mobileNavClose : function() {
+        // console.log( "SiteIndex._mobileNavClose" );
+      },
+      
+      _mobileNavClosed : function() {
+        // console.log( "SiteIndex._mobileNavClosed" );
+        var windowTop = -parseInt(this.$siteContent.css("margin-top"),10);
+        this.$siteContent.css({"margin-top" : ""});
+        window.scrollTo( 0, windowTop );
+      },
 
     });
 

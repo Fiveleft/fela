@@ -239,42 +239,63 @@ footer .container {
   padding: 20px 0 0;
 }
 
-/* line 40, scss/core/_layout.scss */
+/* line 39, scss/core/_layout.scss */
+main #top-nav {
+  visibility: hidden;
+}
+
+/* line 44, scss/core/_layout.scss */
 main.snap-nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
 }
-/* line 46, scss/core/_layout.scss */
+/* line 50, scss/core/_layout.scss */
 main.snap-nav #mobile-nav {
   position: absolute;
 }
-/* line 52, scss/core/_layout.scss */
+/* line 53, scss/core/_layout.scss */
+main.snap-nav #top-nav {
+  visibility: visible;
+}
+/* line 56, scss/core/_layout.scss */
+main.snap-nav #site-content {
+  pointer-events: none;
+  -moz-box-shadow: 0 0 20px 0 black;
+  -webkit-box-shadow: 0 0 20px 0 black;
+  box-shadow: 0 0 20px 0 black;
+}
+/* line 60, scss/core/_layout.scss */
 main.snap-nav #canvas {
   position: absolute;
 }
-/* line 56, scss/core/_layout.scss */
+/* line 63, scss/core/_layout.scss */
 main.snap-nav.open {
   margin-left: -200px;
 }
 
 @media (min-width: 768px) {
-  /* line 64, scss/core/_layout.scss */
+  /* line 72, scss/core/_layout.scss */
+  main #top-nav {
+    visibility: visible;
+  }
+
+  /* line 77, scss/core/_layout.scss */
   .container {
     max-width: 768px;
     padding: 0 15px;
   }
 }
 @media (min-width: 1024px) {
-  /* line 71, scss/core/_layout.scss */
+  /* line 84, scss/core/_layout.scss */
   .container {
     max-width: 1024px;
     padding: 0 20px;
   }
 }
 @media (min-width: 1280px) {
-  /* line 78, scss/core/_layout.scss */
+  /* line 91, scss/core/_layout.scss */
   .container {
     max-width: 1280px;
   }
@@ -320,34 +341,89 @@ main.snap-nav.open {
   position: absolute;
   top: 0;
   right: 0;
-  width: 50px;
-  padding: 10px 20px 10px 10px;
+  width: 45px;
+  height: 100%;
+  padding: 10px 15px 11px 10px;
+  background-color: transparent;
 }
-/* line 33, scss/core/_nav.scss */
+/* line 35, scss/core/_nav.scss */
 #mobile-nav button:focus {
   outline: none;
 }
-/* line 36, scss/core/_nav.scss */
+/* line 38, scss/core/_nav.scss */
 #mobile-nav button .icon {
+  position: relative;
   display: block;
   width: 100%;
   height: 100%;
-  border: 1px solid yellow;
   text-indent: -119988px;
   overflow: hidden;
   text-align: left;
   text-transform: capitalize;
 }
-/* line 43, scss/core/_nav.scss */
-#mobile-nav button .open {
+/* line 45, scss/core/_nav.scss */
+#mobile-nav button .bar {
+  position: absolute;
   display: block;
+  width: 100%;
+  height: 3px;
+  left: 50%;
+  margin-left: -50%;
+  margin-top: -1px;
+  background-color: #b8b8b1;
+  -moz-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -moz-transition-delay: 0.3s;
+  -o-transition-delay: 0.3s;
+  -webkit-transition-delay: 0.3s;
+  transition-delay: 0.3s;
 }
-/* line 46, scss/core/_nav.scss */
-#mobile-nav button .close {
-  display: none;
+/* line 56, scss/core/_nav.scss */
+#mobile-nav button .bar:first-child {
+  top: 1px;
+}
+/* line 59, scss/core/_nav.scss */
+#mobile-nav button .bar:nth-child(2) {
+  top: 9px;
+}
+/* line 64, scss/core/_nav.scss */
+#mobile-nav button .bar:last-child {
+  top: 17px;
 }
 
-/* line 55, scss/core/_nav.scss */
+/* line 72, scss/core/_nav.scss */
+.snap-nav.open #mobile-nav button .bar {
+  background-color: #ee2a7b;
+}
+/* line 74, scss/core/_nav.scss */
+.snap-nav.open #mobile-nav button .bar:first-child {
+  top: 50%;
+  height: 4px;
+  margin-top: -2px;
+  -moz-transform: rotate(315deg);
+  -ms-transform: rotate(315deg);
+  -webkit-transform: rotate(315deg);
+  transform: rotate(315deg);
+}
+/* line 80, scss/core/_nav.scss */
+.snap-nav.open #mobile-nav button .bar:nth-child(2) {
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+}
+/* line 83, scss/core/_nav.scss */
+.snap-nav.open #mobile-nav button .bar:last-child {
+  top: 50%;
+  height: 4px;
+  margin-top: -2px;
+  -moz-transform: rotate(-315deg);
+  -ms-transform: rotate(-315deg);
+  -webkit-transform: rotate(-315deg);
+  transform: rotate(-315deg);
+}
+
+/* line 95, scss/core/_nav.scss */
 #top-nav .connect-title {
   display: block;
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
@@ -355,7 +431,7 @@ main.snap-nav.open {
   font-weight: 400;
   text-transform: none;
 }
-/* line 62, scss/core/_nav.scss */
+/* line 102, scss/core/_nav.scss */
 #top-nav .connect-nav .nav-link.social {
   position: relative;
   display: block;
@@ -363,7 +439,7 @@ main.snap-nav.open {
   height: 40px;
   padding: 5px;
 }
-/* line 68, scss/core/_nav.scss */
+/* line 108, scss/core/_nav.scss */
 #top-nav .connect-nav .nav-link.social .icon {
   position: relative;
   display: block;
@@ -380,34 +456,35 @@ main.snap-nav.open {
 }
 
 @media (max-width: 767px) {
-  /* line 84, scss/core/_nav.scss */
+  /* line 124, scss/core/_nav.scss */
   #top-nav {
     right: 0;
     width: 200px;
     height: 100%;
     min-height: 100%;
     z-index: 1;
+    background-color: #2b2b29;
   }
-  /* line 91, scss/core/_nav.scss */
+  /* line 132, scss/core/_nav.scss */
   #top-nav .container {
     padding: 0;
     overflow: hidden;
   }
-  /* line 95, scss/core/_nav.scss */
+  /* line 136, scss/core/_nav.scss */
   #top-nav .nav-link {
     display: block;
     padding: 10px;
     padding-left: 20px;
     line-height: 1.25;
   }
-  /* line 101, scss/core/_nav.scss */
+  /* line 142, scss/core/_nav.scss */
   #top-nav .connect-title {
     margin-top: 10px;
     padding: 10px;
     padding-left: 20px;
     border-top: 1px solid rgba(133, 133, 128, 0.25);
   }
-  /* line 107, scss/core/_nav.scss */
+  /* line 148, scss/core/_nav.scss */
   #top-nav .connect-nav {
     *zoom: 1;
   }
@@ -417,39 +494,39 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 110, scss/core/_nav.scss */
+  /* line 151, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item, #top-nav .connect-nav .social-item {
     display: block;
     float: left;
   }
-  /* line 114, scss/core/_nav.scss */
+  /* line 155, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item {
     width: 100%;
   }
-  /* line 117, scss/core/_nav.scss */
+  /* line 158, scss/core/_nav.scss */
   #top-nav .connect-nav .social-item {
     width: auto;
     margin-right: 10px;
   }
-  /* line 121, scss/core/_nav.scss */
+  /* line 162, scss/core/_nav.scss */
   #top-nav .connect-nav .nav-link.location {
     padding-top: 0;
     padding-bottom: 20px;
     margin-bottom: 20px;
     border-bottom: 1px solid rgba(133, 133, 128, 0.25);
   }
-  /* line 127, scss/core/_nav.scss */
+  /* line 168, scss/core/_nav.scss */
   #top-nav .connect-nav .social-item::first-of-type {
     margin-left: 20px;
   }
 }
 @media (min-width: 768px) {
-  /* line 137, scss/core/_nav.scss */
+  /* line 178, scss/core/_nav.scss */
   #mobile-nav {
     display: none;
   }
 
-  /* line 140, scss/core/_nav.scss */
+  /* line 181, scss/core/_nav.scss */
   #top-nav {
     display: block;
     width: 100%;
@@ -459,7 +536,7 @@ main.snap-nav.open {
     font-size: 14px;
     overflow: visible;
   }
-  /* line 149, scss/core/_nav.scss */
+  /* line 190, scss/core/_nav.scss */
   #top-nav .container {
     *zoom: 1;
   }
@@ -469,7 +546,7 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 152, scss/core/_nav.scss */
+  /* line 193, scss/core/_nav.scss */
   #top-nav .top-nav-items, #top-nav .connect-nav {
     *zoom: 1;
   }
@@ -479,14 +556,14 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 155, scss/core/_nav.scss */
+  /* line 196, scss/core/_nav.scss */
   #top-nav .top-nav-items {
     position: relative;
     display: block;
     padding-left: 120px;
     float: left;
   }
-  /* line 161, scss/core/_nav.scss */
+  /* line 202, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item.home {
     position: absolute;
     top: 0;
@@ -498,11 +575,11 @@ main.snap-nav.open {
     text-align: left;
     text-transform: capitalize;
   }
-  /* line 168, scss/core/_nav.scss */
+  /* line 209, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-link.logo {
     display: block;
   }
-  /* line 171, scss/core/_nav.scss */
+  /* line 212, scss/core/_nav.scss */
   #top-nav .top-nav-items .brand-logo {
     display: block;
     width: 100%;
@@ -511,7 +588,7 @@ main.snap-nav.open {
     background: #1c1c1a url(/images/brand-logo.svg) no-repeat 50% 0;
     background-size: contain;
   }
-  /* line 178, scss/core/_nav.scss */
+  /* line 219, scss/core/_nav.scss */
   #top-nav .top-nav-items .brand-name {
     display: block;
     width: 100%;
@@ -520,33 +597,33 @@ main.snap-nav.open {
     background: url(/images/brand-name.svg) no-repeat 0 100%;
     background-size: contain;
   }
-  /* line 185, scss/core/_nav.scss */
+  /* line 226, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item:not(.home) {
     display: block;
     float: left;
     padding: 0;
   }
-  /* line 189, scss/core/_nav.scss */
+  /* line 230, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item:not(.home) .nav-link {
     display: block;
     padding: 10px 15px;
     line-height: 20px;
   }
-  /* line 197, scss/core/_nav.scss */
+  /* line 238, scss/core/_nav.scss */
   #top-nav .connect-nav {
     display: block;
     float: right;
   }
-  /* line 201, scss/core/_nav.scss */
+  /* line 242, scss/core/_nav.scss */
   #top-nav .connect-nav li {
     float: left;
   }
-  /* line 204, scss/core/_nav.scss */
+  /* line 245, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item {
     text-align: left;
     margin-right: 10px;
   }
-  /* line 207, scss/core/_nav.scss */
+  /* line 248, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item span, #top-nav .connect-nav .info-item a {
     display: inline-block;
     vertical-align: top;
@@ -554,22 +631,22 @@ main.snap-nav.open {
     margin: 0 5px;
     line-height: 20px;
   }
-  /* line 214, scss/core/_nav.scss */
+  /* line 255, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title {
     font-size: 16px;
     line-height: 1.4;
   }
-  /* line 218, scss/core/_nav.scss */
+  /* line 259, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .pipe {
     margin: 0;
   }
-  /* line 221, scss/core/_nav.scss */
+  /* line 262, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title, #top-nav .connect-nav .info-item .location, #top-nav .connect-nav .info-item .pipe {
     display: none;
   }
 }
 @media (min-width: 1024px) {
-  /* line 231, scss/core/_nav.scss */
+  /* line 272, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title, #top-nav .connect-nav .info-item .location, #top-nav .connect-nav .info-item .pipe {
     display: inline-block;
   }
@@ -689,7 +766,6 @@ section#work-section .project-view {
 .project .media {
   display: block;
   position: relative;
-  margin: 0 0 20px;
 }
 /* line 13, scss/sections/_project.scss */
 .project .media-inner {
@@ -707,11 +783,11 @@ section#work-section .project-view {
   width: 100%;
   height: 100%;
 }
-/* line 25, scss/sections/_project.scss */
+/* line 26, scss/sections/_project.scss */
 .project .media-controls {
   z-index: 2;
 }
-/* line 27, scss/sections/_project.scss */
+/* line 28, scss/sections/_project.scss */
 .project .media-controls .inner {
   display: block;
   position: absolute;
@@ -726,7 +802,7 @@ section#work-section .project-view {
   -webkit-border-radius: 9999px;
   border-radius: 9999px;
 }
-/* line 37, scss/sections/_project.scss */
+/* line 38, scss/sections/_project.scss */
 .project .media-controls .icon {
   text-indent: -119988px;
   overflow: hidden;
@@ -738,21 +814,20 @@ section#work-section .project-view {
   height: 50px;
   background: rgba(133, 133, 128, 0.25);
 }
-/* line 44, scss/sections/_project.scss */
+/* line 45, scss/sections/_project.scss */
 .project .media-controls .play {
   display: block;
 }
-/* line 47, scss/sections/_project.scss */
+/* line 48, scss/sections/_project.scss */
 .project .media-controls .pause {
   display: none;
 }
-/* line 51, scss/sections/_project.scss */
+/* line 52, scss/sections/_project.scss */
 .project .media-container {
-  border: 1px solid #000;
   z-index: 1;
   background: #1c1c1a;
 }
-/* line 56, scss/sections/_project.scss */
+/* line 57, scss/sections/_project.scss */
 .project .close {
   display: block;
   position: absolute;
@@ -767,9 +842,26 @@ section#work-section .project-view {
   text-transform: capitalize;
   z-index: 3;
 }
+/* line 66, scss/sections/_project.scss */
+.project .info {
+  margin-top: 30px;
+}
+
+/* line 72, scss/sections/_project.scss */
+.media-container.video {
+  text-align: center;
+}
+/* line 74, scss/sections/_project.scss */
+.media-container.video video {
+  font-size: 0;
+  display: inline-block;
+  margin: 0 auto;
+  width: auto;
+  height: 100%;
+}
 
 @media (min-width: 768px) {
-  /* line 73, scss/sections/_project.scss */
+  /* line 84, scss/sections/_project.scss */
   .project {
     padding-top: 80px;
   }

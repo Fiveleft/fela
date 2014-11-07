@@ -35,7 +35,11 @@ footer .container {
   padding: 20px 0 0;
 }
 
-
+main {
+  #top-nav {
+    visibility:hidden;
+  }
+}
 
 main.snap-nav {
   position: fixed;
@@ -46,13 +50,16 @@ main.snap-nav {
   #mobile-nav {
     position: absolute;
   }
+  #top-nav {
+    visibility: visible;
+  }
   #site-content {
-
+    pointer-events: none;
+    @include box-shadow( 0 0 20px 0 rgb(0,0,0));
   }
   #canvas {
     position: absolute;
   }
-
   &.open {
     margin-left: -200px;
   }
@@ -60,6 +67,12 @@ main.snap-nav {
 
 
 @media ( min-width:$width-sm-min ) {
+
+  main {
+    #top-nav {
+      visibility: visible;
+    }
+  }
 
   .container {
     max-width: $width-sm-min;

@@ -7,7 +7,8 @@ var express = require('express'),
 
 var router  = express.Router(),
     cachetime = 1000*60*60*24*10,
-    cache   = apicache.options({debug:true,defaultDuration:(cachetime)}).middleware;
+    cacheDebug = false,
+    cache   = apicache.options({debug:cacheDebug, defaultDuration:(cachetime)}).middleware;
 
 
 
@@ -22,13 +23,33 @@ function unserialize( json ) {
   return json;
 }
 
-function createGallery( json ) {
-  var pattern = /\?attachment_id=(\d+)/gi;
+
+function createProjectJSON( json ){
+
+  var galleryPattern = /\?attachment_id=(\d+)/gi;
+
   for( var i=json.length-1; i!==-1; i-- ) {
-    var p = json[i];
-    var g = p.content.match( pattern );
-    if( g!==null ) {
-      p.gallery = g.join().replace( pattern, '$1' );
+
+    // Project JSON Object
+    var pObj = json[i];
+    var cf = pObj.custom_fields;
+
+    // Convert custom_fields to "info" property;
+    if( cf.description ) {
+      pObj.info = {};
+      for( var p in cf ) {
+        pObj.info[p] = cf[p][0];
+        if( p === "video_formats" ) {
+          pObj.info[p] = phpUnserialize.unserialize( cf[p][0] );
+        }
+      }
+    }
+    delete pObj.custom_fields;
+
+    // Find any Gallery Info
+    var gallery = pObj.content.match( galleryPattern );
+    if( gallery !== null ) {
+      pObj.gallery = gallery.join().replace( galleryPattern, '$1' );
     }
   }
   return json;
@@ -45,7 +66,7 @@ router.get('/projects', cache(), function(req, res){
   req.apicacheGroup = "project";
   request( params, function( err, response, body ){
     if( err ) return;
-    res.send( createGallery( body.posts ) );
+    res.send( createProjectJSON( body.posts ) );
   });
 });
 
@@ -54,13 +75,15 @@ router.get('/projects', cache(), function(req, res){
 /* GET specific project */
 router.get('/project/:id', cache(), function(req, res){
   var params = {
-    url : urlBase + "get_post/?id=" + req.params.id + "&post_type=fiveleft_project",
+    url : urlBase + "get_post/?id=" + req.params.id + "&post_type=fiveleft_project&include=id,slug,title,content,custom_fields,categories,attachments",
     json : true
   };
   req.apicacheGroup = "project";
   request( params, function( err, response, body ){
     if( err ) return;
-    res.send( unserialize( body.posts ) );
+    var postJSON = createProjectJSON( [body.post] )
+    console.log( " body.post.length : " + postJSON.length );
+    res.send( postJSON );
   });
 });
 
@@ -106,33 +129,6 @@ router.get('/cache/clear/:key?', function(req, res) {
   res.status(200).send(apicache.clear(req.params.key || req.query.key));
 });
 
-
-
-
-/*
-router.get('/clients', cache(), function(req, res){
-  var params = {
-    url : urlBase + "get_posts/?post_type=fiveleft_client&posts_per_page=100&custom_fields=_meta&include=id,slug,title,custom_fields",
-    json : true
-  };
-  req.apicacheGroup = "client";
-  request( params, function( err, response, body ){
-    if( err ) return;
-    res.send( unserialize( body.posts ) );
-  });
-});
-router.get('/agencies', cache(), function(req, res){
-  var params = {
-    url : urlBase + "get_posts/?post_type=fiveleft_agency&posts_per_page=100&custom_fields=_meta&include=id,slug,title,custom_fields",
-    json : true
-  };
-  req.apicacheGroup = "agency";
-  request( params, function( err, response, body ){
-    if( err ) return;
-    res.send( body.posts );
-  });
-});
-*/
 
 
 module.exports = router;

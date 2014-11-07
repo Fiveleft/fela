@@ -32,11 +32,6 @@ define(
         this.listenTo( Events, "project:open", this.openProject );
         this.listenTo( Events, "project:close", this.closeProject );
 
-        // if( !this.collection.length ) {
-        //   this.listenToOnce( this.collection, "sync", this.render );
-        // }else{
-        //   this.render();
-        // }
         this.render();
       },
 
@@ -47,7 +42,7 @@ define(
           projectList.append( projectGridView.render().el );
         }, this);
 
-        console.log( "workView.render()" );
+        //console.log( "workView.render()" );
 
         if( activeSlug ) {
           this.openProject( activeSlug );

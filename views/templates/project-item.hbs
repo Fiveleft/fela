@@ -1,6 +1,6 @@
 <div class="project" data-slug="{{slug}}" >
   <div class="project-inner">
-    <div class="media" {{#if media}}data-media="{{media}}"{{/if}}>
+    <div class="media">
       <div class="media-inner">
         <a href="#" class="media-controls">
           <span class="inner">
@@ -8,22 +8,26 @@
             <i class="icon pause">Pause</i>
           </span>
         </a> 
-        <div class="media-container">
-          {{#if gallery}}
+        {{#if gallery}}
+        <div class="media-container gallery">
           <ul class="gallery-list">
           {{#each gallery}}
-            <li class="gallery-item" data-id="{{id}}"><span class="placeholder" data-src="{{src}}"></span></li>
+            <li class="gallery-item" data-id="{{id}}">
+              <span class="placeholder" data-src="{{url}}"></span>
+            </li>
           {{/each}}
           </ul>
-          {{/if}}
-          {{#if video}}
-          <video class="video" {{#if video.poster}}poster="{{video.poster.src}}"{{/if}} preload="load" loop="loop">
-            {{#if video.mp4}}<source src="{{video.mp4}}" type="video/mp4" />{{/if}}
-            {{#if video.ogg}}<source src="{{video.ogg}}" type="video/ogg" />{{/if}}
-            {{#if video.webm}}<source src="{{video.webm}}" type="video/webm" />{{/if}}
-          </video>
-          {{/if}}
         </div>
+        {{/if}}
+        {{#if video}}
+        <div class="media-container video">
+          <video {{#if video.poster}}poster="{{video.poster.url}}"{{/if}} preload="load" loop="loop">
+            {{#if video.source.mp4}}<source src="{{video.source.mp4}}" type="video/mp4" />{{/if}}
+            {{#if video.source.ogg}}<source src="{{video.source.ogg}}" type="video/ogg" />{{/if}}
+            {{#if video.source.webm}}<source src="{{video.source.webm}}" type="video/webm" />{{/if}}
+          </video>
+        </div>
+        {{/if}}
       </div>
       <a class="close" href=""><i class="icon">Close</i></a>
     </div>
@@ -33,28 +37,28 @@
       <h2 class="subtitle">{{{subtitle}}}</h2>
       {{/if}}
       <div class="details">
-        {{{content}}}
+        <p class="project-content">{{{content}}}</p>
         <p class="additional">
           
-          {{#if client}}
+          {{#if info.client}}
           <span class="participant-info client">
             <span class="info-label">Client:&nbsp;</span>
-            {{#if client.website}}
-            <a class="info-name" href="{{client.website}}">{{client.name}}</a>
+            {{#if info.client.info.website}}
+            <a class="info-name" href="{{client.info.website}}">{{{info.client.title}}}</a>
             {{else}}
-            <span class="info-name">{{client.name}}</a>
+            <span class="info-name">{{{info.client.title}}}</a>
             {{/if}}
           </span>
           {{/if}}
           
-          {{#if agency}}
+          {{#if info.agency}}
           <span class="separator">/</span>
           <span class="participant-info agency">
             <span class="info-label">Agency:&nbsp;</span>
-            {{#if agency.website}}
-            <a class="info-name" href="{{agency.website}}">{{agency.name}}</a>
+            {{#if info.agency.info.website}}
+            <a class="info-name" href="{{agency.info.website}}">{{{info.agency.title}}}</a>
             {{else}}
-            <span class="info-name">{{agency.name}}</a>
+            <span class="info-name">{{{info.agency.title}}}</a>
             {{/if}}
           </span>
           {{/if}}

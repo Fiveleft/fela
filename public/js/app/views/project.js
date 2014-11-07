@@ -1,49 +1,45 @@
 // project.js
 define(
-  ['jquery','underscore','backbone','events','templates','tweenmax'],
-  function( $, _, Backbone, Events, templates, TweenMax ){
-
-
-    // var $mediaControls;
-    // var $mediaList;
-    // var window;
-    TweenMax;
-    // console.log( window );
-
+  ['jquery','underscore','backbone','events','templates','app/views/projectMedia'],
+  function( $, _, Backbone, Events, templates, ProjectMediaView ){
 
     var ProjectView = Backbone.View.extend({
 
       initialize : function() {
-        // console.log("ProjctView.initialize()", this.model.attributes.content );
+        this.mediaView = new ProjectMediaView({ model:this.model });
       },
 
       render : function() {
         var html = templates["project-item"](this.model.attributes);
         this.setElement( html );
-        console.log( this );
+
         this.$el.css({"min-height" : window.innerHeight});
+        this.mediaView.setElement( $(".media", this.$el) );
+        this.mediaView.render();
+
+        console.log( this.model.attributes );
+
         return this;
       },
 
       events : {
-        "click a.close" : "close",
-        "click a.media-controls" : "togglePlay"
+        "click a.close" : "clickClose"
       },
 
       open : function() {
         console.log("ProjectView[" + this.model.attributes.slug + "].open()" );
+        this.mediaView.start();
       },
 
-      close : function( e ) {
-        e.preventDefault();
+      close : function() {
         console.log("ProjectView[" + this.model.attributes.slug + "].close()" );
-        Events.trigger( "router:navigate", "/work" );
+        this.mediaView.stop();
       },
 
-      togglePlay : function( e ) {
+      clickClose : function( e ) {
         e.preventDefault();
-        console.log("ProjectView[" + this.model.attributes.slug + "].togglePlay()" );
-        Events.trigger( "project:playMedia" );
+        this.close();
+        Events.trigger( "router:navigate", "/work" );
       }
 
     });

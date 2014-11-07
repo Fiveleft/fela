@@ -32,11 +32,13 @@ define(
 
       index : function() {
         this._buildIndex();
+        console.log( " scroll to " );
       },
 
       project : function( slug ) {
         this._buildIndex();
         Events.trigger( "project:open", slug );
+        console.log( " scroll to " );
       },
 
     });
