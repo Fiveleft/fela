@@ -49,7 +49,9 @@ this["JST"]["project-grid-item"] = Handlebars.template({"1":function(depth0,help
 },"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<a href=\"/project/"
     + escapeExpression(((helper = (helper = helpers.slug || (depth0 != null ? depth0.slug : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"slug","hash":{},"data":data}) : helper)))
-    + "\" class=\"project-item\" data-index=\""
+    + "\" class=\"project-item\" data-slug=\""
+    + escapeExpression(((helper = (helper = helpers.slug || (depth0 != null ? depth0.slug : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"slug","hash":{},"data":data}) : helper)))
+    + "\" data-index=\""
     + escapeExpression(((helper = (helper = helpers.index || (depth0 != null ? depth0.index : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"index","hash":{},"data":data}) : helper)))
     + "\" >\n  <span class=\"project-grid-item-inner\">\n    <span class=\"media\">\n      <span class=\"media-inner\">\n        <span class=\"media-content\" style=\"background-image: url('"
     + escapeExpression(((helper = (helper = helpers.gridImage || (depth0 != null ? depth0.gridImage : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"gridImage","hash":{},"data":data}) : helper)))
@@ -66,7 +68,7 @@ this["JST"]["project-grid-item"] = Handlebars.template({"1":function(depth0,help
 
 
 
-this["JST"]["project-item"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
+this["JST"]["project"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   var stack1, buffer = "        <div class=\"media-container gallery\">\n          <ul class=\"gallery-list\">\n";
   stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.gallery : depth0), {"name":"each","hash":{},"fn":this.program(2, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
@@ -75,11 +77,9 @@ this["JST"]["project-item"] = Handlebars.template({"1":function(depth0,helpers,p
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "            <li class=\"gallery-item\" data-id=\""
     + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\n              <img class=\"img unloaded\" data-src=\""
+    + "\">\n              <div class=\"img-container\" style=\"background-image:url("
     + escapeExpression(((helper = (helper = helpers.url || (depth0 != null ? depth0.url : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"url","hash":{},"data":data}) : helper)))
-    + "\" alt=\""
-    + escapeExpression(((helper = (helper = helpers.slug || (depth0 != null ? depth0.slug : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"slug","hash":{},"data":data}) : helper)))
-    + "\"/>\n            </li>\n";
+    + ");\"></div>\n            </li>\n";
 },"4":function(depth0,helpers,partials,data) {
   var stack1, buffer = "        <div class=\"media-container video\">\n          <video ";
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.video : depth0)) != null ? stack1.poster : stack1), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});

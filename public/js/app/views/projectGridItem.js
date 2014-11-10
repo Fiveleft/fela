@@ -8,7 +8,13 @@ define(
       className: "project-grid-item",
       
       render: function() {
-        var html = templates["project-grid-item"](this.model.attributes);
+        var c, 
+          context, 
+          html;
+          
+        c = this.model.collection;
+        context = _.extend({index:c.indexOf(this.model)}, this.model.attributes);
+        html = templates["project-grid-item"](context);
         this.$el.html( html );
         return this;
       },

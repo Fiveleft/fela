@@ -5,14 +5,13 @@
   height: 0;
   overflow: hidden;
 
-  &.open {
+  &.active {
     height: auto;
-    overflow: auto;
+    overflow: visible;
   }
 
   .project-inner {
     padding: 60px 0 0;
-    border-top: 1px solid $color-border;
   }
 
   .media {
@@ -24,6 +23,7 @@
     width: 100%;
     height: 0;
     padding: 0 0 56.25%;
+    background: $color-grey-black;
   }
   .media-container, .media-controls {
     display: block;
@@ -77,6 +77,27 @@
   }
 }
 
+.media-container.gallery {
+  .gallery-list {
+    display: block;
+    position: relative;
+    width: 100%; height: 100%;
+  }
+  .gallery-item {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    padding: 30px;
+  }
+  .img-container {
+    display: block;
+    position: relative;
+    width: 100%; height: 100%;
+    background: no-repeat 50% 50%;
+    background-size: contain;
+  }
+}
 
 .media-container.video {
   text-align: center;
@@ -95,11 +116,21 @@
       padding-top: 80px;
     }
   }
+  .media-container.gallery {
+    .gallery-item {
+      padding: 20px;
+    }
+  }
 }
 
 @media ( min-width:$width-md-min ) {
   .project {
     
+  }
+  .media-container.gallery {
+    .gallery-item {
+      padding: 30px;
+    }
   }
 }
 

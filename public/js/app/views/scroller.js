@@ -16,8 +16,8 @@ define(
 
         // Set Event Listeners
         this.windowEvents = {
-          resize : _.throttle(this.resize, 200), 
-          scroll : _.throttle(this.scroll, 200)
+          "resize" : _.throttle(this.resize, 100), 
+          "scroll" : _.throttle(this.scroll, 100)
         };
 
         // Set elements
@@ -58,12 +58,14 @@ define(
           dRatio = Utils.ratioBetween( distance, 0, this.scrollArea ),
           duration = Utils.ratioOf( dRatio, minTime, maxTime );
 
+
+
         // Kill Window Event listeners
         $(window).off( this.windowEvents );
 
         // Animate to target position
         TweenLite.to( window, duration, {
-          scrollTo:{y:targetY}, 
+          scrollTo:{y:targetY, autoKill:false}, 
           ease:Expo.easeInOut, 
           onComplete:self._pageScrollToComplete, 
           onCompleteScope:self 

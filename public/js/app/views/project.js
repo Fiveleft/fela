@@ -7,13 +7,20 @@ define(
 
       initialize : function() {
         this.mediaView = new ProjectMediaView({ model:this.model });
+      },
 
+      activate : function() {
         // Events
-        this.listenTo( Events, Events.scrollToEnd, this._scrollToEnd );
+        // this.listenTo( Events, Events.scrollToEnd, this._scrollToEnd );
+      },
+
+      deactivate : function() {
+        // Events
+        // this.stopListening( Events, Events.scrollToEnd, this._scrollToEnd );
       },
 
       render : function() {
-        var html = templates["project-item"](this.model.attributes);
+        var html = templates["project"](this.model.attributes);
         this.setElement( html );
 
         // Set Views and Elements
@@ -32,21 +39,41 @@ define(
       },
 
       open : function() {
-        console.log("ProjectView[" + this.model.attributes.slug + "].open()" );
-        this.mediaView.start();
+        // console.log("ProjectView[" + this.model.attributes.slug + "].open()" );
+        TweenLite.to( this.$el, 0.5, {
+          // delay: 0.25,
+          height: window.innerHeight,
+          ease: Expo.easeInOut,
+          onComplete: this._openComplete,
+          onCompleteScope: this
+        });
       },
 
       _openComplete : function() {
+        this.$el
+          .addClass("active")
+          .css({"height" : ""});
 
+        console.log("ProjectView[" + this.model.attributes.slug + "].openComplete()" );
+        this.mediaView.start();
       },
 
       close : function() {
-        console.log("ProjectView[" + this.model.attributes.slug + "].close()" );
+        // console.log("ProjectView[" + this.model.attributes.slug + "].close()" );
         this.mediaView.stop();
+
+        TweenLite.to( this.$el, 0.5, {
+          // delay: 0.25,
+          height: 0,
+          ease: Expo.easeInOut,
+          onComplete: this._closeComplete,
+          onCompleteScope: this
+        });
       },
 
       _closeComplete : function() {
-
+        this.$el.removeClass("active");
+        // console.log("ProjectView[" + this.model.attributes.slug + "].closeComplete()" );
       },
 
       clickClose : function( e ) {
@@ -54,10 +81,6 @@ define(
         this.close();
         Events.trigger( "router:navigate", "/work" );
       },
-
-      _scrollToEnd : function() {
-        // console.log( "ProjectView._scrollToEnd", this );
-      }
 
     });
 

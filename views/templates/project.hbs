@@ -13,7 +13,7 @@
           <ul class="gallery-list">
           {{#each gallery}}
             <li class="gallery-item" data-id="{{id}}">
-              <img class="img unloaded" data-src="{{url}}" alt="{{slug}}"/>
+              <div class="img-container" style="background-image:url({{url}});"></div>
             </li>
           {{/each}}
           </ul>
