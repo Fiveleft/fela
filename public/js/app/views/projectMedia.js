@@ -17,12 +17,8 @@ define(
         this.$mediaContainer = $(".media-container", this.$el);
         this.isGallery = this.$mediaContainer.hasClass('gallery');
         this.isVideo = this.$mediaContainer.hasClass('video');
-
-        if( this.isGallery ) {
-          this._renderGallery();
-        }else{
-          this._renderVideo();
-        }
+        if( this.isGallery ) this._renderGallery();
+        if( this.isVideo ) this._renderVideo();
       },
 
       _renderGallery : function() {

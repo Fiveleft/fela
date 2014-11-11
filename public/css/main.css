@@ -886,8 +886,13 @@ section#work-section .project-view {
   height: 0;
   padding: 0 0 56.25%;
   background: #1c1c1a;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IiIgcj0iMTEwJSI+PHN0b3Agb2Zmc2V0PSIyMCUiIHN0b3AtY29sb3I9IiNiOGI4YjEiIHN0b3Atb3BhY2l0eT0iMC4yNSIvPjxzdG9wIG9mZnNldD0iMTEwJSIgc3RvcC1jb2xvcj0iIzFjMWMxYSIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background-size: 100%;
+  background-image: -moz-radial-gradient(center, ellipse cover, rgba(184, 184, 177, 0.25) 20%, #1c1c1a 110%);
+  background-image: -webkit-radial-gradient(center, ellipse cover, rgba(184, 184, 177, 0.25) 20%, #1c1c1a 110%);
+  background-image: radial-gradient(ellipse cover at center, rgba(184, 184, 177, 0.25) 20%, #1c1c1a 110%);
 }
-/* line 33, scss/sections/_project.scss */
+/* line 36, scss/sections/_project.scss */
 .project .media-container, .project .media-controls {
   display: block;
   position: absolute;
@@ -896,11 +901,11 @@ section#work-section .project-view {
   width: 100%;
   height: 100%;
 }
-/* line 40, scss/sections/_project.scss */
+/* line 43, scss/sections/_project.scss */
 .project .media-controls {
   z-index: 2;
 }
-/* line 42, scss/sections/_project.scss */
+/* line 45, scss/sections/_project.scss */
 .project .media-controls .inner {
   display: block;
   position: absolute;
@@ -915,7 +920,7 @@ section#work-section .project-view {
   -webkit-border-radius: 9999px;
   border-radius: 9999px;
 }
-/* line 52, scss/sections/_project.scss */
+/* line 55, scss/sections/_project.scss */
 .project .media-controls .icon {
   text-indent: -119988px;
   overflow: hidden;
@@ -927,25 +932,19 @@ section#work-section .project-view {
   height: 50px;
   background: rgba(133, 133, 128, 0.25);
 }
-/* line 59, scss/sections/_project.scss */
+/* line 62, scss/sections/_project.scss */
 .project .media-controls .play {
   display: block;
 }
-/* line 62, scss/sections/_project.scss */
+/* line 65, scss/sections/_project.scss */
 .project .media-controls .pause {
   display: none;
 }
-/* line 66, scss/sections/_project.scss */
+/* line 69, scss/sections/_project.scss */
 .project .media-container {
   z-index: 1;
-  background: #1c1c1a;
-  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IiIgcj0iODAlIj48c3RvcCBvZmZzZXQ9IjEwJSIgc3RvcC1jb2xvcj0iI2I4YjhiMSIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI4MCUiIHN0b3AtY29sb3I9IiMxYzFjMWEiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
-  background-size: 100%;
-  background-image: -moz-radial-gradient(center, ellipse cover, rgba(184, 184, 177, 0.25) 10%, #1c1c1a 80%);
-  background-image: -webkit-radial-gradient(center, ellipse cover, rgba(184, 184, 177, 0.25) 10%, #1c1c1a 80%);
-  background-image: radial-gradient(ellipse cover at center, rgba(184, 184, 177, 0.25) 10%, #1c1c1a 80%);
 }
-/* line 74, scss/sections/_project.scss */
+/* line 73, scss/sections/_project.scss */
 .project .close {
   display: block;
   position: absolute;
@@ -960,45 +959,45 @@ section#work-section .project-view {
   text-transform: capitalize;
   z-index: 3;
 }
-/* line 83, scss/sections/_project.scss */
+/* line 82, scss/sections/_project.scss */
 .project .info {
   margin-top: 30px;
 }
 
-/* line 89, scss/sections/_project.scss */
+/* line 88, scss/sections/_project.scss */
 .media-container.gallery .gallery-list {
   display: block;
   position: relative;
   width: 100%;
   height: 100%;
 }
-/* line 94, scss/sections/_project.scss */
+/* line 93, scss/sections/_project.scss */
 .media-container.gallery .gallery-item {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  padding: 30px;
+  padding: 5px;
   z-index: 5;
-  -moz-transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-  -o-transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-  -webkit-transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-  transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -moz-transition: opacity 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: opacity 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: opacity 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: opacity 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 102, scss/sections/_project.scss */
+/* line 101, scss/sections/_project.scss */
 .media-container.gallery .gallery-item.active {
   z-index: 6;
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 106, scss/sections/_project.scss */
+/* line 105, scss/sections/_project.scss */
 .media-container.gallery .gallery-item.fade {
   z-index: 7;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 110, scss/sections/_project.scss */
+/* line 109, scss/sections/_project.scss */
 .media-container.gallery .img-container {
   display: block;
   position: relative;
@@ -1006,24 +1005,20 @@ section#work-section .project-view {
   height: 100%;
   text-align: center;
 }
-/* line 116, scss/sections/_project.scss */
+/* line 115, scss/sections/_project.scss */
 .media-container.gallery img {
   display: inline-block;
   width: auto;
   height: 100%;
   margin: 0 auto;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  -moz-box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.8);
-  -webkit-box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.8);
-  box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.8);
 }
 
-/* line 126, scss/sections/_project.scss */
+/* line 125, scss/sections/_project.scss */
 .media-container.video {
   text-align: center;
   overflow: hidden;
 }
-/* line 129, scss/sections/_project.scss */
+/* line 128, scss/sections/_project.scss */
 .media-container.video video {
   font-size: 0;
   display: inline-block;
@@ -1031,12 +1026,12 @@ section#work-section .project-view {
   width: auto;
   height: 100%;
 }
-/* line 136, scss/sections/_project.scss */
+/* line 135, scss/sections/_project.scss */
 .media-container.video .marker {
   display: block;
   position: absolute;
   bottom: 0;
-  left: 50%;
+  left: 0;
   width: 0;
   height: 0;
   margin-left: -6px;
@@ -1046,18 +1041,18 @@ section#work-section .project-view {
 }
 
 @media (min-width: 768px) {
-  /* line 152, scss/sections/_project.scss */
+  /* line 151, scss/sections/_project.scss */
   .project .project-inner {
     padding-top: 80px;
   }
 
-  /* line 157, scss/sections/_project.scss */
+  /* line 156, scss/sections/_project.scss */
   .media-container.gallery .gallery-item {
     padding: 20px;
   }
 }
 @media (min-width: 1025px) {
-  /* line 168, scss/sections/_project.scss */
+  /* line 167, scss/sections/_project.scss */
   .media-container.gallery .gallery-item {
     padding: 30px;
   }
