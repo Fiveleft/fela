@@ -6,12 +6,12 @@ define(
     var ProjectGridItemView = Backbone.View.extend({
       
       className: "project-grid-item",
-      
+
       render: function() {
         var c, 
           context, 
           html;
-          
+
         c = this.model.collection;
         context = _.extend({index:c.indexOf(this.model)}, this.model.attributes);
         html = templates["project-grid-item"](context);
@@ -20,14 +20,14 @@ define(
       },
 
       events: {
-        'click .project-item': 'click'
+        'click .project-item': '_click'
       },
 
-      click : function( e ) {
+      _click : function( e ) {
         e.preventDefault();
         var url = $(e.currentTarget).attr("href");
         Events.trigger("router:navigate", url);
-      }
+      },
 
     });
     return ProjectGridItemView;

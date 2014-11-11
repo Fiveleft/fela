@@ -48,14 +48,18 @@ define(
         Events.trigger( "mobilenav:open" );
         this.$main.addClass("snap-nav open");
         this.mobileNavOpen = true;
+        this.listenTo( Events, "breakpoint:change", this._breakpointChanged );
       },
 
       _closeMobileNav : function() {
         // console.log( "Nav._closeMobileNav" );
         Events.trigger( "mobilenav:close" );
+
         var self = this;
         this.$main.on( Events.transitionEnd, function(){self._clearMobileNav();} );
         this.$main.removeClass("open");
+
+        this.stopListening( Events, "breakpoint:change", this._breakpointChanged );
       },
 
       _clearMobileNav : function() {
@@ -69,6 +73,13 @@ define(
         if( this.onMobileNavClosed ) {
           this.onMobileNavClosed.call();
           this.onMobileNavClosed = false;
+        }
+      },
+
+      _breakpointChanged : function( breakpoint ) {
+        // console.log( "Nav._breakpointChanged", breakpoint ); 
+        if( this.mobileNavOpen ) {
+          this._closeMobileNav();
         }
       }
 

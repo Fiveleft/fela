@@ -61,6 +61,14 @@ section#work-section {
       color: $color-white;
     }
   }
+
+  
+
+  &.active {
+    .info {
+      background-color: rgba( $brand-black, 0.7 );
+    }
+  }
 }
 
 

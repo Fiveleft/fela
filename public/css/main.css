@@ -126,7 +126,7 @@ h4 {
     font-size: 18px;
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
   /* line 74, scss/core/_typography.scss */
   h1 {
     font-size: 48px;
@@ -287,17 +287,17 @@ main.snap-nav.open {
     padding: 0 15px;
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
   /* line 83, scss/core/_layout.scss */
   .container {
-    max-width: 1024px;
+    max-width: 1025px;
     padding: 0 20px;
   }
 }
-@media (min-width: 1280px) {
+@media (min-width: 1281px) {
   /* line 90, scss/core/_layout.scss */
   .container {
-    max-width: 1280px;
+    max-width: 1281px;
   }
 }
 /* line 2, scss/core/_nav.scss */
@@ -733,7 +733,7 @@ main.snap-nav.open {
     display: none;
   }
 }
-@media (min-width: 1024px) {
+@media (min-width: 1025px) {
   /* line 334, scss/core/_nav.scss */
   #top-nav .top-nav-items {
     padding-left: 120px;
@@ -827,26 +827,30 @@ section#work-section .project-view {
   font-size: 21px;
   color: white;
 }
+/* line 68, scss/sections/_work.scss */
+.project-item.active .info {
+  background-color: rgba(28, 28, 26, 0.7);
+}
 
 @media (min-width: 768px) {
-  /* line 71, scss/sections/_work.scss */
+  /* line 79, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 33.33333%;
   }
 
-  /* line 76, scss/sections/_work.scss */
+  /* line 84, scss/sections/_work.scss */
   .project-item .info {
     display: block;
   }
 }
-@media (min-width: 1024px) {
-  /* line 84, scss/sections/_work.scss */
+@media (min-width: 1025px) {
+  /* line 92, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 25%;
   }
 }
-@media (min-width: 1280px) {
-  /* line 92, scss/sections/_work.scss */
+@media (min-width: 1281px) {
+  /* line 100, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 25%;
   }
@@ -855,22 +859,27 @@ section#work-section .project-view {
 .project {
   height: 0;
   overflow: hidden;
+  position: relative;
 }
-/* line 8, scss/sections/_project.scss */
+/* line 9, scss/sections/_project.scss */
 .project.active {
   height: auto;
-  overflow: visible;
 }
 /* line 13, scss/sections/_project.scss */
-.project .project-inner {
-  padding: 60px 0 0;
+.project.open {
+  overflow: visible;
 }
 /* line 17, scss/sections/_project.scss */
+.project .project-inner {
+  padding: 60px 0 0;
+  position: relative;
+}
+/* line 22, scss/sections/_project.scss */
 .project .media {
   display: block;
   position: relative;
 }
-/* line 21, scss/sections/_project.scss */
+/* line 26, scss/sections/_project.scss */
 .project .media-inner {
   position: relative;
   width: 100%;
@@ -878,7 +887,7 @@ section#work-section .project-view {
   padding: 0 0 56.25%;
   background: #1c1c1a;
 }
-/* line 28, scss/sections/_project.scss */
+/* line 33, scss/sections/_project.scss */
 .project .media-container, .project .media-controls {
   display: block;
   position: absolute;
@@ -887,11 +896,11 @@ section#work-section .project-view {
   width: 100%;
   height: 100%;
 }
-/* line 35, scss/sections/_project.scss */
+/* line 40, scss/sections/_project.scss */
 .project .media-controls {
   z-index: 2;
 }
-/* line 37, scss/sections/_project.scss */
+/* line 42, scss/sections/_project.scss */
 .project .media-controls .inner {
   display: block;
   position: absolute;
@@ -906,7 +915,7 @@ section#work-section .project-view {
   -webkit-border-radius: 9999px;
   border-radius: 9999px;
 }
-/* line 47, scss/sections/_project.scss */
+/* line 52, scss/sections/_project.scss */
 .project .media-controls .icon {
   text-indent: -119988px;
   overflow: hidden;
@@ -918,20 +927,25 @@ section#work-section .project-view {
   height: 50px;
   background: rgba(133, 133, 128, 0.25);
 }
-/* line 54, scss/sections/_project.scss */
+/* line 59, scss/sections/_project.scss */
 .project .media-controls .play {
   display: block;
 }
-/* line 57, scss/sections/_project.scss */
+/* line 62, scss/sections/_project.scss */
 .project .media-controls .pause {
   display: none;
 }
-/* line 61, scss/sections/_project.scss */
+/* line 66, scss/sections/_project.scss */
 .project .media-container {
   z-index: 1;
   background: #1c1c1a;
+  background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgY3g9IjUwJSIgY3k9IiIgcj0iODAlIj48c3RvcCBvZmZzZXQ9IjEwJSIgc3RvcC1jb2xvcj0iI2I4YjhiMSIgc3RvcC1vcGFjaXR5PSIwLjI1Ii8+PHN0b3Agb2Zmc2V0PSI4MCUiIHN0b3AtY29sb3I9IiMxYzFjMWEiLz48L3JhZGlhbEdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background-size: 100%;
+  background-image: -moz-radial-gradient(center, ellipse cover, rgba(184, 184, 177, 0.25) 10%, #1c1c1a 80%);
+  background-image: -webkit-radial-gradient(center, ellipse cover, rgba(184, 184, 177, 0.25) 10%, #1c1c1a 80%);
+  background-image: radial-gradient(ellipse cover at center, rgba(184, 184, 177, 0.25) 10%, #1c1c1a 80%);
 }
-/* line 66, scss/sections/_project.scss */
+/* line 74, scss/sections/_project.scss */
 .project .close {
   display: block;
   position: absolute;
@@ -946,43 +960,70 @@ section#work-section .project-view {
   text-transform: capitalize;
   z-index: 3;
 }
-/* line 75, scss/sections/_project.scss */
+/* line 83, scss/sections/_project.scss */
 .project .info {
   margin-top: 30px;
 }
 
-/* line 81, scss/sections/_project.scss */
+/* line 89, scss/sections/_project.scss */
 .media-container.gallery .gallery-list {
   display: block;
   position: relative;
   width: 100%;
   height: 100%;
 }
-/* line 86, scss/sections/_project.scss */
+/* line 94, scss/sections/_project.scss */
 .media-container.gallery .gallery-item {
-  display: block;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   padding: 30px;
+  z-index: 5;
+  -moz-transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -o-transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-/* line 93, scss/sections/_project.scss */
+/* line 102, scss/sections/_project.scss */
+.media-container.gallery .gallery-item.active {
+  z-index: 6;
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+}
+/* line 106, scss/sections/_project.scss */
+.media-container.gallery .gallery-item.fade {
+  z-index: 7;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+}
+/* line 110, scss/sections/_project.scss */
 .media-container.gallery .img-container {
   display: block;
   position: relative;
   width: 100%;
   height: 100%;
-  background: no-repeat 50% 50%;
-  background-size: contain;
-}
-
-/* line 102, scss/sections/_project.scss */
-.media-container.video {
   text-align: center;
 }
-/* line 104, scss/sections/_project.scss */
+/* line 116, scss/sections/_project.scss */
+.media-container.gallery img {
+  display: inline-block;
+  width: auto;
+  height: 100%;
+  margin: 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  -moz-box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.8);
+  -webkit-box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 30px 5px rgba(0, 0, 0, 0.8);
+}
+
+/* line 126, scss/sections/_project.scss */
+.media-container.video {
+  text-align: center;
+  overflow: hidden;
+}
+/* line 129, scss/sections/_project.scss */
 .media-container.video video {
   font-size: 0;
   display: inline-block;
@@ -990,20 +1031,33 @@ section#work-section .project-view {
   width: auto;
   height: 100%;
 }
+/* line 136, scss/sections/_project.scss */
+.media-container.video .marker {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -6px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 9px solid #ee2a7b;
+}
 
 @media (min-width: 768px) {
-  /* line 115, scss/sections/_project.scss */
+  /* line 152, scss/sections/_project.scss */
   .project .project-inner {
     padding-top: 80px;
   }
 
-  /* line 120, scss/sections/_project.scss */
+  /* line 157, scss/sections/_project.scss */
   .media-container.gallery .gallery-item {
     padding: 20px;
   }
 }
-@media (min-width: 1024px) {
-  /* line 131, scss/sections/_project.scss */
+@media (min-width: 1025px) {
+  /* line 168, scss/sections/_project.scss */
   .media-container.gallery .gallery-item {
     padding: 30px;
   }

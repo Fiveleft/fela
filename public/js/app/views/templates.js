@@ -77,9 +77,9 @@ this["JST"]["project"] = Handlebars.template({"1":function(depth0,helpers,partia
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
   return "            <li class=\"gallery-item\" data-id=\""
     + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\n              <div class=\"img-container\" style=\"background-image:url("
+    + "\">\n              <div class=\"img-container\">\n                <img src=\""
     + escapeExpression(((helper = (helper = helpers.url || (depth0 != null ? depth0.url : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"url","hash":{},"data":data}) : helper)))
-    + ");\"></div>\n            </li>\n";
+    + "\" />\n              </div>\n            </li>\n";
 },"4":function(depth0,helpers,partials,data) {
   var stack1, buffer = "        <div class=\"media-container video\">\n          <video ";
   stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.video : depth0)) != null ? stack1.poster : stack1), {"name":"if","hash":{},"fn":this.program(5, data),"inverse":this.noop,"data":data});
@@ -93,7 +93,7 @@ this["JST"]["project"] = Handlebars.template({"1":function(depth0,helpers,partia
   buffer += "\n            ";
   stack1 = helpers['if'].call(depth0, ((stack1 = ((stack1 = (depth0 != null ? depth0.video : depth0)) != null ? stack1.source : stack1)) != null ? stack1.webm : stack1), {"name":"if","hash":{},"fn":this.program(11, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "\n          </video>\n        </div>\n";
+  return buffer + "\n          </video>\n          <span class=\"marker\"></span>\n        </div>\n";
 },"5":function(depth0,helpers,partials,data) {
   var stack1, lambda=this.lambda, escapeExpression=this.escapeExpression;
   return "poster=\""

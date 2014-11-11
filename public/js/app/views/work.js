@@ -7,9 +7,10 @@ define(
       $projectContainer,
       $activeContainer,
       $projectList,
+      $gridItems,
       activeSlug,
-      activeView,
-      lastView,
+      activeView = null,
+      lastView = null,
       containerIndex = 1;
 
 
@@ -49,17 +50,17 @@ define(
 
       render: function() {
         var projectGridView;
+
         this.collection.each( function( projectItem ){
           projectGridView = new ProjectGridItemView({ model:projectItem });
           $projectList.append( projectGridView.render().el );
         }, this);
 
-        //console.log( "workView.render()" );
+        $gridItems = $(".project-item", this.$projectList );
 
         if( activeSlug ) {
           this.openProject( activeSlug );
         }
-
         return this;
       },
 
@@ -77,6 +78,12 @@ define(
         var itemRow = Math.floor( gridIndex / gridCols );
         var rowCol1 = gridCols * itemRow;
         var $firstItemInRow = $("[data-index='" + rowCol1 + "']", $projectList ).parent();
+
+        // Activate the correct project
+        $gridItems.each(function(i,el){
+          // console.log( el );
+          $(el).toggleClass( "active", $(el).attr("data-slug")===slug );
+        });
 
         // If ProjectView is not set
         if( !projectView ) {
@@ -105,13 +112,18 @@ define(
       },
 
       openProject : function () {
+        console.log( "Work.openProject() lastView:", lastView, " activeView:", activeView.model.get("slug") );
         if( lastView ) lastView.close();
         lastView = null;
         activeView.open();
       },
 
       closeProject : function () {
-        if( activeView ) activeView.close();
+        if( activeView === null ) {
+          return; 
+        }
+        console.log( "Work.closeProject()", activeView.model.get("slug") );
+        activeView.close();
         activeView = null;
       },
 
@@ -121,16 +133,21 @@ define(
         var slug = path[2];
         switch( target ) {
         case "work" : 
-          console.log( " show work view " );
+          // console.log( " show work view " );
           this.closeProject();
           break;
         case "project" : 
-          console.log( " show project view " );
+          // console.log( " show project view " );
           if( activeSlug === slug ) {
             this.openProject();
           }
           break;
         }
+      }, 
+
+      _breakpointChanged : function( breakpoint ) {
+        // console.log( "Work._breakpointChanged", breakpoint ); 
+        
       }
 
     });

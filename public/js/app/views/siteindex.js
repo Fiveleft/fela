@@ -11,7 +11,8 @@ define([
     'app/views/pageContentCollection',
     'app/views/partnerCollection',
     'app/views/work',
-    'app/views/scroller'
+    'app/views/scroller',
+    'app/models/breakpoints'
   ], 
   function(
     $,
@@ -25,7 +26,8 @@ define([
     PageContentCollectionView,
     PartnerCollectionView,
     WorkView,
-    ScrollerView
+    ScrollerView,
+    Breakpoints
   ){
     
     var SiteIndexView = Backbone.View.extend({
@@ -56,6 +58,7 @@ define([
 
         // Start the ScrollerView
         ScrollerView.start();
+        Breakpoints;
 
         this.listenTo( Events, "mobilenav:open", this._mobileNavOpen );
         this.listenTo( Events, "mobilenav:close", this._mobileNavClose );
@@ -77,7 +80,7 @@ define([
         var windowTop = -parseInt(this.$siteContent.css("margin-top"),10);
         this.$siteContent.css({"margin-top" : ""});
         window.scrollTo( 0, windowTop );
-      },
+      }
 
     });
 

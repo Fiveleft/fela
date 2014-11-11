@@ -40,8 +40,9 @@ define(
 
       open : function() {
         // console.log("ProjectView[" + this.model.attributes.slug + "].open()" );
+        this.$el.addClass("active");
+
         TweenLite.to( this.$el, 0.5, {
-          // delay: 0.25,
           height: window.innerHeight,
           ease: Expo.easeInOut,
           onComplete: this._openComplete,
@@ -51,10 +52,10 @@ define(
 
       _openComplete : function() {
         this.$el
-          .addClass("active")
+          .addClass("open")
           .css({"height" : ""});
 
-        console.log("ProjectView[" + this.model.attributes.slug + "].openComplete()" );
+        // console.log("ProjectView[" + this.model.attributes.slug + "].openComplete()" );
         this.mediaView.start();
       },
 
@@ -62,10 +63,12 @@ define(
         // console.log("ProjectView[" + this.model.attributes.slug + "].close()" );
         this.mediaView.stop();
 
+        this.$el.removeClass("open");
+
         TweenLite.to( this.$el, 0.5, {
-          // delay: 0.25,
           height: 0,
           ease: Expo.easeInOut,
+          clearProps: "all",
           onComplete: this._closeComplete,
           onCompleteScope: this
         });
@@ -78,7 +81,7 @@ define(
 
       clickClose : function( e ) {
         e.preventDefault();
-        this.close();
+        // this.close();
         Events.trigger( "router:navigate", "/work" );
       },
 
