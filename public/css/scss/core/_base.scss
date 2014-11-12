@@ -1,0 +1,41 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: $color-text;
+}
+* {
+  @include box-sizing( border-box );
+}
+ul, li {
+  list-style-type:none;
+  padding: 0;
+  margin: 0;
+}
+p {
+  max-width: 40em;
+  margin: 0;
+  padding: 0 0 1em;
+}
+a {
+  color: $brand-black;
+  text-decoration: none;
+}
+p, li {
+  a {
+    color: $brand-black;
+    text-decoration: underline;
+    @include transition( color 0.3s $easeInOutCubic );
+    &:hover {
+      color: $brand-magenta;
+      text-decoration: none;
+    }
+  }
+}
+button {
+  display: inline-block;
+  border: none;
+  padding: 0 10px;
+  text-align: center;
+  background: $brand-black;
+  color: $color-grey-white;
+}

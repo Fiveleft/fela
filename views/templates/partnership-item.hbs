@@ -1,13 +1,8 @@
-{{#if id}}
-    <li class="partner-item {{type}}">
-        {{#if info.website}}
-        <a class="partner-link" href="{{info.website}}" target="_blank" data-id="{{id}}">
-            <i class="icon"></i><span class="label">{{title}}</span>
-        </a>
-        {{else}}
-        <span class="partner-link" data-id="{{id}}">
-            <span class="label">{{title}}</span>
-        </span>
-        {{/if}}
-    </li>
+
+{{#if info.website}}
+<a class="partner-link" href="{{info.website}}" target="_blank" data-id="{{id}}">
+<i class="icon"></i><span class="label">{{{title}}}</span>
+</a>
+{{else}}
+<span class="partner-link" data-id="{{id}}">{{{title}}}</span>
 {{/if}}

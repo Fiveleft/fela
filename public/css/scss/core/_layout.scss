@@ -1,0 +1,93 @@
+// _layout.scss
+main {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  @include transition( margin-left 0.3s $easeInOutCubic );
+}
+#site-content {
+  position: relative;
+  height: 100%;
+  z-index: 3;
+}
+#site-content > section {
+  width: 100%;
+  min-height: 100%;
+  padding: 60px 0 0;
+  .section-inner {
+  }
+}
+#canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background: #FFFFFF;
+}
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+footer .container {
+  padding: 20px 0 0;
+}
+
+main {
+  #top-nav {
+    visibility:hidden;
+  }
+}
+
+main.snap-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  #mobile-nav {
+    position: absolute;
+  }
+  #top-nav {
+    visibility: visible;
+  }
+  #site-content {
+    pointer-events: none;
+  }
+  #canvas {
+    position: absolute;
+    @include box-shadow( 0 0 20px 0 rgb(0,0,0));
+  }
+  &.open {
+    margin-left: -200px;
+  }
+}
+
+
+@media ( min-width:$width-sm-min ) {
+
+  main {
+    #top-nav {
+      visibility: visible;
+    }
+  }
+  .container {
+    max-width: $width-sm-min;
+    padding: 0 15px;
+  }
+}
+
+@media ( min-width:$width-md-min ) {
+  .container {
+    max-width: $width-md-min;
+    padding: 0 20px;
+  }
+}
+
+@media ( min-width:$width-lg-min ) {
+  .container {
+    max-width: $width-lg-min;
+  }
+}

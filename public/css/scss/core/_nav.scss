@@ -1,0 +1,347 @@
+// _nav.scss
+#top-nav, #mobile-nav {
+  position: fixed;
+  top: 0;
+  background: rgba( $color-grey-black, 0.95 );
+  color: $color-grey-light;
+  @include navFont();
+
+  a { 
+    color: $color-grey-light; 
+    text-decoration: none;
+  }
+  .brand-name {
+    display: block;
+    width: 80px; 
+    height: 30px; 
+    margin: 5px;
+    background-position: 50% 50%;
+    background: url( /images/brand-name.svg) no-repeat;
+    background-size: contain;
+    @include hide-text();
+  }
+}
+
+#mobile-nav {
+  display: block;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  padding: 0 50px 0 0;
+  z-index: 1000;
+
+  a.logo, button {
+    height: 40px;
+  }
+  a.logo {
+    display: inline-block;
+    padding: 0 15px 0 5px;
+    @include clearfix;
+  }
+  .brand-icon {
+    display: block;
+    float: left;
+    width: 40px; height: 40px;
+    background: url( /images/brand-icon.png) no-repeat 50% 50%;
+  }
+  .brand-name {
+    display: block;
+    float: left;
+    width: 80px; height: 30px; 
+    margin: 5px;
+    background-position: 50% 50%;
+    background-size: contain;
+  }
+  button {
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 100%;
+    padding: 10px 15px 11px 15px;
+    background-color: transparent;
+    @include transition( background-color 0.3s $easeInOutCubic );
+    &:focus {
+      outline: none;
+    }
+    .icon {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      @include hide-text();
+    }
+    .bar {
+      position: absolute;
+      display: block;
+      width: 100%;
+      height: 3px;
+      left: 50%;
+      margin-left: -50%;
+      margin-top: -1px;
+      background-color: $color-grey-light;
+      @include transition( all 0.3s $easeInOutCubic );
+      @include transition-delay( 0.3s );
+      &:first-child {
+        top: 1px;
+      }
+      &:nth-child(2) {
+        top: 9px;
+      }
+      &:last-child {
+        top: 17px;
+      }
+    }
+  }
+}
+.snap-nav.open {
+
+  #mobile-nav button {
+    background-color: $brand-magenta;
+    .bar {
+      background-color: $color-white;
+      &:first-child {
+        top: 50%;
+        height: 4px;
+        margin-top: -2px;
+        @include rotate( 315deg );
+      }
+      &:nth-child(2) {
+        @include opacity(0);
+      }
+      &:last-child {
+        top: 50%;
+        height: 4px;
+        margin-top: -2px;
+        @include rotate( -315deg );
+      }
+    }
+  }
+}
+
+
+#top-nav {
+
+  .connect-title {
+    display: block;
+    @include italicFont();
+    text-transform: none;
+  }
+
+  .connect-nav {
+    .nav-link.social {
+      position: relative;
+      display: block;
+      width: 40px; 
+      height: 40px;
+      padding: 5px;
+      .icon {
+        position: relative;
+        display: block;
+        width: 100%; height: 100%;
+        @include hide-text();
+        @include border-radius(9999px);
+        background: rgba( $brand-grey, 0.2 );
+      }
+    }
+  }
+}
+
+
+
+@media ( max-width:$width-xs-max ) {
+
+  #top-nav {
+    right: 0;
+    width: 200px; 
+    height: 100%;
+    min-height: 100%;
+    z-index: 1;
+    background-color: darken($color-grey-dark, 15%);
+    .nav-item {
+      display: block;
+    }
+    .container {
+      padding: 0;
+      overflow: hidden;
+    }
+    .nav-link {
+      display: block;
+      padding: 10px;
+      padding-left: 20px;
+      line-height: 1.25;
+    }
+
+    .nav-link.logo {
+      line-height: 0;
+      height: 40px;
+      padding: 0 0 0 15px;      
+      .brand-name {
+        display: inline-block;
+        width: 80px; height: 30px; 
+        margin: 5px;
+        background-position: 50% 50%;
+        background-size: contain;
+      }
+    }
+    
+    // Borders
+    .top-nav-items {
+      padding-bottom: 10px;
+      border-bottom: 1px solid $brand-black;
+    }
+    .nav-item.home {
+      border-bottom: 1px solid $brand-black;
+    }
+    .nav-item.work {
+      border-top: 1px solid $color-border;
+      padding-top: 10px;
+    }
+
+    .connect-nav {
+      @include clearfix;
+      padding-top: 10px;
+      border-top: 1px solid $color-border;
+      .connect-title {
+        display: block;
+        height: 24px;
+        line-height: 24px;
+        padding-left: 20px;
+      }
+      .pipe {
+        display: none;
+      }
+      .nav-link.location {
+        padding-top: 10px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid $brand-black;
+      }
+      .info-item, .social-item {
+        display: block;
+        float: left;
+      }
+      .info-item {
+        width: 100%;
+        margin-bottom: 10px;
+        border-bottom: 1px solid $color-border;
+      }
+      .social-item {
+        width: auto;
+        margin-right: 5px;
+      }
+      .nav-link.facebook {
+        margin-left: 15px;
+      }
+    }
+  }
+}
+
+
+@media ( min-width:$width-sm-min ) {
+
+  #mobile-nav {
+    display: none;
+  }
+  #top-nav {
+    display: block;
+    width: 100%;
+    height: 40px;
+    min-height: 0;
+    z-index: 1000;
+    font-size: 14px;
+    overflow: visible;
+
+    .container {
+      @include clearfix;
+    }
+    .top-nav-items, .connect-nav {
+      @include clearfix;
+    }
+    .top-nav-items {
+      position: relative;
+      display: block;
+      padding-left: 80px;
+      float: left;
+
+      .nav-item.home {
+        position: absolute;
+        top: 0; left: 0;
+        width: 70px;
+        height: auto;
+        @include hide-text();
+      }
+      .nav-link.logo {
+        display: block;
+      }
+      .brand-logo {
+        display: block;
+        width: 100%; height: 0; 
+        padding: 0 0 100%;
+        background: $brand-black url( /images/brand-logo.svg) no-repeat 50% 0;
+        background-size: contain;
+      }
+      .brand-name {
+        display: block;
+        width: 100%; height: 0; 
+        padding: 0 0 40%;
+        margin: 0;
+        background-position: 0 100%;
+        background-size: contain;
+      }
+      .nav-item:not( .home ) {
+        display: block;
+        float: left;
+        padding: 0;
+        .nav-link {
+          display: block;
+          padding: 10px 15px;
+          line-height: 20px;
+        }
+      }
+    }
+
+    .connect-nav {
+      display: block;
+      float: right;
+    }
+    .connect-nav li {
+      float: left;
+    }
+    .connect-nav .info-item {
+      text-align: left;
+      margin-right: 10px;
+      span, a {
+        display: inline-block;
+        vertical-align: top;
+        padding: 10px 0;
+        margin: 0 5px;
+        line-height: 20px;
+      }
+      .connect-title {
+        font-size: 16px;
+        line-height: 1.4;
+      }
+      .pipe {
+        margin: 0;
+      }
+      .connect-title, .location, .pipe {
+        display: none;
+      }
+    }
+  }
+}
+
+@media ( min-width:$width-md-min ) {
+  #top-nav {
+    .top-nav-items {
+      padding-left: 120px;
+    }
+    .connect-nav .info-item {
+      .connect-title, .location, .pipe {
+        display: inline-block;
+      }
+    }
+  }
+}
+

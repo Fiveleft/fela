@@ -1,94 +1,34 @@
 
 {{#contentFor 'pageStyles'}}
 	<link rel="stylesheet" href="/css/main.css">
-	{{#if config.localScripts }}
-	    <script src="/js/vendor/modernizr.min.js"></script>
-	{{else}}
-	    <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
-	{{/if}}
 {{/contentFor}}
-
 
 {{#contentFor 'pageScripts'}}
 	{{>fonts }}	
+	<script src="/js/vendor/modernizr/modernizr.js"></script>
+	<script id="site-vars" hidden> var __cdn='{{cdn}}'; </script>
 {{/contentFor}}
 
-{{#contentFor 'inlineScripts'}}
-	
-	{{#if config.localScripts }}
-	    <!-- Local Vendor Files: -->
-		<script src="/js/vendor/jquery-1.11.0.min.js"></script>
-		<script src="/js/vendor/native.history.js"></script>
-		<script src="/js/vendor/preloadjs-0.4.0.min.js"></script>
-		<script src="/js/vendor/TweenMax.min.js"></script>
-		<script src="/js/vendor/ScrollToPlugin.min.js"></script>
-		<script src="/js/vendor/handlebars-v1.3.0.js"></script>
-
-	{{else}}
-	    <!-- CDNs: -->
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/history.js/1.8/bundled/html4+html5/native.history.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.10.0/ScrollToPlugin.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/gsap/1.10.0/TweenMax.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/PreloadJS/0.4.0/preloadjs.min.js"></script>
-		<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.2/handlebars.min.js"></script>
-	{{/if}}
-
-	
-	{{#if config.minifiedScripts}}
-		<!-- TODO: add minification to grunt and put respective files here -->
-	{{else}}
-		<script src="/js/vendor/dat.gui.min.js"></script>
-
-		<!-- Up-front requirements -->
-		<script src="/js/fiveleft/core/Utils.js"></script>
-		<script src="/js/fiveleft/core/SineValue.js"></script>
-		<script src="/js/fiveleft/core/Color.js"></script>
-		<script src="/js/fiveleft/core/Vector.js"></script>
-		<script src="/js/fiveleft/core/MotionVector.js"></script>
-		<script src="/js/fiveleft/core/Rectangle.js"></script>
-		
-		<script src="/js/fiveleft/drawing/RegPoint.js"></script>
-		<script src="/js/fiveleft/drawing/SpriteSheet.js"></script>
-		<script src="/js/fiveleft/drawing/CompositionLayout.js"></script>
-		<script src="/js/fiveleft/drawing/BrushPoint.js"></script>
-		<script src="/js/fiveleft/drawing/Brush.js"></script>
-		<script src="/js/fiveleft/drawing/ShapeBuilder.js"></script>
-		<script src="/js/fiveleft/drawing/DrawingAPI.js"></script>
-
-		<script src="/js/fiveleft/model/ApplicationData.js"></script>
-		<script src="/js/fiveleft/model/ProjectData.js"></script>
-		<script src="/js/fiveleft/view/templates.js"></script>
-		<script src="/js/fiveleft/view/MediaController.js"></script>
-		<script src="/js/fiveleft/view/Project.js"></script>
-		<script src="/js/fiveleft/view/NavigationView.js"></script>
-		<script src="/js/fiveleft/view/SectionAbstract.js"></script>
-		<script src="/js/fiveleft/view/SectionWelcome.js"></script>
-		<script src="/js/fiveleft/view/SectionWork.js"></script>
-		<script src="/js/fiveleft/view/SectionInfo.js"></script>
-		<script src="/js/fiveleft/view/SectionDrawing.js"></script>
-		<script src="/js/fiveleft/view/SectionConnect.js"></script>
-		<script src="/js/fiveleft/Events.js"></script>
-		<script src="/js/fiveleft/Application.js"></script>
-	{{/if}}
-
-	
+<main role="main" class="">
+	<header id="header">
+		{{>main/header}}
+	</header>
+	<article id="site-content" class="container">
+		{{>main/section_home}}
+		{{>main/section_work}}
+		{{>main/section_info}}
+		{{>main/section_connect}}
+		<footer id="footer">
+			{{>main/footer}}
+		</footer>
+	</article>
+	<canvas id="canvas"></canvas>	
+</main>
+{{#contentFor 'inlineScripts'}} 
+	<script data-main="/js/init" src="/js/vendor/requirejs/require.js"></script>
 {{/contentFor}}
 
-
-<header id="header">
-	{{>main/navigation}}
-</header>
-<div id="main">
-	<div class="main-inner section-container">
-		{{>main/section-welcome}}
-		{{>main/section-work}}
-		{{>main/section-info}}
-		{{>main/section-drawing}}
-		{{>main/section-connect}}
-	</div>
-</div>
-
-
-
+<span hidden id="data-api-projects" data-json='{{projects}}'></span>
+<span hidden id="data-api-partners" data-json='{{partners}}'></span>
+<span hidden id="data-api-content" data-json='{{pageContent}}'></span>
 

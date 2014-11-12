@@ -1,79 +1,89 @@
-var express = require("express")
-	,routes = require("./routes")
-	,mysql = require("mysql")
-	,fs = require("fs")
-	,http = require("http")
-	,sockets = require("socket.io")
-	,path = require("path")
-	,envConfig = require("./config.json")
-	,exphbs = require("express3-handlebars")
-	,logfmt = require("logfmt");
+var express = require('express'),
+  path = require('path'),
+  favicon = require('serve-favicon'),
+  logger = require('morgan'),
+  cookieParser = require('cookie-parser'),
+  bodyParser = require('body-parser'),
+  hbs = require("hbs");
 
-var app = express()
-	,router = express.Router()
-	,server = http.createServer(app)
-	,io = sockets.listen(server)
-	,socketCount = 0
-	,port = process.env.PORT || 3000
-	,node_env = process.env.NODE_ENV || 'development'
-	,config = envConfig[node_env]
-	,routeFiles = fs.readdirSync( path.join(__dirname, "routes") );
+// Application Instantiation
+var app = module.exports = express();
+
+// Routes
+var indexRoutes = require('./routes/index'),
+  users = require('./routes/users'),
+  api = require('./routes/api');
 
 
+// View engine setup
+// Set Handlebars as Express Rendering engine
+app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "hbs");
 
-app.set( "config", config );
-app.set( "pageContent", {
-	title : "Fiveleft is a creative digital studio focusing on interactive development located in beautiful Seattle WA"
+// Set Handlebars as Express Rendering engine
+hbs.localsAsTemplateData(app);
+hbs.registerPartials(__dirname + '/views/partials');
+// hbs.registerPartials(__dirname + '/views/templates');
+hbs.registerHelper('asset', function(file) {
+  return app.locals.CDN + file;
 });
-var data = {
-    content : app.get("pageContent")
-    ,config : app.get("config")
-  };
-
-
-// Catch Public Static files
-app.use( express.static( path.join(__dirname, '/public')) );
-
-
-// Use Routefiles to create unique routes
-routeFiles.forEach( function( file ) {
-	var filepath = path.join( __dirname, "routes", file )
-		,route = require(filepath);
-	route.init(app);
+hbs.registerHelper('block', function(name){
+  var blocks = this._blocks;
+  var content = blocks && blocks[name];
+  return content ? content.join('\n') : null;
+});
+hbs.registerHelper('contentFor', function(name, options){
+  var blocks = this._blocks || (this._blocks = {});
+  var block = blocks[name] || (blocks[name] = []); //Changed this to [] instead of {}
+  block.push(options.fn(this)); 
 });
 
+// Settings
+app.locals.CDN = '//cms.fiveleft.com/media/';
+app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
+// app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Socket Connection
-// io.sockets.on('connection', function (socket) {
-// 	socket.emit('news', { hello: 'world' });
-// 	socket.on('my other event', function (data) {
-// 		console.log(data);
-// 	});
-// });
-// 
+// Set Routes
+app.use('/users', users);
+app.use('/api', api);
+app.use( indexRoutes );
 
-// Set Handlebars as Express Rendering Engine
-app.engine( "hbs", exphbs({
-	partialsDir: __dirname + "/views/partials"
-	,extname: ".hbs"
-	,defaultLayout: "main"
-	,helpers: {
-      block: function(name){
-        var blocks = this._blocks;
-            content = blocks && blocks[name];
-        return content ? content.join('\n') : null;
-      },
-      contentFor: function(name, options){
-        var blocks = this._blocks || (this._blocks = {});
-            block = blocks[name] || (blocks[name] = []); //Changed this to [] instead of {}
-        block.push(options.fn(this));
-      }
-    }
-}) );
-app.set( "view engine", "hbs" );
-app.set( "views", __dirname + "/views" );
-app.set( "port", port );
-
-app.listen( app.get("port"), function() {
-	console.log("Listening on " + app.get("port") );
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  console.log( err );
+  next(err);
 });
+
+// error handlers
+
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+  app.locals.CDN = '/assets/';
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  });
+}
+
+// production error handler
+// no stacktraces leaked to user
+app.use(function(err, req, res, next) {
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
+});
+
+
+module.exports = app;
