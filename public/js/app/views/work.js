@@ -147,7 +147,7 @@ define(
         if( isBelowPrev ) {
           $scrollTarget.addClass("offset").children().css("top", -window.innerHeight);
         }else{
-          $scollTarget.removeClass("offset");
+          $scrollTarget.removeClass("offset");
         }
       }
 
