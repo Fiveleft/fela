@@ -111,6 +111,7 @@ define(
         // console.log( "Work.closeProject()", activeView.model.get("slug") );
         activeView.close();
         activeView = null;
+        $scrollTarget.removeClass("offset");
       },
 
       _scrollTo : function () {
@@ -134,18 +135,20 @@ define(
           gridIndex = parseInt(gridItem.attr("data-index"), 10),
           gridCols = Math.round( $projectList[0].clientWidth / gridItem[0].clientWidth ),
           itemRow = Math.floor( gridIndex / gridCols ),
-          prevRowLastCol = (gridCols * itemRow) - 1,
-          $addAfterItem = $("[data-index='" + prevRowLastCol + "']", $projectList ).parent();
+          itemIndex = gridCols * itemRow,
+          isBelowPrev = false,
+          $addBeforeItem = $("[data-index='" + itemIndex + "']", $projectList ).parent();
 
+        $activeContainer.insertBefore( $addBeforeItem ); 
+        $scrollTarget.insertBefore( $activeContainer );
 
+        isBelowPrev = $scrollTarget.prevAll(".project-view").children().length > 0;
 
-        if( $addAfterItem.length ) {
-          $scrollTarget.insertAfter( $addAfterItem );
+        if( isBelowPrev ) {
+          $scrollTarget.addClass("offset").children().css("top", -window.innerHeight);
         }else{
-          $projectList.prepend( $scrollTarget );
+          $scollTarget.removeClass("offset");
         }
-        $activeContainer.insertAfter( $scrollTarget );        
-
       }
 
     });

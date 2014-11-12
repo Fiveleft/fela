@@ -11,11 +11,19 @@ section#work-section {
     padding:  5px;
   }
   .scroll-target {
+    position:relative;
     display: block;
     float: left;
     width: 100%;
     height: 0;
     padding: 0 5px;
+    &.offset {
+      .scroll-to {
+        position:absolute;
+        width: 100%; height: 0;
+        border:1px solid #0000FF;
+      }
+    }
   }
   .project-view {
     float: left;

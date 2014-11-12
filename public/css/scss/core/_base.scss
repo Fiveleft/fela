@@ -16,6 +16,11 @@ p {
   margin: 0;
   padding: 0 0 1em;
 }
+a, button {
+  &:focus {
+    outline:none;
+  }
+}
 a {
   color: $brand-black;
   text-decoration: none;

@@ -175,13 +175,18 @@ p {
   padding: 0 0 1em;
 }
 
-/* line 19, scss/core/_base.scss */
+/* line 20, scss/core/_base.scss */
+a:focus, button:focus {
+  outline: none;
+}
+
+/* line 24, scss/core/_base.scss */
 a {
   color: #1c1c1a;
   text-decoration: none;
 }
 
-/* line 24, scss/core/_base.scss */
+/* line 29, scss/core/_base.scss */
 p a, li a {
   color: #1c1c1a;
   text-decoration: underline;
@@ -190,13 +195,13 @@ p a, li a {
   -webkit-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 28, scss/core/_base.scss */
+/* line 33, scss/core/_base.scss */
 p a:hover, li a:hover {
   color: #ee2a7b;
   text-decoration: none;
 }
 
-/* line 34, scss/core/_base.scss */
+/* line 39, scss/core/_base.scss */
 button {
   display: inline-block;
   border: none;
@@ -778,20 +783,28 @@ section#work-section .project-grid-item {
 }
 /* line 13, scss/sections/_work.scss */
 section#work-section .scroll-target {
+  position: relative;
   display: block;
   float: left;
   width: 100%;
   height: 0;
   padding: 0 5px;
 }
-/* line 20, scss/sections/_work.scss */
+/* line 21, scss/sections/_work.scss */
+section#work-section .scroll-target.offset .scroll-to {
+  position: absolute;
+  width: 100%;
+  height: 0;
+  border: 1px solid #0000FF;
+}
+/* line 28, scss/sections/_work.scss */
 section#work-section .project-view {
   float: left;
   width: 100%;
   padding: 0 5px;
 }
 
-/* line 27, scss/sections/_work.scss */
+/* line 35, scss/sections/_work.scss */
 .project-item {
   display: block;
   position: relative;
@@ -799,7 +812,7 @@ section#work-section .project-view {
   height: 0;
   padding: 0 0 100%;
 }
-/* line 34, scss/sections/_work.scss */
+/* line 42, scss/sections/_work.scss */
 .project-item .project-grid-item-inner {
   display: block;
   position: absolute;
@@ -809,7 +822,7 @@ section#work-section .project-view {
   height: 100%;
   overflow: hidden;
 }
-/* line 40, scss/sections/_work.scss */
+/* line 48, scss/sections/_work.scss */
 .project-item .info, .project-item .media {
   position: absolute;
   top: 0;
@@ -817,19 +830,19 @@ section#work-section .project-view {
   width: 100%;
   height: 100%;
 }
-/* line 45, scss/sections/_work.scss */
+/* line 53, scss/sections/_work.scss */
 .project-item .media-inner, .project-item .info-inner {
   display: block;
   position: relative;
   width: 100%;
   height: 100%;
 }
-/* line 50, scss/sections/_work.scss */
+/* line 58, scss/sections/_work.scss */
 .project-item .media {
   display: block;
   z-index: 1;
 }
-/* line 54, scss/sections/_work.scss */
+/* line 62, scss/sections/_work.scss */
 .project-item .media-content {
   display: block;
   position: absolute;
@@ -840,41 +853,41 @@ section#work-section .project-view {
   background: no-repeat 50% 50%;
   background-size: cover;
 }
-/* line 62, scss/sections/_work.scss */
+/* line 70, scss/sections/_work.scss */
 .project-item .info {
   display: none;
   z-index: 2;
   padding: 5%;
 }
-/* line 66, scss/sections/_work.scss */
+/* line 74, scss/sections/_work.scss */
 .project-item .info h1, .project-item .info h2 {
   font-size: 21px;
   color: white;
 }
-/* line 75, scss/sections/_work.scss */
+/* line 83, scss/sections/_work.scss */
 .project-item.active .info {
   background-color: rgba(28, 28, 26, 0.7);
 }
 
 @media (min-width: 768px) {
-  /* line 86, scss/sections/_work.scss */
+  /* line 94, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 33.33333%;
   }
 
-  /* line 91, scss/sections/_work.scss */
+  /* line 99, scss/sections/_work.scss */
   .project-item .info {
     display: block;
   }
 }
 @media (min-width: 1025px) {
-  /* line 99, scss/sections/_work.scss */
+  /* line 107, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 25%;
   }
 }
 @media (min-width: 1281px) {
-  /* line 107, scss/sections/_work.scss */
+  /* line 115, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 25%;
   }
