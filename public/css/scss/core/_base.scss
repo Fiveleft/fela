@@ -17,8 +17,19 @@ p {
   padding: 0 0 1em;
 }
 a {
-  color: $brand-magenta;
+  color: $brand-black;
   text-decoration: none;
+}
+p, li {
+  a {
+    color: $brand-black;
+    text-decoration: underline;
+    @include transition( color 0.3s $easeInOutCubic );
+    &:hover {
+      color: $brand-magenta;
+      text-decoration: none;
+    }
+  }
 }
 button {
   display: inline-block;

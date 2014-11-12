@@ -10,6 +10,13 @@ section#work-section {
     width: 50%;
     padding:  5px;
   }
+  .scroll-target {
+    display: block;
+    float: left;
+    width: 100%;
+    height: 0;
+    padding: 0 5px;
+  }
   .project-view {
     float: left;
     width: 100%;
@@ -62,7 +69,7 @@ section#work-section {
     }
   }
 
-  
+
 
   &.active {
     .info {

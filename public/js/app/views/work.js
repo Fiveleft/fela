@@ -6,6 +6,7 @@ define(
     var self,
       $projectContainer,
       $activeContainer,
+      $inactiveContainer,
       $projectList,
       $gridItems,
       activeSlug,
@@ -15,18 +16,17 @@ define(
 
 
     function toggleActiveContainer() {
-      var oldC, newC;
 
-      oldC = $($projectContainer[containerIndex]);
+      // Inactive Container is now current container
+      $inactiveContainer = $($projectContainer[containerIndex]);
+      $inactiveContainer.removeClass("active");
+
+      // Update Container index
       containerIndex = (containerIndex+1) % 2;
-      newC = $($projectContainer[containerIndex]);
-      oldC
-        .removeClass("active")
-        .attr("data-scrollto", "");
-      newC
-        .addClass("active")
-        .attr("data-scrollto", "project");
-      return newC;
+
+      // Active container is the toggled 
+      $activeContainer = $($projectContainer[containerIndex]);
+      $activeContainer.addClass("active");
     }
 
 
@@ -37,12 +37,14 @@ define(
         this.setElement( $("#work-section")[0] );
         $projectList = $(".project-list", this.$el );
         $projectContainer = $(".project-view", $projectList);
-        $activeContainer = toggleActiveContainer();
+        $scrollTarget = $(".scroll-target", $projectList);
+        toggleActiveContainer();
 
         // Add EventListeners
         this.listenTo( Events, "project:set", this.setProject );
         this.listenTo( Events, "project:open", this.openProject );
         this.listenTo( Events, "project:close", this.closeProject );
+        this.listenTo( Events, Events.breakpoint, this._positionActiveContainer );
         this.listenTo( Events, Events.scrollTo, this._scrollTo );
 
         this.render();
@@ -58,63 +60,47 @@ define(
 
         $gridItems = $(".project-item", this.$projectList );
 
-        if( activeSlug ) {
-          this.openProject( activeSlug );
-        }
+        // Open project if activeSlug is set
+        if( activeSlug ) this.openProject( activeSlug );
+
         return this;
       },
 
       setProject : function ( slug ) {
 
+        var projectData = this.collection.findWhere({"slug":slug}),
+          projectView = projectData.getView();
+
         // Define the activeSlug first.
         activeSlug = slug;
 
-        // Get Data and View
-        var projectData = this.collection.findWhere({"slug":slug});
-        var projectView = projectData.getView();
-        var gridItem = $("[data-slug='" + slug + "']", $projectList );
-        var gridIndex = parseInt(gridItem.attr("data-index"), 10);
-        var gridCols = Math.round( $projectList[0].clientWidth / gridItem[0].clientWidth );
-        var itemRow = Math.floor( gridIndex / gridCols );
-        var rowCol1 = gridCols * itemRow;
-        var $firstItemInRow = $("[data-index='" + rowCol1 + "']", $projectList ).parent();
-
-        // Activate the correct project
+        // Activate the correct project grid item
         $gridItems.each(function(i,el){
-          // console.log( el );
           $(el).toggleClass( "active", $(el).attr("data-slug")===slug );
         });
+
+        // Position the new Active Container
+        toggleActiveContainer();
+        this._positionActiveContainer();
 
         // If ProjectView is not set
         if( !projectView ) {
           projectView = new ProjectView({model:projectData});
           projectData.setView( projectView );
         }
-
         // Swap Active Views
-        if( activeView ) {
-          lastView = activeView;
-          lastView.deactivate();
-        }
+        if( activeView ) lastView = activeView;
         activeView = projectView;
-        projectView.activate();
-
-        // Clear and update the activeContainer
-        $activeContainer = toggleActiveContainer();
-        $activeContainer.empty().append( projectView.render().el );
-
-        // Prepend Active Container before the first gridItem in the targeted row
-        if( $firstItemInRow.prev().hasClass("project-view") ) {
-          $activeContainer.insertBefore( $firstItemInRow.prev() );
-        }else{
-          $activeContainer.insertBefore( $firstItemInRow );
-        }
+        activeView.render();
       },
 
       openProject : function () {
-        console.log( "Work.openProject() lastView:", lastView, " activeView:", activeView.model.get("slug") );
+        // console.log( "Work.openProject() lastView:", lastView, " activeView:", activeView.model.get("slug") );
         if( lastView ) lastView.close();
         lastView = null;
+
+        // Clear and update the activeContainer
+        $activeContainer.empty().append( activeView.el );
         activeView.open();
       },
 
@@ -122,7 +108,7 @@ define(
         if( activeView === null ) {
           return; 
         }
-        console.log( "Work.closeProject()", activeView.model.get("slug") );
+        // console.log( "Work.closeProject()", activeView.model.get("slug") );
         activeView.close();
         activeView = null;
       },
@@ -133,21 +119,33 @@ define(
         var slug = path[2];
         switch( target ) {
         case "work" : 
-          // console.log( " show work view " );
           this.closeProject();
           break;
         case "project" : 
-          // console.log( " show project view " );
-          if( activeSlug === slug ) {
-            this.openProject();
-          }
+          if( activeSlug === slug ) this.openProject();
           break;
         }
-      }, 
+      },
 
-      _breakpointChanged : function( breakpoint ) {
-        // console.log( "Work._breakpointChanged", breakpoint ); 
-        
+      _positionActiveContainer : function() {
+
+        // Get Data and View
+        var gridItem = $gridItems.filter(".active"),
+          gridIndex = parseInt(gridItem.attr("data-index"), 10),
+          gridCols = Math.round( $projectList[0].clientWidth / gridItem[0].clientWidth ),
+          itemRow = Math.floor( gridIndex / gridCols ),
+          prevRowLastCol = (gridCols * itemRow) - 1,
+          $addAfterItem = $("[data-index='" + prevRowLastCol + "']", $projectList ).parent();
+
+
+
+        if( $addAfterItem.length ) {
+          $scrollTarget.insertAfter( $addAfterItem );
+        }else{
+          $projectList.prepend( $scrollTarget );
+        }
+        $activeContainer.insertAfter( $scrollTarget );        
+
       }
 
     });

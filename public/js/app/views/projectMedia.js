@@ -12,8 +12,6 @@ define(
       },
 
       render : function() {
-        console.log( "ProjectMediaView.render()", this.el );
-        
         this.$mediaContainer = $(".media-container", this.$el);
         this.isGallery = this.$mediaContainer.hasClass('gallery');
         this.isVideo = this.$mediaContainer.hasClass('video');
@@ -42,18 +40,26 @@ define(
 
       start : function() {
         this.playing = true;
+        this.$el.addClass( "playing" );
         if( this.isGallery ) this._startGallery();
         if( this.isVideo ) this.video.play();
       },
 
       stop : function() {
+        this.$el.removeClass( "playing" );
         if( this.isGallery ) this._stopGallery();
         if( this.isVideo ) this.video.pause();
         this.playing = false;
       },
 
       _updateVideo : function() {
-        if( !_.isNumber(this.video.duration) ) return;
+        if( !_.isNumber(this.video.duration) ) {
+          return;
+        }
+        if( this.video.currentTime < 1 ) {
+          this.$videoMarker.css("left", (p*100)+"%");
+          return;
+        }
         var p = this.video.currentTime / this.video.duration;
         TweenLite.to( this.$videoMarker, 0.5, {left:(p*100)+"%", ease:Linear.easeNone});
       },
@@ -68,6 +74,8 @@ define(
       },
 
       _updateGallery : function() {
+        if( !this.playing ) return;
+
         this.galleryIndex = (this.galleryIndex == this.galleryItemCount-1) ? 0 : this.galleryIndex+1;
         var old = this.$galleryItems.filter(".active");
         var next = $(this.$galleryItems[this.galleryIndex]);
@@ -80,7 +88,6 @@ define(
       _togglePlay : function( e ) {
         e.preventDefault();
         this[ (this.playing ? "stop" : "start") ]();
-        console.log("ProjectMediaView.togglePlay()" );
         Events.trigger( "project:playMedia" );
       }
 

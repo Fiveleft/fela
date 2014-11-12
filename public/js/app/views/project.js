@@ -9,16 +9,6 @@ define(
         this.mediaView = new ProjectMediaView({ model:this.model });
       },
 
-      activate : function() {
-        // Events
-        // this.listenTo( Events, Events.scrollToEnd, this._scrollToEnd );
-      },
-
-      deactivate : function() {
-        // Events
-        // this.stopListening( Events, Events.scrollToEnd, this._scrollToEnd );
-      },
-
       render : function() {
         var html = templates["project"](this.model.attributes);
         this.setElement( html );
@@ -43,6 +33,7 @@ define(
         this.$el.addClass("active");
 
         TweenLite.to( this.$el, 0.5, {
+          // delay: 0.2,
           height: window.innerHeight,
           ease: Expo.easeInOut,
           onComplete: this._openComplete,
@@ -66,6 +57,7 @@ define(
         this.$el.removeClass("open");
 
         TweenLite.to( this.$el, 0.5, {
+          // delay: 0.2,
           height: 0,
           ease: Expo.easeInOut,
           clearProps: "all",
@@ -75,7 +67,9 @@ define(
       },
 
       _closeComplete : function() {
-        this.$el.removeClass("active");
+        this.$el
+          .removeClass("active")
+          .remove();
         // console.log("ProjectView[" + this.model.attributes.slug + "].closeComplete()" );
       },
 

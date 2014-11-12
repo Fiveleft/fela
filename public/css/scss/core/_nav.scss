@@ -6,7 +6,10 @@
   color: $color-grey-light;
   @include navFont();
 
-  a { color: $color-grey-light; }
+  a { 
+    color: $color-grey-light; 
+    text-decoration: none;
+  }
   .brand-name {
     display: block;
     width: 80px; 
