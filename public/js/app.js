@@ -9,5 +9,6 @@ define(
         Backbone.history.start({pushState: true});
       }
     };
+    
     return App;
   });
