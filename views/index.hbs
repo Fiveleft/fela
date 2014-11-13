@@ -13,7 +13,7 @@
 	<header id="header">
 		{{>main/header}}
 	</header>
-	<article id="site-content" class="container">
+	<article id="site-content">
 		{{>main/section_home}}
 		{{>main/section_work}}
 		{{>main/section_info}}
@@ -23,12 +23,12 @@
 		</footer>
 	</article>
 	<canvas id="canvas"></canvas>	
+	<span hidden id="data-api-projects" data-json='{{projects}}'></span>
+	<span hidden id="data-api-partners" data-json='{{partners}}'></span>
+	<span hidden id="data-api-content" data-json='{{pageContent}}'></span>
 </main>
 {{#contentFor 'inlineScripts'}} 
 	<script data-main="/js/init" src="/js/vendor/requirejs/require.js"></script>
 {{/contentFor}}
 
-<span hidden id="data-api-projects" data-json='{{projects}}'></span>
-<span hidden id="data-api-partners" data-json='{{partners}}'></span>
-<span hidden id="data-api-content" data-json='{{pageContent}}'></span>
 

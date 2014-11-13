@@ -13,8 +13,8 @@ main {
 #site-content > section {
   width: 100%;
   min-height: 100%;
-  padding: 60px 0 0;
   .section-inner {
+    padding: 60px 0 0;
   }
 }
 #canvas {
@@ -31,8 +31,18 @@ main {
   margin: 0 auto;
   padding: 0 10px;
 }
-footer .container {
-  padding: 20px 0 0;
+footer {
+  background: rgba( $color-grey-black, 0.95 );
+  color: $color-grey-light;
+  font-size: 13px;
+  text-align: center;
+  .container {
+    padding: 20px 0 0;
+  }
+  .copyright {
+    margin: 0 auto;
+    text-align: center;
+  }
 }
 
 main {

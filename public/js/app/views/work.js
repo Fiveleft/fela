@@ -130,6 +130,8 @@ define(
 
       _positionActiveContainer : function() {
 
+        if( !activeView ) return;
+
         // Get Data and View
         var gridItem = $gridItems.filter(".active"),
           gridIndex = parseInt(gridItem.attr("data-index"), 10),
