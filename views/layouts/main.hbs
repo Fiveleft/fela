@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	{{>head}}
+  	{{{block "pageScripts"}}}
+    {{{block "pageStyles"}}}
+  </head>
+
+  <body>
+
+    <!-- Placeholder for page content. -->
+    {{{body}}}
+
+    <!-- Partials are common snippets to be used 1 or more pages. -->
+
+    <!-- A block is placeholder for pieces of content defined in a page. -->
+    {{{block 'inlineScripts'}}}
+    {{>social-apis}}
+    {{>start-js-app}}
+  </body>
+</html>

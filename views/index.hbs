@@ -1,0 +1,34 @@
+
+{{#contentFor 'pageStyles'}}
+	<link rel="stylesheet" href="/css/main.css">
+{{/contentFor}}
+
+{{#contentFor 'pageScripts'}}
+	{{>fonts }}	
+	<script src="/js/vendor/modernizr/modernizr.js"></script>
+	<script id="site-vars" hidden> var __cdn='{{cdn}}'; </script>
+{{/contentFor}}
+
+<main role="main" class="">
+	<header id="header">
+		{{>main/header}}
+	</header>
+	<article id="site-content">
+		{{>main/section_home}}
+		{{>main/section_work}}
+		{{>main/section_info}}
+		{{>main/section_connect}}
+		<footer id="footer">
+			{{>main/footer}}
+		</footer>
+	</article>
+	<canvas id="canvas"></canvas>	
+	<span hidden id="data-api-projects" data-json='{{projects}}'></span>
+	<span hidden id="data-api-partners" data-json='{{partners}}'></span>
+	<span hidden id="data-api-content" data-json='{{pageContent}}'></span>
+</main>
+{{#contentFor 'inlineScripts'}} 
+	<script data-main="/js/init" src="/js/vendor/requirejs/require.js"></script>
+{{/contentFor}}
+
+

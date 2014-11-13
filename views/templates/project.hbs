@@ -1,0 +1,130 @@
+<div class="project" data-slug="{{slug}}" >
+  <div class="project-inner">
+    <div class="media">
+      <div class="media-inner">
+        <a href="#" class="media-controls">
+          <span class="inner">
+            <i class="icon play">
+              <svg class="play-icon" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0" y="0" width="100" height="100" viewBox="50 50 100 100" overflow="visible" enable-background="new 50 50 100 100" xml:space="preserve"><path fill="#F1F2F2" d="M52.5 62.6c0-5.5 4.1-8.1 9.1-5.8l82.2 38.8c5 2.4 5 6.2 0 8.6l-82.2 38.8c-5 2.4-9.1-0.2-9.1-5.8V62.6z"/></svg>
+            </i>
+            <i class="icon pause">
+              <svg class="pause-icon" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0" y="0" width="100" height="100" viewBox="50 50 100 100" overflow="visible" enable-background="new 50 50 100 100" xml:space="preserve"><path fill="#F1F2F2" d="M53 63c0-5.5 4.5-10 10-10h16.2c5.5 0 10 4.5 10 10v74c0 5.5-4.5 10-10 10H63c-5.5 0-10-4.5-10-10V63zM110.8 137c0 5.5 4.5 10 10 10H137c5.5 0 10-4.5 10-10V63c0-5.5-4.5-10-10-10h-16.2c-5.5 0-10 4.5-10 10V137z"/></svg>
+            </i>
+          </span>
+        </a> 
+        {{#if gallery}}
+        <div class="media-container gallery">
+          <ul class="gallery-list">
+          {{#each gallery}}
+            <li class="gallery-item" data-id="{{id}}">
+              <div class="img-container">
+                <img src="{{url}}" />
+              </div>
+            </li>
+          {{/each}}
+          </ul>
+        </div>
+        {{/if}}
+        {{#if video}}
+        <div class="media-container video">
+          <video {{#if video.poster}}poster="{{video.poster.url}}"{{/if}} preload="load" loop="loop">
+            {{#if video.source.mp4}}<source src="{{video.source.mp4}}" type="video/mp4" />{{/if}}
+            {{#if video.source.ogg}}<source src="{{video.source.ogg}}" type="video/ogg" />{{/if}}
+            {{#if video.source.webm}}<source src="{{video.source.webm}}" type="video/webm" />{{/if}}
+          </video>
+          <span class="marker"></span>
+        </div>
+        {{/if}}
+      </div>
+      <a class="close" href="">
+        <span class="icon">
+          <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" version="1.1" x="0px" y="0px" width="20px" height="20px" viewBox="-1.515 -1.515 20 20" overflow="visible" enable-background="new -1.515 -1.515 20 20" xml:space="preserve"><defs></defs><polygon points="17,14.1 11.3,8.5 17,2.8 14.1,0 8.5,5.7 2.8,0 0,2.8 5.7,8.5 0,14.1 2.8,17 8.5,11.3 14.1,17"/></svg>
+        </span>
+      </a>
+    </div>
+    <div class="info">
+      <h1 class="title">{{{title}}}</h1>
+      {{#if subtitle}}
+      <h2 class="subtitle">{{{subtitle}}}</h2>
+      {{/if}}
+      <div class="details">
+        <p class="project-content">{{{content}}}</p>
+        <p class="additional">
+          
+          {{#if info.client}}
+          <span class="participant-info client">
+            <span class="info-label">Client:&nbsp;</span>
+            {{#if info.client.info.website}}
+            <a class="info-name" href="{{client.info.website}}">{{{info.client.title}}}</a>
+            {{else}}
+            <span class="info-name">{{{info.client.title}}}</a>
+            {{/if}}
+          </span>
+          {{/if}}
+          
+          {{#if info.agency}}
+          <span class="separator">/</span>
+          <span class="participant-info agency">
+            <span class="info-label">Agency:&nbsp;</span>
+            {{#if info.agency.info.website}}
+            <a class="info-name" href="{{agency.info.website}}">{{{info.agency.title}}}</a>
+            {{else}}
+            <span class="info-name">{{{info.agency.title}}}</a>
+            {{/if}}
+          </span>
+          {{/if}}
+          
+          {{#if disciplines}}
+          <span class="separator">/</span>
+          <span class="taxonomy disciplines">
+            <span class="info-label">Disciplines: </span>
+            {{#each disciplines}}
+            <span class="taxonomy-item" data-term-"{{name}}">
+              <span class="label">{{{name}}}</span><span class="separator">,</span>
+            </span>
+            {{/each}}
+          </span>
+          {{/if}}
+          
+          {{#if technologies}}
+          <span class="separator">/</span>
+          <span class="taxonomy technologies">
+            <span class="info-label">Technology: </span>
+            {{#each technologies}}
+            <span class="taxonomy-item" data-term-"{{name}}">
+              <span class="label">{{{name}}}</span><span class="separator">,</span>
+            </span>
+            {{/each}}
+          </span>
+          {{/if}}
+          
+          {{#if tools}}
+          <span class="separator">/</span>
+          <span class="taxonomy tools">
+            <span class="info-label">Tools: </span>
+            {{#each tools}}
+            <span class="taxonomy-item" data-term-"{{name}}">
+              <span class="label">{{{name}}}</span><span class="separator">,</span>
+            </span>
+            {{/each}}
+          </span>
+          {{/if}}
+
+          {{#if website}}
+          <span class="separator">/</span>
+          <span class="participant-info site">
+            <a class="project-link info-name" href="{{website}}" target="_blank" title="{{title}}">View Site</a>
+          </span>
+          {{/if}}
+        </p>
+        <!--
+        <a class="next project-advance" href="#">
+          <span class="label">Next Project</span>
+          <span class="title-wrapper"><span class="project-title">{project title}</span></span>
+          <i class="icon"></i>
+        </a>
+        -->
+      </div>
+    </div>
+  </div>
+</div>
