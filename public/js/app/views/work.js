@@ -136,16 +136,16 @@ define(
           gridCols = Math.round( $projectList[0].clientWidth / $gridItems[0].clientWidth ),
           itemRow = Math.floor( gridIndex / gridCols ),
           itemIndex = gridCols * itemRow,
-          isBelowPrev = false,
+          prevView = [],
           $addBeforeItem = $("[data-index='" + itemIndex + "']", $projectList ).parent();
 
         $activeContainer.insertBefore( $addBeforeItem ); 
         $scrollTarget.insertBefore( $activeContainer );
 
-        isBelowPrev = $scrollTarget.prevAll(".project-view").children().length > 0;
+        prevView = $scrollTarget.prevAll(".project-view");
 
-        if( isBelowPrev ) {
-          $scrollTarget.addClass("offset").children().css("top", -window.innerHeight);
+        if( prevView.children().length > 0 ) {
+          $scrollTarget.addClass("offset").children().css("top", -prevView.height());
         }else{
           $scrollTarget.removeClass("offset");
         }
