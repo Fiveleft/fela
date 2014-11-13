@@ -29,8 +29,9 @@
     height: 0;
     padding: 0 0 56.25%;
     background: $color-grey-black;
+    z-index: 3;
     @include background-image( 
-      radial-gradient(center, ellipse cover, rgba($color-grey-light,0.25) 20%, rgba($color-grey-black,1) 110%)
+      radial-gradient(center, ellipse cover, rgba($color-grey-light,0.25), rgba($color-grey-black,1))
     );
   }
   .media-container, .media-controls {
@@ -99,7 +100,7 @@
     position: absolute;
     top: 0; right: 0;
     width: 40px; height: 40px; padding: 6px;
-    z-index: 3;
+    z-index: 4;
 
     .icon {
       position: relative;

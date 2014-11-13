@@ -35,7 +35,7 @@
   }
   a.logo {
     display: inline-block;
-    padding: 0 15px 0 5px;
+    padding: 0 15px 0 0;
     @include clearfix;
   }
   .brand-icon {
@@ -43,7 +43,7 @@
     float: left;
     width: 40px; height: 40px;
     background: url( /images/brand-logo-small.svg) no-repeat 50% 50%;
-    background-size: 36px auto;
+    background-size: 30px auto;
   }
   .brand-name {
     display: block;
