@@ -233,6 +233,9 @@ main {
 #site-content > section {
   width: 100%;
   min-height: 100%;
+}
+/* line 16, scss/core/_layout.scss */
+#site-content > section .section-inner {
   padding: 60px 0 0;
 }
 
@@ -255,67 +258,79 @@ main {
 }
 
 /* line 34, scss/core/_layout.scss */
+footer {
+  background: rgba(28, 28, 26, 0.95);
+  color: #b8b8b1;
+  font-size: 13px;
+  text-align: center;
+}
+/* line 39, scss/core/_layout.scss */
 footer .container {
   padding: 20px 0 0;
 }
+/* line 42, scss/core/_layout.scss */
+footer .copyright {
+  margin: 0 auto;
+  text-align: center;
+}
 
-/* line 39, scss/core/_layout.scss */
+/* line 49, scss/core/_layout.scss */
 main #top-nav {
   visibility: hidden;
 }
 
-/* line 44, scss/core/_layout.scss */
+/* line 54, scss/core/_layout.scss */
 main.snap-nav {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
 }
-/* line 50, scss/core/_layout.scss */
+/* line 60, scss/core/_layout.scss */
 main.snap-nav #mobile-nav {
   position: absolute;
 }
-/* line 53, scss/core/_layout.scss */
+/* line 63, scss/core/_layout.scss */
 main.snap-nav #top-nav {
   visibility: visible;
 }
-/* line 56, scss/core/_layout.scss */
+/* line 66, scss/core/_layout.scss */
 main.snap-nav #site-content {
   pointer-events: none;
 }
-/* line 59, scss/core/_layout.scss */
+/* line 69, scss/core/_layout.scss */
 main.snap-nav #canvas {
   position: absolute;
   -moz-box-shadow: 0 0 20px 0 black;
   -webkit-box-shadow: 0 0 20px 0 black;
   box-shadow: 0 0 20px 0 black;
 }
-/* line 63, scss/core/_layout.scss */
+/* line 73, scss/core/_layout.scss */
 main.snap-nav.open {
   margin-left: -200px;
 }
 
 @media (min-width: 768px) {
-  /* line 72, scss/core/_layout.scss */
+  /* line 82, scss/core/_layout.scss */
   main #top-nav {
     visibility: visible;
   }
 
-  /* line 76, scss/core/_layout.scss */
+  /* line 86, scss/core/_layout.scss */
   .container {
     max-width: 768px;
     padding: 0 15px;
   }
 }
 @media (min-width: 1025px) {
-  /* line 83, scss/core/_layout.scss */
+  /* line 93, scss/core/_layout.scss */
   .container {
     max-width: 1025px;
     padding: 0 20px;
   }
 }
 @media (min-width: 1281px) {
-  /* line 90, scss/core/_layout.scss */
+  /* line 100, scss/core/_layout.scss */
   .container {
     max-width: 1281px;
   }
@@ -383,19 +398,20 @@ main.snap-nav.open {
   float: left;
   width: 40px;
   height: 40px;
-  background: url(/images/brand-icon.png) no-repeat 50% 50%;
+  background: url(/images/brand-logo-small.svg) no-repeat 50% 50%;
+  background-size: 36px auto;
 }
-/* line 47, scss/core/_nav.scss */
+/* line 48, scss/core/_nav.scss */
 #mobile-nav .brand-name {
   display: block;
   float: left;
   width: 80px;
   height: 30px;
-  margin: 5px;
+  margin: 5px 10px;
   background-position: 50% 50%;
   background-size: contain;
 }
-/* line 55, scss/core/_nav.scss */
+/* line 56, scss/core/_nav.scss */
 #mobile-nav button {
   display: block;
   position: absolute;
@@ -410,11 +426,11 @@ main.snap-nav.open {
   -webkit-transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 65, scss/core/_nav.scss */
+/* line 66, scss/core/_nav.scss */
 #mobile-nav button:focus {
   outline: none;
 }
-/* line 68, scss/core/_nav.scss */
+/* line 69, scss/core/_nav.scss */
 #mobile-nav button .icon {
   position: relative;
   display: block;
@@ -425,7 +441,7 @@ main.snap-nav.open {
   text-align: left;
   text-transform: capitalize;
 }
-/* line 75, scss/core/_nav.scss */
+/* line 76, scss/core/_nav.scss */
 #mobile-nav button .bar {
   position: absolute;
   display: block;
@@ -444,28 +460,28 @@ main.snap-nav.open {
   -webkit-transition-delay: 0.3s;
   transition-delay: 0.3s;
 }
-/* line 86, scss/core/_nav.scss */
+/* line 87, scss/core/_nav.scss */
 #mobile-nav button .bar:first-child {
   top: 1px;
 }
-/* line 89, scss/core/_nav.scss */
+/* line 90, scss/core/_nav.scss */
 #mobile-nav button .bar:nth-child(2) {
   top: 9px;
 }
-/* line 92, scss/core/_nav.scss */
+/* line 93, scss/core/_nav.scss */
 #mobile-nav button .bar:last-child {
   top: 17px;
 }
 
-/* line 100, scss/core/_nav.scss */
+/* line 102, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button {
   background-color: #ee2a7b;
 }
-/* line 102, scss/core/_nav.scss */
+/* line 104, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button .bar {
   background-color: white;
 }
-/* line 104, scss/core/_nav.scss */
+/* line 106, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button .bar:first-child {
   top: 50%;
   height: 4px;
@@ -475,12 +491,12 @@ main.snap-nav.open {
   -webkit-transform: rotate(315deg);
   transform: rotate(315deg);
 }
-/* line 110, scss/core/_nav.scss */
+/* line 112, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button .bar:nth-child(2) {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 113, scss/core/_nav.scss */
+/* line 115, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button .bar:last-child {
   top: 50%;
   height: 4px;
@@ -491,7 +507,7 @@ main.snap-nav.open {
   transform: rotate(-315deg);
 }
 
-/* line 126, scss/core/_nav.scss */
+/* line 128, scss/core/_nav.scss */
 #top-nav .connect-title {
   display: block;
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
@@ -499,32 +515,75 @@ main.snap-nav.open {
   font-weight: 400;
   text-transform: none;
 }
-/* line 133, scss/core/_nav.scss */
-#top-nav .connect-nav .nav-link.social {
-  position: relative;
-  display: block;
+/* line 136, scss/core/_nav.scss */
+#top-nav .connect-nav .social-item {
   width: 40px;
   height: 40px;
   padding: 5px;
 }
-/* line 139, scss/core/_nav.scss */
-#top-nav .connect-nav .nav-link.social .icon {
+/* line 142, scss/core/_nav.scss */
+#top-nav .connect-nav .social {
   position: relative;
   display: block;
   width: 100%;
   height: 100%;
+  padding: 3px;
+  background: rgba(133, 133, 128, 0.2);
+  -moz-border-radius: 9999px;
+  -webkit-border-radius: 9999px;
+  border-radius: 9999px;
+  -moz-transition: background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -o-transition: background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+/* line 151, scss/core/_nav.scss */
+#top-nav .connect-nav .social .icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: no-repeat 50% 50%;
+  background-size: 100% auto;
   text-indent: -119988px;
   overflow: hidden;
   text-align: left;
   text-transform: capitalize;
-  -moz-border-radius: 9999px;
-  -webkit-border-radius: 9999px;
-  border-radius: 9999px;
-  background: rgba(133, 133, 128, 0.2);
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
+  opacity: 0.4;
+  -moz-transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -o-transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+/* line 162, scss/core/_nav.scss */
+#top-nav .connect-nav .social:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+/* line 164, scss/core/_nav.scss */
+#top-nav .connect-nav .social:hover .icon {
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+}
+/* line 169, scss/core/_nav.scss */
+#top-nav .connect-nav .github .icon {
+  background-image: url(/images/icon-github.svg);
+}
+/* line 172, scss/core/_nav.scss */
+#top-nav .connect-nav .facebook {
+  padding: 5px;
+}
+/* line 174, scss/core/_nav.scss */
+#top-nav .connect-nav .facebook .icon {
+  background-image: url(/images/icon-facebook.svg);
+}
+/* line 178, scss/core/_nav.scss */
+#top-nav .connect-nav .twitter .icon {
+  background-image: url(/images/icon-twitter.svg);
 }
 
 @media (max-width: 767px) {
-  /* line 155, scss/core/_nav.scss */
+  /* line 186, scss/core/_nav.scss */
   #top-nav {
     right: 0;
     width: 200px;
@@ -533,29 +592,29 @@ main.snap-nav.open {
     z-index: 1;
     background-color: #2b2b29;
   }
-  /* line 162, scss/core/_nav.scss */
+  /* line 193, scss/core/_nav.scss */
   #top-nav .nav-item {
     display: block;
   }
-  /* line 165, scss/core/_nav.scss */
+  /* line 196, scss/core/_nav.scss */
   #top-nav .container {
     padding: 0;
     overflow: hidden;
   }
-  /* line 169, scss/core/_nav.scss */
+  /* line 200, scss/core/_nav.scss */
   #top-nav .nav-link {
     display: block;
     padding: 10px;
     padding-left: 20px;
     line-height: 1.25;
   }
-  /* line 176, scss/core/_nav.scss */
+  /* line 207, scss/core/_nav.scss */
   #top-nav .nav-link.logo {
     line-height: 0;
     height: 40px;
     padding: 0 0 0 15px;
   }
-  /* line 180, scss/core/_nav.scss */
+  /* line 211, scss/core/_nav.scss */
   #top-nav .nav-link.logo .brand-name {
     display: inline-block;
     width: 80px;
@@ -564,21 +623,21 @@ main.snap-nav.open {
     background-position: 50% 50%;
     background-size: contain;
   }
-  /* line 190, scss/core/_nav.scss */
+  /* line 221, scss/core/_nav.scss */
   #top-nav .top-nav-items {
     padding-bottom: 10px;
     border-bottom: 1px solid #1c1c1a;
   }
-  /* line 194, scss/core/_nav.scss */
+  /* line 225, scss/core/_nav.scss */
   #top-nav .nav-item.home {
     border-bottom: 1px solid #1c1c1a;
   }
-  /* line 197, scss/core/_nav.scss */
+  /* line 228, scss/core/_nav.scss */
   #top-nav .nav-item.work {
     border-top: 1px solid rgba(133, 133, 128, 0.25);
     padding-top: 10px;
   }
-  /* line 202, scss/core/_nav.scss */
+  /* line 233, scss/core/_nav.scss */
   #top-nav .connect-nav {
     *zoom: 1;
     padding-top: 10px;
@@ -590,51 +649,62 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 206, scss/core/_nav.scss */
+  /* line 237, scss/core/_nav.scss */
   #top-nav .connect-nav .connect-title {
     display: block;
     height: 24px;
     line-height: 24px;
     padding-left: 20px;
   }
-  /* line 212, scss/core/_nav.scss */
+  /* line 243, scss/core/_nav.scss */
   #top-nav .connect-nav .pipe {
     display: none;
   }
-  /* line 215, scss/core/_nav.scss */
+  /* line 246, scss/core/_nav.scss */
   #top-nav .connect-nav .nav-link.location {
     padding-top: 10px;
     padding-bottom: 20px;
     border-bottom: 1px solid #1c1c1a;
   }
-  /* line 220, scss/core/_nav.scss */
+  /* line 251, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item, #top-nav .connect-nav .social-item {
     display: block;
     float: left;
   }
-  /* line 224, scss/core/_nav.scss */
+  /* line 255, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item {
     width: 100%;
     margin-bottom: 10px;
     border-bottom: 1px solid rgba(133, 133, 128, 0.25);
   }
-  /* line 229, scss/core/_nav.scss */
+  /* line 260, scss/core/_nav.scss */
   #top-nav .connect-nav .social-item {
     width: auto;
+    height: auto;
     margin-right: 5px;
   }
-  /* line 233, scss/core/_nav.scss */
+  /* line 265, scss/core/_nav.scss */
+  #top-nav .connect-nav .social {
+    width: 40px;
+    height: 40px;
+  }
+  /* line 268, scss/core/_nav.scss */
+  #top-nav .connect-nav .social .icon {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+  /* line 272, scss/core/_nav.scss */
   #top-nav .connect-nav .nav-link.facebook {
     margin-left: 15px;
   }
 }
 @media (min-width: 768px) {
-  /* line 243, scss/core/_nav.scss */
+  /* line 281, scss/core/_nav.scss */
   #mobile-nav {
     display: none;
   }
 
-  /* line 246, scss/core/_nav.scss */
+  /* line 284, scss/core/_nav.scss */
   #top-nav {
     display: block;
     width: 100%;
@@ -644,7 +714,7 @@ main.snap-nav.open {
     font-size: 14px;
     overflow: visible;
   }
-  /* line 255, scss/core/_nav.scss */
+  /* line 293, scss/core/_nav.scss */
   #top-nav .container {
     *zoom: 1;
   }
@@ -654,7 +724,7 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 258, scss/core/_nav.scss */
+  /* line 296, scss/core/_nav.scss */
   #top-nav .top-nav-items, #top-nav .connect-nav {
     *zoom: 1;
   }
@@ -664,14 +734,14 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 261, scss/core/_nav.scss */
+  /* line 299, scss/core/_nav.scss */
   #top-nav .top-nav-items {
     position: relative;
     display: block;
     padding-left: 80px;
     float: left;
   }
-  /* line 267, scss/core/_nav.scss */
+  /* line 305, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item.home {
     position: absolute;
     top: 0;
@@ -683,20 +753,20 @@ main.snap-nav.open {
     text-align: left;
     text-transform: capitalize;
   }
-  /* line 274, scss/core/_nav.scss */
+  /* line 312, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-link.logo {
     display: block;
   }
-  /* line 277, scss/core/_nav.scss */
+  /* line 315, scss/core/_nav.scss */
   #top-nav .top-nav-items .brand-logo {
     display: block;
     width: 100%;
     height: 0;
     padding: 0 0 100%;
-    background: #1c1c1a url(/images/brand-logo.svg) no-repeat 50% 0;
-    background-size: contain;
+    background: #1c1c1a url(/images/brand-logo-small.svg) no-repeat 50% 50%;
+    background-size: 50px auto;
   }
-  /* line 284, scss/core/_nav.scss */
+  /* line 322, scss/core/_nav.scss */
   #top-nav .top-nav-items .brand-name {
     display: block;
     width: 100%;
@@ -706,33 +776,33 @@ main.snap-nav.open {
     background-position: 0 100%;
     background-size: contain;
   }
-  /* line 292, scss/core/_nav.scss */
+  /* line 330, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item:not(.home) {
     display: block;
     float: left;
     padding: 0;
   }
-  /* line 296, scss/core/_nav.scss */
+  /* line 334, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item:not(.home) .nav-link {
     display: block;
     padding: 10px 15px;
     line-height: 20px;
   }
-  /* line 304, scss/core/_nav.scss */
+  /* line 342, scss/core/_nav.scss */
   #top-nav .connect-nav {
     display: block;
     float: right;
   }
-  /* line 308, scss/core/_nav.scss */
+  /* line 346, scss/core/_nav.scss */
   #top-nav .connect-nav li {
     float: left;
   }
-  /* line 311, scss/core/_nav.scss */
+  /* line 349, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item {
     text-align: left;
     margin-right: 10px;
   }
-  /* line 314, scss/core/_nav.scss */
+  /* line 352, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item span, #top-nav .connect-nav .info-item a {
     display: inline-block;
     vertical-align: top;
@@ -740,26 +810,26 @@ main.snap-nav.open {
     margin: 0 5px;
     line-height: 20px;
   }
-  /* line 321, scss/core/_nav.scss */
+  /* line 359, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title {
     font-size: 16px;
     line-height: 1.4;
   }
-  /* line 325, scss/core/_nav.scss */
+  /* line 363, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .pipe {
     margin: 0;
   }
-  /* line 328, scss/core/_nav.scss */
+  /* line 366, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title, #top-nav .connect-nav .info-item .location, #top-nav .connect-nav .info-item .pipe {
     display: none;
   }
 }
 @media (min-width: 1025px) {
-  /* line 337, scss/core/_nav.scss */
+  /* line 375, scss/core/_nav.scss */
   #top-nav .top-nav-items {
     padding-left: 120px;
   }
-  /* line 341, scss/core/_nav.scss */
+  /* line 379, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title, #top-nav .connect-nav .info-item .location, #top-nav .connect-nav .info-item .pipe {
     display: inline-block;
   }
@@ -795,16 +865,15 @@ section#work-section .scroll-target.offset .scroll-to {
   position: absolute;
   width: 100%;
   height: 0;
-  border: 1px solid #0000FF;
 }
-/* line 28, scss/sections/_work.scss */
+/* line 27, scss/sections/_work.scss */
 section#work-section .project-view {
   float: left;
   width: 100%;
   padding: 0 5px;
 }
 
-/* line 35, scss/sections/_work.scss */
+/* line 34, scss/sections/_work.scss */
 .project-item {
   display: block;
   position: relative;
@@ -812,7 +881,7 @@ section#work-section .project-view {
   height: 0;
   padding: 0 0 100%;
 }
-/* line 42, scss/sections/_work.scss */
+/* line 41, scss/sections/_work.scss */
 .project-item .project-grid-item-inner {
   display: block;
   position: absolute;
@@ -822,7 +891,7 @@ section#work-section .project-view {
   height: 100%;
   overflow: hidden;
 }
-/* line 48, scss/sections/_work.scss */
+/* line 47, scss/sections/_work.scss */
 .project-item .info, .project-item .media {
   position: absolute;
   top: 0;
@@ -830,19 +899,19 @@ section#work-section .project-view {
   width: 100%;
   height: 100%;
 }
-/* line 53, scss/sections/_work.scss */
+/* line 52, scss/sections/_work.scss */
 .project-item .media-inner, .project-item .info-inner {
   display: block;
   position: relative;
   width: 100%;
   height: 100%;
 }
-/* line 58, scss/sections/_work.scss */
+/* line 57, scss/sections/_work.scss */
 .project-item .media {
   display: block;
   z-index: 1;
 }
-/* line 62, scss/sections/_work.scss */
+/* line 61, scss/sections/_work.scss */
 .project-item .media-content {
   display: block;
   position: absolute;
@@ -853,41 +922,41 @@ section#work-section .project-view {
   background: no-repeat 50% 50%;
   background-size: cover;
 }
-/* line 70, scss/sections/_work.scss */
+/* line 69, scss/sections/_work.scss */
 .project-item .info {
   display: none;
   z-index: 2;
   padding: 5%;
 }
-/* line 74, scss/sections/_work.scss */
+/* line 73, scss/sections/_work.scss */
 .project-item .info h1, .project-item .info h2 {
   font-size: 21px;
   color: white;
 }
-/* line 83, scss/sections/_work.scss */
+/* line 82, scss/sections/_work.scss */
 .project-item.active .info {
   background-color: rgba(28, 28, 26, 0.7);
 }
 
 @media (min-width: 768px) {
-  /* line 94, scss/sections/_work.scss */
+  /* line 93, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 33.33333%;
   }
 
-  /* line 99, scss/sections/_work.scss */
+  /* line 98, scss/sections/_work.scss */
   .project-item .info {
     display: block;
   }
 }
 @media (min-width: 1025px) {
-  /* line 107, scss/sections/_work.scss */
+  /* line 106, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 25%;
   }
 }
 @media (min-width: 1281px) {
-  /* line 115, scss/sections/_work.scss */
+  /* line 114, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 25%;
   }
