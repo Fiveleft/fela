@@ -130,12 +130,10 @@ define(
 
       _positionActiveContainer : function() {
 
-        if( !activeView ) return;
-
         // Get Data and View
         var gridItem = $gridItems.filter(".active"),
           gridIndex = parseInt(gridItem.attr("data-index"), 10),
-          gridCols = Math.round( $projectList[0].clientWidth / gridItem[0].clientWidth ),
+          gridCols = Math.round( $projectList[0].clientWidth / $gridItems[0].clientWidth ),
           itemRow = Math.floor( gridIndex / gridCols ),
           itemIndex = gridCols * itemRow,
           isBelowPrev = false,
