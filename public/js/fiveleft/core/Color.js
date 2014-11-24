@@ -6,6 +6,7 @@
  */
 define([],function(){
 
+
 	function Color( redOrHex, green, blue, alpha )
 	{
 		var useHex = (typeof redOrHex !== "undefined" && redOrHex.length>3 );
