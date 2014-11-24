@@ -107,44 +107,54 @@ h4 {
 
 @media (min-width: 768px) {
   /* line 67, scss/core/_typography.scss */
+  body {
+    font-size: 18px;
+  }
+
+  /* line 68, scss/core/_typography.scss */
   h1 {
     font-size: 36px;
   }
 
-  /* line 68, scss/core/_typography.scss */
-  h2 {
-    font-size: 24px;
-  }
-
   /* line 69, scss/core/_typography.scss */
-  h3 {
-    font-size: 20px;
+  h2 {
+    font-size: 28px;
   }
 
   /* line 70, scss/core/_typography.scss */
+  h3 {
+    font-size: 24px;
+  }
+
+  /* line 71, scss/core/_typography.scss */
   h4 {
     font-size: 18px;
   }
 }
 @media (min-width: 1025px) {
-  /* line 74, scss/core/_typography.scss */
+  /* line 75, scss/core/_typography.scss */
+  body {
+    font-size: 20px;
+  }
+
+  /* line 76, scss/core/_typography.scss */
   h1 {
     font-size: 48px;
   }
 
-  /* line 75, scss/core/_typography.scss */
+  /* line 77, scss/core/_typography.scss */
   h2 {
     font-size: 30px;
   }
 
-  /* line 76, scss/core/_typography.scss */
+  /* line 78, scss/core/_typography.scss */
   h3 {
-    font-size: 21px;
+    font-size: 24px;
   }
 
-  /* line 77, scss/core/_typography.scss */
+  /* line 79, scss/core/_typography.scss */
   h4 {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
 /* line 1, scss/core/_base.scss */
@@ -282,7 +292,7 @@ main #top-nav {
 /* line 54, scss/core/_layout.scss */
 main.snap-nav {
   position: fixed;
-  top: 1px;
+  top: 0;
   left: 0;
   width: 100%;
   height: 101%;
@@ -833,6 +843,131 @@ main.snap-nav.open {
   /* line 379, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title, #top-nav .connect-nav .info-item .location, #top-nav .connect-nav .info-item .pipe {
     display: inline-block;
+  }
+}
+/* line 4, scss/sections/_home.scss */
+#home-section .section-inner {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+/* line 10, scss/sections/_home.scss */
+#home-section .message-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0 5px 10%;
+}
+/* line 16, scss/sections/_home.scss */
+#home-section .message-inner {
+  display: block;
+  position: relative;
+}
+/* line 20, scss/sections/_home.scss */
+#home-section .section-title {
+  font-size: 1.5em;
+  margin-bottom: 0;
+  -moz-transition: margin-bottom 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: margin-bottom 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: margin-bottom 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: margin-bottom 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+/* line 24, scss/sections/_home.scss */
+#home-section .section-title .top {
+  display: block;
+  font-size: 1.65em;
+}
+/* line 28, scss/sections/_home.scss */
+#home-section .section-title .linking-verb {
+  font-family: "adobe-garamond-pro", Georgia, sans-serif;
+  font-style: italic;
+  font-weight: 600;
+  display: block;
+  font-size: 0.8em;
+  text-transform: none;
+  padding: 0.125em 0;
+}
+/* line 35, scss/sections/_home.scss */
+#home-section .section-title .adj, #home-section .section-title .noun {
+  display: inline-block;
+}
+/* line 38, scss/sections/_home.scss */
+#home-section .section-title .adj {
+  padding: 0.25em 0;
+}
+/* line 42, scss/sections/_home.scss */
+#home-section .section-description {
+  position: relative;
+  font-size: 1.125em;
+  line-height: 1.3;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: -80px;
+  padding: 0 10px;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -moz-transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
+  -o-transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
+}
+/* line 58, scss/sections/_home.scss */
+#home-section.active .message-inner .section-title, #home-section.on .message-inner .section-title,
+#home-section .message-inner:hover .section-title {
+  margin-bottom: 0.5em;
+  -moz-transition: margin-bottom 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+  -o-transition: margin-bottom 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-transition: margin-bottom 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: margin-bottom 0.25s cubic-bezier(0.19, 1, 0.22, 1);
+}
+/* line 62, scss/sections/_home.scss */
+#home-section.active .message-inner .section-description, #home-section.on .message-inner .section-description,
+#home-section .message-inner:hover .section-description {
+  margin-top: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+  -moz-transition: opacity 0.66s cubic-bezier(0.645, 0.045, 0.355, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
+  -o-transition: opacity 0.66s cubic-bezier(0.645, 0.045, 0.355, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
+  -webkit-transition: opacity 0.66s cubic-bezier(0.645, 0.045, 0.355, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: opacity 0.66s cubic-bezier(0.645, 0.045, 0.355, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@media (min-width: 768px) {
+  /* line 73, scss/sections/_home.scss */
+  #home-section .message-wrapper {
+    font-size: 1.5em;
+    padding: 0 0 10%;
+  }
+  /* line 79, scss/sections/_home.scss */
+  #home-section .section-title .linking-verb, #home-section .section-title .adj, #home-section .section-title .noun {
+    display: inline;
+    padding: 0;
+  }
+  /* line 86, scss/sections/_home.scss */
+  #home-section .section-description {
+    max-width: 30em;
+  }
+}
+@media (min-width: 1025px) {
+  /* line 94, scss/sections/_home.scss */
+  #home-section .message-wrapper {
+    font-size: 2.0em;
+  }
+  /* line 97, scss/sections/_home.scss */
+  #home-section .section-description {
+    font-size: 1em;
+    max-width: 27.5em;
+  }
+}
+@media (min-width: 1281px) {
+  /* line 106, scss/sections/_home.scss */
+  #home-section .message-wrapper {
+    font-size: 2.5em;
+  }
+  /* line 109, scss/sections/_home.scss */
+  #home-section .section-description {
+    font-size: 0.875em;
+    max-width: 25em;
   }
 }
 /* line 4, scss/sections/_work.scss */

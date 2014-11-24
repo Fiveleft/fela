@@ -69,7 +69,7 @@ define([
         // console.log( "SiteIndex._mobileNavOpen" );
         var windowTop = window.scrollY;
         this.$siteContent.css({"margin-top" : -windowTop });
-        window.scrollTo( 0, 1 );
+        // window.scrollTo( 0, 0 );
       },
 
       _mobileNavClose : function() {

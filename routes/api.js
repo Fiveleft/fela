@@ -110,6 +110,7 @@ router.get('/pagecontent', cache(), function(req, res){
     url : urlBase + "get_posts/?post_type=page&posts_per_page=100&include=id,slug,title,content,attachments,custom_fields",
     json : true
   };
+  req.apicacheGroup = "content";
   request( params, function( err, response, body ){
     if( err ) return;
     res.send( body.posts );

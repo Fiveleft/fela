@@ -1,5 +1,5 @@
 define(
-  ['jquery','underscore','backbone','events','tweenlite','vendor/fiveleft/core/utils'],
+  ['jquery','underscore','backbone','events','tweenlite','fiveleft/core/utils'],
   function( $, _, Backbone, Events, TweenLite, Utils ){
     
     var _instance = false,
@@ -16,12 +16,15 @@ define(
 
         // Set Event Listeners
         this.windowEvents = {
-          "resize" : _.throttle(this.resize, 100), 
-          "scroll" : _.throttle(this.scroll, 100)
+          "resize" : _.throttle(function(){self.resize();}, 100), 
+          "scroll" : _.throttle(function(){self.scroll();}, 100)
         };
 
         // Set elements
         this.$footer = $("#footer");
+        this.$sections = $("article > section.container");
+        this.$sectionInners = $(".section-inner", this.$sections);
+
 
         // Set Measurements
         this.totalHeight = this.$footer.offset().top + this.$footer.height();
@@ -30,6 +33,7 @@ define(
 
       start : function() {
         $(window).on( this.windowEvents );
+        this.resize();
         this.listenTo( Events, Events.scrollTo, this._pageScrollTo );
       },
 
@@ -39,7 +43,7 @@ define(
       },
 
       resize : function() {
-        // console.log( "ScrollerView.resize()");
+        this.$sectionInners.css( "min-height", window.innerHeight );
       },
 
       scroll : function() {

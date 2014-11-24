@@ -1,0 +1,114 @@
+// file: scss/sections/_home.scss
+#home-section {
+
+  .section-inner {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+  }
+
+  .message-wrapper {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    padding: 0 5px 10%;
+  }
+  .message-inner {
+    display: block;
+    position: relative;
+  }
+  .section-title {
+    font-size: 1.5em;
+    margin-bottom: 0;
+    @include transition ( margin-bottom 0.5s $easeInOutCubic );
+    .top {
+      display: block;
+      font-size: 1.65em;
+    }
+    .linking-verb {
+      @include italicBoldFont();
+      display: block;
+      font-size: 0.8em;
+      text-transform: none;
+      padding: 0.125em 0;
+    }
+    .adj, .noun {
+      display: inline-block;
+    }
+    .adj {
+      padding: 0.25em 0;
+    }
+  }
+  .section-description {
+    position: relative;
+    font-size: 1.125em;
+    line-height: 1.3;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: -80px;
+    padding: 0 10px;
+    @include opacity( 0 );
+    @include transition ( opacity 0.2s $easeOutExpo, margin-top 0.66s $easeOutExpo );
+  }
+
+  &.active .message-inner, 
+  &.on .message-inner,
+  .message-inner:hover {
+    //background: rgba( 0,0,0,0.2 );
+    .section-title {
+      margin-bottom: 0.5em;
+      @include transition ( margin-bottom 0.25s $easeOutExpo );
+    }
+    .section-description {
+      margin-top: 0;
+      @include opacity( 1 );
+      @include transition ( opacity 0.66s $easeInOutCubic, margin-top 0.66s $easeOutExpo );
+    }
+  }
+}
+
+
+@media ( min-width:$width-sm-min ) {
+  #home-section {
+    .message-wrapper {
+      font-size: 1.5em;
+      padding: 0 0 10%;
+    }
+    .section-title {
+      .top {}
+      .linking-verb, .adj, .noun {
+        display: inline;
+        padding: 0;
+      }
+      .adj {}
+      .noun {}
+    }
+    .section-description {
+      max-width: 30em;
+    }
+  }
+}
+
+@media ( min-width:$width-md-min ) {
+  #home-section {
+    .message-wrapper {
+      font-size: 2.0em;
+    }
+    .section-description {
+      font-size: 1em;
+      max-width: 27.5em;
+    }
+  }
+}
+
+@media ( min-width:$width-lg-min ) {
+  #home-section {
+    .message-wrapper {
+      font-size: 2.5em;
+    }
+    .section-description {
+      font-size: 0.875em;
+      max-width: 25em;
+    }
+  }
+}
