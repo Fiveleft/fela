@@ -1,5 +1,5 @@
 define(
-  ['jquery','underscore','backbone','events','tweenlite','fiveleft/core/utils'],
+  ['jquery','underscore','backbone','events','tweenlite','fiveleft/core/Utils'],
   function( $, _, Backbone, Events, TweenLite, Utils ){
     
     var _instance = false,
