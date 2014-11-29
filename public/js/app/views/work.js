@@ -44,7 +44,7 @@ define(
         this.listenTo( Events, "project:set", this.setProject );
         this.listenTo( Events, "project:open", this.openProject );
         this.listenTo( Events, "project:close", this.closeProject );
-        this.listenTo( Events, Events.breakpoint, this._positionActiveContainer );
+        this.listenTo( Events, Events.breakpoint, this._breakpointChange );
         this.listenTo( Events, Events.scrollTo, this._scrollTo );
 
         this.render();
@@ -108,7 +108,9 @@ define(
         if( activeView === null ) {
           return; 
         }
-        // console.log( "Work.closeProject()", activeView.model.get("slug") );
+        $gridItems.filter( "[data-slug='" + activeView.model.get("slug") + "']" ).removeClass("active");
+
+        console.log( "Work.closeProject()", activeView.model.get("slug") );
         activeView.close();
         activeView = null;
         $scrollTarget.removeClass("offset");
@@ -131,8 +133,14 @@ define(
       _positionActiveContainer : function() {
 
         // Get Data and View
-        var gridItem = $gridItems.filter(".active"),
-          gridIndex = parseInt(gridItem.attr("data-index"), 10),
+        var gridItem = $gridItems.filter(".active");
+
+        if( gridItem.length === 0 ) {
+          //console.log( "no active container or grid item" );
+          return;
+        }
+
+        var gridIndex = parseInt(gridItem.attr("data-index"), 10),
           gridCols = Math.round( $projectList[0].clientWidth / $gridItems[0].clientWidth ),
           itemRow = Math.floor( gridIndex / gridCols ),
           itemIndex = gridCols * itemRow,
@@ -149,7 +157,13 @@ define(
         }else{
           $scrollTarget.removeClass("offset");
         }
+      },
+
+      _breakpointChange : function() {
+        this._positionActiveContainer();
+        $inactiveContainer.insertBefore( $activeContainer );
       }
+
 
     });
     return WorkView;

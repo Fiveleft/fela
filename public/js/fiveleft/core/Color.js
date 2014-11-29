@@ -4,18 +4,24 @@
  * @see https://gist.github.com/neolitec/1344610
  * @see http://www.createjs.com/Docs/EaselJS/classes/Graphics.html
  */
-define([],function(){
+define(['fiveleft/core/Utils'],function( Utils ){
 
 
-	function Color( redOrHex, green, blue, alpha )
+	// Color Constructor
+	// @param redOrHex - the red [0-255] or hex [#xxxxxx] value of the color
+	// @param greenOrAlpha - the green [0-255] or alpha [0-1] value of the color
+	// @param blue - the blue [0-255] value of the color
+	// @param alpha - the alpha [0-1] value of the color
+	function Color( redOrHex, greenOrAlpha, blue, alpha )
 	{
 		var useHex = (typeof redOrHex !== "undefined" && redOrHex.length>3 );
 		var hex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(redOrHex);
 		this.r = useHex ? parseInt(hex[1], 16) : redOrHex||0;
-		this.g = useHex ? parseInt(hex[2], 16) : green||0;
+		this.g = useHex ? parseInt(hex[2], 16) : greenOrAlpha||0;
 		this.b = useHex ? parseInt(hex[3], 16) : blue||0;
-		this.alpha = useHex ? green : alpha||1;
+		this.alpha = useHex ? greenOrAlpha : alpha||1;
 	}
+
 
 	Color.prototype = {
 		
@@ -27,12 +33,17 @@ define([],function(){
 		l : 0, // Lightness [0-1]
 		alpha : 1, // Alpha [0-1]
 		
-		set : function( redOrHex, green, blue, alpha ) {
+		// Set Color values
+		// @param redOrHex - the red [0-255] or hex [#xxxxxx] value of the color
+		// @param greenOrAlpha - the green [0-255] or alpha [0-1] value of the color
+		// @param blue - the blue [0-255] value of the color
+		// @param alpha - the alpha [0-1] value of the color
+		set : function( redOrHex, greenOrAlpha, blue, alpha ) {
 			var useHex = (redOrHex !== null && redOrHex.length>3);
 			var hex = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(redOrHex);
-			this.alpha = useHex ? green : alpha||1;
+			this.alpha = useHex ? greenOrAlpha : alpha||1;
 			this.r = useHex ? parseInt(hex[1], 16) : redOrHex||0;
-			this.g = useHex ? parseInt(hex[2], 16) : green||0;
+			this.g = useHex ? parseInt(hex[2], 16) : greenOrAlpha||0;
 			this.b = useHex ? parseInt(hex[3], 16) : blue||0;
 			return this;
 		},
@@ -82,9 +93,9 @@ define([],function(){
 		setRandom : function( minValue, maxValue ) {
 			var min = minValue||0,			
 				max = maxValue||255;
-			this.r = round(randomBetween(min, max));
-			this.g = round(randomBetween(min, max));
-			this.b = round(randomBetween(min, max));
+			this.r = round(Utils.randomBetween(min, max));
+			this.g = round(Utils.randomBetween(min, max));
+			this.b = round(Utils.randomBetween(min, max));
 			return this;
 		},
 		
@@ -101,7 +112,7 @@ define([],function(){
 		},
 		
 		lighten : function( amount ) {
-			var amt = clamp(amount,-1,1);
+			var amt = Utils.clamp(amount,-1,1);
 			this.r = this.r + (amt<0 ? this.r*amt : (255-this.r)*amt);
 			this.g = this.g + (amt<0 ? this.g*amt : (255-this.g)*amt);
 			this.b = this.b + (amt<0 ? this.b*amt : (255-this.b)*amt);
@@ -109,7 +120,7 @@ define([],function(){
 		},
 		
 		darken : function( amount ) {
-			var amt = clamp(amount,-1,1);
+			var amt = Utils.clamp(amount,-1,1);
 			this.r = this.r - (amt<0 ? (255-this.r)*amt : this.r*amt);
 			this.g = this.g - (amt<0 ? (255-this.g)*amt : this.g*amt);
 			this.b = this.b - (amt<0 ? (255-this.b)*amt : this.b*amt);
@@ -117,7 +128,7 @@ define([],function(){
 		},
 		
 		mix : function( c, amount ) {
-			var amt = clamp(amount,0,1);
+			var amt = Utils.clamp(amount,0,1);
 			this.r = this.r + (c.r - this.r)*amt;
 			this.g = this.g + (c.g - this.g)*amt;
 			this.b = this.b + (c.b - this.b)*amt;
@@ -125,7 +136,7 @@ define([],function(){
 		},
 		
 		mixColors : function( c1, c2, amount ) {
-			var amt = clamp(amount,0,1);
+			var amt = Utils.clamp(amount,0,1);
 			this.r = c1.r + (c2.r - c1.r)*amt;
 			this.g = c1.g + (c2.g - c1.g)*amt;
 			this.b = c1.b + (c2.b - c1.b)*amt;
@@ -137,9 +148,9 @@ define([],function(){
 		},
 		
 		saturate : function( amount ) {
-			//var amt = clamp(amount,0,1);
+			//var amt = Utils.clamp(amount,0,1);
 			this.convertToHSL();
-			this.s = clamp(amount,0,100);
+			this.s = Utils.clamp(amount,0,100);
 			this.convertToRGB();
 			return this;
 		},
@@ -212,12 +223,11 @@ define([],function(){
 
 
 	Color.random = function( minValue, maxValue ) {
-		var min = minValue||0
-			,max = maxValue||255
-			,r = round(randomBetween(min, max))
-			,g = round(randomBetween(min, max))
-			,b = round(randomBetween(min, max));
-			// log( r, g, b );
+		var min = minValue||0,
+			max = maxValue||255,
+			r = round(Utils.Utils.randomBetween(min, max)),
+			g = round(Utils.Utils.randomBetween(min, max)),
+			b = round(Utils.Utils.randomBetween(min, max));
 		return new fiveleft.Color( r, g, b, 1 );
 	};
 

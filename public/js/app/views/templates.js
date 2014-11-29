@@ -41,12 +41,7 @@ this["JST"]["partnership-item"] = Handlebars.template({"1":function(depth0,helpe
 
 
 
-this["JST"]["project-grid-item"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
-  var stack1, lambda=this.lambda, buffer = "        <h2 class=\"subtitle\">";
-  stack1 = lambda(((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.subtitle : stack1), depth0);
-  if (stack1 != null) { buffer += stack1; }
-  return buffer + "</h2>\n";
-},"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
+this["JST"]["project-grid-item"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<a href=\"/project/"
     + escapeExpression(((helper = (helper = helpers.slug || (depth0 != null ? depth0.slug : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"slug","hash":{},"data":data}) : helper)))
     + "\" class=\"project-item\" data-slug=\""
@@ -60,10 +55,7 @@ this["JST"]["project-grid-item"] = Handlebars.template({"1":function(depth0,help
     + "\" /> -->\n        </span>   \n        <span class=\"media-hover\"></span>             \n        <span class=\"media-active icon\"></span>             \n      </span>\n    </span>\n    <span class=\"info\">\n      <span class=\"info-inner\">\n        <h1 class=\"title\">";
   stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
-  buffer += "</h1>\n";
-  stack1 = helpers['if'].call(depth0, ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.subtitle : stack1), {"name":"if","hash":{},"fn":this.program(1, data),"inverse":this.noop,"data":data});
-  if (stack1 != null) { buffer += stack1; }
-  return buffer + "      </span>\n    </span>\n  </span>\n</a>";
+  return buffer + "</h1>\n      </span>\n    </span>\n  </span>\n</a>";
 },"useData":true});
 
 

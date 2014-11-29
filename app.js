@@ -41,7 +41,6 @@ hbs.registerHelper('contentFor', function(name, options){
 // Settings
 app.locals.CDN = '//cms.fiveleft.com/media/';
 app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
-// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -66,6 +65,7 @@ app.use(function(req, res, next) {
 // will print stacktrace
 if (app.get('env') === 'development') {
   app.locals.CDN = '/assets/';
+  app.use(logger('dev'));
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
@@ -84,6 +84,8 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+console.log( "Express app.get('env') = ", app.get('env') );
 
 
 module.exports = app;

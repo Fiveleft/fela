@@ -2,6 +2,17 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
+    // Prepare Build
+    prepare_build: {
+      options: {
+        envName : "production"
+        // Task-specific options go here.
+      }
+    },
+
+
+
+
     // Perhaps no longer needed
     bower: {
       install: {
@@ -13,8 +24,9 @@ module.exports = function(grunt) {
       }
     },
 
+    // Handlebars Templates
+    // @see http://danburzo.ro/grunt/chapters/handlebars/
     handlebars: {
-      // @see http://danburzo.ro/grunt/chapters/handlebars/
       all : { 
         options : {
           amd: true,
@@ -32,7 +44,16 @@ module.exports = function(grunt) {
     // JS TASKS ================================================================
     // check all js files for errors
     jshint: {
-      all: ['src/js/**/*.js'] 
+      all: [
+        'public/js/*.js',
+        'public/js/app/**/*.js',
+        'public/js/fiveleft/**/*.js',
+        '!public/js/app/views/templates.js'
+      ],
+      options: {
+        'expr' : true,
+        'sub' : true
+      }
     },
 
     // take all the js files and minify them into app.min.js
@@ -72,7 +93,7 @@ module.exports = function(grunt) {
       }
     },
 
-    // COOL TASKS ==============================================================
+    // DEV TASKS ===============================================================
     // watch css and js files and process the above tasks
     watch: {
       css: {
@@ -98,7 +119,7 @@ module.exports = function(grunt) {
         }
       }
     },
-    // configure nodemon
+
     nodemon: {
       dev: {
         script: './bin/www',
@@ -121,12 +142,19 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bower-requirejs');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-nodemon');
 
+  // New:
+  grunt.loadNpmTasks('grunt-prepare-build');
+
   // Default task
   grunt.registerTask('default', ['handlebars','concurrent']);
+
+  // Stage Task
+  grunt.registerTask('build', ['jshint']);
 
 };
