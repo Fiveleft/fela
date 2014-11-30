@@ -18,19 +18,22 @@
     position: relative;
   }
   .section-title {
-    font-size: 1.5em;
+    font-size: 1.75em;
     margin-bottom: 0;
     @include transition ( margin-bottom 0.5s $easeInOutCubic );
     .top {
-      display: block;
+      display: inline-block;
       font-size: 1.65em;
     }
     .linking-verb {
       @include italicBoldFont();
-      display: block;
+      display: inline-block;
       font-size: 0.8em;
       text-transform: none;
       padding: 0.125em 0;
+    }
+    br {
+      display: block;
     }
     .adj, .noun {
       display: inline-block;
@@ -75,10 +78,15 @@
       padding: 0 0 10%;
     }
     .section-title {
-      .top {}
+      .top {
+        display: block;
+      }
       .linking-verb, .adj, .noun {
         display: inline;
         padding: 0;
+      }
+      br {
+        display: none;
       }
       .adj {}
       .noun {}

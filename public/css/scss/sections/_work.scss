@@ -78,7 +78,7 @@ section#work-section {
 
     @include transition( background-color 0.3s $easeInOutCubic );
     h1, h2 {
-      font-size: 21px;
+      font-size: 2em;
       color: $color-white;
     }
   }

@@ -865,7 +865,7 @@ main.snap-nav.open {
 }
 /* line 20, scss/sections/_home.scss */
 #home-section .section-title {
-  font-size: 1.5em;
+  font-size: 1.75em;
   margin-bottom: 0;
   -moz-transition: margin-bottom 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
   -o-transition: margin-bottom 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -874,7 +874,7 @@ main.snap-nav.open {
 }
 /* line 24, scss/sections/_home.scss */
 #home-section .section-title .top {
-  display: block;
+  display: inline-block;
   font-size: 1.65em;
 }
 /* line 28, scss/sections/_home.scss */
@@ -882,20 +882,24 @@ main.snap-nav.open {
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
   font-style: italic;
   font-weight: 600;
-  display: block;
+  display: inline-block;
   font-size: 0.8em;
   text-transform: none;
   padding: 0.125em 0;
 }
 /* line 35, scss/sections/_home.scss */
+#home-section .section-title br {
+  display: block;
+}
+/* line 38, scss/sections/_home.scss */
 #home-section .section-title .adj, #home-section .section-title .noun {
   display: inline-block;
 }
-/* line 38, scss/sections/_home.scss */
+/* line 41, scss/sections/_home.scss */
 #home-section .section-title .adj {
   padding: 0.25em 0;
 }
-/* line 42, scss/sections/_home.scss */
+/* line 45, scss/sections/_home.scss */
 #home-section .section-description {
   position: relative;
   font-size: 1.125em;
@@ -911,7 +915,7 @@ main.snap-nav.open {
   -webkit-transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
   transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
 }
-/* line 58, scss/sections/_home.scss */
+/* line 61, scss/sections/_home.scss */
 #home-section.active .message-inner .section-title, #home-section.on .message-inner .section-title,
 #home-section .message-inner:hover .section-title {
   margin-bottom: 0.5em;
@@ -920,7 +924,7 @@ main.snap-nav.open {
   -webkit-transition: margin-bottom 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   transition: margin-bottom 0.25s cubic-bezier(0.19, 1, 0.22, 1);
 }
-/* line 62, scss/sections/_home.scss */
+/* line 65, scss/sections/_home.scss */
 #home-section.active .message-inner .section-description, #home-section.on .message-inner .section-description,
 #home-section .message-inner:hover .section-description {
   margin-top: 0;
@@ -933,38 +937,46 @@ main.snap-nav.open {
 }
 
 @media (min-width: 768px) {
-  /* line 73, scss/sections/_home.scss */
+  /* line 76, scss/sections/_home.scss */
   #home-section .message-wrapper {
     font-size: 1.5em;
     padding: 0 0 10%;
   }
-  /* line 79, scss/sections/_home.scss */
+  /* line 81, scss/sections/_home.scss */
+  #home-section .section-title .top {
+    display: block;
+  }
+  /* line 84, scss/sections/_home.scss */
   #home-section .section-title .linking-verb, #home-section .section-title .adj, #home-section .section-title .noun {
     display: inline;
     padding: 0;
   }
-  /* line 86, scss/sections/_home.scss */
+  /* line 88, scss/sections/_home.scss */
+  #home-section .section-title br {
+    display: none;
+  }
+  /* line 94, scss/sections/_home.scss */
   #home-section .section-description {
     max-width: 30em;
   }
 }
 @media (min-width: 1025px) {
-  /* line 94, scss/sections/_home.scss */
+  /* line 102, scss/sections/_home.scss */
   #home-section .message-wrapper {
     font-size: 2.0em;
   }
-  /* line 97, scss/sections/_home.scss */
+  /* line 105, scss/sections/_home.scss */
   #home-section .section-description {
     font-size: 1em;
     max-width: 27.5em;
   }
 }
 @media (min-width: 1281px) {
-  /* line 106, scss/sections/_home.scss */
+  /* line 114, scss/sections/_home.scss */
   #home-section .message-wrapper {
     font-size: 2.5em;
   }
-  /* line 109, scss/sections/_home.scss */
+  /* line 117, scss/sections/_home.scss */
   #home-section .section-description {
     font-size: 0.875em;
     max-width: 25em;
@@ -1077,7 +1089,7 @@ section#work-section .project-view {
 }
 /* line 80, scss/sections/_work.scss */
 .project-item .info h1, .project-item .info h2 {
-  font-size: 21px;
+  font-size: 2em;
   color: white;
 }
 /* line 85, scss/sections/_work.scss */
