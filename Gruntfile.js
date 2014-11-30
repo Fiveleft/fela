@@ -4,9 +4,16 @@ module.exports = function(grunt) {
 
     // Prepare Build
     prepare_build: {
-      options: {
-        envName : "production"
-        // Task-specific options go here.
+      production: {
+        options: {
+          envName: "production"
+          // Task-specific options go here.
+        }
+      },
+      stage: {
+        options: {
+          envName: "stage"
+        }
       }
     },
 
@@ -125,6 +132,30 @@ module.exports = function(grunt) {
         script: './bin/www',
         options: {
           nodeArgs: ['--debug'],
+          ext: 'hbs,js',
+          ignore: [
+            'node_modules/**',
+            'views/templates/**',
+            'public/js/**'
+          ],
+        }
+      },
+      stage: {
+        script: './bin/www',
+        options: {
+          nodeArgs: ['--debug'],
+          ext: 'hbs,js',
+          ignore: [
+            'node_modules/**',
+            'views/templates/**',
+            'public/js/**'
+          ],
+        }
+      },
+      release: {
+        script: './app/dist',
+        options: {
+          nodeArgs: [''],
           ext: 'hbs,js',
           ignore: [
             'node_modules/**',
