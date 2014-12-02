@@ -344,9 +344,14 @@ main.snap-nav.open {
     max-width: 1025px;
     padding: 0 20px;
   }
+
+  /* line 102, scss/core/_layout.scss */
+  #site-content > section .section-inner {
+    padding-top: 140px;
+  }
 }
 @media (min-width: 1281px) {
-  /* line 105, scss/core/_layout.scss */
+  /* line 108, scss/core/_layout.scss */
   .container {
     max-width: 1281px;
   }
