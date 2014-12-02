@@ -77,10 +77,6 @@ section#work-section {
     padding: 5%;
 
     @include transition( background-color 0.3s $easeInOutCubic );
-    h1, h2 {
-      font-size: 2em;
-      color: $color-white;
-    }
   }
   .info-inner {
     display: none;
@@ -90,6 +86,8 @@ section#work-section {
     @include transition( margin-top 0.3s $easeInOutCubic );
 
     h1 {
+      font-size: 1.5em;
+      color: $color-white;
       width: 100%;
       position: absolute;
       bottom: 0;

@@ -1,17 +1,26 @@
 // sections/_info.scss
 section#info-section {
 
+  .section-inner > div {
+    padding: 0 0 2em;
+  }
+  h1, h2, h3 {
+    margin: 0 0 0.5em;
+  }
+
   .partnership-list {
     max-width: 40em;
     li { 
       display: inline;
       line-height: 24px;
     }
-    li:after {
-      content: " / ";
+    li .partner-link:after {
+      display: inline-block;
+      margin-right: 0.25em;
+      content: ", ";
       color: $color-grey-light;
     }
-    li:last-child:after {
+    li:last-child .partner-link:after {
       content: "";
     }
   }
@@ -24,13 +33,13 @@ section#info-section {
   section#info-section {
     .partnership-list {
       max-width: none;
-      @include columns( 10em 3 );
-      @include column-gap( 1.5em );
+      // @include columns( 10em 3 );
+      // @include column-gap( 1.5em );
       li {
-        display: block;
+        display: inline-block;
       }
       li:after {
-        content: none;
+        //content: none;
       }
     }
   }

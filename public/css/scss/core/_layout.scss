@@ -88,6 +88,10 @@ main.snap-nav {
     max-width: $width-sm-min;
     padding: 0 15px;
   }
+  #site-content > section .section-inner {
+    padding-top: 100px;
+  }
+
 }
 
 @media ( min-width:$width-md-min ) {

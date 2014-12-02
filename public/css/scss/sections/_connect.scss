@@ -1,0 +1,28 @@
+// sections/_connect.scss
+section#connect-section {
+
+  h1, h2, h3 {
+    margin: 0 0 0.5em;
+  }
+  .content-wrapper {
+    padding: 0 0 2em;
+  }
+  .hours {
+    @include italicBoldFont();
+    padding-bottom: 0.75em;
+  }
+  .vcard {
+    .type {
+      display: block; 
+      width: 1px; 
+      height: 0;
+      line-height: 0;
+      overflow: hidden;
+      visibility: hidden; 
+      text-indent: -9999px;
+    }
+    .adr, .tel, .email {
+      display: block;
+    }
+  }
+}

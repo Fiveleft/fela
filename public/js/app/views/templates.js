@@ -21,10 +21,10 @@ this["JST"]["partnership-item"] = Handlebars.template({"1":function(depth0,helpe
     + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.website : stack1), depth0))
     + "\" target=\"_blank\" data-id=\""
     + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
-    + "\">\n<i class=\"icon\"></i><span class=\"label\">";
+    + "\">";
   stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "</span>\n</a>\n";
+  return buffer + "</a>\n";
 },"3":function(depth0,helpers,partials,data) {
   var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<span class=\"partner-link\" data-id=\""
     + escapeExpression(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"id","hash":{},"data":data}) : helper)))
