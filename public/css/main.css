@@ -200,10 +200,10 @@ a {
 p a, li a {
   color: #1c1c1a;
   text-decoration: underline;
-  -moz-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  -o-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  -webkit-transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-  transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -moz-transition: color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 /* line 33, scss/core/_base.scss */
 p a:hover, li a:hover {
@@ -211,14 +211,29 @@ p a:hover, li a:hover {
   text-decoration: none;
 }
 
-/* line 39, scss/core/_base.scss */
+/* line 40, scss/core/_base.scss */
 button {
+  font-family: "brandon-grotesque",sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  position: relative;
+  font-size: 16px;
+  line-height: 1.25;
   display: inline-block;
   border: none;
-  padding: 0 10px;
-  text-align: center;
+  padding: 0.625em 2em;
   background: #1c1c1a;
-  color: #f7f7f0;
+  color: #b8b8b1;
+  text-transform: uppercase;
+  -moz-transition: border-color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1), color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1), background-color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: border-color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1), color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1), background-color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: border-color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1), color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1), background-color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: border-color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1), color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1), background-color 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+/* line 67, scss/core/_base.scss */
+button:hover, button:focus {
+  color: white;
+  background-color: #ee2a7b;
 }
 
 /* line 2, scss/core/_layout.scss */
@@ -436,6 +451,7 @@ main.snap-nav.open {
 #mobile-nav button {
   display: block;
   position: absolute;
+  border: none;
   top: 0;
   right: 0;
   width: 50px;
@@ -447,11 +463,16 @@ main.snap-nav.open {
   -webkit-transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 66, scss/core/_nav.scss */
+/* line 67, scss/core/_nav.scss */
+#mobile-nav button::after {
+  display: none;
+  content: "";
+}
+/* line 71, scss/core/_nav.scss */
 #mobile-nav button:focus {
   outline: none;
 }
-/* line 69, scss/core/_nav.scss */
+/* line 74, scss/core/_nav.scss */
 #mobile-nav button .icon {
   position: relative;
   display: block;
@@ -462,7 +483,7 @@ main.snap-nav.open {
   text-align: left;
   text-transform: capitalize;
 }
-/* line 76, scss/core/_nav.scss */
+/* line 81, scss/core/_nav.scss */
 #mobile-nav button .bar {
   position: absolute;
   display: block;
@@ -481,28 +502,28 @@ main.snap-nav.open {
   -webkit-transition-delay: 0.3s;
   transition-delay: 0.3s;
 }
-/* line 87, scss/core/_nav.scss */
+/* line 92, scss/core/_nav.scss */
 #mobile-nav button .bar:first-child {
   top: 1px;
 }
-/* line 90, scss/core/_nav.scss */
+/* line 95, scss/core/_nav.scss */
 #mobile-nav button .bar:nth-child(2) {
   top: 9px;
 }
-/* line 93, scss/core/_nav.scss */
+/* line 98, scss/core/_nav.scss */
 #mobile-nav button .bar:last-child {
   top: 17px;
 }
 
-/* line 102, scss/core/_nav.scss */
+/* line 107, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button {
   background-color: #ee2a7b;
 }
-/* line 104, scss/core/_nav.scss */
+/* line 109, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button .bar {
   background-color: white;
 }
-/* line 106, scss/core/_nav.scss */
+/* line 111, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button .bar:first-child {
   top: 50%;
   height: 4px;
@@ -512,12 +533,12 @@ main.snap-nav.open {
   -webkit-transform: rotate(315deg);
   transform: rotate(315deg);
 }
-/* line 112, scss/core/_nav.scss */
+/* line 117, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button .bar:nth-child(2) {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 115, scss/core/_nav.scss */
+/* line 120, scss/core/_nav.scss */
 .snap-nav.open #mobile-nav button .bar:last-child {
   top: 50%;
   height: 4px;
@@ -528,7 +549,7 @@ main.snap-nav.open {
   transform: rotate(-315deg);
 }
 
-/* line 128, scss/core/_nav.scss */
+/* line 133, scss/core/_nav.scss */
 #top-nav .connect-title {
   display: block;
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
@@ -536,13 +557,13 @@ main.snap-nav.open {
   font-weight: 400;
   text-transform: none;
 }
-/* line 136, scss/core/_nav.scss */
+/* line 141, scss/core/_nav.scss */
 #top-nav .connect-nav .social-item {
   width: 40px;
   height: 40px;
   padding: 5px;
 }
-/* line 142, scss/core/_nav.scss */
+/* line 147, scss/core/_nav.scss */
 #top-nav .connect-nav .social {
   position: relative;
   display: block;
@@ -558,7 +579,7 @@ main.snap-nav.open {
   -webkit-transition: background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-/* line 151, scss/core/_nav.scss */
+/* line 156, scss/core/_nav.scss */
 #top-nav .connect-nav .social .icon {
   display: block;
   width: 100%;
@@ -577,34 +598,34 @@ main.snap-nav.open {
   -webkit-transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: opacity 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-/* line 162, scss/core/_nav.scss */
+/* line 167, scss/core/_nav.scss */
 #top-nav .connect-nav .social:hover {
   background: rgba(0, 0, 0, 0.6);
 }
-/* line 164, scss/core/_nav.scss */
+/* line 169, scss/core/_nav.scss */
 #top-nav .connect-nav .social:hover .icon {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 169, scss/core/_nav.scss */
+/* line 174, scss/core/_nav.scss */
 #top-nav .connect-nav .github .icon {
   background-image: url(/images/icon-github.svg);
 }
-/* line 172, scss/core/_nav.scss */
+/* line 177, scss/core/_nav.scss */
 #top-nav .connect-nav .facebook {
   padding: 5px;
 }
-/* line 174, scss/core/_nav.scss */
+/* line 179, scss/core/_nav.scss */
 #top-nav .connect-nav .facebook .icon {
   background-image: url(/images/icon-facebook.svg);
 }
-/* line 178, scss/core/_nav.scss */
+/* line 183, scss/core/_nav.scss */
 #top-nav .connect-nav .twitter .icon {
   background-image: url(/images/icon-twitter.svg);
 }
 
 @media (max-width: 767px) {
-  /* line 186, scss/core/_nav.scss */
+  /* line 191, scss/core/_nav.scss */
   #top-nav {
     right: 0;
     width: 200px;
@@ -613,29 +634,29 @@ main.snap-nav.open {
     z-index: 1;
     background-color: #2b2b29;
   }
-  /* line 193, scss/core/_nav.scss */
+  /* line 198, scss/core/_nav.scss */
   #top-nav .nav-item {
     display: block;
   }
-  /* line 196, scss/core/_nav.scss */
+  /* line 201, scss/core/_nav.scss */
   #top-nav .container {
     padding: 0;
     overflow: hidden;
   }
-  /* line 200, scss/core/_nav.scss */
+  /* line 205, scss/core/_nav.scss */
   #top-nav .nav-link {
     display: block;
     padding: 10px;
     padding-left: 20px;
     line-height: 1.25;
   }
-  /* line 207, scss/core/_nav.scss */
+  /* line 212, scss/core/_nav.scss */
   #top-nav .nav-link.logo {
     line-height: 0;
     height: 40px;
     padding: 0 0 0 15px;
   }
-  /* line 211, scss/core/_nav.scss */
+  /* line 216, scss/core/_nav.scss */
   #top-nav .nav-link.logo .brand-name {
     display: inline-block;
     width: 80px;
@@ -644,21 +665,21 @@ main.snap-nav.open {
     background-position: 50% 50%;
     background-size: contain;
   }
-  /* line 221, scss/core/_nav.scss */
+  /* line 226, scss/core/_nav.scss */
   #top-nav .top-nav-items {
     padding-bottom: 10px;
     border-bottom: 1px solid #1c1c1a;
   }
-  /* line 225, scss/core/_nav.scss */
+  /* line 230, scss/core/_nav.scss */
   #top-nav .nav-item.home {
     border-bottom: 1px solid #1c1c1a;
   }
-  /* line 228, scss/core/_nav.scss */
+  /* line 233, scss/core/_nav.scss */
   #top-nav .nav-item.work {
     border-top: 1px solid rgba(133, 133, 128, 0.25);
     padding-top: 10px;
   }
-  /* line 233, scss/core/_nav.scss */
+  /* line 238, scss/core/_nav.scss */
   #top-nav .connect-nav {
     *zoom: 1;
     padding-top: 10px;
@@ -670,62 +691,62 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 237, scss/core/_nav.scss */
+  /* line 242, scss/core/_nav.scss */
   #top-nav .connect-nav .connect-title {
     display: block;
     height: 24px;
     line-height: 24px;
     padding-left: 20px;
   }
-  /* line 243, scss/core/_nav.scss */
+  /* line 248, scss/core/_nav.scss */
   #top-nav .connect-nav .pipe {
     display: none;
   }
-  /* line 246, scss/core/_nav.scss */
+  /* line 251, scss/core/_nav.scss */
   #top-nav .connect-nav .nav-link.location {
     padding-top: 10px;
     padding-bottom: 20px;
     border-bottom: 1px solid #1c1c1a;
   }
-  /* line 251, scss/core/_nav.scss */
+  /* line 256, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item, #top-nav .connect-nav .social-item {
     display: block;
     float: left;
   }
-  /* line 255, scss/core/_nav.scss */
+  /* line 260, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item {
     width: 100%;
     margin-bottom: 10px;
     border-bottom: 1px solid rgba(133, 133, 128, 0.25);
   }
-  /* line 260, scss/core/_nav.scss */
+  /* line 265, scss/core/_nav.scss */
   #top-nav .connect-nav .social-item {
     width: auto;
     height: auto;
     margin-right: 5px;
   }
-  /* line 265, scss/core/_nav.scss */
+  /* line 270, scss/core/_nav.scss */
   #top-nav .connect-nav .social {
     width: 40px;
     height: 40px;
   }
-  /* line 268, scss/core/_nav.scss */
+  /* line 273, scss/core/_nav.scss */
   #top-nav .connect-nav .social .icon {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1;
   }
-  /* line 272, scss/core/_nav.scss */
+  /* line 277, scss/core/_nav.scss */
   #top-nav .connect-nav .nav-link.facebook {
     margin-left: 15px;
   }
 }
 @media (min-width: 768px) {
-  /* line 281, scss/core/_nav.scss */
+  /* line 286, scss/core/_nav.scss */
   #mobile-nav {
     display: none;
   }
 
-  /* line 284, scss/core/_nav.scss */
+  /* line 289, scss/core/_nav.scss */
   #top-nav {
     display: block;
     width: 100%;
@@ -735,7 +756,7 @@ main.snap-nav.open {
     font-size: 14px;
     overflow: visible;
   }
-  /* line 293, scss/core/_nav.scss */
+  /* line 298, scss/core/_nav.scss */
   #top-nav .container {
     *zoom: 1;
   }
@@ -745,7 +766,7 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 296, scss/core/_nav.scss */
+  /* line 301, scss/core/_nav.scss */
   #top-nav .top-nav-items, #top-nav .connect-nav {
     *zoom: 1;
   }
@@ -755,14 +776,14 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 299, scss/core/_nav.scss */
+  /* line 304, scss/core/_nav.scss */
   #top-nav .top-nav-items {
     position: relative;
     display: block;
     padding-left: 80px;
     float: left;
   }
-  /* line 305, scss/core/_nav.scss */
+  /* line 310, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item.home {
     position: absolute;
     top: 0;
@@ -774,11 +795,11 @@ main.snap-nav.open {
     text-align: left;
     text-transform: capitalize;
   }
-  /* line 312, scss/core/_nav.scss */
+  /* line 317, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-link.logo {
     display: block;
   }
-  /* line 315, scss/core/_nav.scss */
+  /* line 320, scss/core/_nav.scss */
   #top-nav .top-nav-items .brand-logo {
     display: block;
     width: 100%;
@@ -787,7 +808,7 @@ main.snap-nav.open {
     background: #1c1c1a url(/images/brand-logo-small.svg) no-repeat 50% 50%;
     background-size: 50px auto;
   }
-  /* line 322, scss/core/_nav.scss */
+  /* line 327, scss/core/_nav.scss */
   #top-nav .top-nav-items .brand-name {
     display: block;
     width: 100%;
@@ -797,33 +818,33 @@ main.snap-nav.open {
     background-position: 0 100%;
     background-size: contain;
   }
-  /* line 330, scss/core/_nav.scss */
+  /* line 335, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item:not(.home) {
     display: block;
     float: left;
     padding: 0;
   }
-  /* line 334, scss/core/_nav.scss */
+  /* line 339, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item:not(.home) .nav-link {
     display: block;
     padding: 10px 15px;
     line-height: 20px;
   }
-  /* line 342, scss/core/_nav.scss */
+  /* line 347, scss/core/_nav.scss */
   #top-nav .connect-nav {
     display: block;
     float: right;
   }
-  /* line 346, scss/core/_nav.scss */
+  /* line 351, scss/core/_nav.scss */
   #top-nav .connect-nav li {
     float: left;
   }
-  /* line 349, scss/core/_nav.scss */
+  /* line 354, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item {
     text-align: left;
     margin-right: 10px;
   }
-  /* line 352, scss/core/_nav.scss */
+  /* line 357, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item span, #top-nav .connect-nav .info-item a {
     display: inline-block;
     vertical-align: top;
@@ -831,26 +852,26 @@ main.snap-nav.open {
     margin: 0 5px;
     line-height: 20px;
   }
-  /* line 359, scss/core/_nav.scss */
+  /* line 364, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title {
     font-size: 16px;
     line-height: 1.4;
   }
-  /* line 363, scss/core/_nav.scss */
+  /* line 368, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .pipe {
     margin: 0;
   }
-  /* line 366, scss/core/_nav.scss */
+  /* line 371, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title, #top-nav .connect-nav .info-item .location, #top-nav .connect-nav .info-item .pipe {
     display: none;
   }
 }
 @media (min-width: 1025px) {
-  /* line 375, scss/core/_nav.scss */
+  /* line 380, scss/core/_nav.scss */
   #top-nav .top-nav-items {
     padding-left: 120px;
   }
-  /* line 379, scss/core/_nav.scss */
+  /* line 384, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title, #top-nav .connect-nav .info-item .location, #top-nav .connect-nav .info-item .pipe {
     display: inline-block;
   }
@@ -1501,4 +1522,136 @@ section#connect-section .vcard .type {
 /* line 24, scss/sections/_connect.scss */
 section#connect-section .vcard .adr, section#connect-section .vcard .tel, section#connect-section .vcard .email {
   display: block;
+}
+
+/* line 30, scss/sections/_connect.scss */
+.contact-form {
+  width: 100%;
+  padding-bottom: 2em;
+}
+/* line 34, scss/sections/_connect.scss */
+.contact-form .input-field {
+  margin: 0 0 1em;
+}
+/* line 37, scss/sections/_connect.scss */
+.contact-form .input-wrapper {
+  background: #1c1c1a;
+  padding: 5px;
+}
+/* line 42, scss/sections/_connect.scss */
+.contact-form label {
+  font-family: "brandon-grotesque",sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  display: block;
+  text-transform: uppercase;
+}
+/* line 48, scss/sections/_connect.scss */
+.contact-form input[type='text'], .contact-form textarea {
+  font-family: "adobe-garamond-pro", Georgia, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  display: block;
+  background: #1c1c1a;
+  color: #b8b8b1;
+  width: 100%;
+  height: auto;
+  font-size: 16px;
+  line-height: 1.25;
+  padding: 0.33em;
+  border: 1px solid #1c1c1a;
+  outline: none;
+  -moz-transition: border-color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -o-transition: border-color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: border-color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: border-color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+/* line 69, scss/sections/_connect.scss */
+.contact-form input[type='text']:focus, .contact-form textarea:focus {
+  outline: none;
+  color: #f7f7f0;
+  background-color: black;
+  border-color: #858580;
+}
+/* line 76, scss/sections/_connect.scss */
+.contact-form input[type='text'] div[pseudo="-webkit-input-placeholder"], .contact-form textarea div[pseudo="-webkit-input-placeholder"] {
+  color: #52524e;
+}
+/* line 83, scss/sections/_connect.scss */
+.contact-form .input-field[data-field='inquiry'] .input-wrapper {
+  position: relative;
+}
+/* line 86, scss/sections/_connect.scss */
+.contact-form .input-field[data-field='inquiry'] .inquiry-type-list {
+  display: block;
+}
+/* line 89, scss/sections/_connect.scss */
+.contact-form .input-field[data-field='inquiry'] input[name='inquiry'] {
+  position: relative;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
+  opacity: 0.8;
+}
+/* line 95, scss/sections/_connect.scss */
+.contact-form .input-field[data-field='inquiry'] select[name='inquiry'] {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  visibility: hidden;
+}
+
+@media (min-width: 768px) {
+  /* line 110, scss/sections/_connect.scss */
+  .contact-form {
+    padding-bottom: 1em;
+  }
+  /* line 113, scss/sections/_connect.scss */
+  .contact-form button.submit {
+    margin-top: 1.4em;
+  }
+
+  /* line 119, scss/sections/_connect.scss */
+  section#connect-section .connect-row {
+    *zoom: 1;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+  /* line 38, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/utilities/general/_clearfix.scss */
+  section#connect-section .connect-row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  /* line 125, scss/sections/_connect.scss */
+  section#connect-section .contact-form, section#connect-section .connect-details {
+    display: block;
+    float: left;
+  }
+  /* line 129, scss/sections/_connect.scss */
+  section#connect-section .contact-form {
+    width: 65%;
+    padding-right: 5%;
+    border-right: 1px solid rgba(133, 133, 128, 0.25);
+    margin-right: 5%;
+  }
+  /* line 135, scss/sections/_connect.scss */
+  section#connect-section .connect-details {
+    width: 25%;
+  }
+}
+@media (min-width: 1025px) {
+  /* line 146, scss/sections/_connect.scss */
+  section#connect-section .contact-form {
+    width: 55%;
+  }
+  /* line 149, scss/sections/_connect.scss */
+  section#connect-section .connect-details {
+    width: 25%;
+  }
 }

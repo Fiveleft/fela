@@ -29,18 +29,46 @@ p, li {
   a {
     color: $brand-black;
     text-decoration: underline;
-    @include transition( color 0.3s $easeInOutCubic );
+    @include transition( color 0.25s $easeInOutCubic );
     &:hover {
       color: $brand-magenta;
       text-decoration: none;
     }
   }
 }
+
 button {
+  @include thinFont();
+  position: relative;
+  font-size: 16px;
+  line-height: 1.25;
   display: inline-block;
   border: none;
-  padding: 0 10px;
-  text-align: center;
+  padding: 0.625em 2em;
   background: $brand-black;
-  color: $color-grey-white;
+  color: $color-grey-light;
+  text-transform: uppercase;
+
+  @include transition( 
+    border-color 0.25s $easeInOutCubic,
+    color 0.25s $easeInOutCubic,
+    background-color 0.25s $easeInOutCubic 
+  );
+
+  // &::after {
+  //   content: " ";
+  //   display: block;
+  //   position: absolute;
+  //   top: 4px; left: 4px; right: 4px; bottom: 4px;
+  //   border: 1px solid $brand-black;
+  //   @include transition( border-color 0.25s $easeInOutCubic );
+  // }
+
+  &:hover, &:focus {
+    color: $color-white;
+    background-color: $brand-magenta;
+    // &::after {
+    //   border-color: $color-border;
+    // }
+  }
 }

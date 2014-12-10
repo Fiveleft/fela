@@ -1,14 +1,19 @@
   // api.js
-var express = require('express'),
+var app = require('../app'),
+    express = require('express'),
     request = require('request'),
+    path = require('path'),
+    fs = require('fs'),
     apicache = require('apicache'),
     phpUnserialize = require('php-unserialize'),
+    siteContent = require('../sitecontent.json'),
     urlBase = "http://cms.fiveleft.com/wordpress/api/";
 
 var router  = express.Router(),
     cachetime = 1000*60*60*24*10,
     cacheDebug = true,
-    cache   = apicache.options({debug:cacheDebug, defaultDuration:(cachetime)}).middleware;
+    useCachedJSON = true,
+    cache = apicache.options({debug:cacheDebug, defaultDuration:(cachetime)}).middleware;
 
 
 
@@ -24,7 +29,7 @@ function unserialize( json ) {
 }
 
 
-function createProjectJSON( json ){
+function cleanJSON( json ){
 
   var galleryPattern = /\?attachment_id=(\d+)/gi;
 
@@ -33,8 +38,10 @@ function createProjectJSON( json ){
     // Project JSON Object
     var pObj = json[i];
     var cf = pObj.custom_fields;
-
     // Convert custom_fields to "info" property;
+    // if( pObj.type.match( /_client|_agency/ ) ) {
+    //   console.log( pObj.type, pObj.slug );
+    // }
     if( cf.description ) {
       pObj.info = {};
       for( var p in cf ) {
@@ -43,6 +50,10 @@ function createProjectJSON( json ){
           pObj.info[p] = phpUnserialize.unserialize( cf[p][0] );
         }
       }
+    }
+    if( cf._meta ) {
+      pObj.meta = phpUnserialize.unserialize( cf._meta );
+      delete cf._meta;
     }
     delete pObj.custom_fields;
 
@@ -57,64 +68,39 @@ function createProjectJSON( json ){
 
 
 
-/* GET all projects */
-router.get('/projects', cache(), function(req, res){
-  var params = {
-    url : urlBase + "get_posts/?post_type=fiveleft_project&posts_per_page=100&include=id,slug,title,content,custom_fields,categories,attachments",
-    json : true
-  };
-  req.apicacheGroup = "project";
-  request( params, function( err, response, body ){
-    if( err ) return;
-    res.send( createProjectJSON( body.posts ) );
-  });
-});
-
-
-
-/* GET specific project */
-router.get('/project/:id', cache(), function(req, res){
-  var params = {
-    url : urlBase + "get_post/?id=" + req.params.id + "&post_type=fiveleft_project&include=id,slug,title,content,custom_fields,categories,attachments",
-    json : true
-  };
-  req.apicacheGroup = "project";
-  request( params, function( err, response, body ){
-    if( err ) return;
-    var postJSON = createProjectJSON( [body.post] )
-    console.log( " body.post.length : " + postJSON.length );
-    res.send( postJSON );
-  });
-});
-
 
 
 /* GET partners */
-router.get('/partners', cache(), function(req, res){
-  var params = {
-    url : urlBase + "get_posts/?post_type[]=fiveleft_client&post_type[]=fiveleft_agency&posts_per_page=200&custom_fields=_meta&include=id,slug,title,custom_fields,type",
-    json : true
-  };
-  req.apicacheGroup = "partners";
-  request( params, function( err, response, body ){
-    if( err ) return;
-    res.send( unserialize( body.posts ) );
-  });
-});
+router.get('/sitecontent/:uncache?', cache(), function(req, res){
 
+  console.log( "ROUTE: SiteContent uncache = ", req.query.uncache );  
 
+  if (app.get('env') === 'development' && req.query.uncache!=="1" ) {
+    console.log( "Environment: " + app.get('env') + " | loading site content data from JSON file" );
+    res.send( siteContent );
+  } else {
+    console.log(" loading site content data from CMS " );
+    var params = {
+      url : urlBase + "get_posts/?post_status=publish&post_type[]=info_block&post_type[]=fiveleft_project&post_type[]=fiveleft_client&post_type[]=fiveleft_agency&count=200&include=id,slug,title,content,custom_fields,type,categories,attachments",
+      json : true
+    };
+    req.apicacheGroup = "content";
+    request( params, function( err, response, body ){
+      if( err ) return;
+      var json = cleanJSON( body.posts );
 
-/* GET all site pages */
-router.get('/pagecontent', cache(), function(req, res){
-  var params = {
-    url : urlBase + "get_posts/?post_type=page&posts_per_page=100&include=id,slug,title,content,attachments,custom_fields",
-    json : true
-  };
-  req.apicacheGroup = "content";
-  request( params, function( err, response, body ){
-    if( err ) return;
-    res.send( body.posts );
-  });
+      if( app.get('env') === 'development' && req.query.uncache==="1" ) {
+        var fn = path.join(__dirname, '../sitecontent.json');
+        var jst = JSON.stringify( json );
+        console.log(' writing file: ', fn );
+        fs.writeFile( fn, jst, function(err){
+          if( err ) throw err;
+          console.log( " WRITE FILE COMPLETE" );
+        });
+      }
+      res.send( json );
+    });
+  }
 });
 
 

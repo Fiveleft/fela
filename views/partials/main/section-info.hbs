@@ -1,14 +1,42 @@
 <section id="info-section" class="section container" data-id="info" data-scrollto="info">
   <div class="section-inner">
-    <div class="about-container" data-content="about">
-    </div>
+  {{#if infoData.about }}
+    <h1>{{infoData.about.title}}</h1>
+    {{{infoData.about.content}}}
+  {{else }}
+    <div class="about-container" data-content="about"></div>
+  {{/if }}
     <div class="clients">
       <h2>Clients I've produced work for</h2>
-      <ul class="client-list partnership-list"></ul>
+      <ul class="client-list partnership-list">
+        {{#if clientData}}
+        {{#each clientData}}
+        <li class="client-item partner-item">
+          {{#if info.website}}
+          <a class="partner-link" href="{{info.website}}" target="_blank" data-id="{{id}}">{{{title}}}</a>
+          {{else}}
+          <span class="partner-link" data-id="{{id}}">{{{title}}}</span>
+          {{/if}}
+        </li>
+        {{/each}}
+        {{/if}}
+      </ul>
     </div>
     <div class="agencies">
       <h2>Agencies I've worked with</h2>
-      <ul class="agency-list partnership-list"></ul>
+      <ul class="agency-list partnership-list">
+        {{#if agencyData}}
+        {{#each agencyData}}
+        <li class="agency-item partner-item">
+          {{#if info.website}}
+          <a class="partner-link" href="{{info.website}}" target="_blank" data-id="{{id}}">{{{title}}}</a>
+          {{else}}
+          <span class="partner-link" data-id="{{id}}">{{{title}}}</span>
+          {{/if}}
+        </li>
+        {{/each}}
+        {{/if}}
+      </ul>
     </div>
   </div>
 </section>

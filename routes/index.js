@@ -3,13 +3,16 @@ var express     = require('express');
 var request     = require('request');
 var indexPaths  = ['/','/work','/project/:slug','/connect','/info'];
 var router      = express.Router();
+var _           = require('underscore');
 
 // Data to inject into index
 var indexData   = {
   title: 'Fiveleft is a Creative Digital Studio',
-  projects: {},
-  partners : {},
-  pageContent : {}
+  data : {},
+  agencyData: {},
+  clientData: {},
+  infoData : {},
+  projectData: {}
 };
 
 // router.get( "/_escape_fragment_/*", function( request, response ) {
@@ -28,34 +31,49 @@ var indexData   = {
 
 
 // Load Project Data
-router.use( indexPaths, function(req, res, next){
-  request( "http://localhost:" + app.get("port") + "/api/projects", function( err, response, body ){
-    if( !err && response.statusCode == 200) {
-      indexData.projects = body;
-      next();
-    }else{
-      console.log( "could not load project data" );
-    }
-  });
-});
+// router.use( indexPaths, function(req, res, next){
+//   request( "http://localhost:" + app.get("port") + "/api/projects", function( err, response, body ){
+//     if( !err && response.statusCode == 200) {
+//       indexData.projects = body;
+//       next();
+//     }else{
+//       console.log( "could not load project data" );
+//     }
+//   });
+// });
 
-// Load Partner Data
-router.use( indexPaths, function(req, res, next){
-  request( "http://localhost:" + app.get("port") + "/api/partners", function( err, response, body ){
-    if( !err && response.statusCode == 200) {
-      indexData.partners = body;
-      next();
-    }else{
-      console.log( "could not load partner data" );
-    }
-  });
-});
+// // Load Partner Data
+// router.use( indexPaths, function(req, res, next){
+//   request( "http://localhost:" + app.get("port") + "/api/partners", function( err, response, body ){
+//     if( !err && response.statusCode == 200) {
+//       indexData.partners = body;
+//       next();
+//     }else{
+//       console.log( "could not load partner data" );
+//     }
+//   });
+// });
 
 // Load Content Data
 router.use( indexPaths, function(req, res, next){
-  request( "http://localhost:" + app.get("port") + "/api/pagecontent", function( err, response, body ){
+  request( "http://localhost:" + app.get("port") + "/api/sitecontent", function( err, response, body ){
     if( !err && response.statusCode == 200) {
-      indexData.pageContent = body;
+
+      var b = JSON.parse( body );
+      var infoData = _.where( b, {type:"info_block"} );
+      
+      indexData.data = body;
+      indexData.agencyData = _.where( b, {type:"fiveleft_agency"} );
+      indexData.clientData = _.where( b, {type:"fiveleft_client"} );
+      indexData.projectData = _.where( b, {type:"fiveleft_project"} );
+
+      // console.log( indexData.clientData );
+
+      _.each( infoData, function(d){
+        indexData.infoData[d.slug] = d;
+        console.log( d.slug, d.title );
+      });
+
       next();
     }else{
       console.log( "could not load page content data" );

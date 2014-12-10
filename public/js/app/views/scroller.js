@@ -12,7 +12,7 @@ define(
 
       initialize : function() {
         var self = this;
-        console.log( "ScrollerView.initialize()" );
+        // console.log( "ScrollerView.initialize()" );
 
         // Set Event Listeners
         this.windowEvents = {

@@ -56,6 +56,7 @@
   button {
     display: block;
     position: absolute;
+    border: none;
     top: 0;
     right: 0;
     width: 50px;
@@ -63,6 +64,10 @@
     padding: 10px 15px 11px 15px;
     background-color: transparent;
     @include transition( background-color 0.3s $easeInOutCubic );
+    &::after {
+      display: none;
+      content: "";
+    }
     &:focus {
       outline: none;
     }

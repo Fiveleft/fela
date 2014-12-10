@@ -1,6 +1,7 @@
 // Filename siteindex.js
 define([
     'jquery',
+    'underscore',
     'backbone',
     'events',
     'tweenmax',
@@ -16,6 +17,7 @@ define([
   ], 
   function(
     $,
+    _,
     Backbone,
     Events,
     TweenMax,
@@ -39,22 +41,17 @@ define([
         this.$main = $("main");
         this.$siteContent = $("#site-content");
         
-        var projectsData = JSON.parse($("#data-api-projects").attr("data-json")); 
-        var partnersData = JSON.parse($("#data-api-partners").attr("data-json")); 
-        var contentData = JSON.parse($("#data-api-content").attr("data-json")); 
-        $("#data-api-projects").remove();
-        $("#data-api-partners").remove();
-        $("#data-api-content").remove();
+        var siteData = JSON.parse($("#data-api-data").attr("data-json")); 
+        $("#data-api-data").remove();
         
+        var projectsData = _.where( siteData, {type:"fiveleft_project"});//JSON.parse($("#data-api-projects").attr("data-json")); 
+        var partnersData = _.where( siteData, function(p){ if(p.type==="fiveleft_agency"||p.type==="fiveleft_client") return p; } );
+       
         PartnerCollection.reset( partnersData );
         ProjectCollection.reset( projectsData );
-        PageContentCollection.reset( contentData ); 
 
         new NavView({el:$('#header')});
-        new PartnerCollectionView({ el:$(".agency-list")[0], type:"fiveleft_agency", collection:PartnerCollection });
-        new PartnerCollectionView({ el:$(".client-list")[0], type:"fiveleft_client", collection:PartnerCollection });
         new WorkView({ collection:ProjectCollection });
-        new PageContentCollectionView({ collection:PageContentCollection });
 
         // Start the ScrollerView
         ScrollerView.start();

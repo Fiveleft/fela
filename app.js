@@ -23,7 +23,7 @@ app.set("view engine", "hbs");
 // Set Handlebars as Express Rendering engine
 hbs.localsAsTemplateData(app);
 hbs.registerPartials(__dirname + '/views/partials');
-// hbs.registerPartials(__dirname + '/views/templates');
+hbs.registerPartials(__dirname + '/views/templates');
 hbs.registerHelper('asset', function(file) {
   return app.locals.CDN + file;
 });
