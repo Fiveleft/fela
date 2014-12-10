@@ -6,13 +6,12 @@ var app = require('../app'),
     fs = require('fs'),
     apicache = require('apicache'),
     phpUnserialize = require('php-unserialize'),
-    siteContent = require('../sitecontent.json'),
     urlBase = "http://cms.fiveleft.com/wordpress/api/";
 
 var router  = express.Router(),
     cachetime = 1000*60*60*24*10,
     cacheDebug = true,
-    useCachedJSON = true,
+    siteContent,
     cache = apicache.options({debug:cacheDebug, defaultDuration:(cachetime)}).middleware;
 
 
@@ -77,6 +76,7 @@ router.get('/sitecontent/:uncache?', cache(), function(req, res){
 
   if (app.get('env') === 'development' && req.query.uncache!=="1" ) {
     console.log( "Environment: " + app.get('env') + " | loading site content data from JSON file" );
+    siteContent = require('../sitecontent.json');
     res.send( siteContent );
   } else {
     console.log(" loading site content data from CMS " );
