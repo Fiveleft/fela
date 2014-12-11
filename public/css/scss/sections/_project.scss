@@ -33,7 +33,7 @@
     background: $color-grey-black;
     z-index: 3;
     @include background-image( 
-      radial-gradient(center, ellipse cover, rgba($color-grey-light,0.25), rgba($color-grey-black,1))
+      radial-gradient(center, ellipse cover, rgba($color-grey-dark,1), rgba($color-grey-black,1))
     );
   }
   .media-container, .media-controls {
