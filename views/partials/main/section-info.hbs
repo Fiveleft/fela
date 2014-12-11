@@ -1,11 +1,12 @@
 <section id="info-section" class="section container" data-id="info" data-scrollto="info">
   <div class="section-inner">
-  {{#if infoData.about }}
-    <h1>{{infoData.about.title}}</h1>
-    {{{infoData.about.content}}}
-  {{else }}
-    <div class="about-container" data-content="about"></div>
-  {{/if }}
+    <div class="about-container" data-content="about">
+    {{#if infoData.about }}
+      <h1>{{infoData.about.title}}</h1>
+      {{{infoData.about.content}}}
+    {{else }}
+    {{/if }}
+    </div>
     <div class="clients">
       <h2>Clients I've produced work for</h2>
       <ul class="client-list partnership-list">

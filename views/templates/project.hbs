@@ -53,65 +53,60 @@
           
           {{#if info.client}}
           <span class="participant-info client">
-            <span class="info-label">Client:&nbsp;</span>
+            <span class="info-label">Client: </span>
             {{#if info.client.info.website}}
             <a class="info-name" href="{{client.info.website}}">{{{info.client.title}}}</a>
             {{else}}
-            <span class="info-name">{{{info.client.title}}}</a>
+            <span class="info-name">{{{info.client.title}}}</span>
             {{/if}}
           </span>
           {{/if}}
           
           {{#if info.agency}}
-          <span class="separator">/</span>
           <span class="participant-info agency">
-            <span class="info-label">Agency:&nbsp;</span>
+            <span class="info-label">Agency: </span>
             {{#if info.agency.info.website}}
             <a class="info-name" href="{{agency.info.website}}">{{{info.agency.title}}}</a>
             {{else}}
-            <span class="info-name">{{{info.agency.title}}}</a>
+            <span class="info-name">{{{info.agency.title}}}</span>
             {{/if}}
           </span>
           {{/if}}
           
           {{#if disciplines}}
-          <span class="separator">/</span>
           <span class="taxonomy disciplines">
             <span class="info-label">Disciplines: </span>
             {{#each disciplines}}
             <span class="taxonomy-item" data-term-"{{name}}">
-              <span class="label">{{{name}}}</span><span class="separator">,</span>
+              <span class="label">{{{name}}}<span class="separator">,</span></span>
             </span>
             {{/each}}
           </span>
           {{/if}}
           
           {{#if technologies}}
-          <span class="separator">/</span>
           <span class="taxonomy technologies">
             <span class="info-label">Technology: </span>
             {{#each technologies}}
             <span class="taxonomy-item" data-term-"{{name}}">
-              <span class="label">{{{name}}}</span><span class="separator">,</span>
+              <span class="label">{{{name}}}<span class="separator">,</span></span>
             </span>
             {{/each}}
           </span>
           {{/if}}
           
           {{#if tools}}
-          <span class="separator">/</span>
           <span class="taxonomy tools">
             <span class="info-label">Tools: </span>
             {{#each tools}}
             <span class="taxonomy-item" data-term-"{{name}}">
-              <span class="label">{{{name}}}</span><span class="separator">,</span>
+              <span class="label">{{{name}}}<span class="separator">,</span></span>
             </span>
             {{/each}}
           </span>
           {{/if}}
 
           {{#if website}}
-          <span class="separator">/</span>
           <span class="participant-info site">
             <a class="project-link info-name" href="{{website}}" target="_blank" title="{{title}}">View Site</a>
           </span>

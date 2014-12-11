@@ -45,10 +45,14 @@ define([
         // Get Agency
         if( a.info.agency !== "null" ) {
           a.info.agency = PartnerCollection.findWhere({ id : parseInt(a.info.agency,10) }).attributes;
+        }else{
+          delete a.info.agency;
         }
         // Get Client
         if( a.info.client !== "null" ) {
           a.info.client = PartnerCollection.findWhere({ id : parseInt(a.info.client,10) }).attributes;
+        }else{
+          delete a.info.client;
         }
         // Set Content
         if( a.info.description ) {

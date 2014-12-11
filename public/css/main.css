@@ -84,17 +84,17 @@ h1, h2, h3, h4 {
 
 /* line 53, scss/core/_typography.scss */
 h1 {
-  font-size: 24px;
+  font-size: 28px;
 }
 
 /* line 54, scss/core/_typography.scss */
 h2 {
-  font-size: 18px;
+  font-size: 24px;
 }
 
 /* line 55, scss/core/_typography.scss */
 h3 {
-  font-size: 16px;
+  font-size: 21px;
 }
 
 /* line 56, scss/core/_typography.scss */
@@ -102,7 +102,7 @@ h4 {
   font-family: "brandon-grotesque",sans-serif;
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 18px;
 }
 
 @media (min-width: 768px) {
@@ -1190,16 +1190,17 @@ section#work-section .project-view {
 }
 /* line 17, scss/sections/_project.scss */
 .project .project-inner {
-  padding: 60px 0 0;
+  padding: 60px 0;
   position: relative;
 }
-/* line 22, scss/sections/_project.scss */
+
+/* line 24, scss/sections/_project.scss */
 .project .media {
   display: block;
   position: relative;
 }
-/* line 26, scss/sections/_project.scss */
-.project .media-inner {
+/* line 28, scss/sections/_project.scss */
+.project .media .media-inner {
   position: relative;
   width: 100%;
   height: 0;
@@ -1212,8 +1213,8 @@ section#work-section .project-view {
   background-image: -webkit-radial-gradient(center, ellipse cover, rgba(184, 184, 177, 0.25), #1c1c1a);
   background-image: radial-gradient(ellipse cover at center, rgba(184, 184, 177, 0.25), #1c1c1a);
 }
-/* line 37, scss/sections/_project.scss */
-.project .media-container, .project .media-controls {
+/* line 39, scss/sections/_project.scss */
+.project .media .media-container, .project .media .media-controls {
   display: block;
   position: absolute;
   top: 0;
@@ -1221,8 +1222,8 @@ section#work-section .project-view {
   width: 100%;
   height: 100%;
 }
-/* line 44, scss/sections/_project.scss */
-.project .media-controls {
+/* line 46, scss/sections/_project.scss */
+.project .media .media-controls {
   z-index: 2;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
@@ -1231,8 +1232,8 @@ section#work-section .project-view {
   -webkit-transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: opacity 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-/* line 48, scss/sections/_project.scss */
-.project .media-controls .inner {
+/* line 50, scss/sections/_project.scss */
+.project .media .media-controls .inner {
   display: block;
   position: absolute;
   top: 50%;
@@ -1250,8 +1251,8 @@ section#work-section .project-view {
   -webkit-transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 59, scss/sections/_project.scss */
-.project .media-controls .icon {
+/* line 61, scss/sections/_project.scss */
+.project .media .media-controls .icon {
   text-indent: -119988px;
   overflow: hidden;
   text-align: left;
@@ -1261,55 +1262,55 @@ section#work-section .project-view {
   width: 50px;
   height: 50px;
 }
-/* line 65, scss/sections/_project.scss */
-.project .media-controls .play-icon, .project .media-controls .pause-icon {
+/* line 67, scss/sections/_project.scss */
+.project .media .media-controls .play-icon, .project .media .media-controls .pause-icon {
   display: block;
   width: 100%;
   height: 100%;
 }
-/* line 68, scss/sections/_project.scss */
-.project .media-controls .play-icon path, .project .media-controls .pause-icon path {
+/* line 70, scss/sections/_project.scss */
+.project .media .media-controls .play-icon path, .project .media .media-controls .pause-icon path {
   fill: rgba(255, 255, 255, 0.5);
   -moz-transition: fill 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   -o-transition: fill 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   -webkit-transition: fill 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: fill 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 73, scss/sections/_project.scss */
-.project .media-controls .play {
+/* line 75, scss/sections/_project.scss */
+.project .media .media-controls .play {
   display: block;
 }
-/* line 76, scss/sections/_project.scss */
-.project .media-controls .pause {
+/* line 78, scss/sections/_project.scss */
+.project .media .media-controls .pause {
   display: none;
 }
-/* line 79, scss/sections/_project.scss */
-.project .media-controls:hover {
+/* line 81, scss/sections/_project.scss */
+.project .media .media-controls:hover {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 82, scss/sections/_project.scss */
-.project .media-controls .inner:hover {
+/* line 84, scss/sections/_project.scss */
+.project .media .media-controls .inner:hover {
   background-color: #ee2a7b;
 }
-/* line 85, scss/sections/_project.scss */
-.project .media-controls .inner:hover .play-icon path, .project .media-controls .inner:hover .pause-icon path {
+/* line 87, scss/sections/_project.scss */
+.project .media .media-controls .inner:hover .play-icon path, .project .media .media-controls .inner:hover .pause-icon path {
   fill: white;
 }
-/* line 92, scss/sections/_project.scss */
-.project .playing .media-controls .play {
+/* line 94, scss/sections/_project.scss */
+.project .media .playing .media-controls .play {
   display: none;
 }
-/* line 93, scss/sections/_project.scss */
-.project .playing .media-controls .pause {
+/* line 95, scss/sections/_project.scss */
+.project .media .playing .media-controls .pause {
   display: block;
 }
-/* line 95, scss/sections/_project.scss */
-.project .media-container {
+/* line 97, scss/sections/_project.scss */
+.project .media .media-container {
   z-index: 1;
 }
-/* line 98, scss/sections/_project.scss */
-.project .close {
+/* line 100, scss/sections/_project.scss */
+.project .media .close {
   display: block;
   position: absolute;
   top: 0;
@@ -1319,8 +1320,8 @@ section#work-section .project-view {
   padding: 6px;
   z-index: 4;
 }
-/* line 105, scss/sections/_project.scss */
-.project .close .icon {
+/* line 107, scss/sections/_project.scss */
+.project .media .close .icon {
   position: relative;
   display: block;
   width: 100%;
@@ -1335,41 +1336,65 @@ section#work-section .project-view {
   -webkit-border-radius: 9999px;
   border-radius: 9999px;
 }
-/* line 114, scss/sections/_project.scss */
-.project .close .close-icon {
+/* line 116, scss/sections/_project.scss */
+.project .media .close .close-icon {
   display: block;
   width: 100%;
   height: 100%;
 }
-/* line 117, scss/sections/_project.scss */
-.project .close .close-icon polygon {
+/* line 119, scss/sections/_project.scss */
+.project .media .close .close-icon polygon {
   fill: #1c1c1a;
   -moz-transition: fill 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   -o-transition: fill 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   -webkit-transition: fill 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: fill 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 123, scss/sections/_project.scss */
-.project .close:hover .icon {
+/* line 125, scss/sections/_project.scss */
+.project .media .close:hover .icon {
   background-color: #ee2a7b;
 }
-/* line 126, scss/sections/_project.scss */
-.project .close:hover .close-icon polygon {
+/* line 128, scss/sections/_project.scss */
+.project .media .close:hover .close-icon polygon {
   fill: white;
 }
-/* line 131, scss/sections/_project.scss */
+
+/* line 135, scss/sections/_project.scss */
 .project .info {
   margin-top: 30px;
 }
+/* line 138, scss/sections/_project.scss */
+.project .info .details {
+  padding: 1em 0 0;
+}
+/* line 143, scss/sections/_project.scss */
+.project .info .additional .participant-info, .project .info .additional .taxonomy {
+  display: block;
+  font-size: 87.5%;
+  color: #1c1c1a;
+}
+/* line 149, scss/sections/_project.scss */
+.project .info .additional .info-label {
+  font-family: "brandon-grotesque",sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 11px;
+  color: #858580;
+}
+/* line 155, scss/sections/_project.scss */
+.project .info .additional .taxonomy-item:last-child .separator {
+  display: none;
+}
 
-/* line 137, scss/sections/_project.scss */
+/* line 162, scss/sections/_project.scss */
 .media-container.gallery .gallery-list {
   display: block;
   position: relative;
   width: 100%;
   height: 100%;
 }
-/* line 142, scss/sections/_project.scss */
+/* line 167, scss/sections/_project.scss */
 .media-container.gallery .gallery-item {
   position: absolute;
   top: 0;
@@ -1383,19 +1408,19 @@ section#work-section .project-view {
   -webkit-transition: opacity 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: opacity 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 150, scss/sections/_project.scss */
+/* line 175, scss/sections/_project.scss */
 .media-container.gallery .gallery-item.active {
   z-index: 6;
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 154, scss/sections/_project.scss */
+/* line 179, scss/sections/_project.scss */
 .media-container.gallery .gallery-item.fade {
   z-index: 7;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 158, scss/sections/_project.scss */
+/* line 183, scss/sections/_project.scss */
 .media-container.gallery .img-container {
   display: block;
   position: relative;
@@ -1403,7 +1428,7 @@ section#work-section .project-view {
   height: 100%;
   text-align: center;
 }
-/* line 164, scss/sections/_project.scss */
+/* line 189, scss/sections/_project.scss */
 .media-container.gallery img {
   display: inline-block;
   width: auto;
@@ -1411,12 +1436,12 @@ section#work-section .project-view {
   margin: 0 auto;
 }
 
-/* line 172, scss/sections/_project.scss */
+/* line 197, scss/sections/_project.scss */
 .media-container.video {
   text-align: center;
   overflow: hidden;
 }
-/* line 175, scss/sections/_project.scss */
+/* line 200, scss/sections/_project.scss */
 .media-container.video video {
   font-size: 0;
   display: inline-block;
@@ -1424,7 +1449,7 @@ section#work-section .project-view {
   width: auto;
   height: 100%;
 }
-/* line 182, scss/sections/_project.scss */
+/* line 207, scss/sections/_project.scss */
 .media-container.video .marker {
   display: block;
   position: absolute;
@@ -1439,20 +1464,71 @@ section#work-section .project-view {
 }
 
 @media (min-width: 768px) {
-  /* line 198, scss/sections/_project.scss */
+  /* line 223, scss/sections/_project.scss */
   .project .project-inner {
     padding-top: 100px;
   }
 
-  /* line 203, scss/sections/_project.scss */
+  /* line 228, scss/sections/_project.scss */
   .media-container.gallery .gallery-item {
     padding: 20px;
   }
 }
 @media (min-width: 1025px) {
-  /* line 214, scss/sections/_project.scss */
+  /* line 239, scss/sections/_project.scss */
   .media-container.gallery .gallery-item {
     padding: 30px;
+  }
+}
+@media (min-width: 1281px) {
+  /* line 248, scss/sections/_project.scss */
+  .project .project-inner {
+    position: relative;
+    width: 100%;
+    *zoom: 1;
+  }
+  /* line 38, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/utilities/general/_clearfix.scss */
+  .project .project-inner:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+  /* line 253, scss/sections/_project.scss */
+  .project .media {
+    width: 66.6666%;
+    position: relative;
+  }
+  /* line 256, scss/sections/_project.scss */
+  .project .media .media-inner {
+    width: 100%;
+    position: relative;
+  }
+  /* line 261, scss/sections/_project.scss */
+  .project .info {
+    position: absolute;
+    width: 100%;
+    margin-top: 0;
+    padding-top: 30px;
+  }
+  /* line 267, scss/sections/_project.scss */
+  .project .info .title, .project .info .subtitle {
+    width: 66.6666%;
+  }
+  /* line 270, scss/sections/_project.scss */
+  .project .info .title {
+    font-size: 54px;
+  }
+  /* line 273, scss/sections/_project.scss */
+  .project .info .details {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    width: 33.3333%;
+    padding: 0 0 0 20px;
+  }
+  /* line 279, scss/sections/_project.scss */
+  .project .info .additional {
+    padding-bottom: 0;
   }
 }
 /* line 4, scss/sections/_info.scss */

@@ -50,12 +50,12 @@ h1, h2, h3, h4 {
   @include headlineFont();
   color: $color-grey-black;
 }
-h1 { font-size: 24px; }
-h2 { font-size: 18px; }
-h3 { font-size: 16px; }
+h1 { font-size: 28px; }
+h2 { font-size: 24px; }
+h3 { font-size: 21px; }
 h4 { 
   @include mediumFont();
-  font-size: 16px; 
+  font-size: 18px; 
 }
 p {
   // -webkit-font-smoothing: antialiased;

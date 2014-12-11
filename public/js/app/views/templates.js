@@ -2,20 +2,6 @@ define(['handlebars'], function(Handlebars) {
 
 this["JST"] = this["JST"] || {};
 
-this["JST"]["page-content"] = Handlebars.template({"compiler":[6,">= 2.0.0-beta.1"],"main":function(depth0,helpers,partials,data) {
-  var stack1, helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression, buffer = "<!-- page-content.hbs -->\n<div class=\"page-content page-content-"
-    + escapeExpression(((helper = (helper = helpers.slug || (depth0 != null ? depth0.slug : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"slug","hash":{},"data":data}) : helper)))
-    + "\">\n  <h1 class=\"content-title\">";
-  stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper));
-  if (stack1 != null) { buffer += stack1; }
-  buffer += "</h1>\n  ";
-  stack1 = ((helper = (helper = helpers.content || (depth0 != null ? depth0.content : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"content","hash":{},"data":data}) : helper));
-  if (stack1 != null) { buffer += stack1; }
-  return buffer + "\n</div>\n";
-},"useData":true});
-
-
-
 this["JST"]["partnership-item"] = Handlebars.template({"1":function(depth0,helpers,partials,data) {
   var stack1, helper, lambda=this.lambda, escapeExpression=this.escapeExpression, functionType="function", helperMissing=helpers.helperMissing, buffer = "<a class=\"partner-link\" href=\""
     + escapeExpression(lambda(((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.website : stack1), depth0))
@@ -112,7 +98,7 @@ this["JST"]["project"] = Handlebars.template({"1":function(depth0,helpers,partia
   if (stack1 != null) { buffer += stack1; }
   return buffer + "</h2>\n";
 },"15":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "          <span class=\"participant-info client\">\n            <span class=\"info-label\">Client:&nbsp;</span>\n";
+  var stack1, buffer = "          <span class=\"participant-info client\">\n            <span class=\"info-label\">Client: </span>\n";
   stack1 = helpers['if'].call(depth0, ((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.client : stack1)) != null ? stack1.info : stack1)) != null ? stack1.website : stack1), {"name":"if","hash":{},"fn":this.program(16, data),"inverse":this.program(18, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "          </span>\n";
@@ -127,9 +113,9 @@ this["JST"]["project"] = Handlebars.template({"1":function(depth0,helpers,partia
   var stack1, lambda=this.lambda, buffer = "            <span class=\"info-name\">";
   stack1 = lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.client : stack1)) != null ? stack1.title : stack1), depth0);
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "</a>\n";
+  return buffer + "</span>\n";
 },"20":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "          <span class=\"separator\">/</span>\n          <span class=\"participant-info agency\">\n            <span class=\"info-label\">Agency:&nbsp;</span>\n";
+  var stack1, buffer = "          <span class=\"participant-info agency\">\n            <span class=\"info-label\">Agency: </span>\n";
   stack1 = helpers['if'].call(depth0, ((stack1 = ((stack1 = ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.agency : stack1)) != null ? stack1.info : stack1)) != null ? stack1.website : stack1), {"name":"if","hash":{},"fn":this.program(21, data),"inverse":this.program(23, data),"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "          </span>\n";
@@ -144,9 +130,9 @@ this["JST"]["project"] = Handlebars.template({"1":function(depth0,helpers,partia
   var stack1, lambda=this.lambda, buffer = "            <span class=\"info-name\">";
   stack1 = lambda(((stack1 = ((stack1 = (depth0 != null ? depth0.info : depth0)) != null ? stack1.agency : stack1)) != null ? stack1.title : stack1), depth0);
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "</a>\n";
+  return buffer + "</span>\n";
 },"25":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "          <span class=\"separator\">/</span>\n          <span class=\"taxonomy disciplines\">\n            <span class=\"info-label\">Disciplines: </span>\n";
+  var stack1, buffer = "          <span class=\"taxonomy disciplines\">\n            <span class=\"info-label\">Disciplines: </span>\n";
   stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.disciplines : depth0), {"name":"each","hash":{},"fn":this.program(26, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "          </span>\n";
@@ -156,20 +142,20 @@ this["JST"]["project"] = Handlebars.template({"1":function(depth0,helpers,partia
     + "\">\n              <span class=\"label\">";
   stack1 = ((helper = (helper = helpers.name || (depth0 != null ? depth0.name : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"name","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
-  return buffer + "</span><span class=\"separator\">,</span>\n            </span>\n";
+  return buffer + "<span class=\"separator\">,</span></span>\n            </span>\n";
 },"28":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "          <span class=\"separator\">/</span>\n          <span class=\"taxonomy technologies\">\n            <span class=\"info-label\">Technology: </span>\n";
+  var stack1, buffer = "          <span class=\"taxonomy technologies\">\n            <span class=\"info-label\">Technology: </span>\n";
   stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.technologies : depth0), {"name":"each","hash":{},"fn":this.program(26, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "          </span>\n";
 },"30":function(depth0,helpers,partials,data) {
-  var stack1, buffer = "          <span class=\"separator\">/</span>\n          <span class=\"taxonomy tools\">\n            <span class=\"info-label\">Tools: </span>\n";
+  var stack1, buffer = "          <span class=\"taxonomy tools\">\n            <span class=\"info-label\">Tools: </span>\n";
   stack1 = helpers.each.call(depth0, (depth0 != null ? depth0.tools : depth0), {"name":"each","hash":{},"fn":this.program(26, data),"inverse":this.noop,"data":data});
   if (stack1 != null) { buffer += stack1; }
   return buffer + "          </span>\n";
 },"32":function(depth0,helpers,partials,data) {
   var helper, functionType="function", helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
-  return "          <span class=\"separator\">/</span>\n          <span class=\"participant-info site\">\n            <a class=\"project-link info-name\" href=\""
+  return "          <span class=\"participant-info site\">\n            <a class=\"project-link info-name\" href=\""
     + escapeExpression(((helper = (helper = helpers.website || (depth0 != null ? depth0.website : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"website","hash":{},"data":data}) : helper)))
     + "\" target=\"_blank\" title=\""
     + escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper)))

@@ -15,14 +15,16 @@
   }
 
   .project-inner {
-    padding: 60px 0 0;
+    padding: 60px 0;
     position: relative;
   }
+}
 
-  .media {
-    display: block;
-    position: relative;
-  }
+
+.project .media {
+  display: block;
+  position: relative;
+
   .media-inner {
     position: relative;
     width: 100%;
@@ -128,8 +130,31 @@
       }
     }
   }
-  .info {
-    margin-top: 30px;
+}
+
+.project .info {
+  margin-top: 30px;  
+
+  .details {
+    padding: 1em 0 0;
+  }
+
+  .additional {
+    .participant-info, .taxonomy {
+      // @include italicFont();
+      display: block;
+      font-size: 87.5%;
+      color: $color-grey-black;
+    }
+    .info-label {
+      @include mediumFont();
+      text-transform: uppercase;
+      font-size: 11px;
+      color: $color-grey-med;
+    }
+    .taxonomy-item:last-child .separator {
+      display: none;
+    }
   }
 }
 
@@ -219,6 +244,42 @@
 
 @media ( min-width:$width-lg-min ) {
   .project {
-    
+
+    .project-inner {
+      position: relative;
+      width: 100%;
+      @include clearfix;
+    }
+    .media {
+      width: 66.6666%;
+      position: relative;
+      .media-inner {
+        width: 100%;
+        position: relative;
+      }
+    }
+    .info {
+      position: absolute;
+      width: 100%;
+      margin-top: 0;
+      padding-top: 30px;
+
+      .title, .subtitle {
+        width: 66.6666%;
+      }
+      .title {
+        font-size: 54px;
+      }
+      .details {
+        position: absolute;
+        bottom: 100%; right: 0;
+        width: 33.3333%;
+        padding: 0 0 0 20px;
+      }
+      .additional {
+        padding-bottom: 0;
+      }
+
+    }
   }
 }
