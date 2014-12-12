@@ -5,6 +5,7 @@ var app = require('../app'),
     path = require('path'),
     fs = require('fs'),
     apicache = require('apicache'),
+    _ = require('underscore'),
     phpUnserialize = require('php-unserialize'),
     urlBase = "http://cms.fiveleft.com/wordpress/api/";
 
@@ -31,33 +32,36 @@ function unserialize( json ) {
 function cleanJSON( json ){
 
   var galleryPattern = /\?attachment_id=(\d+)/gi;
+  var i = json.length-1;
 
-  for( var i=json.length-1; i!==-1; i-- ) {
+  for( i; i!==-1; i-- ) {
 
     // Project JSON Object
     var pObj = json[i];
-    var cf = pObj.custom_fields;
-    // Convert custom_fields to "info" property;
-    // if( pObj.type.match( /_client|_agency/ ) ) {
-    //   console.log( pObj.type, pObj.slug );
-    // }
-    if( cf.description ) {
+    var cf;
+    var p;
+    var gallery;
+    
+
+    if( !_.isEmpty( pObj.custom_fields ) ) {
+      cf = pObj.custom_fields; 
       pObj.info = {};
-      for( var p in cf ) {
-        pObj.info[p] = cf[p][0];
-        if( p == "video_formats" && cf[p][0].length ) {
-          pObj.info[p] = phpUnserialize.unserialize( cf[p][0] );
+      for( p in cf ) {
+        if( !_.isEmpty( cf[p] ) ) {
+          pObj.info[p] = cf[p][0];
         }
       }
+      if( pObj.info.video_formats ) {
+        pObj.info.video_formats = phpUnserialize.unserialize( pObj.info.video_formats );
+      }
     }
-    if( cf._meta ) {
-      pObj.meta = phpUnserialize.unserialize( cf._meta );
-      delete cf._meta;
+
+    if( pObj.hasOwnProperty('custom_fields') ) {  
+      delete pObj.custom_fields;
     }
-    delete pObj.custom_fields;
 
     // Find any Gallery Info
-    var gallery = pObj.content.match( galleryPattern );
+    gallery = pObj.content.match( galleryPattern );
     if( gallery !== null ) {
       pObj.gallery = gallery.join().replace( galleryPattern, '$1' );
     }
@@ -81,7 +85,7 @@ router.get('/sitecontent/:uncache?', cache(), function(req, res){
   } else {
     console.log(" loading site content data from CMS " );
     var params = {
-      url : urlBase + "get_posts/?post_status=publish&post_type[]=info_block&post_type[]=fiveleft_project&post_type[]=fiveleft_client&post_type[]=fiveleft_agency&count=200&include=id,slug,title,content,custom_fields,type,categories,attachments",
+      url : urlBase + "get_posts/?post_status=publish&post_type[]=info_block&post_type[]=fiveleft_project&post_type[]=fiveleft_client&post_type[]=fiveleft_agency&count=200&include=id,slug,title,content,custom_fields,type,categories,attachments,menu_order",
       json : true
     };
     req.apicacheGroup = "content";

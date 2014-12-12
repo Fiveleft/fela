@@ -5,12 +5,9 @@ define([
     'backbone',
     'events',
     'tweenmax',
-    'app/collections/pageContentCollection',
     'app/collections/partnerCollection',
     'app/collections/projectCollection',
     "app/views/nav",
-    'app/views/pageContentCollection',
-    'app/views/partnerCollection',
     'app/views/work',
     'app/views/scroller',
     'app/models/breakpoints'
@@ -21,12 +18,9 @@ define([
     Backbone,
     Events,
     TweenMax,
-    PageContentCollection, 
     PartnerCollection, 
     ProjectCollection,
     NavView,
-    PageContentCollectionView,
-    PartnerCollectionView,
     WorkView,
     ScrollerView,
     Breakpoints
@@ -45,10 +39,14 @@ define([
         $("#data-api-data").remove();
         
         var projectsData = _.where( siteData, {type:"fiveleft_project"});//JSON.parse($("#data-api-projects").attr("data-json")); 
-        var partnersData = _.where( siteData, function(p){ if(p.type==="fiveleft_agency"||p.type==="fiveleft_client") return p; } );
+        var partnersData = _.filter( siteData, function(p){ 
+            if( /_agency|_client/g.test( p.type ) ) return p;
+        });
        
         PartnerCollection.reset( partnersData );
         ProjectCollection.reset( projectsData );
+
+        console.log(PartnerCollection);
 
         new NavView({el:$('#header')});
         new WorkView({ collection:ProjectCollection });

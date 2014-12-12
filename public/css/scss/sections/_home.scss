@@ -52,6 +52,11 @@
     padding: 0 10px;
     @include opacity( 0 );
     @include transition ( opacity 0.2s $easeOutExpo, margin-top 0.66s $easeOutExpo );
+
+    p {
+      margin: 0; padding: 0; line-height: inherit;
+    }
+
   }
 
   &.active .message-inner, 

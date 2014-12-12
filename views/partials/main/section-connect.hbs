@@ -1,6 +1,7 @@
 <section id="connect-section" class="section container" data-id="connect" data-scrollto="connect">
 	<div class="section-inner">
 		<h1 class="section-title">Connect</h1>
+
 		<div class="connect-row">
 			<form class="contact-form">
 				<div class="input-field" data-field="name">
@@ -64,6 +65,13 @@
 				<p class="hours">Hours by appointment only</p>
 			</div>
 		</div>
-    <div class="content-wrapper" data-content="collaboration"></div>
+
+		<div class="collaboration-container">
+    {{#if infoData.collaboration }}
+      <h1>{{infoData.collaboration.title}}</h1>
+      {{{infoData.collaboration.content}}}
+    {{/if }}
+    </div>
+
 	</div>
 </section>

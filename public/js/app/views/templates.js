@@ -36,9 +36,7 @@ this["JST"]["project-grid-item"] = Handlebars.template({"compiler":[6,">= 2.0.0-
     + escapeExpression(((helper = (helper = helpers.index || (depth0 != null ? depth0.index : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"index","hash":{},"data":data}) : helper)))
     + "\" >\n  <span class=\"project-grid-item-inner\">\n    <span class=\"media\">\n      <span class=\"media-inner\">\n        <span class=\"media-content\" style=\"background-image: url('"
     + escapeExpression(((helper = (helper = helpers.gridImage || (depth0 != null ? depth0.gridImage : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"gridImage","hash":{},"data":data}) : helper)))
-    + "');\">\n          <!-- <img class=\"thumbnail\" src=\""
-    + escapeExpression(((helper = (helper = helpers.gridImage || (depth0 != null ? depth0.gridImage : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"gridImage","hash":{},"data":data}) : helper)))
-    + "\" /> -->\n        </span>   \n        <span class=\"media-hover\"></span>             \n        <span class=\"media-active icon\"></span>             \n      </span>\n    </span>\n    <span class=\"info\">\n      <span class=\"info-inner\">\n        <h1 class=\"title\">";
+    + "');\"></span>   \n        <span class=\"media-hover\"></span>             \n        <span class=\"media-active icon\"></span>             \n      </span>\n    </span>\n    <span class=\"info\">\n      <span class=\"info-inner\">\n        <h1 class=\"title\">";
   stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : helperMissing),(typeof helper === functionType ? helper.call(depth0, {"name":"title","hash":{},"data":data}) : helper));
   if (stack1 != null) { buffer += stack1; }
   return buffer + "</h1>\n      </span>\n    </span>\n  </span>\n</a>";

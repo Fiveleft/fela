@@ -28,31 +28,9 @@ var indexData   = {
 //     response.end( "<!doctype html><html>" + stdout + "</html>" );
 //   });
 // });
+// 
 
 
-// Load Project Data
-// router.use( indexPaths, function(req, res, next){
-//   request( "http://localhost:" + app.get("port") + "/api/projects", function( err, response, body ){
-//     if( !err && response.statusCode == 200) {
-//       indexData.projects = body;
-//       next();
-//     }else{
-//       console.log( "could not load project data" );
-//     }
-//   });
-// });
-
-// // Load Partner Data
-// router.use( indexPaths, function(req, res, next){
-//   request( "http://localhost:" + app.get("port") + "/api/partners", function( err, response, body ){
-//     if( !err && response.statusCode == 200) {
-//       indexData.partners = body;
-//       next();
-//     }else{
-//       console.log( "could not load partner data" );
-//     }
-//   });
-// });
 
 // Load Content Data
 router.use( indexPaths, function(req, res, next){
@@ -67,11 +45,8 @@ router.use( indexPaths, function(req, res, next){
       indexData.clientData = _.where( b, {type:"fiveleft_client"} );
       indexData.projectData = _.where( b, {type:"fiveleft_project"} );
 
-      // console.log( indexData.clientData );
-
       _.each( infoData, function(d){
         indexData.infoData[d.slug] = d;
-        console.log( d.slug, d.title );
       });
 
       next();

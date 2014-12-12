@@ -946,7 +946,13 @@ main.snap-nav.open {
   -webkit-transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
   transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
 }
-/* line 61, scss/sections/_home.scss */
+/* line 56, scss/sections/_home.scss */
+#home-section .section-description p {
+  margin: 0;
+  padding: 0;
+  line-height: inherit;
+}
+/* line 66, scss/sections/_home.scss */
 #home-section.active .message-inner .section-title, #home-section.on .message-inner .section-title,
 #home-section .message-inner:hover .section-title {
   margin-bottom: 0.5em;
@@ -955,7 +961,7 @@ main.snap-nav.open {
   -webkit-transition: margin-bottom 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   transition: margin-bottom 0.25s cubic-bezier(0.19, 1, 0.22, 1);
 }
-/* line 65, scss/sections/_home.scss */
+/* line 70, scss/sections/_home.scss */
 #home-section.active .message-inner .section-description, #home-section.on .message-inner .section-description,
 #home-section .message-inner:hover .section-description {
   margin-top: 0;
@@ -968,46 +974,46 @@ main.snap-nav.open {
 }
 
 @media (min-width: 768px) {
-  /* line 76, scss/sections/_home.scss */
+  /* line 81, scss/sections/_home.scss */
   #home-section .message-wrapper {
     font-size: 1.5em;
     padding: 0 0 10%;
   }
-  /* line 81, scss/sections/_home.scss */
+  /* line 86, scss/sections/_home.scss */
   #home-section .section-title .top {
     display: block;
   }
-  /* line 84, scss/sections/_home.scss */
+  /* line 89, scss/sections/_home.scss */
   #home-section .section-title .linking-verb, #home-section .section-title .adj, #home-section .section-title .noun {
     display: inline;
     padding: 0;
   }
-  /* line 88, scss/sections/_home.scss */
+  /* line 93, scss/sections/_home.scss */
   #home-section .section-title br {
     display: none;
   }
-  /* line 94, scss/sections/_home.scss */
+  /* line 99, scss/sections/_home.scss */
   #home-section .section-description {
     max-width: 30em;
   }
 }
 @media (min-width: 1025px) {
-  /* line 102, scss/sections/_home.scss */
+  /* line 107, scss/sections/_home.scss */
   #home-section .message-wrapper {
     font-size: 2.0em;
   }
-  /* line 105, scss/sections/_home.scss */
+  /* line 110, scss/sections/_home.scss */
   #home-section .section-description {
     font-size: 1em;
     max-width: 27.5em;
   }
 }
 @media (min-width: 1281px) {
-  /* line 114, scss/sections/_home.scss */
+  /* line 119, scss/sections/_home.scss */
   #home-section .message-wrapper {
     font-size: 2.5em;
   }
-  /* line 117, scss/sections/_home.scss */
+  /* line 122, scss/sections/_home.scss */
   #home-section .section-description {
     font-size: 0.875em;
     max-width: 25em;

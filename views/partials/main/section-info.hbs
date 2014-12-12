@@ -4,7 +4,6 @@
     {{#if infoData.about }}
       <h1>{{infoData.about.title}}</h1>
       {{{infoData.about.content}}}
-    {{else }}
     {{/if }}
     </div>
     <div class="clients">
@@ -13,11 +12,7 @@
         {{#if clientData}}
         {{#each clientData}}
         <li class="client-item partner-item">
-          {{#if info.website}}
-          <a class="partner-link" href="{{info.website}}" target="_blank" data-id="{{id}}">{{{title}}}</a>
-          {{else}}
           <span class="partner-link" data-id="{{id}}">{{{title}}}</span>
-          {{/if}}
         </li>
         {{/each}}
         {{/if}}
