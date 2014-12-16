@@ -77,6 +77,8 @@ define([
             a.video.source[f] = __cdn + a.info.video_file + "." + f;
           });
         }
+
+        console.log( this );
       },
       getView : function() {
         return this.get("view");

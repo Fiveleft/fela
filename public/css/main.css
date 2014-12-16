@@ -1304,11 +1304,11 @@ section#work-section .project-view {
   fill: white;
 }
 /* line 94, scss/sections/_project.scss */
-.project .media .playing .media-controls .play {
+.project .media.playing .media-controls .play {
   display: none;
 }
 /* line 95, scss/sections/_project.scss */
-.project .media .playing .media-controls .pause {
+.project .media.playing .media-controls .pause {
   display: block;
 }
 /* line 97, scss/sections/_project.scss */
@@ -1539,41 +1539,85 @@ section#work-section .project-view {
 }
 /* line 4, scss/sections/_info.scss */
 section#info-section .section-inner > div {
-  padding: 0 0 2em;
+  padding: 0 0 3em;
 }
 /* line 7, scss/sections/_info.scss */
 section#info-section h1, section#info-section h2, section#info-section h3 {
   margin: 0 0 0.5em;
 }
-/* line 11, scss/sections/_info.scss */
+/* line 13, scss/sections/_info.scss */
+section#info-section .about-container em {
+  display: none;
+}
+/* line 16, scss/sections/_info.scss */
+section#info-section .about-container dt, section#info-section .about-container dd {
+  display: block;
+  max-width: 40em;
+}
+/* line 20, scss/sections/_info.scss */
+section#info-section .about-container dt {
+  font-family: "brandon-grotesque",sans-serif;
+  font-style: normal;
+  font-weight: 900;
+  padding: 20px 0 5px;
+  font-size: 75%;
+  color: #1c1c1a;
+  text-transform: uppercase;
+}
+/* line 26, scss/sections/_info.scss */
+section#info-section .about-container dt:first-of-type {
+  padding-top: 0;
+}
+/* line 30, scss/sections/_info.scss */
+section#info-section .about-container dd {
+  padding-bottom: 10px;
+}
+/* line 38, scss/sections/_info.scss */
 section#info-section .partnership-list {
   max-width: 40em;
 }
-/* line 13, scss/sections/_info.scss */
+/* line 41, scss/sections/_info.scss */
+section#info-section .partnership-list .partner-link {
+  white-space: nowrap;
+}
+/* line 44, scss/sections/_info.scss */
 section#info-section .partnership-list li {
   display: inline;
   line-height: 24px;
 }
-/* line 17, scss/sections/_info.scss */
+/* line 48, scss/sections/_info.scss */
 section#info-section .partnership-list li .partner-link:after {
   display: inline-block;
   margin-right: 0.25em;
   content: ", ";
   color: #b8b8b1;
 }
-/* line 23, scss/sections/_info.scss */
+/* line 54, scss/sections/_info.scss */
 section#info-section .partnership-list li:last-child .partner-link:after {
   content: "";
 }
 
 @media (min-width: 768px) {
-  /* line 34, scss/sections/_info.scss */
-  section#info-section .partnership-list {
-    max-width: none;
+  /* line 66, scss/sections/_info.scss */
+  section#info-section .about-container dt {
+    padding-top: 1em;
   }
-  /* line 38, scss/sections/_info.scss */
-  section#info-section .partnership-list li {
-    display: inline-block;
+}
+@media (min-width: 1025px) {
+  /* line 91, scss/sections/_info.scss */
+  section#info-section .about-container dl {
+    display: block;
+    width: 100%;
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;
+    -moz-column-gap: 2.5em;
+    -webkit-column-gap: 2.5em;
+    column-gap: 2.5em;
+  }
+  /* line 97, scss/sections/_info.scss */
+  section#info-section .about-container dt {
+    padding-right: 25%;
   }
 }
 /* line 4, scss/sections/_connect.scss */

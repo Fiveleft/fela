@@ -108,12 +108,11 @@ router.get('/sitecontent/:uncache?', cache(), function(req, res){
 });
 
 
-
-
 // GET apicache index (for the curious)
 router.get('/cache/index', function(req, res) {
   res.send(apicache.getIndex());
 });
+
 
 // Clear apicache
 router.get('/cache/clear/:key?', function(req, res) {

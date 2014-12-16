@@ -90,7 +90,7 @@
       }
     }
   }
-  .playing .media-controls {
+  &.playing .media-controls {
     .play { display: none; }
     .pause { display: block; }
   }

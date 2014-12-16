@@ -2,14 +2,45 @@
 section#info-section {
 
   .section-inner > div {
-    padding: 0 0 2em;
+    padding: 0 0 3em;
   }
   h1, h2, h3 {
     margin: 0 0 0.5em;
   }
 
+  .about-container {
+
+    em {
+      display:none;
+    }
+    dt, dd {
+      display: block;
+      max-width: 40em;
+    }
+    dt {
+      @include boldFont();
+      padding: 20px 0 5px;
+      font-size: 75%;
+      color: $brand-black;
+      text-transform: uppercase;
+      &:first-of-type {
+        padding-top: 0;
+      }
+    }
+    dd {
+      // color: $brand-black;
+      padding-bottom: 10px;
+    }
+
+
+  }
+
   .partnership-list {
     max-width: 40em;
+    //@include thinFont();
+    .partner-link {
+      white-space: nowrap;  
+    }
     li { 
       display: inline;
       line-height: 24px;
@@ -18,7 +49,7 @@ section#info-section {
       display: inline-block;
       margin-right: 0.25em;
       content: ", ";
-      color: $color-grey-light;
+      color: $color-grey-light; 
     }
     li:last-child .partner-link:after {
       content: "";
@@ -31,12 +62,17 @@ section#info-section {
 @media ( min-width:$width-sm-min ) {
   
   section#info-section {
+    .about-container {
+      dt {
+        padding-top: 1em;
+      }
+    }
     .partnership-list {
-      max-width: none;
+      // max-width: none;
       // @include columns( 10em 3 );
       // @include column-gap( 1.5em );
       li {
-        display: inline-block;
+        //display: inline-block;
       }
       li:after {
         //content: none;
@@ -48,6 +84,20 @@ section#info-section {
 @media ( min-width:$width-md-min ) {
   
   section#info-section {
+    .about-container {
+      h1 {
+        // width: 100%; 
+      }
+      dl {
+        display: block;
+        width: 100%;
+        @include column-count(3);
+        @include column-gap(2.5em);
+      }
+      dt {
+        padding-right: 25%;
+      }
+    }
   }
 }
 
