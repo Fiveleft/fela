@@ -63,7 +63,14 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 45, scss/core/_typography.scss */
+/* line 47, scss/core/_typography.scss */
+.wf-loading h1, .wf-loading h2, .wf-loading h3, .wf-loading h4, .wf-loading p, .wf-loading li, .wf-loading a {
+  visibility: visible;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+}
+
+/* line 53, scss/core/_typography.scss */
 body {
   font-size: 16px;
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
@@ -72,7 +79,7 @@ body {
   line-height: 1.4;
 }
 
-/* line 49, scss/core/_typography.scss */
+/* line 57, scss/core/_typography.scss */
 h1, h2, h3, h4 {
   font-family: "brandon-grotesque",sans-serif;
   font-style: normal;
@@ -82,22 +89,22 @@ h1, h2, h3, h4 {
   color: #1c1c1a;
 }
 
-/* line 53, scss/core/_typography.scss */
+/* line 61, scss/core/_typography.scss */
 h1 {
   font-size: 28px;
 }
 
-/* line 54, scss/core/_typography.scss */
+/* line 62, scss/core/_typography.scss */
 h2 {
   font-size: 24px;
 }
 
-/* line 55, scss/core/_typography.scss */
+/* line 63, scss/core/_typography.scss */
 h3 {
   font-size: 21px;
 }
 
-/* line 56, scss/core/_typography.scss */
+/* line 64, scss/core/_typography.scss */
 h4 {
   font-family: "brandon-grotesque",sans-serif;
   font-style: normal;
@@ -106,45 +113,19 @@ h4 {
 }
 
 @media (min-width: 768px) {
-  /* line 67, scss/core/_typography.scss */
-  body {
-    font-size: 18px;
-  }
-
-  /* line 68, scss/core/_typography.scss */
-  h1 {
-    font-size: 36px;
-  }
-
-  /* line 69, scss/core/_typography.scss */
-  h2 {
-    font-size: 28px;
-  }
-
-  /* line 70, scss/core/_typography.scss */
-  h3 {
-    font-size: 24px;
-  }
-
-  /* line 71, scss/core/_typography.scss */
-  h4 {
-    font-size: 18px;
-  }
-}
-@media (min-width: 1025px) {
   /* line 75, scss/core/_typography.scss */
   body {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   /* line 76, scss/core/_typography.scss */
   h1 {
-    font-size: 48px;
+    font-size: 36px;
   }
 
   /* line 77, scss/core/_typography.scss */
   h2 {
-    font-size: 30px;
+    font-size: 28px;
   }
 
   /* line 78, scss/core/_typography.scss */
@@ -153,6 +134,32 @@ h4 {
   }
 
   /* line 79, scss/core/_typography.scss */
+  h4 {
+    font-size: 18px;
+  }
+}
+@media (min-width: 1025px) {
+  /* line 83, scss/core/_typography.scss */
+  body {
+    font-size: 20px;
+  }
+
+  /* line 84, scss/core/_typography.scss */
+  h1 {
+    font-size: 48px;
+  }
+
+  /* line 85, scss/core/_typography.scss */
+  h2 {
+    font-size: 30px;
+  }
+
+  /* line 86, scss/core/_typography.scss */
+  h3 {
+    font-size: 24px;
+  }
+
+  /* line 87, scss/core/_typography.scss */
   h4 {
     font-size: 20px;
   }
@@ -1669,10 +1676,11 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   font-family: "brandon-grotesque",sans-serif;
   font-style: normal;
   font-weight: 500;
+  font-size: 83.3333%;
   display: block;
   text-transform: uppercase;
 }
-/* line 48, scss/sections/_connect.scss */
+/* line 49, scss/sections/_connect.scss */
 .contact-form input[type='text'], .contact-form textarea {
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
   font-style: normal;
@@ -1693,26 +1701,26 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   -webkit-transition: border-color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: border-color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-/* line 69, scss/sections/_connect.scss */
+/* line 70, scss/sections/_connect.scss */
 .contact-form input[type='text']:focus, .contact-form textarea:focus {
   outline: none;
   color: #f7f7f0;
   background-color: black;
   border-color: #858580;
 }
-/* line 76, scss/sections/_connect.scss */
+/* line 77, scss/sections/_connect.scss */
 .contact-form input[type='text'] div[pseudo="-webkit-input-placeholder"], .contact-form textarea div[pseudo="-webkit-input-placeholder"] {
   color: #52524e;
 }
-/* line 83, scss/sections/_connect.scss */
+/* line 84, scss/sections/_connect.scss */
 .contact-form .input-field[data-field='inquiry'] .input-wrapper {
   position: relative;
 }
-/* line 86, scss/sections/_connect.scss */
+/* line 87, scss/sections/_connect.scss */
 .contact-form .input-field[data-field='inquiry'] .inquiry-type-list {
   display: block;
 }
-/* line 89, scss/sections/_connect.scss */
+/* line 90, scss/sections/_connect.scss */
 .contact-form .input-field[data-field='inquiry'] input[name='inquiry'] {
   position: relative;
   z-index: 2;
@@ -1721,7 +1729,7 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
   opacity: 0.8;
 }
-/* line 95, scss/sections/_connect.scss */
+/* line 96, scss/sections/_connect.scss */
 .contact-form .input-field[data-field='inquiry'] select[name='inquiry'] {
   position: absolute;
   width: 100%;
@@ -1732,16 +1740,16 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
 }
 
 @media (min-width: 768px) {
-  /* line 110, scss/sections/_connect.scss */
+  /* line 111, scss/sections/_connect.scss */
   .contact-form {
     padding-bottom: 1em;
   }
-  /* line 113, scss/sections/_connect.scss */
+  /* line 114, scss/sections/_connect.scss */
   .contact-form button.submit {
     margin-top: 1.4em;
   }
 
-  /* line 119, scss/sections/_connect.scss */
+  /* line 120, scss/sections/_connect.scss */
   section#connect-section .connect-row {
     *zoom: 1;
     width: 100%;
@@ -1754,29 +1762,29 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
     display: table;
     clear: both;
   }
-  /* line 125, scss/sections/_connect.scss */
+  /* line 126, scss/sections/_connect.scss */
   section#connect-section .contact-form, section#connect-section .connect-details {
     display: block;
     float: left;
   }
-  /* line 129, scss/sections/_connect.scss */
+  /* line 130, scss/sections/_connect.scss */
   section#connect-section .contact-form {
     width: 65%;
     padding-right: 5%;
     border-right: 1px solid rgba(133, 133, 128, 0.25);
     margin-right: 5%;
   }
-  /* line 135, scss/sections/_connect.scss */
+  /* line 136, scss/sections/_connect.scss */
   section#connect-section .connect-details {
     width: 25%;
   }
 }
 @media (min-width: 1025px) {
-  /* line 146, scss/sections/_connect.scss */
+  /* line 147, scss/sections/_connect.scss */
   section#connect-section .contact-form {
     width: 55%;
   }
-  /* line 149, scss/sections/_connect.scss */
+  /* line 150, scss/sections/_connect.scss */
   section#connect-section .connect-details {
     width: 25%;
   }

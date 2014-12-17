@@ -34,5 +34,11 @@
         {{/if}}
       </ul>
     </div>
+    <div class="collaboration-container" data-content="collaboration">
+    {{#if infoData.collaboration }}
+      <h2>{{infoData.collaboration.title}}</h2>
+      {{{infoData.collaboration.content}}}
+    {{/if }}
+    </div>
   </div>
 </section>

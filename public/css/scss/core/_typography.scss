@@ -42,6 +42,14 @@
   text-transform: uppercase;
 }
 
+
+.wf-loading {
+  h1, h2, h3, h4, p, li, a {
+    visibility:visible;
+    @include opacity( 0 );
+  }
+}
+
 body {
   font-size: 16px;
   @include bodyFont();
