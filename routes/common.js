@@ -2,6 +2,7 @@
 var app         = require('../app');
 var express     = require('express');
 var request     = require('request');
+var nodemailer  = require('nodemailer');
 var indexPaths  = ['/','/work','/project/:slug','/connect','/info'];
 var router      = express.Router();
 
@@ -40,4 +41,4 @@ router.post('/contact', function (req, res) {
   
 });
 
-module.exports = router;
+module.exports = router;  

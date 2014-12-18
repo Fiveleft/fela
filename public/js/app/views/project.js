@@ -47,6 +47,7 @@ define(
           .css({"height" : ""});
 
         // console.log("ProjectView[" + this.model.attributes.slug + "].openComplete()" );
+        Events.trigger( Events.changeHeight );
         this.mediaView.start();
       },
 
@@ -70,7 +71,9 @@ define(
         this.$el
           .removeClass("active")
           .remove();
+
         // console.log("ProjectView[" + this.model.attributes.slug + "].closeComplete()" );
+        Events.trigger( Events.changeHeight );
       },
 
       clickClose : function( e ) {

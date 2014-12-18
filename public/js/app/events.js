@@ -4,6 +4,7 @@ define(
   function(_, Backbone){
     var o = {
       breakpoint : "breakpoint:change",
+      changeHeight : "DOM:changeHeight",
       scrollTo : "window:scrollTo",
       scrollToEnd : "window:scrollToEnd",
       transitionEnd : "webkitTransitionEnd MozTransitionEnd oTransitionEnd transitionend",

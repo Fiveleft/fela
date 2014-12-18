@@ -84,7 +84,7 @@ define(
       }
 
     });
-
+    
 
     return NavView;
   });

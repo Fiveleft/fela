@@ -46,8 +46,6 @@ define([
         PartnerCollection.reset( partnersData );
         ProjectCollection.reset( projectsData );
 
-        console.log(PartnerCollection);
-
         new NavView({el:$('#header')});
         new WorkView({ collection:ProjectCollection });
 

@@ -266,12 +266,12 @@ main {
   width: 100%;
   min-height: 100%;
 }
-/* line 16, scss/core/_layout.scss */
+/* line 17, scss/core/_layout.scss */
 #site-content > section .section-inner {
   padding: 60px 0 0;
 }
 
-/* line 20, scss/core/_layout.scss */
+/* line 21, scss/core/_layout.scss */
 #canvas {
   position: fixed;
   top: 0;
@@ -282,36 +282,36 @@ main {
   background: #FFFFFF;
 }
 
-/* line 29, scss/core/_layout.scss */
+/* line 30, scss/core/_layout.scss */
 .container {
   width: 100%;
   margin: 0 auto;
   padding: 0 10px;
 }
 
-/* line 34, scss/core/_layout.scss */
+/* line 35, scss/core/_layout.scss */
 footer {
   background: rgba(28, 28, 26, 0.95);
   color: #b8b8b1;
   font-size: 13px;
   text-align: center;
 }
-/* line 39, scss/core/_layout.scss */
+/* line 40, scss/core/_layout.scss */
 footer .container {
   padding: 20px 0 0;
 }
-/* line 42, scss/core/_layout.scss */
+/* line 43, scss/core/_layout.scss */
 footer .copyright {
   margin: 0 auto;
   text-align: center;
 }
 
-/* line 49, scss/core/_layout.scss */
+/* line 50, scss/core/_layout.scss */
 main #top-nav {
   visibility: hidden;
 }
 
-/* line 54, scss/core/_layout.scss */
+/* line 55, scss/core/_layout.scss */
 main.snap-nav {
   position: fixed;
   top: 0;
@@ -319,61 +319,61 @@ main.snap-nav {
   width: 100%;
   height: 101%;
 }
-/* line 61, scss/core/_layout.scss */
+/* line 62, scss/core/_layout.scss */
 main.snap-nav #mobile-nav {
   position: absolute;
 }
-/* line 64, scss/core/_layout.scss */
+/* line 65, scss/core/_layout.scss */
 main.snap-nav #top-nav {
   visibility: visible;
 }
-/* line 67, scss/core/_layout.scss */
+/* line 68, scss/core/_layout.scss */
 main.snap-nav #site-content {
   pointer-events: none;
 }
-/* line 70, scss/core/_layout.scss */
+/* line 71, scss/core/_layout.scss */
 main.snap-nav #canvas {
   position: absolute;
   -moz-box-shadow: 0 0 20px 0 black;
   -webkit-box-shadow: 0 0 20px 0 black;
   box-shadow: 0 0 20px 0 black;
 }
-/* line 74, scss/core/_layout.scss */
+/* line 75, scss/core/_layout.scss */
 main.snap-nav.open {
   margin-left: -200px;
 }
 
 @media (min-width: 768px) {
-  /* line 83, scss/core/_layout.scss */
+  /* line 84, scss/core/_layout.scss */
   main #top-nav {
     visibility: visible;
   }
 
-  /* line 87, scss/core/_layout.scss */
+  /* line 88, scss/core/_layout.scss */
   .container {
     max-width: 768px;
     padding: 0 15px;
   }
 
-  /* line 91, scss/core/_layout.scss */
+  /* line 92, scss/core/_layout.scss */
   #site-content > section .section-inner {
     padding-top: 100px;
   }
 }
 @media (min-width: 1025px) {
-  /* line 98, scss/core/_layout.scss */
+  /* line 99, scss/core/_layout.scss */
   .container {
     max-width: 1025px;
     padding: 0 20px;
   }
 
-  /* line 102, scss/core/_layout.scss */
+  /* line 103, scss/core/_layout.scss */
   #site-content > section .section-inner {
     padding-top: 140px;
   }
 }
 @media (min-width: 1281px) {
-  /* line 108, scss/core/_layout.scss */
+  /* line 109, scss/core/_layout.scss */
   .container {
     max-width: 1281px;
   }
@@ -753,7 +753,7 @@ main.snap-nav.open {
     display: none;
   }
 
-  /* line 289, scss/core/_nav.scss */
+  /* line 290, scss/core/_nav.scss */
   #top-nav {
     display: block;
     width: 100%;
@@ -763,7 +763,7 @@ main.snap-nav.open {
     font-size: 14px;
     overflow: visible;
   }
-  /* line 298, scss/core/_nav.scss */
+  /* line 299, scss/core/_nav.scss */
   #top-nav .container {
     *zoom: 1;
   }
@@ -773,7 +773,7 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 301, scss/core/_nav.scss */
+  /* line 302, scss/core/_nav.scss */
   #top-nav .top-nav-items, #top-nav .connect-nav {
     *zoom: 1;
   }
@@ -783,14 +783,14 @@ main.snap-nav.open {
     display: table;
     clear: both;
   }
-  /* line 304, scss/core/_nav.scss */
+  /* line 305, scss/core/_nav.scss */
   #top-nav .top-nav-items {
     position: relative;
     display: block;
-    padding-left: 80px;
+    padding-left: 120px;
     float: left;
   }
-  /* line 310, scss/core/_nav.scss */
+  /* line 313, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item.home {
     position: absolute;
     top: 0;
@@ -802,56 +802,55 @@ main.snap-nav.open {
     text-align: left;
     text-transform: capitalize;
   }
-  /* line 317, scss/core/_nav.scss */
+  /* line 320, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-link.logo {
     display: block;
   }
-  /* line 320, scss/core/_nav.scss */
+  /* line 323, scss/core/_nav.scss */
   #top-nav .top-nav-items .brand-logo {
     display: block;
-    width: 100%;
-    height: 0;
-    padding: 0 0 100%;
+    width: 70px;
+    height: 70px;
     background: #1c1c1a url(/images/brand-logo-small.svg) no-repeat 50% 50%;
     background-size: 50px auto;
   }
-  /* line 327, scss/core/_nav.scss */
+  /* line 329, scss/core/_nav.scss */
   #top-nav .top-nav-items .brand-name {
     display: block;
-    width: 100%;
+    width: 70px;
     height: 0;
     padding: 0 0 40%;
     margin: 0;
     background-position: 0 100%;
     background-size: contain;
   }
-  /* line 335, scss/core/_nav.scss */
+  /* line 337, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item:not(.home) {
     display: block;
     float: left;
     padding: 0;
   }
-  /* line 339, scss/core/_nav.scss */
+  /* line 341, scss/core/_nav.scss */
   #top-nav .top-nav-items .nav-item:not(.home) .nav-link {
     display: block;
     padding: 10px 15px;
     line-height: 20px;
   }
-  /* line 347, scss/core/_nav.scss */
+  /* line 349, scss/core/_nav.scss */
   #top-nav .connect-nav {
     display: block;
     float: right;
   }
-  /* line 351, scss/core/_nav.scss */
+  /* line 353, scss/core/_nav.scss */
   #top-nav .connect-nav li {
     float: left;
   }
-  /* line 354, scss/core/_nav.scss */
+  /* line 356, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item {
     text-align: left;
     margin-right: 10px;
   }
-  /* line 357, scss/core/_nav.scss */
+  /* line 359, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item span, #top-nav .connect-nav .info-item a {
     display: inline-block;
     vertical-align: top;
@@ -859,26 +858,136 @@ main.snap-nav.open {
     margin: 0 5px;
     line-height: 20px;
   }
-  /* line 364, scss/core/_nav.scss */
+  /* line 366, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title {
     font-size: 16px;
     line-height: 1.4;
   }
-  /* line 368, scss/core/_nav.scss */
+  /* line 370, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .pipe {
     margin: 0;
   }
-  /* line 371, scss/core/_nav.scss */
+  /* line 373, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title, #top-nav .connect-nav .info-item .location, #top-nav .connect-nav .info-item .pipe {
     display: none;
   }
+
+  /* line 381, scss/core/_nav.scss */
+  .csstransitions #top-nav {
+    -moz-transition: height 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition: height 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transition: height 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: height 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  /* line 383, scss/core/_nav.scss */
+  .csstransitions #top-nav .connect-nav {
+    -moz-transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  /* line 386, scss/core/_nav.scss */
+  .csstransitions #top-nav .top-nav-items {
+    padding-left: 160px;
+  }
+  /* line 388, scss/core/_nav.scss */
+  .csstransitions #top-nav .top-nav-items .nav-item.home {
+    width: 160px;
+  }
+  /* line 392, scss/core/_nav.scss */
+  .csstransitions #top-nav .top-nav-items .nav-link.logo {
+    width: 100%;
+    height: 40px;
+    overflow: hidden;
+    position: relative;
+  }
+  /* line 399, scss/core/_nav.scss */
+  .csstransitions #top-nav .top-nav-items .brand-logo {
+    -moz-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    position: relative;
+    width: 70px;
+    height: 40px;
+    background-size: 34px auto;
+    z-index: 5;
+  }
+  /* line 407, scss/core/_nav.scss */
+  .csstransitions #top-nav .top-nav-items .brand-name {
+    -moz-transition: top 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition: top 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transition: top 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: top 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -moz-transition-delay: 0.2s;
+    -o-transition-delay: 0.2s;
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s;
+    position: absolute;
+    width: 70px;
+    height: 38px;
+    padding: 0;
+    left: 70px;
+    top: 0px;
+    background-position: 50% 50%;
+    background-size: 100% auto;
+    z-index: 4;
+  }
+  /* line 420, scss/core/_nav.scss */
+  .csstransitions #top-nav .top-nav-items .nav-item:not(.home) .nav-link {
+    -moz-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -o-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    -webkit-transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+  /* line 423, scss/core/_nav.scss */
+  .csstransitions #top-nav .top-nav-items .nav-item:not(.home) .nav-link.active {
+    background-color: #1c1c1a;
+    color: white;
+    border-bottom: 3px solid #ee2a7b;
+  }
+
+  /* line 431, scss/core/_nav.scss */
+  .csstransitions #top-nav.affixed {
+    height: 50px;
+  }
+  /* line 433, scss/core/_nav.scss */
+  .csstransitions #top-nav.affixed .connect-nav {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  /* line 439, scss/core/_nav.scss */
+  .csstransitions #top-nav.affixed .top-nav-items .nav-item.home {
+    width: 70px;
+  }
+  /* line 442, scss/core/_nav.scss */
+  .csstransitions #top-nav.affixed .top-nav-items .nav-link.logo {
+    width: 100%;
+    height: 100px;
+  }
+  /* line 446, scss/core/_nav.scss */
+  .csstransitions #top-nav.affixed .top-nav-items .brand-logo {
+    width: 70px;
+    height: 70px;
+    background-size: 50px auto;
+    z-index: 5;
+  }
+  /* line 452, scss/core/_nav.scss */
+  .csstransitions #top-nav.affixed .top-nav-items .brand-name {
+    top: 80px;
+    left: 0;
+    width: 70px;
+    background-position: 50% 0%;
+    background-size: 100% auto;
+  }
+  /* line 459, scss/core/_nav.scss */
+  .csstransitions #top-nav.affixed .top-nav-items .nav-item:not(.home) .nav-link {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
 }
 @media (min-width: 1025px) {
-  /* line 380, scss/core/_nav.scss */
-  #top-nav .top-nav-items {
-    padding-left: 120px;
-  }
-  /* line 384, scss/core/_nav.scss */
+  /* line 473, scss/core/_nav.scss */
   #top-nav .connect-nav .info-item .connect-title, #top-nav .connect-nav .info-item .location, #top-nav .connect-nav .info-item .pipe {
     display: inline-block;
   }
