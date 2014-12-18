@@ -33,16 +33,64 @@ main {
   padding: 0 10px;
 }
 footer {
-  background: rgba( $color-grey-black, 0.95 );
-  color: $color-grey-light;
+  background: rgba( $color-white, 0.95 );
+  // color: $color-grey-light;
   font-size: 13px;
   text-align: center;
-  .container {
-    padding: 20px 0 0;
+
+  .footer-inner {
+    position: relative;
+    border-top: 1px solid $color-border;
+  }
+  a.logo {
+    display: block;
+    position: absolute;
+    left: 50%; top: 0;
+    width: 100%; height: 80px;
+    margin: -80px 0 0 -50%;
+    padding: 0;
+    z-index: 1;
+    overflow: hidden;
+    .icon {
+      display: block;
+      position: relative;
+      width: 40px; height: 40px;
+      margin: 45px auto 0;
+      @include transition( all 0.3s $easeInOutExpo );
+    }
+    .icon-spear {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      polygon {
+        @include transition( fill 0.3s $easeInOutExpo );
+        fill: $color-grey-light;
+      }
+    }
   }
   .copyright {
+    @include italicFont();
+    position: relative;
+    padding: 1em 0;
+    width: 100%;
     margin: 0 auto;
     text-align: center;
+    z-index: 2;
+  }
+}
+
+html:not(.touch) footer:hover {
+  a.logo {
+    .icon {
+      width: 60px; height: 60px;
+      margin-top: 20px;
+    }
+    .icon-spear polygon {
+      fill: $brand-black;
+    }
+  }
+  .copyright {
+    color: $brand-black;
   }
 }
 

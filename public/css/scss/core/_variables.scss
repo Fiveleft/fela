@@ -1,7 +1,7 @@
 
 // Colors
 $color-black      : rgb( 0, 0, 0 );
-$color-grey-black : rgb( 28, 28, 26 );
+$color-grey-black : rgb( 28, 28, 26 );  // #1c1c1a
 $color-grey-dark  : rgb( 82, 82, 78 );
 $color-grey-med   : rgb( 133, 133, 128 );
 $color-grey-light : rgb( 184, 184, 177 );
@@ -10,8 +10,8 @@ $color-white      : rgb( 255, 255, 255 );
 $color-border     : rgba( $color-grey-med, 0.25 );
 $color-text       : $color-grey-dark;
 
-$brand-black    : $color-grey-black;    // rgb( 22, 24, 19 );    // #162732
-$brand-magenta  : rgb( 238, 42, 123 ); // rgb( 237, 36, 144 );  // #FF0097
+$brand-black    : $color-grey-black;    // rgb( 28, 28, 26 );
+$brand-magenta  : rgb( 238, 42, 123 );  // rgb( 237, 36, 144 );  // #FF0097
 $brand-grey     : $color-grey-med;      // #959484
 
 

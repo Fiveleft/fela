@@ -291,27 +291,90 @@ main {
 
 /* line 35, scss/core/_layout.scss */
 footer {
-  background: rgba(28, 28, 26, 0.95);
-  color: #b8b8b1;
+  background: rgba(255, 255, 255, 0.95);
   font-size: 13px;
   text-align: center;
 }
-/* line 40, scss/core/_layout.scss */
-footer .container {
-  padding: 20px 0 0;
+/* line 41, scss/core/_layout.scss */
+footer .footer-inner {
+  position: relative;
+  border-top: 1px solid rgba(133, 133, 128, 0.25);
 }
-/* line 43, scss/core/_layout.scss */
+/* line 45, scss/core/_layout.scss */
+footer a.logo {
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  margin: -80px 0 0 -50%;
+  padding: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+/* line 54, scss/core/_layout.scss */
+footer a.logo .icon {
+  display: block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin: 45px auto 0;
+  -moz-transition: all 0.3s cubic-bezier(1, 0, 0, 1);
+  -o-transition: all 0.3s cubic-bezier(1, 0, 0, 1);
+  -webkit-transition: all 0.3s cubic-bezier(1, 0, 0, 1);
+  transition: all 0.3s cubic-bezier(1, 0, 0, 1);
+}
+/* line 61, scss/core/_layout.scss */
+footer a.logo .icon-spear {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+/* line 65, scss/core/_layout.scss */
+footer a.logo .icon-spear polygon {
+  -moz-transition: fill 0.3s cubic-bezier(1, 0, 0, 1);
+  -o-transition: fill 0.3s cubic-bezier(1, 0, 0, 1);
+  -webkit-transition: fill 0.3s cubic-bezier(1, 0, 0, 1);
+  transition: fill 0.3s cubic-bezier(1, 0, 0, 1);
+  fill: #b8b8b1;
+}
+/* line 71, scss/core/_layout.scss */
 footer .copyright {
+  font-family: "adobe-garamond-pro", Georgia, sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  position: relative;
+  padding: 1em 0;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
+  z-index: 2;
 }
 
-/* line 50, scss/core/_layout.scss */
+/* line 84, scss/core/_layout.scss */
+html:not(.touch) footer:hover a.logo .icon {
+  width: 60px;
+  height: 60px;
+  margin-top: 20px;
+}
+/* line 88, scss/core/_layout.scss */
+html:not(.touch) footer:hover a.logo .icon-spear polygon {
+  fill: #1c1c1a;
+}
+/* line 92, scss/core/_layout.scss */
+html:not(.touch) footer:hover .copyright {
+  color: #1c1c1a;
+}
+
+/* line 98, scss/core/_layout.scss */
 main #top-nav {
   visibility: hidden;
 }
 
-/* line 55, scss/core/_layout.scss */
+/* line 103, scss/core/_layout.scss */
 main.snap-nav {
   position: fixed;
   top: 0;
@@ -319,61 +382,61 @@ main.snap-nav {
   width: 100%;
   height: 101%;
 }
-/* line 62, scss/core/_layout.scss */
+/* line 110, scss/core/_layout.scss */
 main.snap-nav #mobile-nav {
   position: absolute;
 }
-/* line 65, scss/core/_layout.scss */
+/* line 113, scss/core/_layout.scss */
 main.snap-nav #top-nav {
   visibility: visible;
 }
-/* line 68, scss/core/_layout.scss */
+/* line 116, scss/core/_layout.scss */
 main.snap-nav #site-content {
   pointer-events: none;
 }
-/* line 71, scss/core/_layout.scss */
+/* line 119, scss/core/_layout.scss */
 main.snap-nav #canvas {
   position: absolute;
   -moz-box-shadow: 0 0 20px 0 black;
   -webkit-box-shadow: 0 0 20px 0 black;
   box-shadow: 0 0 20px 0 black;
 }
-/* line 75, scss/core/_layout.scss */
+/* line 123, scss/core/_layout.scss */
 main.snap-nav.open {
   margin-left: -200px;
 }
 
 @media (min-width: 768px) {
-  /* line 84, scss/core/_layout.scss */
+  /* line 132, scss/core/_layout.scss */
   main #top-nav {
     visibility: visible;
   }
 
-  /* line 88, scss/core/_layout.scss */
+  /* line 136, scss/core/_layout.scss */
   .container {
     max-width: 768px;
     padding: 0 15px;
   }
 
-  /* line 92, scss/core/_layout.scss */
+  /* line 140, scss/core/_layout.scss */
   #site-content > section .section-inner {
     padding-top: 100px;
   }
 }
 @media (min-width: 1025px) {
-  /* line 99, scss/core/_layout.scss */
+  /* line 147, scss/core/_layout.scss */
   .container {
     max-width: 1025px;
     padding: 0 20px;
   }
 
-  /* line 103, scss/core/_layout.scss */
+  /* line 151, scss/core/_layout.scss */
   #site-content > section .section-inner {
     padding-top: 140px;
   }
 }
 @media (min-width: 1281px) {
-  /* line 109, scss/core/_layout.scss */
+  /* line 157, scss/core/_layout.scss */
   .container {
     max-width: 1281px;
   }
@@ -1216,7 +1279,7 @@ section#work-section .project-view {
   z-index: 1;
 }
 /* line 63, scss/sections/_work.scss */
-.project-item .media-content {
+.project-item .media-content, .project-item .media-active {
   display: block;
   position: absolute;
   top: 0;
@@ -1225,22 +1288,50 @@ section#work-section .project-view {
   height: 100%;
   background: no-repeat 50% 50%;
   background-size: cover;
+  z-index: 1;
 }
-/* line 71, scss/sections/_work.scss */
-.project-item .info {
-  display: block;
-  position: absolute;
-  z-index: 2;
-  background-color: transparent;
-  width: 100%;
-  height: 100%;
-  padding: 5%;
+/* line 72, scss/sections/_work.scss */
+.project-item .media-active {
+  background: rgba(28, 28, 26, 0);
   -moz-transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   -o-transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   -webkit-transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: background-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 81, scss/sections/_work.scss */
+/* line 76, scss/sections/_work.scss */
+.project-item .close-icon {
+  display: block;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: 60%;
+  height: 60%;
+  background: no-repeat 50% 50%;
+  background-image: url(/images/grid-close.svg);
+  background-size: cover;
+  z-index: 2;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -moz-transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -o-transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: opacity 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -moz-transition-delay: 0.5s;
+  -o-transition-delay: 0.5s;
+  -webkit-transition-delay: 0.5s;
+  transition-delay: 0.5s;
+}
+/* line 90, scss/sections/_work.scss */
+.project-item .info {
+  display: block;
+  position: absolute;
+  z-index: 3;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  padding: 5%;
+}
+/* line 98, scss/sections/_work.scss */
 .project-item .info-inner {
   display: none;
   position: relative;
@@ -1252,7 +1343,7 @@ section#work-section .project-view {
   -webkit-transition: margin-top 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: margin-top 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 88, scss/sections/_work.scss */
+/* line 105, scss/sections/_work.scss */
 .project-item .info-inner h1 {
   font-size: 1.5em;
   color: white;
@@ -1260,38 +1351,44 @@ section#work-section .project-view {
   position: absolute;
   bottom: 0;
 }
-/* line 99, scss/sections/_work.scss */
-.project-item.touch .info {
+/* line 116, scss/sections/_work.scss */
+.project-item.touch .media-active {
   background-color: rgba(238, 42, 123, 0.85);
 }
-/* line 104, scss/sections/_work.scss */
-.project-item.active .info, .project-item.hover .info {
+/* line 121, scss/sections/_work.scss */
+.project-item.active .media-active, .project-item.hover .media-active {
   background-color: rgba(28, 28, 26, 0.85);
 }
-/* line 109, scss/sections/_work.scss */
+/* line 126, scss/sections/_work.scss */
+.project-item.active .close-icon {
+  display: block;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+}
+/* line 132, scss/sections/_work.scss */
 .project-item.hover:not(.active) .info-inner {
   margin-top: 0%;
 }
 
 @media (min-width: 768px) {
-  /* line 119, scss/sections/_work.scss */
+  /* line 142, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 33.33333%;
   }
 
-  /* line 124, scss/sections/_work.scss */
+  /* line 147, scss/sections/_work.scss */
   .project-item .info-inner {
     display: block;
   }
 }
 @media (min-width: 1025px) {
-  /* line 132, scss/sections/_work.scss */
+  /* line 155, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 25%;
   }
 }
 @media (min-width: 1281px) {
-  /* line 140, scss/sections/_work.scss */
+  /* line 163, scss/sections/_work.scss */
   section#work-section .project-grid-item {
     width: 25%;
   }

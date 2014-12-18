@@ -126,7 +126,6 @@ define(
       },
 
       _navActiveUpdate : function() {
-        console.log( "_navActiveUpdate ", activeSection );
         this.$navLinks.each( function(i,el) {
           var active = $(el).attr( "data-id" ) === activeSection;
           $(el).toggleClass("active", active);

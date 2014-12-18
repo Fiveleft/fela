@@ -10,6 +10,7 @@ define([
     "app/views/nav",
     'app/views/work',
     'app/views/scroller',
+    'app/views/connectForm',
     'app/models/breakpoints'
   ], 
   function(
@@ -23,6 +24,7 @@ define([
     NavView,
     WorkView,
     ScrollerView,
+    ConnectForm,
     Breakpoints
   ){
     
@@ -34,6 +36,7 @@ define([
         // console.log( "SiteIndex.initialize" );
         this.$main = $("main");
         this.$siteContent = $("#site-content");
+        this.$footerTopLink = $("#footer a.logo");
         
         var siteData = JSON.parse($("#data-api-data").attr("data-json")); 
         $("#data-api-data").remove();
@@ -52,10 +55,19 @@ define([
         // Start the ScrollerView
         ScrollerView.start();
         Breakpoints;
+        ConnectForm;
+
+        this.$footerTopLink.on( "click", this.indexState );
 
         this.listenTo( Events, "mobilenav:open", this._mobileNavOpen );
         this.listenTo( Events, "mobilenav:close", this._mobileNavClose );
         this.listenTo( Events, "mobilenav:closed", this._mobileNavClosed );
+      },
+
+      indexState : function( e ) {
+        e.preventDefault();
+        var url = $(e.currentTarget).attr("href");
+        Events.trigger( "router:navigate", url);
       },
 
       _mobileNavOpen : function() {

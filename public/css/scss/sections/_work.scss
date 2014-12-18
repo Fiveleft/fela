@@ -60,23 +60,40 @@ section#work-section {
     display: block;
     z-index: 1;
   }
-  .media-content {
+  .media-content, .media-active {
     display: block;
     position: absolute; 
     top: 0; left: 0;
     width: 100%; height: 100%;
     background: no-repeat 50% 50%;
     background-size: cover;
+    z-index: 1;
   }
+  .media-active {
+    background: rgba( $brand-black, 0 );
+    @include transition( background-color 0.3s $easeInOutCubic );
+  }
+  .close-icon {
+    display: block;
+    position: absolute; 
+    top: 20%; left: 20%;
+    width: 60%; height: 60%;
+    background: no-repeat 50% 50%;
+    background-image: url(/images/grid-close.svg);
+    background-size: cover;
+    z-index: 2;
+    @include opacity( 0 );
+    @include transition( opacity 0.5s $easeOutCubic );
+    @include transition-delay( 0.5s );
+  }
+
   .info {
     display: block;
     position: absolute;
-    z-index: 2;
+    z-index: 3;
     background-color: transparent;
     width: 100%; height: 100%;
     padding: 5%;
-
-    @include transition( background-color 0.3s $easeInOutCubic );
   }
   .info-inner {
     display: none;
@@ -96,13 +113,19 @@ section#work-section {
 
   
   &.touch {
-    .info {
+    .media-active {
       background-color: rgba( $brand-magenta, 0.85 );
     }
   }
   &.active, &.hover {
-    .info {
+    .media-active {
       background-color: rgba( $brand-black, 0.85 );
+    }
+  }
+  &.active {
+    .close-icon {
+      display: block;
+      @include opacity( 0.5 );
     }
   }
   &.hover:not(.active) {

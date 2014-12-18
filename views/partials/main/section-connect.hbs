@@ -7,65 +7,9 @@
     </div>
     {{/if }}
 		<div class="connect-row">
-			<form class="contact-form">
-				<div class="input-field" data-field="name">
-					<label for="name">Name</label>
-					<div class="input-wrapper">
-						<input name="name" type="text" placeholder="Enter your name"></input>
-					</div>
-				</div>
-				<div class="input-field" data-field="email">
-					<label for="email">Email</label>
-					<div class="input-wrapper">
-						<input name="email" type="text" placeholder="Enter your email"></input>
-					</div>
-				</div>
-				<div class="input-field" data-field="inquiry">
-					<label for="inquiry">Inquiry</label>
-					<div class="input-wrapper">
-						<input name="inquiry" type="text" value=""></input> 
-						<select name="inquiry">
-							<option value=""></option>
-							<option value=""></option>
-							<option value=""></option>
-						</select>
-						<ul class="inquiry-type-list">
-							<li class="inquiry-type-item">
-								<a class="inquiry-type" href="#" data-value=""></a>
-							</li>
-							<li class="inquiry-type-item">
-								<a class="inquiry-type" href="#" data-value=""></a>
-							</li>
-							<li class="inquiry-type-item">
-								<a class="inquiry-type" href="#" data-value=""></a>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="input-field" data-field="message">
-					<label for="message">Message</label>
-					<div class="input-wrapper">
-						<textarea name="message" placeholder="What's up?"></textarea>
-					</div>
-				</div>
-				<button class="submit">Send</button>
-			</form>
+			{{>connect_form}}
 			<div class="connect-details">
-				<div class="vcard">
-					<span class="fn org">Fiveleft, LLC</span>
-					<div class="adr">
-				    <span class="type">Work</span>
-	 					<span class="locality">Seattle</span>,  
-				    <abbr class="region" title="Washington">WA</abbr>
-				    <span class="postal-code">98115</span>
-				    <span class="country-name">USA</span>
-				  </div>
-					<span class="tel">
-						<span class="type">Work</span>
-						<a href="tel:2063107873"><span class="value">+1</span>.<span class="value">206</span>.<span class="value">310</span>.<span class="value">7873</span></a>
-					</span>
-					<a class="email" href="mai&#108;to&#58;s&#116;&#117;di&#111;&#64;fi&#118;elef&#116;&#46;co&#109;">st&#117;&#100;&#105;o&#64;fivelef&#116;&#46;c&#111;m</a>
-				</div>
+				{{>vcard}}
 				<p class="hours">Hours by appointment only</p>
 			</div>
 		</div>
