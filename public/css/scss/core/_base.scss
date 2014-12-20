@@ -55,20 +55,11 @@ button {
     background-color 0.25s $easeInOutCubic 
   );
 
-  // &::after {
-  //   content: " ";
-  //   display: block;
-  //   position: absolute;
-  //   top: 4px; left: 4px; right: 4px; bottom: 4px;
-  //   border: 1px solid $brand-black;
-  //   @include transition( border-color 0.25s $easeInOutCubic );
-  // }
-
   &:hover, &:focus {
     color: $color-white;
     background-color: $brand-magenta;
-    // &::after {
-    //   border-color: $color-border;
-    // }
   }
 }
+
+
+

@@ -24,8 +24,7 @@ define(
 
       initialize : function() {
         var self = this;
-        // console.log( "ScrollerView.initialize()" );
-
+        
         // Set Event Listeners
         this.windowEvents = {
           "resize" : _.throttle(function(){self.resize();}, 100), 
@@ -66,7 +65,7 @@ define(
       },
 
       _measure : function() {
-        console.log( "ScrollerView._measure()");
+        // console.log( "ScrollerView._measure()");
         this.totalHeight = this.$footer.offset().top + this.$footer.height();
         this.scrollArea = Math.max( this.totalHeight - window.innerHeight, 0 );
         activeOffset = Math.round( window.innerHeight * 0.333);

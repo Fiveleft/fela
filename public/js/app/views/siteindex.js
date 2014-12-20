@@ -33,18 +33,21 @@ define([
       $el : $("body"),
       
       initialize : function() {
-        // console.log( "SiteIndex.initialize" );
+        
+        var siteData = JSON.parse($("#data-api-data").attr("data-json")),
+            projectsData = _.where( siteData, {type:"fiveleft_project"}),
+            partnersData = _.filter( siteData, function(p){ 
+                if( /_agency|_client/g.test( p.type ) ) return p;
+            });
+
+        // Remove data holder
+        $("#data-api-data").remove();
+
         this.$main = $("main");
         this.$siteContent = $("#site-content");
         this.$footerTopLink = $("#footer a.logo");
         
-        var siteData = JSON.parse($("#data-api-data").attr("data-json")); 
-        $("#data-api-data").remove();
         
-        var projectsData = _.where( siteData, {type:"fiveleft_project"});//JSON.parse($("#data-api-projects").attr("data-json")); 
-        var partnersData = _.filter( siteData, function(p){ 
-            if( /_agency|_client/g.test( p.type ) ) return p;
-        });
        
         PartnerCollection.reset( partnersData );
         ProjectCollection.reset( projectsData );
@@ -57,6 +60,7 @@ define([
         Breakpoints;
         ConnectForm;
 
+        // Events
         this.$footerTopLink.on( "click", this.indexState );
 
         this.listenTo( Events, "mobilenav:open", this._mobileNavOpen );

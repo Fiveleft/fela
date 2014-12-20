@@ -22,6 +22,12 @@
   }
 }
 
+html.ios-keyboard {
+  #top-nav, #mobile-nav {
+    position: absolute; 
+  }
+}
+
 #mobile-nav {
   display: block;
   left: 0;
