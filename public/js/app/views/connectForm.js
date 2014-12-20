@@ -64,7 +64,7 @@ define(
         }
 
 
-        console.log( e, isType, type );
+       // console.log( e, isType, type );
         this.$inquiryField.removeClass( "open" );
         this.$el.off( "focusin", function(e){self.focusSelect(e);} ); 
       },
@@ -81,7 +81,7 @@ define(
         e.preventDefault();
         e.stopPropagation();
         var self = this;
-        console.log( " open select " );
+       // console.log( " open select " );
         this.$inquiryField.addClass( "open" );
         
         this.$el

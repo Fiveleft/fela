@@ -38,8 +38,10 @@ hbs.registerHelper('contentFor', function(name, options){
   block.push(options.fn(this)); 
 });
 
+// assets.fiveleft.com.s3.amazonaws.com
+
 // Settings
-app.locals.CDN = '//cms.fiveleft.com/media/';
+app.locals.CDN = '//assets.fiveleft.com.s3.amazonaws.com/';
 app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
