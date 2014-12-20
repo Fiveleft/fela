@@ -1863,99 +1863,17 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   display: block;
 }
 
-/* line 30, scss/sections/_connect.scss */
-.contact-form {
-  width: 100%;
-  padding-bottom: 2em;
-}
-/* line 34, scss/sections/_connect.scss */
-.contact-form .input-field {
-  margin: 0 0 1em;
-}
-/* line 37, scss/sections/_connect.scss */
-.contact-form .input-wrapper {
-  background: #1c1c1a;
-  padding: 5px;
-}
-/* line 42, scss/sections/_connect.scss */
-.contact-form label {
-  font-family: "brandon-grotesque",sans-serif;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 83.3333%;
-  display: block;
-  text-transform: uppercase;
-}
-/* line 49, scss/sections/_connect.scss */
-.contact-form input[type='text'], .contact-form textarea {
-  font-family: "adobe-garamond-pro", Georgia, sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 1.4;
-  display: block;
-  background: #1c1c1a;
-  color: #b8b8b1;
-  width: 100%;
-  height: auto;
-  font-size: 16px;
-  line-height: 1.25;
-  padding: 0.33em;
-  border: 1px solid #1c1c1a;
-  outline: none;
-  -moz-transition: border-color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-  -o-transition: border-color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-  -webkit-transition: border-color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-  transition: border-color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), color 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-/* line 70, scss/sections/_connect.scss */
-.contact-form input[type='text']:focus, .contact-form textarea:focus {
-  outline: none;
-  color: #f7f7f0;
-  background-color: black;
-  border-color: #858580;
-}
-/* line 77, scss/sections/_connect.scss */
-.contact-form input[type='text'] div[pseudo="-webkit-input-placeholder"], .contact-form textarea div[pseudo="-webkit-input-placeholder"] {
-  color: #52524e;
-}
-/* line 84, scss/sections/_connect.scss */
-.contact-form .input-field[data-field='inquiry'] .input-wrapper {
-  position: relative;
-}
-/* line 87, scss/sections/_connect.scss */
-.contact-form .input-field[data-field='inquiry'] .inquiry-type-list {
-  display: block;
-}
-/* line 90, scss/sections/_connect.scss */
-.contact-form .input-field[data-field='inquiry'] input[name='inquiry'] {
-  position: relative;
-  z-index: 2;
-  top: 0;
-  left: 0;
-  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80);
-  opacity: 0.8;
-}
-/* line 96, scss/sections/_connect.scss */
-.contact-form .input-field[data-field='inquiry'] select[name='inquiry'] {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  visibility: hidden;
-}
-
 @media (min-width: 768px) {
-  /* line 111, scss/sections/_connect.scss */
+  /* line 33, scss/sections/_connect.scss */
   .contact-form {
     padding-bottom: 1em;
   }
-  /* line 114, scss/sections/_connect.scss */
+  /* line 36, scss/sections/_connect.scss */
   .contact-form button.submit {
     margin-top: 1.4em;
   }
 
-  /* line 120, scss/sections/_connect.scss */
+  /* line 42, scss/sections/_connect.scss */
   section#connect-section .connect-row {
     *zoom: 1;
     width: 100%;
@@ -1968,30 +1886,197 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
     display: table;
     clear: both;
   }
-  /* line 126, scss/sections/_connect.scss */
+  /* line 48, scss/sections/_connect.scss */
   section#connect-section .contact-form, section#connect-section .connect-details {
     display: block;
     float: left;
   }
-  /* line 130, scss/sections/_connect.scss */
+  /* line 52, scss/sections/_connect.scss */
   section#connect-section .contact-form {
     width: 65%;
     padding-right: 5%;
     border-right: 1px solid rgba(133, 133, 128, 0.25);
     margin-right: 5%;
   }
-  /* line 136, scss/sections/_connect.scss */
+  /* line 58, scss/sections/_connect.scss */
   section#connect-section .connect-details {
     width: 25%;
   }
 }
 @media (min-width: 1025px) {
-  /* line 147, scss/sections/_connect.scss */
+  /* line 69, scss/sections/_connect.scss */
   section#connect-section .contact-form {
     width: 55%;
   }
-  /* line 150, scss/sections/_connect.scss */
+  /* line 72, scss/sections/_connect.scss */
   section#connect-section .connect-details {
     width: 25%;
   }
+}
+/* line 3, scss/modules/_connect-form.scss */
+#connect-form {
+  width: 100%;
+  padding-bottom: 2em;
+  font-size: 16px;
+}
+/* line 9, scss/modules/_connect-form.scss */
+#connect-form .input-field {
+  margin: 0 0 1em;
+}
+/* line 12, scss/modules/_connect-form.scss */
+#connect-form .input-wrapper {
+  background: #1c1c1a;
+}
+/* line 17, scss/modules/_connect-form.scss */
+#connect-form label {
+  font-family: "brandon-grotesque",sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1em;
+  display: block;
+  text-transform: uppercase;
+}
+/* line 24, scss/modules/_connect-form.scss */
+#connect-form .inquiry-select, #connect-form input[type='text'], #connect-form textarea {
+  font-family: "adobe-garamond-pro", Georgia, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.4;
+  display: block;
+  background: #1c1c1a;
+  color: #b8b8b1;
+  width: 100%;
+  height: auto;
+  font-size: 16px;
+  line-height: 1.25;
+  padding: 10px;
+  border: none;
+  outline: none;
+  -moz-transition: color 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -o-transition: color 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: color 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: color 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+/* line 45, scss/modules/_connect-form.scss */
+#connect-form .inquiry-select div[pseudo="-webkit-input-placeholder"], #connect-form input[type='text'] div[pseudo="-webkit-input-placeholder"], #connect-form textarea div[pseudo="-webkit-input-placeholder"] {
+  color: #52524e;
+}
+/* line 48, scss/modules/_connect-form.scss */
+#connect-form .inquiry-select:focus, #connect-form input[type='text']:focus, #connect-form textarea:focus {
+  outline: none;
+  background: #f7f7f0;
+  color: black;
+  -moz-box-shadow: 0px 0px 5px #333333;
+  -webkit-box-shadow: 0px 0px 5px #333333;
+  box-shadow: 0px 0px 5px #333333;
+}
+/* line 57, scss/modules/_connect-form.scss */
+#connect-form .input-field.inquiry {
+  position: relative;
+}
+/* line 60, scss/modules/_connect-form.scss */
+#connect-form input[name='inquiry'] {
+  cursor: pointer;
+  pointer-events: none;
+}
+/* line 65, scss/modules/_connect-form.scss */
+#connect-form .inquiry-select {
+  display: block;
+  position: relative;
+  padding: 0;
+  cursor: pointer;
+}
+/* line 71, scss/modules/_connect-form.scss */
+#connect-form .inquiry-select input {
+  background: none;
+  border: none;
+}
+/* line 75, scss/modules/_connect-form.scss */
+#connect-form .inquiry-select::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 50%;
+  right: 17px;
+  width: 0;
+  height: 0;
+  margin-top: 0;
+  margin-right: -4px;
+  border-top: solid 6px #858580;
+  border-left: solid 8px transparent;
+  border-right: solid 8px transparent;
+  -moz-transition: border-top-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: border-top-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: border-top-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: border-top-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+/* line 87, scss/modules/_connect-form.scss */
+#connect-form .inquiry-select:focus, #connect-form .inquiry-select:focus input {
+  color: black;
+}
+/* line 90, scss/modules/_connect-form.scss */
+#connect-form .inquiry-select:focus::after {
+  border-top-color: black;
+}
+/* line 94, scss/modules/_connect-form.scss */
+#connect-form .inquiry-type-list {
+  display: none;
+  position: relative;
+  padding: 0;
+  width: 100%;
+  background: #f7f7f0;
+  color: black;
+}
+/* line 102, scss/modules/_connect-form.scss */
+#connect-form .inquiry-type-item {
+  display: block;
+  width: 100%;
+}
+/* line 106, scss/modules/_connect-form.scss */
+#connect-form .inquiry-type {
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  line-height: 1.25;
+  padding: 10px;
+  font-size: inherit;
+  text-decoration: none;
+  -moz-transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+/* line 116, scss/modules/_connect-form.scss */
+#connect-form .inquiry-type.selected {
+  background-color: #1c1c1a;
+  color: white;
+}
+/* line 120, scss/modules/_connect-form.scss */
+#connect-form .inquiry-type:focus, #connect-form .inquiry-type:hover {
+  background-color: #ee2a7b;
+  color: white;
+}
+/* line 128, scss/modules/_connect-form.scss */
+#connect-form .input-field.inquiry.open {
+  z-index: 1000;
+  position: relative;
+  height: 65px;
+}
+/* line 134, scss/modules/_connect-form.scss */
+#connect-form .input-field.inquiry.open input, #connect-form .input-field.inquiry.open .input-wrapper {
+  background-color: #f7f7f0;
+  color: black;
+  border: none;
+}
+/* line 139, scss/modules/_connect-form.scss */
+#connect-form .input-field.inquiry.open .input-wrapper {
+  position: absolute;
+  width: 100%;
+  -moz-box-shadow: 0px 0px 5px #333333;
+  -webkit-box-shadow: 0px 0px 5px #333333;
+  box-shadow: 0px 0px 5px #333333;
+}
+/* line 144, scss/modules/_connect-form.scss */
+#connect-form .input-field.inquiry.open .inquiry-type-list {
+  display: block;
 }

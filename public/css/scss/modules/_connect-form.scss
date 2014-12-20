@@ -1,0 +1,154 @@
+// _connect-form.scss
+
+#connect-form {
+
+  width: 100%;
+  padding-bottom: 2em;
+  font-size: 16px;
+
+  .input-field {
+    margin: 0 0 1em;
+  }
+  .input-wrapper {
+    background: $color-grey-black;
+    //padding: 5px;
+  }
+
+  label {
+    @include mediumFont();
+    font-size: 1em;
+    display: block;
+    text-transform: uppercase;
+  }
+
+  .inquiry-select, input[type='text'], textarea {
+
+    @include bodyFont();
+    display: block;
+    background: $color-grey-black;
+    color: $color-grey-light;
+    width: 100%;
+    height: auto;
+    font-size: 16px;
+    line-height: 1.25;
+    padding: 10px;
+    border: none;
+    outline: none;
+
+
+    @include transition( 
+      //border-color 0.3s $easeInCubic,
+      color 0.2s $easeInCubic,
+      background-color 0.2s $easeOutCubic 
+    );
+
+    div[pseudo="-webkit-input-placeholder"] {
+      color: $color-grey-dark;
+    }
+    &:focus {
+      outline: none;
+      background: $color-grey-white;
+      color: $color-black;
+      @include box-shadow();
+    }
+
+  }
+
+  .input-field.inquiry {
+    position: relative;
+  }
+  input[name='inquiry'] {
+    cursor: pointer;
+    pointer-events:none;
+    //@include transition( border-color 0.2s $easeInOutCubic );
+  }
+  .inquiry-select {
+    display: block;
+    position: relative;
+    padding: 0;
+    cursor: pointer;
+
+    input {
+      background: none;
+      border: none;
+    }
+    &::after {
+      content: " ";
+      display: block;
+      position: absolute;
+      top: 50%; right: 17px;
+      width: 0; height: 0;
+      margin-top: 0; margin-right: -4px;
+      border-top: solid 6px $color-grey-med;
+      border-left: solid 8px transparent;
+      border-right: solid 8px transparent;
+      @include transition( border-top-color 0.2s $easeInOutCubic );
+    }
+    &:focus, &:focus input {
+      color: $color-black;
+    }
+    &:focus::after {
+      border-top-color: $color-black;
+    }
+  }
+  .inquiry-type-list {
+    display: none;
+    position: relative;
+    padding: 0;
+    width: 100%;
+    background: $color-grey-white;
+    color: $color-black;
+  }
+  .inquiry-type-item {
+    display: block;
+    width: 100%;
+  }
+  .inquiry-type {
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    line-height: 1.25;
+    padding: 10px;
+    font-size: inherit;
+    text-decoration: none;
+    @include transition( all 0.2s $easeInOutCubic );
+
+    &.selected {
+      background-color: $color-grey-black;
+      color: $color-white;
+    }
+    &:focus, 
+    &:hover {
+      background-color: $brand-magenta;
+      color: $color-white;
+    }
+  }
+
+
+  .input-field.inquiry.open {
+
+    z-index: 1000;
+    position: relative;
+    height: 65px;
+    
+    input, .input-wrapper {
+      background-color: $color-grey-white;
+      color: $color-black;
+      border: none;
+    }
+    .input-wrapper {
+      position: absolute;
+      width: 100%;
+      @include box-shadow();
+    }
+    .inquiry-type-list {
+      display: block;
+    }
+
+  }
+}
+
+
+
+
+
