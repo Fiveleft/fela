@@ -377,66 +377,67 @@ main #top-nav {
 /* line 104, scss/core/_layout.scss */
 main.snap-nav {
   position: fixed;
-  top: 0;
+  top: 1px;
+  margin-top: -1px;
   left: 0;
   width: 100%;
-  height: 101%;
+  height: 100%;
 }
-/* line 111, scss/core/_layout.scss */
+/* line 112, scss/core/_layout.scss */
 main.snap-nav #mobile-nav {
   position: absolute;
 }
-/* line 114, scss/core/_layout.scss */
+/* line 115, scss/core/_layout.scss */
 main.snap-nav #top-nav {
   visibility: visible;
 }
-/* line 117, scss/core/_layout.scss */
+/* line 118, scss/core/_layout.scss */
 main.snap-nav #site-content {
   pointer-events: none;
 }
-/* line 120, scss/core/_layout.scss */
+/* line 121, scss/core/_layout.scss */
 main.snap-nav #canvas {
   position: absolute;
   -moz-box-shadow: 0 0 20px 0 black;
   -webkit-box-shadow: 0 0 20px 0 black;
   box-shadow: 0 0 20px 0 black;
 }
-/* line 124, scss/core/_layout.scss */
+/* line 125, scss/core/_layout.scss */
 main.snap-nav.open {
   margin-left: -200px;
 }
 
 @media (min-width: 768px) {
-  /* line 133, scss/core/_layout.scss */
+  /* line 134, scss/core/_layout.scss */
   main #top-nav {
     visibility: visible;
   }
 
-  /* line 137, scss/core/_layout.scss */
+  /* line 138, scss/core/_layout.scss */
   .container {
     max-width: 768px;
     padding: 0 15px;
   }
 
-  /* line 141, scss/core/_layout.scss */
+  /* line 142, scss/core/_layout.scss */
   #site-content > section .section-inner {
-    padding-top: 100px;
+    padding-top: 75px;
   }
 }
 @media (min-width: 1024px) {
-  /* line 148, scss/core/_layout.scss */
+  /* line 149, scss/core/_layout.scss */
   .container {
     max-width: 1024px;
     padding: 0 20px;
   }
 
-  /* line 152, scss/core/_layout.scss */
+  /* line 153, scss/core/_layout.scss */
   #site-content > section .section-inner {
-    padding-top: 140px;
+    padding-top: 80px;
   }
 }
 @media (min-width: 1281px) {
-  /* line 158, scss/core/_layout.scss */
+  /* line 159, scss/core/_layout.scss */
   .container {
     max-width: 1281px;
   }
@@ -1871,7 +1872,7 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
 @media (min-width: 768px) {
   /* line 33, scss/sections/_connect.scss */
   .contact-form {
-    padding-bottom: 1em;
+    padding-bottom: 2em;
   }
   /* line 36, scss/sections/_connect.scss */
   .contact-form button.submit {
@@ -1884,7 +1885,7 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
     width: 100%;
     display: block;
     margin: 0 auto;
-    padding-bottom: 80px;
+    padding: 40px 0 80px;
   }
   /* line 38, ../../../../../../.rvm/gems/ruby-2.1.4@global/gems/compass-core-1.0.1/stylesheets/compass/utilities/general/_clearfix.scss */
   section#connect-section .connect-row:after {
@@ -1899,14 +1900,14 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   }
   /* line 53, scss/sections/_connect.scss */
   section#connect-section .contact-form {
-    width: 65%;
+    width: 60%;
     padding-right: 5%;
     border-right: 1px solid rgba(133, 133, 128, 0.25);
     margin-right: 5%;
   }
   /* line 59, scss/sections/_connect.scss */
   section#connect-section .connect-details {
-    width: 25%;
+    width: 30%;
   }
 }
 @media (min-width: 1024px) {
@@ -1916,25 +1917,24 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   }
   /* line 73, scss/sections/_connect.scss */
   section#connect-section .connect-details {
-    width: 25%;
+    width: 35%;
   }
 }
 /* line 3, scss/modules/_connect-form.scss */
 #connect-form {
   width: 100%;
-  padding-bottom: 100px;
   font-size: 16px;
 }
-/* line 9, scss/modules/_connect-form.scss */
+/* line 8, scss/modules/_connect-form.scss */
 #connect-form .input-field {
   margin: 0 0 1em;
 }
-/* line 12, scss/modules/_connect-form.scss */
+/* line 11, scss/modules/_connect-form.scss */
 #connect-form .input-wrapper {
   position: relative;
   background: #1c1c1a;
 }
-/* line 18, scss/modules/_connect-form.scss */
+/* line 17, scss/modules/_connect-form.scss */
 #connect-form button.ios-intercept {
   display: block;
   position: absolute;
@@ -1946,7 +1946,7 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   background: transparent;
   overflow: hidden;
 }
-/* line 29, scss/modules/_connect-form.scss */
+/* line 28, scss/modules/_connect-form.scss */
 #connect-form label {
   font-family: "brandon-grotesque",sans-serif;
   font-style: normal;
@@ -1955,7 +1955,7 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   display: block;
   text-transform: uppercase;
 }
-/* line 36, scss/modules/_connect-form.scss */
+/* line 35, scss/modules/_connect-form.scss */
 #connect-form .inquiry-select, #connect-form input[type='text'], #connect-form textarea {
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
   font-style: normal;
@@ -1976,11 +1976,11 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   -webkit-transition: color 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: color 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-/* line 57, scss/modules/_connect-form.scss */
+/* line 56, scss/modules/_connect-form.scss */
 #connect-form .inquiry-select div[pseudo="-webkit-input-placeholder"], #connect-form input[type='text'] div[pseudo="-webkit-input-placeholder"], #connect-form textarea div[pseudo="-webkit-input-placeholder"] {
   color: #858580;
 }
-/* line 60, scss/modules/_connect-form.scss */
+/* line 59, scss/modules/_connect-form.scss */
 #connect-form .inquiry-select:focus, #connect-form input[type='text']:focus, #connect-form textarea:focus {
   outline: none;
   background: #f7f7f0;
@@ -1989,28 +1989,28 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   -webkit-box-shadow: 0px 0px 5px #333333;
   box-shadow: 0px 0px 5px #333333;
 }
-/* line 69, scss/modules/_connect-form.scss */
+/* line 68, scss/modules/_connect-form.scss */
 #connect-form .input-field.inquiry {
   position: relative;
 }
-/* line 72, scss/modules/_connect-form.scss */
+/* line 71, scss/modules/_connect-form.scss */
 #connect-form input[name='inquiry'] {
   cursor: pointer;
   pointer-events: none;
 }
-/* line 77, scss/modules/_connect-form.scss */
+/* line 76, scss/modules/_connect-form.scss */
 #connect-form .inquiry-select {
   display: block;
   position: relative;
   padding: 0;
   cursor: pointer;
 }
-/* line 83, scss/modules/_connect-form.scss */
+/* line 82, scss/modules/_connect-form.scss */
 #connect-form .inquiry-select input {
   background: none;
   border: none;
 }
-/* line 87, scss/modules/_connect-form.scss */
+/* line 86, scss/modules/_connect-form.scss */
 #connect-form .inquiry-select::after {
   content: " ";
   display: block;
@@ -2029,15 +2029,15 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   -webkit-transition: border-top-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: border-top-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 99, scss/modules/_connect-form.scss */
+/* line 98, scss/modules/_connect-form.scss */
 #connect-form .inquiry-select:focus, #connect-form .inquiry-select:focus input {
   color: black;
 }
-/* line 102, scss/modules/_connect-form.scss */
+/* line 101, scss/modules/_connect-form.scss */
 #connect-form .inquiry-select:focus::after {
   border-top-color: black;
 }
-/* line 106, scss/modules/_connect-form.scss */
+/* line 105, scss/modules/_connect-form.scss */
 #connect-form .inquiry-type-list {
   display: none;
   position: relative;
@@ -2046,12 +2046,12 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   background: #f7f7f0;
   color: black;
 }
-/* line 114, scss/modules/_connect-form.scss */
+/* line 113, scss/modules/_connect-form.scss */
 #connect-form .inquiry-type-item {
   display: block;
   width: 100%;
 }
-/* line 118, scss/modules/_connect-form.scss */
+/* line 117, scss/modules/_connect-form.scss */
 #connect-form .inquiry-type {
   cursor: pointer;
   display: block;
@@ -2065,29 +2065,29 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   -webkit-transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 128, scss/modules/_connect-form.scss */
+/* line 127, scss/modules/_connect-form.scss */
 #connect-form .inquiry-type.selected {
   background-color: #1c1c1a;
   color: white;
 }
-/* line 132, scss/modules/_connect-form.scss */
+/* line 131, scss/modules/_connect-form.scss */
 #connect-form .inquiry-type:focus, #connect-form .inquiry-type:hover {
   background-color: #ee2a7b;
   color: white;
 }
-/* line 140, scss/modules/_connect-form.scss */
+/* line 139, scss/modules/_connect-form.scss */
 #connect-form .input-field.inquiry.open {
   z-index: 1000;
   position: relative;
   height: 65px;
 }
-/* line 146, scss/modules/_connect-form.scss */
+/* line 145, scss/modules/_connect-form.scss */
 #connect-form .input-field.inquiry.open input, #connect-form .input-field.inquiry.open .input-wrapper {
   background-color: #f7f7f0;
   color: black;
   border: none;
 }
-/* line 151, scss/modules/_connect-form.scss */
+/* line 150, scss/modules/_connect-form.scss */
 #connect-form .input-field.inquiry.open .input-wrapper {
   position: absolute;
   width: 100%;
@@ -2095,7 +2095,7 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   -webkit-box-shadow: 0px 0px 5px #333333;
   box-shadow: 0px 0px 5px #333333;
 }
-/* line 156, scss/modules/_connect-form.scss */
+/* line 155, scss/modules/_connect-form.scss */
 #connect-form .input-field.inquiry.open .inquiry-type-list {
   display: block;
 }

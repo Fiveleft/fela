@@ -103,10 +103,11 @@ main {
 
 main.snap-nav {
   position: fixed;
-  top: 0;
+  top: 1px;
+  margin-top: -1px; // see if this is necessary?
   left: 0;
   width: 100%;
-  height: 101%;
+  height: 100%;
 
   #mobile-nav {
     position: absolute;
@@ -139,7 +140,7 @@ main.snap-nav {
     padding: 0 15px;
   }
   #site-content > section .section-inner {
-    padding-top: 100px;
+    padding-top: 75px;
   }
 
 }
@@ -150,7 +151,7 @@ main.snap-nav {
     padding: 0 20px;
   }
   #site-content > section .section-inner {
-    padding-top: 140px;
+    padding-top: 80px;
   }
 }
 

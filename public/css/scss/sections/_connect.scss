@@ -31,7 +31,7 @@ section#connect-section {
 @media ( min-width:$width-sm-min ) {  
 
   .contact-form {
-    padding-bottom: 1em;
+    padding-bottom: 2em;
         
     button.submit {
       margin-top: 1.4em;
@@ -44,20 +44,20 @@ section#connect-section {
       width: 100%;
       display: block;
       margin: 0 auto;
-      padding-bottom: 80px;
+      padding: 40px 0 80px;
     }
     .contact-form, .connect-details {
       display: block;
       float: left;
     }
     .contact-form {
-      width: 65%;
+      width: 60%;
       padding-right: 5%;
       border-right: 1px solid $color-border;
       margin-right: 5%;
     }
     .connect-details {
-      width: 25%;
+      width: 30%;
     }
   }
 }
@@ -71,7 +71,7 @@ section#connect-section {
       width: 55%;
     }
     .connect-details {
-      width: 25%;
+      width: 35%;
     }
   }
 }
