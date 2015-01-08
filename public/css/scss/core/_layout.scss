@@ -16,8 +16,18 @@ main {
   //border-top: 2px dotted #808080;
   .section-inner {
     padding: 60px 0 0;
+    visibility: hidden;
+    @include opacity( 0 );
+    @include transition( opacity 0.3s $easeOutCubic );
   }
 }
+.started #site-content > section {
+  .section-inner {
+    visibility: visible;
+    @include opacity( 1 );
+  }
+}
+
 #canvas {
   position: fixed;
   top: 0;

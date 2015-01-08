@@ -17,8 +17,9 @@ module.exports = function(grunt) {
       }
     },
 
+    prod_test: {
 
-
+    },
 
     // Perhaps no longer needed
     bower: {
@@ -187,5 +188,12 @@ module.exports = function(grunt) {
 
   // Stage Task
   grunt.registerTask('build', ['jshint']);
+
+  // Production Task
+  grunt.registerTask('prod', function(arg){
+    var msg = "Writing to production server!";
+    grunt.log.writeflags( arg, " - " );
+    grunt.log.write( msg );
+  });
 
 };

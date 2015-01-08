@@ -7,6 +7,7 @@ define(
       maxTime = 0.75,
       activeOffset = window.innerHeight / 2,
       activeSection = -1,
+      started = false,
       topAffixed = true,
       scrollClasses = [
         "below-view",
@@ -39,6 +40,7 @@ define(
         this.$sectionInners = $(".section-inner", this.$sections);
 
         // Set Measurements
+        this.$sectionInners.css( "min-height", window.innerHeight );
         this.totalHeight = this.$footer.offset().top + this.$footer.height();
         this.scrollArea = Math.max( this.totalHeight - window.innerHeight, 0 );
       },
@@ -48,6 +50,13 @@ define(
         this.resize();
         this.listenTo( Events, Events.scrollTo, this._pageScrollTo );
         this.listenTo( Events, Events.changeHeight, this._measure );
+
+        console.log( " Scroller.start()" );
+
+        if( !started ) {
+          started = true;
+          $("html").addClass("started");
+        }
       },
 
       stop : function() {
