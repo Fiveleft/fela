@@ -28,15 +28,15 @@ module.exports = function(grunt) {
     },
 
     // Perhaps no longer needed
-    bower: {
-      install: {
-        options: {
-          // Install dependencies into source/vendor
-          targetDir: 'public/js/vendor',
-          layout: 'byType'
-        }
-      }
-    },
+    // bower: {
+    //   install: {
+    //     options: {
+    //       // Install dependencies into source/vendor
+    //       targetDir: 'public/js/vendor',
+    //       layout: 'byType'
+    //     }
+    //   }
+    // },
 
     // Handlebars Templates
     // @see http://danburzo.ro/grunt/chapters/handlebars/
@@ -174,8 +174,8 @@ module.exports = function(grunt) {
   });
 
   // Load tasks
-  grunt.loadNpmTasks('grunt-bower-task');
-  grunt.loadNpmTasks('grunt-bower-requirejs');
+  // grunt.loadNpmTasks('grunt-bower-task');
+  // grunt.loadNpmTasks('grunt-bower-requirejs');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
