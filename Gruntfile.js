@@ -212,6 +212,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('prod-build', [
+    'env:production',
     'handlebars',
     'cssmin',
     'uglify',
@@ -227,7 +228,6 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('prod', [
-    'env:production',
     'prod-prepare',
     'gitpush:production',
   ]);
