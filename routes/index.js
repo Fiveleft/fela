@@ -4,32 +4,22 @@ var request     = require('request');
 var indexPaths  = ['/','/work','/project/:slug','/connect','/info'];
 var router      = express.Router();
 var _           = require('underscore');
+var devEnv      = app.get('env') === 'development';
 
 // Data to inject into index
 var indexData   = {
   title: 'Fiveleft is a Creative Digital Studio',
+  assets : {
+    styles: (devEnv ? '/css/main.css' : '/css/main.min.css'),
+    modernizr: (devEnv ? '/js/modernizr.custom.js' : '/js/modernizr.min.js'),
+    requirejs: (devEnv ? '/js/vendor/requirejs/require.js' : '/js/require.min.js'),
+  },
   data : {},
-  agencyData: {},
-  clientData: {},
+  agencyData : {},
+  clientData : {},
   infoData : {},
   projectData: {}
 };
-
-// router.get( "/_escape_fragment_/*", function( request, response ) {
-//   var script = path.join( __dirname, "get_html.js" );
-//   var url = "http://localhost:8080" + request.url.replace( "_escape_fragment_", "#!" );
-//   var childArgs = [
-//       script, url
-//   ];
-//   childProcess.execFile( binPath, childArgs, function( err, stdout, stderr ) {
-//     response.writeHead( 200, {
-//       "Content-Type": "text/html; charset=UTF-8"
-//     });
-//     response.end( "<!doctype html><html>" + stdout + "</html>" );
-//   });
-// });
-// 
-
 
 // Load Content Data
 router.use( indexPaths, function(req, res, next){

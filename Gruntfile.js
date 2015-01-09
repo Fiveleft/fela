@@ -2,23 +2,28 @@ module.exports = function(grunt) {
 
   grunt.initConfig({
 
-    // Prepare Build
-    prepare_build: {
-      production: {
-        options: {
-          envName: "production"
-          // Task-specific options go here.
-        }
+
+    // @see:
+    env : {
+      dev: {
+        NODE_ENV : 'development',
       },
-      stage: {
-        options: {
-          envName: "stage"
-        }
+      production: {
+        NODE_ENV : 'production',
       }
     },
 
-    prod_test: {
-
+    // @see: https://www.npmjs.com/package/grunt-sync
+    sync: {
+      main: {
+        files: [{
+          cwd: 'public',
+          src: ['images/**', 'favicon.ico'],
+          dest: 'public-prod/'
+        }],
+        verbose: true, // Display log messages when copying files
+        ignoreInDest: ['**/*.js', '**/*.css'],
+      }
     },
 
     // Perhaps no longer needed
@@ -64,11 +69,22 @@ module.exports = function(grunt) {
       }
     },
 
-    // take all the js files and minify them into app.min.js
+    requirejs: {
+      compile: {
+        options: {
+          baseUrl: 'public/js',
+          mainConfigFile: 'public/js/init.js',
+          name: 'init',
+          out: 'public-prod/js/init.js'
+        }
+      }
+    },
+
     uglify: {
-      build: {
+      compile : {
         files: {
-          'public/dist/js/app.min.js': ['public/src/js/**/*.js', 'public/src/js/*.js']
+          'public-prod/js/require.min.js': ['public/js/vendor/requirejs/require.js'],
+          'public-prod/js/modernizr.min.js': ['public/js/modernizr.custom.js']
         }
       }
     },
@@ -79,9 +95,8 @@ module.exports = function(grunt) {
       dist: {                   // Target
         options: {              // Target options
           sassDir: 'public/css/scss',
-          cssDir: 'app/dist/css',
-          outputStyle: 'compact',
-          lineComments: 'true'
+          cssDir: 'public-prod/css',
+          outputStyle: 'compact'
         }
       },
       dev: {
@@ -96,7 +111,7 @@ module.exports = function(grunt) {
     cssmin: {
       build: {
         files: {
-          'app/dist/css/main.min.css': 'app/dist/css/style.css'
+          'public-prod/css/main.min.css': 'public-prod/css/main.css'
         }
       }
     },
@@ -111,17 +126,16 @@ module.exports = function(grunt) {
       templates: {
         files: ['views/templates/**/*.hbs'],
         tasks: ['handlebars']
-      }
+      },
       // js: {
-      //   files: ['src/js/**/*.js'],
-      //   tasks: ['jshint', 'uglify']
+      //   files: ['public/js/**/*.js'],
+      //   tasks: ['jshint']
       // }
     },
 
     concurrent: {
       dev: {
-        // tasks: ['nodemon', 'node-inspector', 'watch'],
-        tasks: ['nodemon', 'watch'],
+        tasks: ['nodemon:dev', 'watch'],
         options: {
           logConcurrentOutput: true
         }
@@ -136,32 +150,21 @@ module.exports = function(grunt) {
           ext: 'hbs,js',
           ignore: [
             'node_modules/**',
+            'public-dist/**',
+            'public/js/**',
             'views/templates/**',
-            'public/js/**'
           ],
         }
       },
-      stage: {
+      production: {
         script: './bin/www',
         options: {
-          nodeArgs: ['--debug'],
-          ext: 'hbs,js',
+          // ext: 'hbs,js',
           ignore: [
             'node_modules/**',
+            'public-dist/**',
+            'public/js/**',
             'views/templates/**',
-            'public/js/**'
-          ],
-        }
-      },
-      release: {
-        script: './app/dist',
-        options: {
-          nodeArgs: [''],
-          ext: 'hbs,js',
-          ignore: [
-            'node_modules/**',
-            'views/templates/**',
-            'public/js/**'
           ],
         }
       }
@@ -174,23 +177,40 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-bower-requirejs');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
+  grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-concurrent');
+  grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-nodemon');
-
-  // New:
-  grunt.loadNpmTasks('grunt-prepare-build');
+  grunt.loadNpmTasks('grunt-requirejs');
+  grunt.loadNpmTasks('grunt-sync');
 
   // Default task
-  grunt.registerTask('default', ['handlebars','concurrent']);
+  grunt.registerTask('default', [
+    'env:dev',
+    'handlebars',
+    'concurrent:dev'
+  ]);
 
-  // Stage Task
-  grunt.registerTask('build', ['jshint']);
+  grunt.registerTask('prod', [
+    'compass:dist', 
+    'handlebars',
+    'cssmin',
+    'uglify',
+    'requirejs', 
+    'sync'
+  ]);
+
+  grunt.registerTask('test_prod', [
+    'env:production',
+    'prod',
+    'nodemon:production'
+  ]);
 
   // Production Task
-  grunt.registerTask('prod', function(arg){
+  grunt.registerTask('prod-start', function(arg){
     var msg = "Writing to production server!";
     grunt.log.writeflags( arg, " - " );
     grunt.log.write( msg );

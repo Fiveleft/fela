@@ -1,11 +1,11 @@
 
 {{#contentFor 'pageStyles'}}
-	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="{{assets.styles}}">
 {{/contentFor}}
 
 {{#contentFor 'pageScripts'}}
 	{{>fonts }}	
-	<script src="/js/modernizr.custom.32938.js"></script>
+	<script src="{{assets.modernizr}}"></script>
 	<script id="site-vars" hidden> 
 		var __cdn='{{cdn}}'; 
 	</script>
@@ -28,7 +28,7 @@
 	<span hidden id="data-api-data" data-json='{{data}}'></span>
 </main>
 {{#contentFor 'inlineScripts'}} 
-	<script data-main="/js/init" src="/js/vendor/requirejs/require.js"></script>
+	<script data-main="/js/init" src="{{assets.requirejs}}"></script>
 {{/contentFor}}
 
 

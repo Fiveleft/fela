@@ -14,6 +14,9 @@ var indexRoutes = require('./routes/index'),
   users = require('./routes/users'),
   api = require('./routes/api');
 
+// Public Directory
+var publicRoot = app.get('env')==='production' ? "public-prod" : "public";
+
 
 // View engine setup
 // Set Handlebars as Express Rendering engine
@@ -46,7 +49,7 @@ app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static( path.join(__dirname, publicRoot) ));
 
 // Set Routes
 app.use('/users', users);
