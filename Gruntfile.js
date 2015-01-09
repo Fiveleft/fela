@@ -196,6 +196,7 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('prod', [
+    'env:production',
     'compass:dist', 
     'handlebars',
     'cssmin',
