@@ -148,7 +148,7 @@ module.exports = function(grunt) {
         }
       },
       production: {
-        script: './bin/www-stage',
+        script: './bin/www',
         options: {
           // ext: 'hbs,js',
           ignore: [
@@ -223,7 +223,7 @@ module.exports = function(grunt) {
   grunt.registerTask('prod-test', [
     'env:production',
     'prod-prepare',
-    'prod',
+    'prod-build',
     'nodemon:production'
   ]);
 

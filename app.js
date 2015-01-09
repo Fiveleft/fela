@@ -16,6 +16,7 @@ var indexRoutes = require('./routes/index'),
 
 // Public Directory
 var publicRoot = app.get('env')==='production' ? "public-prod" : "public";
+console.log( "Public root: ", publicRoot );
 
 
 // View engine setup
@@ -41,7 +42,6 @@ hbs.registerHelper('contentFor', function(name, options){
   block.push(options.fn(this)); 
 });
 
-// assets.fiveleft.com.s3.amazonaws.com
 
 // Settings
 app.locals.CDN = '//assets.fiveleft.com.s3.amazonaws.com/';
@@ -49,6 +49,8 @@ app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+// How to fix this?!
 app.use(express.static( path.join(__dirname, publicRoot) ));
 
 // Set Routes
