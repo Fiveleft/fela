@@ -114,7 +114,7 @@ module.exports = function(grunt) {
     cssmin: {
       build: {
         files: {
-          'public-prod/css/main.min.css': 'public-prod/css/main.css'
+          'public-prod/css/main.min.css': 'public/css/main.css'
         }
       }
     },
@@ -171,7 +171,23 @@ module.exports = function(grunt) {
           ],
         }
       }
-    }
+    },
+
+
+    // GIT Deployment Tasks
+    gitpush: {
+      stage: {
+        options: {
+          remote: "stage"
+        }
+      },
+      production: {
+        options: {
+          verbose: true,
+          remote: "production"
+        }
+      }
+    },
 
 
   });
@@ -185,6 +201,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-env');
+  grunt.loadNpmTasks('grunt-git');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-requirejs');
   grunt.loadNpmTasks('grunt-sync');
@@ -196,27 +213,29 @@ module.exports = function(grunt) {
     'concurrent:dev'
   ]);
 
-  grunt.registerTask('prod', [
-    'env:production',
-    'compass:dist', 
+  grunt.registerTask('prod-prepare', [
+    'compass:dev', 
+  ]);
+
+  grunt.registerTask('prod-build', [
     'handlebars',
     'cssmin',
     'uglify',
     'requirejs', 
-    'sync'
+    'sync',
   ]);
 
-  grunt.registerTask('test_prod', [
+  grunt.registerTask('prod-test', [
     'env:production',
+    'prod-prepare',
     'prod',
     'nodemon:production'
   ]);
 
-  // Production Task
-  grunt.registerTask('prod-start', function(arg){
-    var msg = "Writing to production server!";
-    grunt.log.writeflags( arg, " - " );
-    grunt.log.write( msg );
-  });
+  grunt.registerTask('prod', [
+    'prod-prepare',
+    'gitpush:production',
+  ]);
+
 
 };

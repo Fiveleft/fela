@@ -36,6 +36,7 @@
     "coffee-script": "^1.8.0",
     "grunt-requirejs": "^0.4.2",
     "grunt-sync": "^0.2.2",
-    "grunt-env": "^0.4.2"
+    "grunt-env": "^0.4.2",
+    "grunt-git": "^0.3.2"
   }
 }
