@@ -135,7 +135,7 @@ module.exports = function(grunt) {
 
     nodemon: {
       dev: {
-        script: './bin/www',
+        script: './bin/www-dev',
         options: {
           nodeArgs: ['--debug'],
           ext: 'hbs,js',
@@ -148,7 +148,7 @@ module.exports = function(grunt) {
         }
       },
       production: {
-        script: './bin/www',
+        script: './bin/www-stage',
         options: {
           // ext: 'hbs,js',
           ignore: [
