@@ -90,7 +90,5 @@ app.use(function(err, req, res, next) {
   });
 });
 
-console.log( "Express app.get('env') = ", app.get('env') );
-
 
 module.exports = app;
