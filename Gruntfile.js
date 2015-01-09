@@ -15,7 +15,6 @@ module.exports = function(grunt) {
       }
     },
 
-
     // @see: https://www.npmjs.com/package/grunt-sync
     sync: {
       main: {
@@ -28,17 +27,6 @@ module.exports = function(grunt) {
         ignoreInDest: ['**/*.js', '**/*.css'],
       }
     },
-
-    // Perhaps no longer needed
-    // bower: {
-    //   install: {
-    //     options: {
-    //       // Install dependencies into source/vendor
-    //       targetDir: 'public/js/vendor',
-    //       layout: 'byType'
-    //     }
-    //   }
-    // },
 
     // Handlebars Templates
     // @see http://danburzo.ro/grunt/chapters/handlebars/
@@ -192,7 +180,6 @@ module.exports = function(grunt) {
   });
 
   // Load tasks
-  grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -201,9 +188,17 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-concurrent');
   grunt.loadNpmTasks('grunt-env');
   grunt.loadNpmTasks('grunt-git');
-  grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-requirejs');
   grunt.loadNpmTasks('grunt-sync');
+
+  // Load gem-dependent tasks
+  grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-nodemon');
+
+
+
+
+
 
   // Default task
   grunt.registerTask('default', [
