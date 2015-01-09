@@ -1,7 +1,9 @@
+
 module.exports = function(grunt) {
 
   grunt.initConfig({
 
+    bower: grunt.file.readJSON('./.bowerrc'),
 
     // @see:
     env : {
@@ -12,7 +14,7 @@ module.exports = function(grunt) {
         NODE_ENV : 'production',
       }
     },
-    
+
 
     // @see: https://www.npmjs.com/package/grunt-sync
     sync: {
@@ -174,8 +176,6 @@ module.exports = function(grunt) {
   });
 
   // Load tasks
-  // grunt.loadNpmTasks('grunt-bower-task');
-  // grunt.loadNpmTasks('grunt-bower-requirejs');
   grunt.loadNpmTasks('grunt-contrib-compass');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-handlebars');

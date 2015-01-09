@@ -1,3 +1,4 @@
 {
-  "directory" : "public/js/vendor"
+  "directory" : "public/js/vendor",
+  "json" : "bower.json"
 }
