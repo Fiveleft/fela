@@ -9,9 +9,11 @@ module.exports = function(grunt) {
     env : {
       dev: {
         NODE_ENV : 'development',
+        PORT : 3000,
       },
       production: {
         NODE_ENV : 'production',
+        PORT : 8080,
       }
     },
 
