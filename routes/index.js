@@ -4,15 +4,15 @@ var request     = require('request');
 var indexPaths  = ['/','/work','/project/:slug','/connect','/info'];
 var router      = express.Router();
 var _           = require('underscore');
-var devEnv      = app.get('env') === 'development';
 
 // Data to inject into index
 var indexData   = {
   title: 'Fiveleft is a Creative Digital Studio',
   assets : {
-    styles: (devEnv ? '/css/main.css' : '/css/main.min.css'),
-    modernizr: (devEnv ? '/js/modernizr.custom.js' : '/js/modernizr.min.js'),
-    requirejs: (devEnv ? '/js/vendor/requirejs/require.js' : '/js/require.min.js'),
+    styles: '/css/main.css',
+    modernizr: '/js/modernizr.custom.js',
+    requirejs: '/js/vendor/requirejs/require.js',
+    requireMain: '/js/init',
   },
   data : {},
   agencyData : {},
@@ -48,6 +48,14 @@ router.use( indexPaths, function(req, res, next){
 /* GET home page. */
 router.get( indexPaths, function(req, res) {
   indexData.cdn = app.locals.CDN;
+
+  if( app.get('env') === 'production' ) {
+    indexData.assets.modernizr = '/js/modernizr.min.js';
+    indexData.assets.requirejs = '/js/require.min.js';
+    indexData.assets.requireMain = "/js/init-min";
+    indexData.assets.styles = '/css/main.min.css';
+  }
+
   res.render('index', indexData);
 });
 

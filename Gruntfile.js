@@ -13,22 +13,22 @@ module.exports = function(grunt) {
       },
       production: {
         NODE_ENV : 'production',
-        PORT : 8080,
+        // PORT : 8080,
       }
     },
 
     // @see: https://www.npmjs.com/package/grunt-sync
-    sync: {
-      main: {
-        files: [{
-          cwd: 'public',
-          src: ['images/**', 'favicon.ico'],
-          dest: 'public-prod/'
-        }],
-        verbose: true, // Display log messages when copying files
-        ignoreInDest: ['**/*.js', '**/*.css'],
-      }
-    },
+    // sync: {
+    //   main: {
+    //     files: [{
+    //       cwd: 'public',
+    //       src: ['images/**', 'favicon.ico'],
+    //       dest: 'public-prod/'
+    //     }],
+    //     verbose: true, // Display log messages when copying files
+    //     ignoreInDest: ['**/*.js', '**/*.css'],
+    //   }
+    // },
 
     // Handlebars Templates
     // @see http://danburzo.ro/grunt/chapters/handlebars/
@@ -68,7 +68,7 @@ module.exports = function(grunt) {
           baseUrl: 'public/js',
           mainConfigFile: 'public/js/init.js',
           name: 'init',
-          out: 'public-prod/js/init.js'
+          out: 'public/js/init-min.js'
         }
       }
     },
@@ -76,8 +76,8 @@ module.exports = function(grunt) {
     uglify: {
       compile : {
         files: {
-          'public-prod/js/require.min.js': ['public/js/vendor/requirejs/require.js'],
-          'public-prod/js/modernizr.min.js': ['public/js/modernizr.custom.js']
+          'public/js/require.min.js': ['public/js/vendor/requirejs/require.js'],
+          'public/js/modernizr.min.js': ['public/js/modernizr.custom.js']
         }
       }
     },
@@ -85,13 +85,6 @@ module.exports = function(grunt) {
     // CSS TASKS ===============================================================
     // process the sass files and compass framework to style.css
     compass: {                  // Task
-      dist: {                   // Target
-        options: {              // Target options
-          sassDir: 'public/css/scss',
-          cssDir: 'public-prod/css',
-          outputStyle: 'compact'
-        }
-      },
       dev: {
         options: {
           sassDir: 'public/css/scss',
@@ -104,7 +97,7 @@ module.exports = function(grunt) {
     cssmin: {
       build: {
         files: {
-          'public-prod/css/main.min.css': 'public/css/main.css'
+          'public/css/main.min.css': 'public/css/main.css'
         }
       }
     },
@@ -120,10 +113,6 @@ module.exports = function(grunt) {
         files: ['views/templates/**/*.hbs'],
         tasks: ['handlebars']
       },
-      // js: {
-      //   files: ['public/js/**/*.js'],
-      //   tasks: ['jshint']
-      // }
     },
 
     concurrent: {
@@ -137,13 +126,12 @@ module.exports = function(grunt) {
 
     nodemon: {
       dev: {
-        script: './bin/www-dev',
+        script: './bin/www',
         options: {
           nodeArgs: ['--debug'],
           ext: 'hbs,js',
           ignore: [
             'node_modules/**',
-            'public-dist/**',
             'public/js/**',
             'views/templates/**',
           ],
@@ -155,7 +143,6 @@ module.exports = function(grunt) {
           // ext: 'hbs,js',
           ignore: [
             'node_modules/**',
-            'public-dist/**',
             'public/js/**',
             'views/templates/**',
           ],
@@ -219,7 +206,7 @@ module.exports = function(grunt) {
     'cssmin',
     'uglify',
     'requirejs', 
-    'sync',
+    // 'sync',
   ]);
 
   grunt.registerTask('prod-test', [
