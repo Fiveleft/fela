@@ -76,14 +76,15 @@ function cleanJSON( json ){
 /* GET partners */
 router.get('/sitecontent/:uncache?', cache(), function(req, res){
 
-  console.log( "ROUTE: SiteContent uncache = ", req.query.uncache );  
+  console.log( "***\nROUTE: SiteContent uncache = ", req.query.uncache );  
+  console.log( "  - environment:", app.get('env') );
 
   if (app.get('env') === 'development' && req.query.uncache!=="1" ) {
-    console.log( "Environment: " + app.get('env') + " | loading site content data from JSON file" );
+    console.log( "  - loading site content data from JSON file" );
     siteContent = require('../sitecontent.json');
     res.send( siteContent );
   } else {
-    console.log(" loading site content data from CMS " );
+    console.log("  - loading site content data from CMS " );
     var params = {
       url : urlBase + "get_posts/?post_status=publish&post_type[]=info_block&post_type[]=fiveleft_project&post_type[]=fiveleft_client&post_type[]=fiveleft_agency&count=200&include=id,slug,title,content,custom_fields,type,categories,attachments,menu_order",
       json : true
@@ -96,10 +97,10 @@ router.get('/sitecontent/:uncache?', cache(), function(req, res){
       if( app.get('env') === 'development' && req.query.uncache==="1" ) {
         var fn = path.join(__dirname, '../sitecontent.json');
         var jst = JSON.stringify( json );
-        console.log(' writing file: ', fn );
+        console.log('  - writing file: ', fn );
         fs.writeFile( fn, jst, function(err){
           if( err ) throw err;
-          console.log( " WRITE FILE COMPLETE" );
+          console.log( "  - write file " + fn + " complete!" );
         });
       }
       res.send( json );
