@@ -11,10 +11,14 @@ module.exports = function(grunt) {
         NODE_ENV : 'development',
         PORT : 3000,
       },
+      stage: {
+        NODE_ENV : 'stage',
+        PORT : 3001,
+      },
       production: {
         NODE_ENV : 'production',
-        // PORT : 8080,
-      }
+        PORT : 3002,
+      },
     },
 
     // @see: https://www.npmjs.com/package/grunt-sync
@@ -126,7 +130,19 @@ module.exports = function(grunt) {
 
     nodemon: {
       dev: {
-        script: './bin/www',
+        script: './bin/www-dev',
+        options: {
+          nodeArgs: ['--debug'],
+          ext: 'hbs,js',
+          ignore: [
+            'node_modules/**',
+            'public/js/**',
+            'views/templates/**',
+          ],
+        }
+      },
+      stage: {
+        script: './bin/app',
         options: {
           nodeArgs: ['--debug'],
           ext: 'hbs,js',
@@ -194,6 +210,11 @@ module.exports = function(grunt) {
     'env:dev',
     'handlebars',
     'concurrent:dev'
+  ]);
+
+  grunt.registerTask('stage-test', [
+    'env:stage',
+    'nodemon:stage'
   ]);
 
   grunt.registerTask('prod-prepare', [
