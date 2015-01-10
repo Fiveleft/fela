@@ -65,7 +65,6 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.locals.CDN = '/assets/';
   app.use(logger('dev'));
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);

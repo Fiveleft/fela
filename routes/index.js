@@ -47,14 +47,18 @@ router.use( indexPaths, function(req, res, next){
 
 /* GET home page. */
 router.get( indexPaths, function(req, res) {
-  indexData.cdn = app.locals.CDN;
 
+  if( app.get('env') === 'development' ) {
+    app.locals.CDN = '/assets/';  
+  }
   if( app.get('env') === 'production' ) {
     indexData.assets.modernizr = '/js/modernizr.min.js';
     indexData.assets.requirejs = '/js/require.min.js';
     indexData.assets.requireMain = "/js/init-min";
     indexData.assets.styles = '/css/main.min.css';
   }
+
+  indexData.cdn = app.locals.CDN;
 
   res.render('index', indexData);
 });
