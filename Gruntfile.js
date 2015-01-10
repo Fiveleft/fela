@@ -218,6 +218,10 @@ module.exports = function(grunt) {
     'nodemon:stage'
   ]);
 
+  grunt.registerTask('stage-prepare', [
+    'env:stage',
+  ]);
+
   grunt.registerTask('prod-prepare', [
     'compass:dev', 
   ]);
