@@ -6,7 +6,7 @@ var router      = express.Router();
 
 // @see http://masashi-k.blogspot.com/2013/06/sending-mail-with-gmail-using-xoauth2.html
 //
-notasecret
+// notasecret
 
 
 router.post('/send-inquiry', function (req, res) {
