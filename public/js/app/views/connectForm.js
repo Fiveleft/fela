@@ -89,8 +89,7 @@ define(
           
           this.$html
             .addClass( 'ios-keyboard' )
-   //         .on('touchstart', function(e){self._iosCheckFocus(e);});
-
+  
           this.$iosIntercepts.each( function(i,el){
             $(el)
               .css({"display" : "none"})
@@ -109,8 +108,7 @@ define(
         var self = this;
 
         this.$html
-          .removeClass( 'ios-keyboard' )
- //         .off('touchstart', function(e){self._iosCheckFocus(e);});
+          .removeClass( 'ios-keyboard' );
 
         this.$iosIntercepts.each( function(i,el){
           $(el)
@@ -226,7 +224,21 @@ define(
       _submit: function( e ) {
         e.preventDefault();
         var d = this.$el.serialize();
-        console.log( "connectForm.submit()", d );
+
+        var send = $.ajax({
+            type: "POST",
+            url: "/send-inquiry",
+            data: d
+          })
+          .done(function( msg ) {
+            console.log( " inquiry sent,", msg, d );
+          })
+          .fail(function( jqXHR, textStatus ) {
+            console.log( " inquiry failed,", jqXHR, textStatus );
+          });
+
+        console.log( "connectForm.submit()", d, send );
+
       }
 
 

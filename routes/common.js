@@ -1,22 +1,24 @@
 // file routes/common.js
-var app         = require('../app');
 var express     = require('express');
-var request     = require('request');
 var nodemailer  = require('nodemailer');
-var indexPaths  = ['/','/work','/project/:slug','/connect','/info'];
 var router      = express.Router();
 
 
-router.post('/contact', function (req, res) {
+// @see http://masashi-k.blogspot.com/2013/06/sending-mail-with-gmail-using-xoauth2.html
+//
+notasecret
+
+
+router.post('/send-inquiry', function (req, res) {
   
   var mailOpts, smtpTrans;
   
   //Setup Nodemailer transport, I chose gmail. Create an application-specific password to avoid problems.
-  smtpTrans = nodemailer.createTransport('SMTP', {
+  smtpTrans = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
       user: "studio@fiveleft.com",
-      pass: "application-specific-password" 
+      password: "s3v3nr!ght",
     }
   });
 
@@ -28,14 +30,28 @@ router.post('/contact', function (req, res) {
     text: req.body.message
   };
 
-  smtpTrans.sendMail(mailOpts, function (error, response) {
+  // 
+  console.log( smtpTrans, mailOpts );
+
+  // Send mail
+  smtpTrans.sendMail(mailOpts, function (error, response, status) {
     //Email not sent
     if (error) {
-      res.render('contact', { title: 'Raging Flame Laboratory - Contact', msg: 'Error occured, message not sent.', err: true, page: 'contact' })
-    }
-    //Yay!! Email sent
-    else {
-      res.render('contact', { title: 'Raging Flame Laboratory - Contact', msg: 'Message sent! Thank you.', err: false, page: 'contact' })
+      console.log( error, response, status );
+      res.status( status ).send({ 
+        title: 'Raging Flame Laboratory - Contact', 
+        msg: 'Error occured, message not sent.', 
+        err: true, 
+        page: 'contact' 
+      });
+    }else {
+      console.log( response, status );
+      res.status( status ).send({ 
+        title: 'Raging Flame Laboratory - Contact', 
+        msg: 'Message sent! Thank you.', 
+        err: false, 
+        page: 'contact' 
+      });
     }
   });
   

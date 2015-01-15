@@ -1719,8 +1719,8 @@ section#work-section .project-view {
     padding: 30px;
   }
 }
-@media (min-width: 1281px) {
-  /* line 248, scss/sections/_project.scss */
+@media (min-width: 1281px), (min-width: 1024px) and (min-aspect-ratio: 2 / 1) {
+  /* line 252, scss/sections/_project.scss */
   .project .project-inner {
     position: relative;
     width: 100%;
@@ -1732,32 +1732,32 @@ section#work-section .project-view {
     display: table;
     clear: both;
   }
-  /* line 253, scss/sections/_project.scss */
+  /* line 257, scss/sections/_project.scss */
   .project .media {
     width: 66.6666%;
     position: relative;
   }
-  /* line 256, scss/sections/_project.scss */
+  /* line 260, scss/sections/_project.scss */
   .project .media .media-inner {
     width: 100%;
     position: relative;
   }
-  /* line 261, scss/sections/_project.scss */
+  /* line 265, scss/sections/_project.scss */
   .project .info {
     position: absolute;
     width: 100%;
     margin-top: 0;
     padding-top: 30px;
   }
-  /* line 267, scss/sections/_project.scss */
+  /* line 271, scss/sections/_project.scss */
   .project .info .title, .project .info .subtitle {
     width: 66.6666%;
   }
-  /* line 270, scss/sections/_project.scss */
+  /* line 274, scss/sections/_project.scss */
   .project .info .title {
     font-size: 54px;
   }
-  /* line 273, scss/sections/_project.scss */
+  /* line 277, scss/sections/_project.scss */
   .project .info .details {
     position: absolute;
     bottom: 100%;
@@ -1765,7 +1765,7 @@ section#work-section .project-view {
     width: 33.3333%;
     padding: 0 0 0 20px;
   }
-  /* line 279, scss/sections/_project.scss */
+  /* line 283, scss/sections/_project.scss */
   .project .info .additional {
     padding-bottom: 0;
   }

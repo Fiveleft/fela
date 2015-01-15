@@ -32,7 +32,7 @@ define(
         // console.log("ProjectView[" + this.model.attributes.slug + "].open()" );
         this.$el.addClass("active");
 
-        TweenLite.to( this.$el, 0.5, {
+        TweenLite.to( this.$el, 0.75, {
           // delay: 0.2,
           height: window.innerHeight,
           ease: Expo.easeInOut,
@@ -57,7 +57,7 @@ define(
 
         this.$el.removeClass("open");
 
-        TweenLite.to( this.$el, 0.5, {
+        TweenLite.to( this.$el, 0.75, {
           // delay: 0.2,
           height: 0,
           ease: Expo.easeInOut,

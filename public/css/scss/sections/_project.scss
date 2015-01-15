@@ -242,7 +242,11 @@
   }
 }
 
-@media ( min-width:$width-lg-min ) {
+//TODO: Fix the aspect ratio value!
+
+@media ( min-width:$width-lg-min ), 
+  ( min-width:$width-md-min ) and ( min-aspect-ratio:2/1 ) {
+
   .project {
 
     .project-inner {

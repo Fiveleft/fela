@@ -11,6 +11,7 @@ var app = module.exports = express();
 
 // Routes
 var indexRoutes = require('./routes/index'),
+  commonRoutes = require('./routes/common'),
   users = require('./routes/users'),
   api = require('./routes/api');
 
@@ -50,6 +51,7 @@ app.use(express.static( path.join(__dirname, 'public') ));
 // Set Routes
 app.use('/users', users);
 app.use('/api', api);
+app.use( commonRoutes );
 app.use( indexRoutes );
 
 // catch 404 and forward to error handler
