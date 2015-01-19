@@ -32,7 +32,7 @@
     text-transform: uppercase;
   }
 
-  .inquiry-select, input[type='text'], textarea, a.inquiry-select {
+  a.inquiry-select, input[type='text'], textarea {
 
     @include bodyFont();
     display: block;
@@ -76,13 +76,8 @@
   .inquiry-select {
     display: block;
     position: relative;
-    padding: 0;
     cursor: pointer;
 
-    input {
-      background: none;
-      border: none;
-    }
     &::after {
       content: " ";
       display: block;

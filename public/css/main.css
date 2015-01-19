@@ -1966,7 +1966,7 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   text-transform: uppercase;
 }
 /* line 35, scss/modules/_connect-form.scss */
-#connect-form .inquiry-select, #connect-form input[type='text'], #connect-form textarea, #connect-form a.inquiry-select {
+#connect-form a.inquiry-select, #connect-form input[type='text'], #connect-form textarea {
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
   font-style: normal;
   font-weight: 400;
@@ -1987,11 +1987,11 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   transition: color 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19), background-color 0.2s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 /* line 56, scss/modules/_connect-form.scss */
-#connect-form .inquiry-select div[pseudo="-webkit-input-placeholder"], #connect-form input[type='text'] div[pseudo="-webkit-input-placeholder"], #connect-form textarea div[pseudo="-webkit-input-placeholder"], #connect-form a.inquiry-select div[pseudo="-webkit-input-placeholder"] {
+#connect-form a.inquiry-select div[pseudo="-webkit-input-placeholder"], #connect-form input[type='text'] div[pseudo="-webkit-input-placeholder"], #connect-form textarea div[pseudo="-webkit-input-placeholder"] {
   color: #858580;
 }
 /* line 59, scss/modules/_connect-form.scss */
-#connect-form .inquiry-select:focus, #connect-form input[type='text']:focus, #connect-form textarea:focus, #connect-form a.inquiry-select:focus {
+#connect-form a.inquiry-select:focus, #connect-form input[type='text']:focus, #connect-form textarea:focus {
   outline: none;
   background: #f7f7f0;
   color: black;
@@ -2012,15 +2012,9 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
 #connect-form .inquiry-select {
   display: block;
   position: relative;
-  padding: 0;
   cursor: pointer;
 }
-/* line 82, scss/modules/_connect-form.scss */
-#connect-form .inquiry-select input {
-  background: none;
-  border: none;
-}
-/* line 86, scss/modules/_connect-form.scss */
+/* line 81, scss/modules/_connect-form.scss */
 #connect-form .inquiry-select::after {
   content: " ";
   display: block;
@@ -2039,15 +2033,15 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   -webkit-transition: border-top-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: border-top-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 98, scss/modules/_connect-form.scss */
+/* line 93, scss/modules/_connect-form.scss */
 #connect-form .inquiry-select:focus, #connect-form .inquiry-select:focus input {
   color: black;
 }
-/* line 101, scss/modules/_connect-form.scss */
+/* line 96, scss/modules/_connect-form.scss */
 #connect-form .inquiry-select:focus::after {
   border-top-color: black;
 }
-/* line 105, scss/modules/_connect-form.scss */
+/* line 100, scss/modules/_connect-form.scss */
 #connect-form .inquiry-type-list {
   display: none;
   position: relative;
@@ -2056,12 +2050,12 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   background: #f7f7f0;
   color: black;
 }
-/* line 113, scss/modules/_connect-form.scss */
+/* line 108, scss/modules/_connect-form.scss */
 #connect-form .inquiry-type-item {
   display: block;
   width: 100%;
 }
-/* line 117, scss/modules/_connect-form.scss */
+/* line 112, scss/modules/_connect-form.scss */
 #connect-form .inquiry-type {
   cursor: pointer;
   display: block;
@@ -2075,29 +2069,29 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   -webkit-transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: all 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 127, scss/modules/_connect-form.scss */
+/* line 122, scss/modules/_connect-form.scss */
 #connect-form .inquiry-type.selected {
   background-color: #1c1c1a;
   color: white;
 }
-/* line 131, scss/modules/_connect-form.scss */
+/* line 126, scss/modules/_connect-form.scss */
 #connect-form .inquiry-type:focus, #connect-form .inquiry-type:hover {
   background-color: #ee2a7b;
   color: white;
 }
-/* line 137, scss/modules/_connect-form.scss */
+/* line 132, scss/modules/_connect-form.scss */
 #connect-form .input-field.inquiry.open {
   z-index: 1000;
   position: relative;
   height: 65px;
 }
-/* line 143, scss/modules/_connect-form.scss */
+/* line 138, scss/modules/_connect-form.scss */
 #connect-form .input-field.inquiry.open input, #connect-form .input-field.inquiry.open .input-wrapper {
   background-color: #f7f7f0;
   color: black;
   border: none;
 }
-/* line 148, scss/modules/_connect-form.scss */
+/* line 143, scss/modules/_connect-form.scss */
 #connect-form .input-field.inquiry.open .input-wrapper {
   position: absolute;
   width: 100%;
@@ -2105,35 +2099,35 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   -webkit-box-shadow: 0px 0px 5px #333333;
   box-shadow: 0px 0px 5px #333333;
 }
-/* line 153, scss/modules/_connect-form.scss */
+/* line 148, scss/modules/_connect-form.scss */
 #connect-form .input-field.inquiry.open .inquiry-type-list {
   display: block;
 }
-/* line 159, scss/modules/_connect-form.scss */
+/* line 154, scss/modules/_connect-form.scss */
 #connect-form .ui-row {
   padding-top: 1.4em;
   display: table;
   width: 100%;
 }
-/* line 164, scss/modules/_connect-form.scss */
+/* line 159, scss/modules/_connect-form.scss */
 #connect-form button.submit, #connect-form .response-message {
   display: table-cell;
   width: 100%;
   min-height: 40px;
 }
-/* line 169, scss/modules/_connect-form.scss */
+/* line 164, scss/modules/_connect-form.scss */
 #connect-form button.submit[disabled] {
   background-color: #52524e;
   color: #858580;
 }
-/* line 173, scss/modules/_connect-form.scss */
+/* line 168, scss/modules/_connect-form.scss */
 #connect-form .response-message {
   position: relative;
   vertical-align: middle;
   overflow: hidden;
   min-height: 40px;
 }
-/* line 179, scss/modules/_connect-form.scss */
+/* line 174, scss/modules/_connect-form.scss */
 #connect-form .response-message p {
   display: block;
   position: absolute;
@@ -2147,17 +2141,17 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
   -webkit-transition: top 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
   transition: top 0.3s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
 }
-/* line 194, scss/modules/_connect-form.scss */
+/* line 189, scss/modules/_connect-form.scss */
 #connect-form.sending .response-message p {
   top: 100%;
 }
-/* line 197, scss/modules/_connect-form.scss */
+/* line 192, scss/modules/_connect-form.scss */
 #connect-form.sending.sent-success .response-message .success, #connect-form.sending.sent-fail .response-message .fail {
   top: 0;
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 202, scss/modules/_connect-form.scss */
+/* line 197, scss/modules/_connect-form.scss */
 #connect-form.sending.sent-success .response-message .fail, #connect-form.sending.sent-fail .response-message .success {
   visibility: hidden;
 }
