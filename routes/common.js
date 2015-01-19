@@ -2,23 +2,18 @@
 var express     = require('express');
 var nodemailer  = require('nodemailer');
 var router      = express.Router();
+var config      = require('./../config.json');
 
 
 // @see http://masashi-k.blogspot.com/2013/06/sending-mail-with-gmail-using-xoauth2.html
-//
 // notasecret
-
-
 
 router.post('/send-inquiry', function (req, res) {
 
   // create reusable transport method (opens pool of SMTP connections)
   var smtpTransport = nodemailer.createTransport({
     service: "Gmail",
-    auth: {
-      user: "info@fiveleft.com",
-      pass: "s3v3nr!ght"
-    }
+    auth: config.connectForm
   });
 
   // setup e-mail data with unicode symbols
