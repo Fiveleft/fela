@@ -34,6 +34,9 @@ router.use( indexPaths, function(req, res, next){
       indexData.clientData = _.where( b, {type:"fiveleft_client"} );
       indexData.projectData = _.where( b, {type:"fiveleft_project"} );
 
+
+      // console.log( indexData.agencyData );
+
       _.each( infoData, function(d){
         indexData.infoData[d.slug] = d;
       });

@@ -16,9 +16,8 @@
   <div class="input-field inquiry" data-field="inquiry">
     <label for="inquiry">Inquiry</label>
     <div class="input-wrapper">
-      <a class="inquiry-select" href="#">
-        <input name="inquiry" type="text" placeholder="What can we help you with?" disabled></input> 
-      </a>
+      <input name="inquiry" type="hidden"></input> 
+      <a class="inquiry-select" href="#">What can we help you with?</a>
       <ul class="inquiry-type-list">
       </ul>
     </div>
@@ -30,5 +29,11 @@
       <button class='ios-intercept'></button>
     </div>
   </div>
-  <button class="submit">Send</button>
+  <div class="ui-row">
+    <button class="submit">Send</button>
+    <div class="response-message">
+      <p class="success">Thank you, message received!</p>
+      <p class="fail">Sorry, message could not be sent.</p>
+    </div>
+  </div>
 </form>

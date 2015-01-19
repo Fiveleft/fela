@@ -32,7 +32,7 @@
     text-transform: uppercase;
   }
 
-  .inquiry-select, input[type='text'], textarea {
+  .inquiry-select, input[type='text'], textarea, a.inquiry-select {
 
     @include bodyFont();
     display: block;
@@ -134,8 +134,6 @@
       color: $color-white;
     }
   }
-
-
   .input-field.inquiry.open {
 
     z-index: 1000;
@@ -155,8 +153,59 @@
     .inquiry-type-list {
       display: block;
     }
-
   }
+
+
+  .ui-row {
+    padding-top: 1.4em;
+    display: table;
+    width: 100%;
+  }
+  button.submit, .response-message {
+    display: table-cell;
+    width: 100%;
+    min-height: 40px;
+  }
+  button.submit[disabled] {
+    background-color: $color-grey-dark;
+    color: $color-grey-med;
+  }
+  .response-message {
+    position: relative;
+    vertical-align: middle;
+    overflow: hidden;
+    min-height: 40px;
+  }
+  .response-message p {
+    display: block;
+    position: absolute;
+    width: 100%;
+    padding: 8px 0 0 1em;
+    top: -100%;
+    @include opacity( 0 );
+    @include transition( 
+      top 0.3s $easeInOutCubic,
+      opacity 0.3s $easeInCubic
+    );
+  }
+
+  // Sending, Sent-success, Sent-fail
+  &.sending {
+    .response-message p {
+      top: 100%;
+    }
+    &.sent-success .response-message .success,
+    &.sent-fail .response-message .fail {
+      top: 0;
+      @include opacity( 1 );
+    }
+    &.sent-success .response-message .fail,
+    &.sent-fail .response-message .success {
+      visibility: hidden;
+    }
+  }
+
+
 }
 
 

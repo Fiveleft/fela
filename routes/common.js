@@ -11,48 +11,35 @@ var router      = express.Router();
 
 
 router.post('/send-inquiry', function (req, res) {
-  
-  var mailOpts, smtpTrans;
-  
-  //Setup Nodemailer transport, I chose gmail. Create an application-specific password to avoid problems.
-  smtpTrans = nodemailer.createTransport({
-    service: 'Gmail',
+
+  // create reusable transport method (opens pool of SMTP connections)
+  var smtpTransport = nodemailer.createTransport({
+    service: "Gmail",
     auth: {
-      user: "studio@fiveleft.com",
-      password: "s3v3nr!ght",
+      user: "info@fiveleft.com",
+      pass: "s3v3nr!ght"
     }
   });
 
-  //Mail options
-  mailOpts = {
-    from: req.body.name + ' &lt;' + req.body.email + '&gt;', //grab form data from the request body object
-    to: 'studio@fiveleft.com',
-    subject: 'Fiveleft.com website contact form',
-    text: req.body.message
+  // setup e-mail data with unicode symbols
+  var mailOptions = {
+    from: req.body.name, // sender address,
+    sender: req.body.email,
+    replyTo: req.body.name + " <" + req.body.email + ">",
+    to: "studio@fiveleft.com", // list of receivers
+    subject: "Fiveleft website inquiry: " + req.body.inquiry, // Subject line
+    text: req.body.message, // plaintext body
+    html: "<b>" + req.body.message + "</b>" // html body
   };
 
-  // 
-  console.log( smtpTrans, mailOpts );
+  console.log( JSON.stringify(mailOptions) );
 
-  // Send mail
-  smtpTrans.sendMail(mailOpts, function (error, response, status) {
-    //Email not sent
-    if (error) {
-      console.log( error, response, status );
-      res.status( status ).send({ 
-        title: 'Raging Flame Laboratory - Contact', 
-        msg: 'Error occured, message not sent.', 
-        err: true, 
-        page: 'contact' 
-      });
-    }else {
-      console.log( response, status );
-      res.status( status ).send({ 
-        title: 'Raging Flame Laboratory - Contact', 
-        msg: 'Message sent! Thank you.', 
-        err: false, 
-        page: 'contact' 
-      });
+  // send mail with defined transport object
+  smtpTransport.sendMail(mailOptions, function(error, response){
+    if(error){
+      res.send( error );
+    }else{
+      res.send( response );
     }
   });
   

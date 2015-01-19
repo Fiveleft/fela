@@ -5,6 +5,8 @@ define(
 
     var _instance = false,
       iOS = false,
+      submitTimeout = 0,
+      defaultInquiryText = "",
       Inquiry = Backbone.Model.extend(),
       InquiryOptions = Backbone.Collection.extend({
         model : Inquiry
@@ -21,10 +23,10 @@ define(
         }
       }),
       inquiryOpts = new InquiryOptions([
+          new Inquiry({ label: "General Inquiry", value: "general inquiry" }),
           new Inquiry({ label: "New Business", value: "new business" }),
           new Inquiry({ label: "Collaboration", value: "collaboration" }),
           new Inquiry({ label: "Contractor Needed", value: "contractor needed" }),
-          new Inquiry({ label: "General Inquiry", value: "general inquiry" })
         ]);
 
 
@@ -42,8 +44,11 @@ define(
         this.$inquiryTypes = $([]);
         this.$uiInputs = $("input,textarea", this.$el );
         this.$iosIntercepts = $("button.ios-intercept", this.$el );
+        this.$submit = $( "button.submit", this.$el );
 
+        defaultInquiryText = this.$inquirySelect.text();
         iOS = ( navigator.userAgent.match(/(iPad|iPhone|iPod)/g) ? true : false );
+
         this.$html.toggleClass('ios', iOS); 
 
         this.render();
@@ -57,7 +62,11 @@ define(
           self.$inquiryTypeList.append( itView.el );
         }, this);
 
+
         this.$inquiryTypes = $('.inquiry-type', this.$inquiryTypeList );
+
+        // Apply inquiry type to form input
+        this.$inquiryInput.attr( "value", $(this.$inquiryTypes[0]).text() );
 
         // Update iOS Intercepts
         this.$iosIntercepts.each( function(i,el){
@@ -137,44 +146,6 @@ define(
         }  
       },
 
-//       _iosFocus : function( e ) {
-
-//         console.log( 'ConnectForm._iosFocus', e );
-//         //uiElementClick.apply(this, e);
-//         // if( e.type === "click" ) {
-//         //   e.preventDefault();
-//         //   e.stopPropagation();
-//         // }
-
-//         // var self = this,
-//         //   $uiIntercept = $(e.target),
-//         //   $uiElement = $uiIntercept.siblings('input,textarea');
-
-//         if( !this.$html.hasClass('ios-keyboard') ) {
-//           this.$html
-//             .addClass( 'ios-keyboard' )
-//             //.on('touchstart', function(e){self._iosCheckFocus(e);});
-// console.log( "here" );
-//           this.$iosIntercepts.each( function(i,el){
-//             $(el).css({"display" : "none"});
-//             $(el).siblings('input,textarea').removeAttr("disabled");
-//           });
-//         }
-
-//         // // $uiIntercept
-//         // //   .css("display","none");
-        
-//         // $uiElement
-//         //   // .removeAttr("disabled")
-//         //   .on('click', function(){
-//         //     console.log( 'click', this );
-//         //     $(this).focus();
-//         //   })
-//         //   .one('blur', function(){
-//         //     console.log( 'blur', this );
-//         //   })
-//       },
-
 
       _closeSelect: function( e ) {
 
@@ -187,12 +158,12 @@ define(
             $(el).toggleClass( 'selected', $(el).text() === type.text() );
           });
           this.$inquiryInput.addClass( 'selected' );
-          this.$inquiryInput.val( type.text() );
-          this.$inquirySelect.focus();
+          this.$inquiryInput.attr( "value", type.text() );
+          this.$inquirySelect
+            .text(type.text())
+            .focus();
         }
 
-
-       // console.log( e, isType, type );
         this.$inquiryField.removeClass( "open" );
         this.$el.off( "focusin", function(e){self._focusSelect(e);} ); 
       },
@@ -220,28 +191,53 @@ define(
           .one( "click", function(e){self._closeSelect(e);} );
       },
 
+      _submitDisable: function() {
+
+        var self = this;
+
+        // console.log( "_submitDisable()" );
+        this.$el.addClass( "sending" );
+        this.$inquiryField.attr("disabled", false);
+        this.$uiInputs.attr("disabled", true);
+        this.$submit.attr("disabled", true);
+
+        clearTimeout( submitTimeout );
+        submitTimeout = setTimeout( function(){ 
+          self._reset();          
+        }, 4000 );
+      },
+
+      _reset: function() {
+        // console.log( "_reset()" );
+        this.$el.removeClass("sent-success sent-fail sending");
+        this.$inquiryField.attr("disabled", true);
+        this.$uiInputs.removeAttr("disabled");
+        this.$submit.removeAttr("disabled");
+      },
 
       _submit: function( e ) {
         e.preventDefault();
-        var d = this.$el.serialize();
 
-        var send = $.ajax({
-            type: "POST",
-            url: "/send-inquiry",
-            data: d
-          })
-          .done(function( msg ) {
-            console.log( " inquiry sent,", msg, d );
-          })
-          .fail(function( jqXHR, textStatus ) {
-            console.log( " inquiry failed,", jqXHR, textStatus );
-          });
+        var self = this,
+          d = this.$el.serialize();
 
-        console.log( "connectForm.submit()", d, send );
-
+        this._submitDisable();
+                
+        // Set up AJAX        
+        $.ajax({
+          type: "POST",
+          url: "/send-inquiry",
+          data: d
+        })
+        .done(function( /*msg*/ ) {
+          // console.log( " inquiry sent,", msg, d );
+          self.$el.addClass("sent-success");
+        })
+        .fail(function( /*jqXHR, textStatus*/ ) {
+          // console.log( " inquiry failed,", jqXHR, textStatus );
+          self.$el.addClass("sent-fail");
+        });
       }
-
-
     });
 
 
