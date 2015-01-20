@@ -27,7 +27,7 @@ router.post('/send-inquiry', function (req, res) {
     html: "<b>" + req.body.message + "</b>" // html body
   };
 
-  console.log( JSON.stringify(mailOptions) );
+  // console.log( JSON.stringify(mailOptions) );
 
   // send mail with defined transport object
   smtpTransport.sendMail(mailOptions, function(error, response){
