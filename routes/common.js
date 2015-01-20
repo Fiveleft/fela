@@ -2,7 +2,7 @@
 var express     = require('express');
 var nodemailer  = require('nodemailer');
 var router      = express.Router();
-var config      = require('./../config.json');
+var config      = require('./../config-env.json');
 
 
 // @see http://masashi-k.blogspot.com/2013/06/sending-mail-with-gmail-using-xoauth2.html
