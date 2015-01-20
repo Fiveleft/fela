@@ -242,7 +242,7 @@ module.exports = function(grunt) {
     'nodemon:production'
   ]);
 
-  grunt.registerTask('prod', [
+  grunt.registerTask('prod-push', [
     'prod-prepare',
     'gitpush:production',
   ]);
