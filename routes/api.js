@@ -79,7 +79,7 @@ router.get('/sitecontent/:uncache?', cache(), function(req, res){
   console.log( "***\nROUTE: SiteContent uncache = ", req.query.uncache );  
   console.log( "  - environment:", app.get('env') );
 
-  if (app.get('env') === 'development' && req.query.uncache!=="1" ) {
+  if (app.get('env') === 'development' && !req.query.uncache ) {
     console.log( "  - loading site content data from JSON file" );
     siteContent = require('../sitecontent.json');
     res.send( siteContent );

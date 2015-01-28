@@ -70,13 +70,21 @@ define([
         // Set Video
         if( a.info.video === "1" ) {
           a.video = {
-            poster : this.media.get( parseInt(a.info.video_poster,10) ).attributes,
             source : {}
           };
+          if( a.info.video_poster ){
+            var poster = a.info.video_poster,
+              posterID = parseInt( poster,10 ),
+              media = this.media.get( posterID );
+            console.log( a.slug, poster, posterID, media );
+            // a.video.poster = this.media.get( parseInt(a.info.video_poster,10) ).attributes;
+          }
           _.each( a.info.video_formats, function( f ) {
             a.video.source[f] = __cdn + a.info.video_file + "." + f;
           });
         }
+
+        //console.log( a.slug, a );
       },
       getView : function() {
         return this.get("view");
