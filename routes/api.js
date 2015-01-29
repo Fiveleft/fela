@@ -94,7 +94,8 @@ router.get('/sitecontent/:uncache?', cache(), function(req, res){
       if( err ) return;
       var json = cleanJSON( body.posts );
 
-      if( app.get('env') === 'development' && req.query.uncache==="1" ) {
+      // if( app.get('env') === 'development' && req.query.uncache==="1" ) {
+      if( app.get('env') === 'development' && !req.query.uncache ) {
         var fn = path.join(__dirname, '../sitecontent.json');
         var jst = JSON.stringify( json );
         console.log('  - writing file: ', fn );
