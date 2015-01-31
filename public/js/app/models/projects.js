@@ -23,7 +23,9 @@ define([
     var ProjectModel = Backbone.Model.extend({
       initialize: function() {
 
-        var a = this.attributes;
+        var a = this.attributes,
+          agency,
+          client;
 
         // Set up collections
         this.media = new MediaCollection( a.attachments );
@@ -43,14 +45,16 @@ define([
           return this;
         }
         // Get Agency
-        if( a.info.agency !== "null" ) {
-          a.info.agency = PartnerCollection.findWhere({ id : parseInt(a.info.agency,10) }).attributes;
+        if( a.info.agency !== "null" && a.info.hasOwnProperty("agency") ) {
+          agency = PartnerCollection.findWhere({ id : parseInt(a.info.agency,10) });
+          if( agency ) a.info.agency = agency.attributes;
         }else{
           delete a.info.agency;
         }
         // Get Client
-        if( a.info.client !== "null" ) {
-          a.info.client = PartnerCollection.findWhere({ id : parseInt(a.info.client,10) }).attributes;
+        if( a.info.client !== "null" && a.info.hasOwnProperty("client") ) {
+          client = PartnerCollection.findWhere({ id : parseInt(a.info.client,10) });
+          if( client ) a.info.client = client.attributes;
         }else{
           delete a.info.client;
         }
