@@ -21,21 +21,30 @@ var indexData   = {
   projectData: {}
 };
 
+
+var prioritySort = function( a, b ){
+  var ap = (a.hasOwnProperty('info') && a.info.hasOwnProperty('priority')) ? a.info.priority : 100,
+    bp = (b.hasOwnProperty('info') && b.info.hasOwnProperty('priority')) ? b.info.priority : 100;
+  return ap-bp;
+};
+
+
 // Load Content Data
 router.use( indexPaths, function(req, res, next){
-  request( "http://localhost:" + app.get("port") + "/api/sitecontent", function( err, response, body ){
+
+  var useCache = req.query.uncache === '1',
+    apiRequest = "http://localhost:" + app.get("port") + "/api/sitecontent" + (useCache ? "?uncache=1" : "");
+
+  request( apiRequest, function( err, response, body ){
     if( !err && response.statusCode == 200) {
 
       var b = JSON.parse( body );
       var infoData = _.where( b, {type:"info_block"} );
       
       indexData.data = body;
-      indexData.agencyData = _.where( b, {type:"fiveleft_agency"} );
-      indexData.clientData = _.where( b, {type:"fiveleft_client"} );
+      indexData.agencyData = _.where( b, {type:"fiveleft_agency"} ).sort( prioritySort );
+      indexData.clientData = _.where( b, {type:"fiveleft_client"} ).sort( prioritySort );
       indexData.projectData = _.where( b, {type:"fiveleft_project"} );
-
-
-      // console.log( indexData.agencyData );
 
       _.each( infoData, function(d){
         indexData.infoData[d.slug] = d;

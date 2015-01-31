@@ -13,20 +13,22 @@ var router  = express.Router(),
     cachetime = 1000*60*60*24*10,
     cacheDebug = true,
     siteContent,
-    cache = apicache.options({debug:cacheDebug, defaultDuration:(cachetime)}).middleware;
+    useCache = true,
+    cache = apicache.options({debug:cacheDebug, defaultDuration:(cachetime)}).middleware,
+    cacheFn = cache;
 
 
 
-function unserialize( json ) {
-  for( var i=json.length-1; i!==-1; i-- ) {
-    var p = json[i];
-    if( p.custom_fields._meta ) {
-      p.info = phpUnserialize.unserialize( p.custom_fields._meta );
-      delete p.custom_fields._meta;
-    }
-  }
-  return json;
-}
+// function unserialize( json ) {
+//   for( var i=json.length-1; i!==-1; i-- ) {
+//     var p = json[i];
+//     if( p.custom_fields._meta ) {
+//       p.info = phpUnserialize.unserialize( p.custom_fields._meta );
+//       delete p.custom_fields._meta;
+//     }
+//   }
+//   return json;
+// }
 
 
 function cleanJSON( json ){
@@ -70,32 +72,48 @@ function cleanJSON( json ){
 }
 
 
-
+router.use( ':uncache?', function(req, res, next){
+  useCache = req.query.uncache !== '1';
+  cacheFn = function(){ console.log('skipping cache'); };
+  console.log( 'capturing uncache request' );
+  next();
+});
 
 
 /* GET partners */
-router.get('/sitecontent/:uncache?', cache(), function(req, res){
+router.get('/sitecontent', cacheFn(), function(req, res){
 
-  console.log( "***\nROUTE: SiteContent uncache = ", req.query.uncache );  
-  console.log( "  - environment:", app.get('env') );
+  console.log( "***\nROUTE: SiteContent" );  
+  console.log( "\t- environment:", app.get('env') );
+  console.log( "\t- use cache? ", useCache );
 
-  if (app.get('env') === 'development' && !req.query.uncache ) {
+  if (app.get('env') === 'development' && useCache ) {
+
+    // IF we're in local dev and not requesting an 'uncache', load the local JSON
     console.log( "  - loading site content data from JSON file" );
     siteContent = require('../sitecontent.json');
     res.send( siteContent );
+
   } else {
+
+    // ELSE we're live OR we're requesting an 'uncache'
     console.log("  - loading site content data from CMS " );
+    
     var params = {
       url : urlBase + "get_posts/?post_status=publish&post_type[]=info_block&post_type[]=fiveleft_project&post_type[]=fiveleft_client&post_type[]=fiveleft_agency&count=200&include=id,slug,title,content,custom_fields,type,categories,attachments,menu_order",
       json : true
     };
-    req.apicacheGroup = "content";
+
+    if( useCache ) {
+      req.apicacheGroup = "content";
+    }
+
     request( params, function( err, response, body ){
       if( err ) return;
       var json = cleanJSON( body.posts );
 
-      // if( app.get('env') === 'development' && req.query.uncache==="1" ) {
-      if( app.get('env') === 'development' && !req.query.uncache ) {
+      // If we are in local Dev and we are not using cache, write a JSON file to reduce CMS server requests.
+      if( app.get('env') === 'development' && !useCache ) {
         var fn = path.join(__dirname, '../sitecontent.json');
         var jst = JSON.stringify( json );
         console.log('  - writing file: ', fn );
@@ -104,6 +122,7 @@ router.get('/sitecontent/:uncache?', cache(), function(req, res){
           console.log( "  - write file " + fn + " complete!" );
         });
       }
+
       res.send( json );
     });
   }
