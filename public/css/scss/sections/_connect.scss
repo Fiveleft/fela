@@ -8,10 +8,24 @@ section#connect-section {
     padding: 0 0 2em;
   }
   .hours {
-    @include italicBoldFont();
+    @include italicFont();
     padding-bottom: 0.75em;
   }
+  .connect-row {
+    padding: 40px 0;
+  }
+  .contact-form, .connect-details {
+    padding-bottom: 2em;
+  }
   .vcard {
+    @include thinFont();
+    line-height: 1.75;
+
+    .fn {
+      text-transform: uppercase;
+      @include mediumFont();
+    }
+
     .type {
       display: block; 
       width: 1px; 
@@ -30,9 +44,6 @@ section#connect-section {
 
 @media ( min-width:$width-sm-min ) {  
 
-  .contact-form {
-    padding-bottom: 2em;
-  }
 
   section#connect-section {
     .connect-row {
@@ -45,6 +56,7 @@ section#connect-section {
     .contact-form, .connect-details {
       display: block;
       float: left;
+      //margin-bottom
     }
     .contact-form {
       width: 60%;

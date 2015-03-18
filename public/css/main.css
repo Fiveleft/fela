@@ -1865,10 +1865,32 @@ section#connect-section .content-wrapper {
 section#connect-section .hours {
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
   font-style: italic;
-  font-weight: 600;
+  font-weight: 400;
   padding-bottom: 0.75em;
 }
-/* line 15, scss/sections/_connect.scss */
+/* line 14, scss/sections/_connect.scss */
+section#connect-section .connect-row {
+  padding: 40px 0;
+}
+/* line 17, scss/sections/_connect.scss */
+section#connect-section .contact-form, section#connect-section .connect-details {
+  padding-bottom: 2em;
+}
+/* line 20, scss/sections/_connect.scss */
+section#connect-section .vcard {
+  font-family: "brandon-grotesque",sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 1.75;
+}
+/* line 24, scss/sections/_connect.scss */
+section#connect-section .vcard .fn {
+  text-transform: uppercase;
+  font-family: "brandon-grotesque",sans-serif;
+  font-style: normal;
+  font-weight: 500;
+}
+/* line 29, scss/sections/_connect.scss */
 section#connect-section .vcard .type {
   display: block;
   width: 1px;
@@ -1878,18 +1900,13 @@ section#connect-section .vcard .type {
   visibility: hidden;
   text-indent: -9999px;
 }
-/* line 24, scss/sections/_connect.scss */
+/* line 38, scss/sections/_connect.scss */
 section#connect-section .vcard .adr, section#connect-section .vcard .tel, section#connect-section .vcard .email {
   display: block;
 }
 
 @media (min-width: 768px) {
-  /* line 33, scss/sections/_connect.scss */
-  .contact-form {
-    padding-bottom: 2em;
-  }
-
-  /* line 38, scss/sections/_connect.scss */
+  /* line 49, scss/sections/_connect.scss */
   section#connect-section .connect-row {
     *zoom: 1;
     width: 100%;
@@ -1903,29 +1920,29 @@ section#connect-section .vcard .adr, section#connect-section .vcard .tel, sectio
     display: table;
     clear: both;
   }
-  /* line 45, scss/sections/_connect.scss */
+  /* line 56, scss/sections/_connect.scss */
   section#connect-section .contact-form, section#connect-section .connect-details {
     display: block;
     float: left;
   }
-  /* line 49, scss/sections/_connect.scss */
+  /* line 61, scss/sections/_connect.scss */
   section#connect-section .contact-form {
     width: 60%;
     padding-right: 5%;
     border-right: 1px solid rgba(133, 133, 128, 0.25);
     margin-right: 5%;
   }
-  /* line 55, scss/sections/_connect.scss */
+  /* line 67, scss/sections/_connect.scss */
   section#connect-section .connect-details {
     width: 30%;
   }
 }
 @media (min-width: 1024px) {
-  /* line 66, scss/sections/_connect.scss */
+  /* line 78, scss/sections/_connect.scss */
   section#connect-section .contact-form {
     width: 55%;
   }
-  /* line 69, scss/sections/_connect.scss */
+  /* line 81, scss/sections/_connect.scss */
   section#connect-section .connect-details {
     width: 35%;
   }

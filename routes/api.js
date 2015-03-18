@@ -75,7 +75,7 @@ function cleanJSON( json ){
 router.use( ':uncache?', function(req, res, next){
   useCache = req.query.uncache !== '1';
   cacheFn = function(){ console.log('skipping cache'); };
-  console.log( 'capturing uncache request' );
+  console.log( 'checking for uncache request' );
   next();
 });
 
