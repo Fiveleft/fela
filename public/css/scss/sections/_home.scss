@@ -10,20 +10,42 @@
     display: block;
     position: relative; 
     bottom: 0;
-    width: 200px; height: auto;
-    padding: 0 0 50px;
-    line-height: 20px;
-    margin: -70px auto 0;
-    @include italicBoldFont();
-    font-size: 0.8em;
-    .icon.scroll-down {
+    width: 200px; height: 80px;
+    padding: 10px 0 50px;
+    margin: -100px auto 0;
+    text-align: center;
+    .message {
       display: block;
-      position: absolute;
-      width: 50px; height: 50px;
-      bottom: 0; left: 50%; 
-      margin-left: -25px;
-      background: rgba(255,255,0,0.74);
+      @include italicBoldFont();
+      color: $color-grey-med;
+      font-size: 0.8em;
+      line-height: 20px;
+      @include transition( color 0.15s $easeInOutCubic );
     }
+    .chevron-down {
+      display: block;
+      position: absolute; 
+      bottom: 10%; 
+      left: 37.5%;
+      width: 25%; height: 50%;
+      @include transition( bottom 0.15s $easeInOutCubic );
+    }
+    .icon-chevron-down {
+      display: inline-block;
+      width: auto;
+      height: 100%; 
+      polygon {
+        fill: rgba( $color-grey-light, 1 );
+        @include transition( fill 0.15s $easeInOutCubic );
+      }
+    }
+
+    &:hover {
+      .message { color: $color-grey-black; }
+      .chevron-down { bottom: 2%; }
+      .icon-chevron-down polygon { fill: $brand-magenta; }
+    }
+
   }
 
   .message-wrapper {

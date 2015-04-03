@@ -3,8 +3,8 @@ define(
   function( $, _, Backbone, Events, TweenLite, Utils ){
     
     var _instance = false,
-      minTime = 0.25,
-      maxTime = 0.75,
+      minTime = 0.33,
+      maxTime = 1.00,
       activeOffset = window.innerHeight / 2,
       activeSection = -1,
       started = false,

@@ -1090,39 +1090,77 @@ html.ios-keyboard #top-nav, html.ios-keyboard #mobile-nav {
   position: relative;
   bottom: 0;
   width: 200px;
-  height: auto;
-  padding: 0 0 50px;
-  line-height: 20px;
-  margin: -70px auto 0;
+  height: 80px;
+  padding: 10px 0 50px;
+  margin: -100px auto 0;
+  text-align: center;
+}
+/* line 17, scss/sections/_home.scss */
+#home-section .scroll-instructions .message {
+  display: block;
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
   font-style: italic;
   font-weight: 600;
+  color: #858580;
   font-size: 0.8em;
+  line-height: 20px;
+  -moz-transition: color 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: color 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: color 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: color 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 19, scss/sections/_home.scss */
-#home-section .scroll-instructions .icon.scroll-down {
+/* line 25, scss/sections/_home.scss */
+#home-section .scroll-instructions .chevron-down {
   display: block;
   position: absolute;
-  width: 50px;
-  height: 50px;
-  bottom: 0;
-  left: 50%;
-  margin-left: -25px;
-  background: rgba(255, 255, 0, 0.74);
+  bottom: 10%;
+  left: 37.5%;
+  width: 25%;
+  height: 50%;
+  -moz-transition: bottom 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: bottom 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: bottom 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: bottom 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 29, scss/sections/_home.scss */
+/* line 33, scss/sections/_home.scss */
+#home-section .scroll-instructions .icon-chevron-down {
+  display: inline-block;
+  width: auto;
+  height: 100%;
+}
+/* line 37, scss/sections/_home.scss */
+#home-section .scroll-instructions .icon-chevron-down polygon {
+  fill: #b8b8b1;
+  -moz-transition: fill 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -o-transition: fill 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-transition: fill 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: fill 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+/* line 44, scss/sections/_home.scss */
+#home-section .scroll-instructions:hover .message {
+  color: #1c1c1a;
+}
+/* line 45, scss/sections/_home.scss */
+#home-section .scroll-instructions:hover .chevron-down {
+  bottom: 2%;
+}
+/* line 46, scss/sections/_home.scss */
+#home-section .scroll-instructions:hover .icon-chevron-down polygon {
+  fill: #ee2a7b;
+}
+/* line 51, scss/sections/_home.scss */
 #home-section .message-wrapper {
   display: table-cell;
   vertical-align: middle;
   text-align: center;
   padding: 0 5px 10%;
 }
-/* line 35, scss/sections/_home.scss */
+/* line 57, scss/sections/_home.scss */
 #home-section .message-inner {
   display: block;
   position: relative;
 }
-/* line 39, scss/sections/_home.scss */
+/* line 61, scss/sections/_home.scss */
 #home-section .section-title {
   font-size: 1.75em;
   margin-bottom: 0;
@@ -1131,12 +1169,12 @@ html.ios-keyboard #top-nav, html.ios-keyboard #mobile-nav {
   -webkit-transition: margin-bottom 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition: margin-bottom 0.5s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
-/* line 43, scss/sections/_home.scss */
+/* line 65, scss/sections/_home.scss */
 #home-section .section-title .top {
   display: inline-block;
   font-size: 1.65em;
 }
-/* line 47, scss/sections/_home.scss */
+/* line 69, scss/sections/_home.scss */
 #home-section .section-title .linking-verb {
   font-family: "adobe-garamond-pro", Georgia, sans-serif;
   font-style: italic;
@@ -1146,19 +1184,19 @@ html.ios-keyboard #top-nav, html.ios-keyboard #mobile-nav {
   text-transform: none;
   padding: 0.125em 0;
 }
-/* line 54, scss/sections/_home.scss */
+/* line 76, scss/sections/_home.scss */
 #home-section .section-title br {
   display: block;
 }
-/* line 57, scss/sections/_home.scss */
+/* line 79, scss/sections/_home.scss */
 #home-section .section-title .adj, #home-section .section-title .noun {
   display: inline-block;
 }
-/* line 60, scss/sections/_home.scss */
+/* line 82, scss/sections/_home.scss */
 #home-section .section-title .adj {
   padding: 0.25em 0;
 }
-/* line 64, scss/sections/_home.scss */
+/* line 86, scss/sections/_home.scss */
 #home-section .section-description {
   position: relative;
   font-size: 1.125em;
@@ -1174,13 +1212,13 @@ html.ios-keyboard #top-nav, html.ios-keyboard #mobile-nav {
   -webkit-transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
   transition: opacity 0.2s cubic-bezier(0.19, 1, 0.22, 1), margin-top 0.66s cubic-bezier(0.19, 1, 0.22, 1);
 }
-/* line 75, scss/sections/_home.scss */
+/* line 97, scss/sections/_home.scss */
 #home-section .section-description p {
   margin: 0;
   padding: 0;
   line-height: inherit;
 }
-/* line 85, scss/sections/_home.scss */
+/* line 107, scss/sections/_home.scss */
 #home-section.active .message-inner .section-title, #home-section.on .message-inner .section-title,
 #home-section .message-inner:hover .section-title {
   margin-bottom: 0.5em;
@@ -1189,7 +1227,7 @@ html.ios-keyboard #top-nav, html.ios-keyboard #mobile-nav {
   -webkit-transition: margin-bottom 0.25s cubic-bezier(0.19, 1, 0.22, 1);
   transition: margin-bottom 0.25s cubic-bezier(0.19, 1, 0.22, 1);
 }
-/* line 89, scss/sections/_home.scss */
+/* line 111, scss/sections/_home.scss */
 #home-section.active .message-inner .section-description, #home-section.on .message-inner .section-description,
 #home-section .message-inner:hover .section-description {
   margin-top: 0;
@@ -1202,46 +1240,46 @@ html.ios-keyboard #top-nav, html.ios-keyboard #mobile-nav {
 }
 
 @media (min-width: 768px) {
-  /* line 100, scss/sections/_home.scss */
+  /* line 122, scss/sections/_home.scss */
   #home-section .message-wrapper {
     font-size: 1.5em;
     padding: 0 0 10%;
   }
-  /* line 105, scss/sections/_home.scss */
+  /* line 127, scss/sections/_home.scss */
   #home-section .section-title .top {
     display: block;
   }
-  /* line 108, scss/sections/_home.scss */
+  /* line 130, scss/sections/_home.scss */
   #home-section .section-title .linking-verb, #home-section .section-title .adj, #home-section .section-title .noun {
     display: inline;
     padding: 0;
   }
-  /* line 112, scss/sections/_home.scss */
+  /* line 134, scss/sections/_home.scss */
   #home-section .section-title br {
     display: none;
   }
-  /* line 118, scss/sections/_home.scss */
+  /* line 140, scss/sections/_home.scss */
   #home-section .section-description {
     max-width: 30em;
   }
 }
 @media (min-width: 1024px) {
-  /* line 126, scss/sections/_home.scss */
+  /* line 148, scss/sections/_home.scss */
   #home-section .message-wrapper {
     font-size: 2.0em;
   }
-  /* line 129, scss/sections/_home.scss */
+  /* line 151, scss/sections/_home.scss */
   #home-section .section-description {
     font-size: 1em;
     max-width: 27.5em;
   }
 }
 @media (min-width: 1281px) {
-  /* line 138, scss/sections/_home.scss */
+  /* line 160, scss/sections/_home.scss */
   #home-section .message-wrapper {
     font-size: 2.5em;
   }
-  /* line 141, scss/sections/_home.scss */
+  /* line 163, scss/sections/_home.scss */
   #home-section .section-description {
     font-size: 0.875em;
     max-width: 25em;
