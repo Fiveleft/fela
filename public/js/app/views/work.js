@@ -114,7 +114,7 @@ define(
         }
         $gridItems.filter( "[data-slug='" + activeView.model.get("slug") + "']" ).removeClass("active");
 
-        console.log( "Work.closeProject()", activeView.model.get("slug") );
+        // console.log( "Work.closeProject()", activeView.model.get("slug") );
         activeView.close();
         activeView = null;
         $scrollTarget.removeClass("offset");

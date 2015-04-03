@@ -45,7 +45,7 @@ define([
 
         this.$main = $("main");
         this.$siteContent = $("#site-content");
-        this.$stateJump = $("#footer a.logo, a.scroll-instructions")
+        this.$stateJump = $("#footer a.logo, a.scroll-instructions");
         
        
         PartnerCollection.reset( partnersData );
@@ -68,7 +68,7 @@ define([
 
 
       indexState : function( e ) {
-        console.log( e );
+        // console.log( e );
         e.preventDefault();
         e.stopPropagation();
         var url = $(e.currentTarget).attr("href");

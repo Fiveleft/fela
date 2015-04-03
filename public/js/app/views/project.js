@@ -94,6 +94,7 @@ define(
         });
       },
 
+
       
       _closeComplete : function() {
         this.$el
@@ -117,7 +118,7 @@ define(
           offsetTop = this.measurements.top - window.innerHeight,
           offsetBottom = this.measurements.bottom,
           stayActive = Utils.inRange( scrollY, offsetTop, offsetBottom );
-          
+
         switch( true ) {
         case stayActive && !this.mediaView.playing :
           this.mediaView.start();
