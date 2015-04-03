@@ -50,6 +50,7 @@ define(
         this.render();
       },
 
+      
       render: function() {
         var projectGridView;
 
@@ -66,6 +67,7 @@ define(
         return this;
       },
 
+      
       setProject : function ( slug ) {
 
         var projectData = this.collection.findWhere({"slug":slug}),
@@ -94,6 +96,7 @@ define(
         activeView.render();
       },
 
+      
       openProject : function () {
         // console.log( "Work.openProject() lastView:", lastView, " activeView:", activeView.model.get("slug") );
         if( lastView ) lastView.close();
@@ -104,6 +107,7 @@ define(
         activeView.open();
       },
 
+      
       closeProject : function () {
         if( activeView === null ) {
           return; 
@@ -116,6 +120,7 @@ define(
         $scrollTarget.removeClass("offset");
       },
 
+      
       _scrollTo : function () {
         var path = window.location.pathname.split("/");
         var target = path[1];
@@ -130,6 +135,7 @@ define(
         }
       },
 
+      
       _positionActiveContainer : function() {
 
         // Get Data and View
@@ -159,6 +165,7 @@ define(
         }
       },
 
+      
       _breakpointChange : function() {
         this._positionActiveContainer();
         $inactiveContainer.insertBefore( $activeContainer );

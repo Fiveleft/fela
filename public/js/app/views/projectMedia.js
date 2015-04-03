@@ -44,6 +44,7 @@ define(
 
       
       start : function() {
+        // console.log( "ProjectMediaView.start()");
         this.playing = true;
         this.$el.addClass( "playing" );
         if( this.isGallery ) this._startGallery();
@@ -52,6 +53,7 @@ define(
 
       
       stop : function() {
+        // console.log( "ProjectMediaView.stop()");
         this.$el.removeClass( "playing" );
         if( this.isGallery ) this._stopGallery();
         if( this.isVideo ) this.video.pause();
@@ -86,6 +88,7 @@ define(
       
       _stopGallery : function() {
         window.clearTimeout( this.timer );
+        this.timer = 0;
         TweenLite.killTweensOf( this.$timeMarker );
       },
 

@@ -48,9 +48,6 @@ define([
           console.log( a.slug, " no thumbnail: ", this.media );
         }
 
-
-console.log( a.slug, a );
-
         // If no info set on Project Data, skip
         if( !a.info ) {
           return this;
