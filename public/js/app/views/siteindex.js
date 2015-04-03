@@ -45,8 +45,7 @@ define([
 
         this.$main = $("main");
         this.$siteContent = $("#site-content");
-        this.$footerTopLink = $("#footer a.logo");
-        
+        this.$stateJump = $("#footer a.logo, a.scroll-instructions")
         
        
         PartnerCollection.reset( partnersData );
@@ -61,19 +60,22 @@ define([
         ConnectForm;
 
         // Events
-        this.$footerTopLink.on( "click", this.indexState );
-
+        this.$stateJump.on( "click", this.indexState );
         this.listenTo( Events, "mobilenav:open", this._mobileNavOpen );
         this.listenTo( Events, "mobilenav:close", this._mobileNavClose );
         this.listenTo( Events, "mobilenav:closed", this._mobileNavClosed );
       },
 
+
       indexState : function( e ) {
+        console.log( e );
         e.preventDefault();
+        e.stopPropagation();
         var url = $(e.currentTarget).attr("href");
         Events.trigger( "router:navigate", url);
       },
 
+      
       _mobileNavOpen : function() {
         // console.log( "SiteIndex._mobileNavOpen" );
         var windowTop = window.scrollY;
@@ -81,9 +83,11 @@ define([
         // window.scrollTo( 0, 0 );
       },
 
+      
       _mobileNavClose : function() {
         // console.log( "SiteIndex._mobileNavClose" );
       },
+      
       
       _mobileNavClosed : function() {
         // console.log( "SiteIndex._mobileNavClosed" );

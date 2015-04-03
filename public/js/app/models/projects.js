@@ -21,11 +21,14 @@ define([
     };
 
     var ProjectModel = Backbone.Model.extend({
+
+
       initialize: function() {
 
         var a = this.attributes,
           agency,
-          client;
+          client,
+          thumbnail;
 
         // Set up collections
         this.media = new MediaCollection( a.attachments );
@@ -38,12 +41,21 @@ define([
         if( a.gallery ) {
           a.gallery = this.media.createGallery( a.gallery );
         }
-        a.gridImage = this.media.getThumbnail().getImage().url;
+        thumbnail = this.media.getThumbnail();
+        a.gridImage = (thumbnail) ? thumbnail.getImage().url : null;
+
+        if( !thumbnail ) {
+          console.log( a.slug, " no thumbnail: ", this.media );
+        }
+
+
+console.log( a.slug, a );
 
         // If no info set on Project Data, skip
         if( !a.info ) {
           return this;
         }
+
         // Get Agency
         if( a.info.agency !== "null" && a.info.hasOwnProperty("agency") ) {
           agency = PartnerCollection.findWhere({ id : parseInt(a.info.agency,10) });
@@ -77,25 +89,31 @@ define([
             source : {}
           };
           if( a.info.video_poster ){
-            var poster = a.info.video_poster,
-              posterID = parseInt( poster,10 ),
+            var posterID = parseInt( a.info.video_poster, 10 ),
               media = this.media.get( posterID );
-            console.log( a.slug, poster, posterID, media );
-            // a.video.poster = this.media.get( parseInt(a.info.video_poster,10) ).attributes;
+            
+            a.video.poster = this.media.get( parseInt(a.info.video_poster,10) ).attributes;
           }
           _.each( a.info.video_formats, function( f ) {
             a.video.source[f] = __cdn + a.info.video_file + "." + f;
           });
         }
 
-        //console.log( a.slug, a );
+        // Sorting weight uses priority, then most recent time
+        a.sinceLaunch = Date.now() - a.launchDate.getTime();
       },
+      
+
       getView : function() {
         return this.get("view");
       },
+      
+
       setView : function( html ) {
         this.set("view", html);
-      },
+      }
+
+
     });
     // Return the model for the module
     return ProjectModel;

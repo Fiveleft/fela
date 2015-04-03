@@ -1,6 +1,10 @@
 // secions/_work.scss
 section#work-section {
 
+  .work-grid {
+    padding-bottom: 25%;
+  }
+
   .project-list {
     @include clearfix();
     margin: 0 -5px;

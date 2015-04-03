@@ -25,12 +25,6 @@ define(
 
       initialize : function() {
         var self = this;
-        
-        // Set Event Listeners
-        this.windowEvents = {
-          "resize" : _.throttle(function(){self.resize();}, 100), 
-          "scroll" : _.throttle(function(){self.scroll();}, 200)
-        };
 
         // Set elements
         this.$nav = $("#top-nav");
@@ -43,7 +37,16 @@ define(
         this.$sectionInners.css( "min-height", window.innerHeight );
         this.totalHeight = this.$footer.offset().top + this.$footer.height();
         this.scrollArea = Math.max( this.totalHeight - window.innerHeight, 0 );
+        
+        // Set Event Listeners
+        this.windowEvents = {
+          "resize" : _.throttle(function(){self.resize();}, 100), 
+          "scroll" : _.throttle(function(){self.scroll();}, 200)
+        };
+
+        this.listenTo( Events, Events.scrollTo, this._pageScrollTo );
       },
+
 
       start : function() {
         $(window).on( this.windowEvents );
@@ -51,27 +54,29 @@ define(
         this.listenTo( Events, Events.scrollTo, this._pageScrollTo );
         this.listenTo( Events, Events.changeHeight, this._measure );
 
-        console.log( " Scroller.start()" );
-
         if( !started ) {
           started = true;
           $("html").addClass("started");
         }
       },
 
+
       stop : function() {
         $(window).off( this.windowEvents );
         this.stopListening( Events, Events.scrollTo, this._pageScrollTo );
       },
+
 
       resize : function() {
         this.$sectionInners.css( "min-height", window.innerHeight );
         this._measure();
       },
 
+
       scroll : function() {
         this._measureScroll();
       },
+
 
       _measure : function() {
         // console.log( "ScrollerView._measure()");

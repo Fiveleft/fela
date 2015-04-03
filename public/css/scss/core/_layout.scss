@@ -11,10 +11,13 @@ main {
   z-index: 3;
 }
 #site-content > section {
+  position: relative;
   width: 100%;
   min-height: 100%;
+  text-align: center;
   //border-top: 2px dotted #808080;
   .section-inner {
+    text-align: left;
     padding: 60px 0 0;
     visibility: hidden;
     @include opacity( 0 );

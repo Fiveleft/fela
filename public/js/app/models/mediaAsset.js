@@ -9,6 +9,8 @@ define(
     }
 
     var MediaAsset = Backbone.Model.extend({
+
+      
       initialize: function() {
         this.attributes._url = this.attributes.url;
         this.attributes.file = getFilePath( this.attributes._url );
@@ -18,7 +20,10 @@ define(
           item.file = getFilePath( item.url );
           item.url = __cdn + item.file;
         });
+        // console.log( "MediaAssetModel()", this.attributes );
       },
+
+
       getImage: function( type ) {
         var imgObj = (this.attributes.images.hasOwnProperty(type)) ? this.attributes.images[type] : this.attributes.images.full;
         return imgObj;

@@ -6,6 +6,25 @@
     table-layout: fixed;
     width: 100%;
   }
+  .scroll-instructions {
+    display: block;
+    position: relative; 
+    bottom: 0;
+    width: 200px; height: auto;
+    padding: 0 0 50px;
+    line-height: 20px;
+    margin: -70px auto 0;
+    @include italicBoldFont();
+    font-size: 0.8em;
+    .icon.scroll-down {
+      display: block;
+      position: absolute;
+      width: 50px; height: 50px;
+      bottom: 0; left: 50%; 
+      margin-left: -25px;
+      background: rgba(255,255,0,0.74);
+    }
+  }
 
   .message-wrapper {
     display: table-cell;

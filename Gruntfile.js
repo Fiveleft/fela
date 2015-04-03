@@ -172,6 +172,7 @@ module.exports = function(grunt) {
     gitpush: {
       stage: {
         options: {
+          verbose: true,
           remote: "stage"
         }
       },
@@ -220,6 +221,11 @@ module.exports = function(grunt) {
 
   grunt.registerTask('stage-prepare', [
     'env:stage',
+  ]);
+
+  grunt.registerTask('stage-push', [
+    'env:stage',
+    'gitpush:stage'
   ]);
 
   grunt.registerTask('prod-prepare', [

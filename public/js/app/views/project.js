@@ -12,7 +12,7 @@ define(
       render : function() {
         var html = templates["project"](this.model.attributes);
         this.setElement( html );
-
+        
         // Set Views and Elements
         this.mediaView.setElement( $(".media", this.$el) );
         this.mediaView.render();
