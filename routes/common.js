@@ -6,8 +6,6 @@ var config      = require('../config-env.json');
 
 
 // @see http://masashi-k.blogspot.com/2013/06/sending-mail-with-gmail-using-xoauth2.html
-// notasecret
-
 router.post('/send-inquiry', function (req, res) {
 
   // create reusable transport method (opens pool of SMTP connections)
