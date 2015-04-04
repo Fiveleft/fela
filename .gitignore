@@ -5,3 +5,4 @@ public/assets
 sitecontent.json
 public-prod
 config.json
+config-env.json

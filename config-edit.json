@@ -1,0 +1,20 @@
+{
+  "connectForm" : {
+    "user" : "name@email.com",
+    "pass" : "***********"
+  },
+  "tracking" : {
+    "googleAnalytics" : {
+      "userAccount" : "XXXXXXX-1"
+    }
+  },
+  "socialAPI" : {
+    "facebook" : {
+      "appID" : false
+    },
+    "google" : false,
+    "pinterest" : false,
+    "twitter" : false,
+    "youtube" : false
+  }
+} 

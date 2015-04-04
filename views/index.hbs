@@ -27,8 +27,11 @@
 	<canvas id="canvas"></canvas>	
 	<span hidden id="data-api-data" data-json='{{data}}'></span>
 </main>
+
 {{#contentFor 'inlineScripts'}} 
 	<script data-main="{{assets.requireMain}}" src="{{assets.requirejs}}"></script>
+	{{>js_social_apis }}	
+	{{>js_analytics }}	
 {{/contentFor}}
 
 

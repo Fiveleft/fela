@@ -1,9 +1,11 @@
+
 var app         = require('../app');
 var express     = require('express');
 var request     = require('request');
 var indexPaths  = ['/','/work','/project/:slug','/connect','/info'];
 var router      = express.Router();
 var _           = require('underscore');
+var config      = require('../config-env.json');
 
 // Data to inject into index
 var indexData   = {
@@ -14,6 +16,7 @@ var indexData   = {
     requirejs: '/js/vendor/requirejs/require.js',
     requireMain: '/js/init',
   },
+  config : config,
   data : {},
   agencyData : {},
   clientData : {},
