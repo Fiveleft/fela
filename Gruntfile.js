@@ -19,21 +19,11 @@ module.exports = function(grunt) {
         NODE_ENV : 'production',
         PORT : 3002,
       },
+      prodtest: {
+        NODE_ENV : 'production',
+        PORT : 3003,
+      },
     },
-
-
-    // @see: https://www.npmjs.com/package/grunt-sync
-    // sync: {
-    //   main: {
-    //     files: [{
-    //       cwd: 'public',
-    //       src: ['images/**', 'favicon.ico'],
-    //       dest: 'public-prod/'
-    //     }],
-    //     verbose: true, // Display log messages when copying files
-    //     ignoreInDest: ['**/*.js', '**/*.css'],
-    //   }
-    // },
 
     // Handlebars Templates
     // @see http://danburzo.ro/grunt/chapters/handlebars/
@@ -89,7 +79,7 @@ module.exports = function(grunt) {
 
     // CSS TASKS ===============================================================
     // process the sass files and compass framework to style.css
-    compass: {                  // Task
+    compass: {
       dev: {
         options: {
           sassDir: 'public/css/scss',
@@ -106,6 +96,7 @@ module.exports = function(grunt) {
         }
       }
     },
+
 
     // DEV TASKS ===============================================================
     // watch css and js files and process the above tasks
@@ -168,6 +159,21 @@ module.exports = function(grunt) {
     },
 
 
+    // PRODUCTION TASKS ===============================================================
+    // gzip assets 1-to-1 for production 
+    compress: {
+      main: {
+        options: {
+          mode: 'gzip'
+        },
+        expand: true,
+        cwd: 'public/js',
+        src: ['*.js'],
+        dest: 'bin/temp/'
+      } 
+    },
+
+
     // GIT Deployment Tasks
     gitpush: {
       stage: {
@@ -200,6 +206,7 @@ module.exports = function(grunt) {
 
   // Load gem-dependent tasks
   grunt.loadNpmTasks('grunt-contrib-compass');
+  grunt.loadNpmTasks('grunt-contrib-compress');
   grunt.loadNpmTasks('grunt-nodemon');
 
 
@@ -237,8 +244,7 @@ module.exports = function(grunt) {
     'handlebars',
     'cssmin',
     'uglify',
-    'requirejs', 
-    // 'sync',
+    'requirejs'
   ]);
 
   grunt.registerTask('prod-test', [

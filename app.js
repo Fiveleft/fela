@@ -44,7 +44,7 @@ hbs.registerHelper('contentFor', function(name, options){
 
 
 // Settings
-app.locals.CDN = '//assets.fiveleft.com.s3.amazonaws.com/';
+app.locals.CDN = '//cdn.fiveleft.com/';
 app.use(favicon(path.join(__dirname, 'public/favicon.ico')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
