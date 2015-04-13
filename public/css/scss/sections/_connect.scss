@@ -8,8 +8,9 @@ section#connect-section {
     padding: 0 0 2em;
   }
   .hours {
-    @include italicFont();
-    padding-bottom: 0.75em;
+    @include thinFont();
+    font-size: 0.75em;
+    padding: 1em 0;
   }
   .connect-row {
     padding: 40px 0;

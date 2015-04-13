@@ -136,11 +136,13 @@ html.ios-keyboard {
 
 #top-nav {
 
-  .connect-title {
-    display: block;
-    @include italicFont();
-    text-transform: none;
-  }
+  // .connect-title {
+  //   display: block;
+  //   // @include italicFont();
+  //   text-transform: uppercase;
+  //   font-size: 0.75em;
+  //   color: $color-grey-med;
+  // }
 
   .connect-nav {
 
@@ -361,7 +363,7 @@ html.ios-keyboard {
     }
     .connect-nav .info-item {
       text-align: left;
-      margin-right: 10px;
+      margin-right: 30px;
       span, a {
         display: inline-block;
         vertical-align: top;
@@ -379,6 +381,9 @@ html.ios-keyboard {
       .connect-title, .location, .pipe {
         display: none;
       }
+    }
+    .info-item {
+      margin-right: 10px;
     }
   }
 

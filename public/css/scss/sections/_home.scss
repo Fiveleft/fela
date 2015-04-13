@@ -6,47 +6,6 @@
     table-layout: fixed;
     width: 100%;
   }
-  .scroll-instructions {
-    display: block;
-    position: relative; 
-    bottom: 0;
-    width: 200px; height: 80px;
-    padding: 10px 0 50px;
-    margin: -100px auto 0;
-    text-align: center;
-    .message {
-      display: block;
-      @include italicBoldFont();
-      color: $color-grey-med;
-      font-size: 0.8em;
-      line-height: 20px;
-      @include transition( color 0.15s $easeInOutCubic );
-    }
-    .chevron-down {
-      display: block;
-      position: absolute; 
-      bottom: 10%; 
-      left: 37.5%;
-      width: 25%; height: 50%;
-      @include transition( bottom 0.15s $easeInOutCubic );
-    }
-    .icon-chevron-down {
-      display: inline-block;
-      width: auto;
-      height: 100%; 
-      polygon {
-        fill: rgba( $color-grey-light, 1 );
-        @include transition( fill 0.15s $easeInOutCubic );
-      }
-    }
-
-    &:hover {
-      .message { color: $color-grey-black; }
-      .chevron-down { bottom: 2%; }
-      .icon-chevron-down polygon { fill: $brand-magenta; }
-    }
-
-  }
 
   .message-wrapper {
     display: table-cell;
@@ -90,15 +49,65 @@
     text-align: center;
     margin: 0 auto;
     margin-top: -80px;
-    padding: 0 10px;
+    padding: 0 10px 1em;
     @include opacity( 0 );
     @include transition ( opacity 0.2s $easeOutExpo, margin-top 0.66s $easeOutExpo );
 
     p {
       margin: 0; padding: 0; line-height: inherit;
     }
+  }
+
+
+  .scroll-instructions {
+    display: block;
+    position: relative; 
+    // bottom: 0;
+    width: 200px; height: 80px;
+    padding: 10px 0 50px;
+    // margin: -100px auto 0;
+    margin: 0 auto;
+    text-align: center;
+    .message {
+      display: block;
+      color: $color-grey-med;
+      font-size: 16px;
+      line-height: 20px;
+      text-transform: uppercase;
+      @include thinFont();
+      @include transition( color 0.15s $easeInOutCubic );
+    }
+    .chevron-down {
+      display: block;
+      position: absolute; 
+      bottom: 10%; 
+      left: 37.5%;
+      width: 25%; height: 50%;
+      @include transition( bottom 0.15s $easeInOutCubic );
+    }
+    .icon-chevron-down {
+      display: inline-block;
+      width: auto;
+      height: 100%; 
+      polygon {
+        fill: rgba( $color-grey-light, 1 );
+        @include transition( fill 0.15s $easeInOutCubic );
+      }
+    }
+
+    &:hover {
+      .message { color: $color-grey-black; }
+      .chevron-down { bottom: 2%; }
+      .icon-chevron-down polygon { fill: $brand-magenta; }
+    }
 
   }
+
+
+
+
+
+
   //&[data-scroll='inside-view'] .message-inner,
   &.active .message-inner, 
   &.on .message-inner,
@@ -120,7 +129,7 @@
 @media ( min-width:$width-sm-min ) {
   #home-section {
     .message-wrapper {
-      font-size: 1.5em;
+      font-size: 2.0em;
       padding: 0 0 10%;
     }
     .section-title {
@@ -138,6 +147,7 @@
       .noun {}
     }
     .section-description {
+      font-size: 0.75em;
       max-width: 30em;
     }
   }
@@ -146,10 +156,10 @@
 @media ( min-width:$width-md-min ) {
   #home-section {
     .message-wrapper {
-      font-size: 2.0em;
+      font-size: 2.25em;
     }
     .section-description {
-      font-size: 1em;
+      font-size: 0.75em;
       max-width: 27.5em;
     }
   }
@@ -161,7 +171,7 @@
       font-size: 2.5em;
     }
     .section-description {
-      font-size: 0.875em;
+      font-size: 0.75em;
       max-width: 25em;
     }
   }
