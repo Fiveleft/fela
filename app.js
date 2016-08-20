@@ -4,7 +4,8 @@ var express = require('express'),
   logger = require('morgan'),
   cookieParser = require('cookie-parser'),
   bodyParser = require('body-parser'),
-  hbs = require("hbs");
+  hbs = require("hbs"),
+  map = require('express-sitemap');
 
 // Application Instantiation
 var app = module.exports = express();
@@ -93,6 +94,23 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
+
+
+// Sitemap
+/**
+ * Testing Sitemap outputs  
+ * @see https://github.com/hex7c0/express-sitemap/blob/master/examples/nested_router.js
+ */
+var sitemap = map();
+console.log('Child');
+console.log(sitemap.generate4(express.Router()));
+sitemap.reset();
+console.log('Father without Router path');
+console.log(sitemap.generate4(app)); // should return {} because no Router path
+sitemap.reset();
+console.log('Father with Router path');
+console.log(sitemap.generate4(app, [ '/' ])); // should return same obj of child with /c path
+sitemap.reset();
 
 
 module.exports = app;

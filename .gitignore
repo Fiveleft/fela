@@ -6,3 +6,5 @@ sitecontent.json
 public-prod
 config.json
 config-env.json
+.sass-cache
+node_modules

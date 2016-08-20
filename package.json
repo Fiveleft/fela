@@ -38,6 +38,7 @@
     "grunt-sync": "^0.2.2",
     "grunt-env": "^0.4.2",
     "grunt-git": "^0.3.2",
-    "grunt-contrib-compress": "^0.13.0"
+    "grunt-contrib-compress": "^0.13.0",
+    "express-sitemap": "^1.5.6"
   }
 }

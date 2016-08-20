@@ -9,7 +9,7 @@ var config      = require('../config-env.json');
 
 // Data to inject into index
 var indexData   = {
-  title: 'Fiveleft is a Creative Digital Studio',
+  title: 'Fiveleft is a Creative Digital Studio | Seattle WA',
   assets : {
     styles: '/css/main.css',
     modernizr: '/js/modernizr.custom.js',
