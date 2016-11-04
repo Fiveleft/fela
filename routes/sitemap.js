@@ -9,6 +9,8 @@
 
 
 var app = require('../app'),
+  express = require('express'),
+  router = express.Router(),
   sm = require('sitemap'),
   sitemap;
 
@@ -22,3 +24,13 @@ sitemap = sm.createSitemap ({
       { url: '/page-4/', img: "http://urlTest.com" }
     ]
   });
+ 
+router.get('/sitemap.xml', function(req, res) {
+  sitemap.toXML( function (err, xml) {
+      if (err) {
+        return res.status(500).end();
+      }
+      res.header('Content-Type', 'application/xml');
+      res.send( xml );
+  });
+});
